@@ -1,4 +1,4 @@
-# React basic
+# React basic [![Azure Static Web Apps CI/CD](https://github.com/atomata/capstone_WebClient/actions/workflows/azure-static-web-apps-black-desert-06819cf0f.yml/badge.svg)](https://github.com/atomata/capstone_WebClient/actions/workflows/azure-static-web-apps-black-desert-06819cf0f.yml)
 
 [Azure Static Web Apps](https://docs.microsoft.com/azure/static-web-apps/overview) allows you to easily build [React](https://reactjs.org/) apps in minutes. Use this repo with the [React quickstart](https://docs.microsoft.com/azure/static-web-apps/getting-started?tabs=react) to build and customize a new static site.
 
