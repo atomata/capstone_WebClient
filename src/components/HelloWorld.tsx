@@ -19,7 +19,7 @@ const HelloWorld = (): JSX.Element => {
   const [data, setData] = useState("");
 
   const getData = () => {
-    fetch("/api/message?name=ethan")
+    fetch("/api/get_pic")
       .then((got) => got.blob())
       .then((blob) => setData(URL.createObjectURL(blob)));
   };
