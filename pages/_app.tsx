@@ -22,7 +22,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <>
       {/* prettier-ignore */}
       <Head>
-        <title>My App</title>
+        <title>Project Edex Prototype</title>
         <link rel="icon"       href={`${assetPrefix}/favicon.ico`} />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=B612:wght@700&display=swap" />
@@ -31,7 +31,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <ThemeProvider theme={theme}>
         <Component {...pageProps} />
       </ThemeProvider>
-      <Footer>My App</Footer>
+      <Footer>Project Edex</Footer>
     </>
   );
 }

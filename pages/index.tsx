@@ -1,21 +1,25 @@
 import styled from "styled-components";
-import { HelloWorld } from "../src/components/HelloWorld";
+import ApparatusListBox from "../src/components/ApparatusListBox";
+import ApparatusSelectedListBox from "../src/components/ApparatusSelectedListBox";
+import ApparatusTriggerListBox from "../src/components/ApparatusTriggerListBox";
+import NavigationBox from "../src/components/NavigationBox";
+import WebglBox from "../src/components/WebglBox";
 
 const Content = styled.div`
   justify-content: center;
   flex-direction: column;
   justify-items: center;
   display: flex;
-
-  & > * {
-    margin-top: 7rem;
-  }
 `;
 
 const Home = (): JSX.Element => (
   <main>
     <Content>
-      <HelloWorld />
+    <ApparatusListBox />
+      <ApparatusSelectedListBox />
+      <WebglBox />
+      <ApparatusTriggerListBox />
+      <NavigationBox />
     </Content>
   </main>
 );
