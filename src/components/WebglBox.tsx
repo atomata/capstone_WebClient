@@ -1,11 +1,18 @@
 import styled from "styled-components";
 import Unity, { UnityContext } from "react-unity-webgl";
 
+// const unityContext = new UnityContext({
+//   loaderUrl: "build/Apps.loader.js",
+//   dataUrl: "build/Apps.data",
+//   frameworkUrl: "build/Apps.framework.js",
+//   codeUrl: "build/Apps.wasm",
+// });
+
 const unityContext = new UnityContext({
-  loaderUrl: "build/myunityapp.loader.js",
-  dataUrl: "build/myunityapp.data",
-  frameworkUrl: "build/myunityapp.framework.js",
-  codeUrl: "build/myunityapp.wasm",
+  loaderUrl: "build/Builds.loader.js",
+  dataUrl: "build/Builds.data",
+  frameworkUrl: "build/Builds.framework.js",
+  codeUrl: "build/Builds.wasm",
 });
 
 const Box = styled.div`
@@ -25,8 +32,8 @@ const WebglBox = (): JSX.Element => {
       <Unity
         unityContext={unityContext}
         style={{
-          height: "inheirit",
-          width: "inheirit",
+          height: "450px",
+          width: "800px",
           background: "#9a2323",
         }}
       />
