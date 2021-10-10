@@ -1,19 +1,20 @@
 import styled from "styled-components";
 import Unity, { UnityContext } from "react-unity-webgl";
 
-// const unityContext = new UnityContext({
-//   loaderUrl: "build/Apps.loader.js",
-//   dataUrl: "build/Apps.data",
-//   frameworkUrl: "build/Apps.framework.js",
-//   codeUrl: "build/Apps.wasm",
-// });
-
 const unityContext = new UnityContext({
-  loaderUrl: "build/Builds.loader.js",
-  dataUrl: "build/Builds.data",
-  frameworkUrl: "build/Builds.framework.js",
-  codeUrl: "build/Builds.wasm",
+  loaderUrl: "build/Apps.loader.js",
+  dataUrl: "build/Apps.data",
+  frameworkUrl: "build/Apps.framework.js",
+  codeUrl: "build/Apps.wasm",
+  streamingAssetsUrl: "streamingassets"
 });
+
+// const unityContext = new UnityContext({
+//   loaderUrl: "build/Builds.loader.js",
+//   dataUrl: "build/Builds.data",
+//   frameworkUrl: "build/Builds.framework.js",
+//   codeUrl: "build/Builds.wasm",
+// });
 
 const Box = styled.div`
   background: #d9d9d9;
