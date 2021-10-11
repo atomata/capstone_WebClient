@@ -6,7 +6,7 @@ const unityContext = new UnityContext({
   dataUrl: "build/Apps.data",
   frameworkUrl: "build/Apps.framework.js",
   codeUrl: "build/Apps.wasm",
-  streamingAssetsUrl: "streamingassets"
+  streamingAssetsUrl: "streamingassets",
 });
 
 // const unityContext = new UnityContext({
@@ -16,12 +16,30 @@ const unityContext = new UnityContext({
 //   codeUrl: "build/Builds.wasm",
 // });
 
-const Box = styled.div`
-  background: #d9d9d9;
+const WebglRoot = styled.div`
+  display: relative;
+ // background: #d9d9d9;
   width: 800px;
   height: 450px;
   margin-bottom: 2rem;
   margin-top: 4rem;
+`;
+
+const WebglFlex = styled.div`
+  display: absolute;
+  width: inherit;
+  height: inherit;
+  z-index: 2;
+`;
+
+const JustinsSuperTestButton = styled.button`
+  background: #7fc985;
+  width: 10em;
+  height: 5em;
+  margin-bottom: 2rem;
+  margin-top: 4rem;
+  position: absolute;
+  z-index: inherit;
 `;
 
 const WebglBox = (): JSX.Element => {
@@ -29,16 +47,21 @@ const WebglBox = (): JSX.Element => {
     unityContext.setFullscreen(true);
   }
   return (
-    <Box>
+    <WebglRoot>
       <Unity
         unityContext={unityContext}
         style={{
           height: "450px",
           width: "800px",
           background: "#9a2323",
+          position: "absolute",
+          zIndex: -1,
         }}
       />
-    </Box>
+      <WebglFlex>
+        <JustinsSuperTestButton>Click me</JustinsSuperTestButton>
+      </WebglFlex>
+    </WebglRoot>
   );
 };
 export default WebglBox;
