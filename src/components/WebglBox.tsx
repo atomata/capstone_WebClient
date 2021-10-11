@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Unity, { UnityContext } from "react-unity-webgl";
+import Overlay from "./Overlay";
 
 const unityContext = new UnityContext({
   loaderUrl: "build/Apps.loader.js",
@@ -18,9 +19,8 @@ const unityContext = new UnityContext({
 
 const WebglRoot = styled.div`
   display: relative;
- // background: #d9d9d9;
-  width: 800px;
-  height: 450px;
+  width: 1600px;
+  height: 700px;
   margin-bottom: 2rem;
   margin-top: 4rem;
 `;
@@ -32,16 +32,6 @@ const WebglFlex = styled.div`
   z-index: 2;
 `;
 
-const JustinsSuperTestButton = styled.button`
-  background: #7fc985;
-  width: 10em;
-  height: 5em;
-  margin-bottom: 2rem;
-  margin-top: 4rem;
-  position: absolute;
-  z-index: inherit;
-`;
-
 const WebglBox = (): JSX.Element => {
   function handleOnClickFullscreen() {
     unityContext.setFullscreen(true);
@@ -51,16 +41,14 @@ const WebglBox = (): JSX.Element => {
       <Unity
         unityContext={unityContext}
         style={{
-          height: "450px",
-          width: "800px",
+          height: "inherit",
+          width: "inherit",
           background: "#9a2323",
           position: "absolute",
           zIndex: -1,
         }}
       />
-      <WebglFlex>
-        <JustinsSuperTestButton>Click me</JustinsSuperTestButton>
-      </WebglFlex>
+      <Overlay />
     </WebglRoot>
   );
 };
