@@ -29,7 +29,7 @@ const WebglFlex = styled.div`
   display: absolute;
   width: inherit;
   height: inherit;
-  z-index: 2;
+  z-index: 0;
 `;
 
 const WebglBox = (): JSX.Element => {
@@ -45,7 +45,7 @@ const WebglBox = (): JSX.Element => {
           width: "inherit",
           background: "#9a2323",
           position: "absolute",
-          zIndex: -1,
+          zIndex: 0,
         }}
       />
       <Overlay />

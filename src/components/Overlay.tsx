@@ -6,8 +6,9 @@ const OverlayRoot = styled.div`
   display: absolute;
   width: inherit;
   height: inherit;
-  z-index: 2;
+  z-index: 0;
   opacity: 0.4;
+  pointer-events: none
 `;
 
 const OverlayGrid = styled.div`
@@ -22,6 +23,8 @@ const OverlayGridItem1 = styled.div`
   background-color: red;
   grid-column: 1 / span 2;
   grid-row: 2 / span 6;
+  z-index:2;
+  pointer-events: auto;
 `;
 
 const OverlayGridItem2 = styled.div`
@@ -29,12 +32,16 @@ const OverlayGridItem2 = styled.div`
   grid-column: 8 / span 2;
   grid-row: 2 / span 7;
   padding: none;
+  z-index:2;
+  pointer-events: auto;
 `;
 
 const OverlayGridItem3 = styled.div`
   background-color: #120b1a;
   grid-column: 3 / span 5;
   grid-row: 8 / span 2;
+  z-index:2;
+  pointer-events: auto;
 `;
 
 const JustinsSuperTestButton = styled.button.attrs({
