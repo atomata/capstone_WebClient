@@ -25,13 +25,6 @@ const WebglRoot = styled.div`
   margin-top: 4rem;
 `;
 
-const WebglFlex = styled.div`
-  display: absolute;
-  width: inherit;
-  height: inherit;
-  z-index: 0;
-`;
-
 const WebglBox = (): JSX.Element => {
   function handleOnClickFullscreen() {
     unityContext.setFullscreen(true);
