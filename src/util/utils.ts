@@ -1,9 +1,8 @@
-// const weAreInProduction = process.env.NODE_ENV === "production";
-// const assetPrefix = weAreInProduction ? "/preprosql" : "";
+const weAreInProduction = !process?.env || process.env.NODE_ENV === "production"; 
+const assetPrefix = weAreInProduction ? "" : "http://localhost:7071/";
 
 import { CSSProperties } from "react";
 
-const assetPrefix = process.env.ASSET_PREFIX || "";
 
 const urlFor = (path = "/"): string => `${assetPrefix}${path}`;
 

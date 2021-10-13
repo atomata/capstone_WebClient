@@ -1,6 +1,7 @@
 import {useState} from "react"
 import styled from "styled-components"
 import httpTrigger from "../../api/get_pic/index";
+import { urlFor } from "../util/utils";
 
 const KittyImage = styled.img`
   width: 25em;
@@ -25,7 +26,7 @@ const button = (): JSX.Element => {
     const [data, setData] = useState("");
 
     const getData = () => {
-        fetch("/api/get_pic/index")
+        fetch(urlFor("api/get_pic"))
         .then((got) => got.blob())
         .then((blob) => setData(URL.createObjectURL(blob)));
     }
