@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Unity, { UnityContext } from "react-unity-webgl";
+import Unity, {UnityContext} from "react-unity-webgl";
 
 const unityContext = new UnityContext({
   loaderUrl: "build/Apps.loader.js",
@@ -10,10 +10,11 @@ const unityContext = new UnityContext({
 });
 
 // const unityContext = new UnityContext({
-//   loaderUrl: "build/Builds.loader.js",
-//   dataUrl: "build/Builds.data",
-//   frameworkUrl: "build/Builds.framework.js",
-//   codeUrl: "build/Builds.wasm",
+//     loaderUrl: "build/Builds.loader.js",
+//     dataUrl: "build/Builds.data",
+//     frameworkUrl: "build/Builds.framework.js",
+//     codeUrl: "build/Builds.wasm",
+//     streamingAssetsUrl: "streamingassets"
 // });
 
 const Box = styled.div`
@@ -25,20 +26,21 @@ const Box = styled.div`
 `;
 
 const WebglBox = (): JSX.Element => {
-  function handleOnClickFullscreen() {
-    unityContext.setFullscreen(true);
-  }
-  return (
-    <Box>
-      <Unity
-        unityContext={unityContext}
-        style={{
-          height: "450px",
-          width: "800px",
-          background: "#9a2323",
-        }}
-      />
-    </Box>
-  );
+    function handleOnClickFullscreen() {
+        unityContext.setFullscreen(true);
+    }
+
+    return (
+        <Box>
+            <Unity
+                unityContext={unityContext}
+                style={{
+                    height: "450px",
+                    width: "800px",
+                    background: "#9a2323",
+                }}
+            />
+        </Box>
+    );
 };
 export default WebglBox;
