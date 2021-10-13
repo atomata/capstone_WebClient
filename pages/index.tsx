@@ -4,6 +4,7 @@ import ApparatusSelectedListBox from "../src/components/ApparatusSelectedListBox
 import ApparatusTriggerListBox from "../src/components/ApparatusTriggerListBox";
 import NavigationBox from "../src/components/NavigationBox";
 import WebglBox from "../src/components/WebglBox";
+import Getimage from "../src/components/Getimage";
 
 const Content = styled.div`
   justify-content: center;
@@ -20,6 +21,7 @@ const Home = (): JSX.Element => (
       <WebglBox />
       <ApparatusTriggerListBox />
       <NavigationBox />
+      <Getimage/>
     </Content>
   </main>
 );
