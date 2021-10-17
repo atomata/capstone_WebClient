@@ -98,7 +98,9 @@ function Overlay(): JSX.Element {
             <OverlayGridItem1>
               <ApparatusSelectedListBox />
             </OverlayGridItem1>
-            <OverlayGridItem2/>
+            <OverlayGridItem2>
+            <ApparatusListBox/>
+            </OverlayGridItem2>
             <OverlayGridItem3>
               <ApparatusTriggerListBox />
             </OverlayGridItem3>
