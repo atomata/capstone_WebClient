@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { useState } from "react";
 import ApparatusSelectedListBox from "./ApparatusSelectedListBox";
 import ApparatusTriggerListBox from "./ApparatusTriggerListBox";
+import ApparatusListBox from "./ApparatusListBox";
+
 
 const OverlayRoot = styled.div`
   display: absolute;

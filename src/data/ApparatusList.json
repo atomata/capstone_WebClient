@@ -1,0 +1,57 @@
+[
+       {
+          "id": 1,
+          "Name": "Apparatus 1",
+          "SubApparatusList": [
+            {
+              "id": 1.1,
+              "Name": "Apparatus 1.1" 
+            },
+            {
+              "id": 1.2,
+              "Name": "Apparatus 1.2" 
+            },
+            {
+              "id": 1.3,
+              "Name": "Apparatus 1.3" 
+            }
+        ]
+           
+       },
+       {
+            "id": 2,
+            "Name": "Apparatus 2"
+       },
+       {
+        "id": 3,
+        "Name": "Apparatus 3"
+        
+     },
+     {
+          "id": 4,
+          "Name": "Apparatus 4"
+     },
+     {
+          "id": 5,
+          "Name": "Apparatus 5"
+     },
+     {
+      "id": 6,
+      "Name": "Apparatus 6"
+      
+   },
+   {
+        "id": 7,
+        "Name": "Apparatus 7"
+   },
+   {
+    "id": 8,
+    "Name": "Apparatus 8"
+    
+ },
+ {
+      "id":9,
+      "Name": "Apparatus 9"
+ }
+]
+ 
