@@ -13,6 +13,8 @@ To run the development server:
 yarn install --dev
 yarn dev
 
+open new terminal 
+
 cd api
 yarn install --dev
 yarn start
