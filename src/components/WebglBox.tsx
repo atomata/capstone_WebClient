@@ -1,28 +1,48 @@
-import init from "../../pages/api/webgl/init";
 import styled from "styled-components";
+import Unity, { UnityContext } from "react-unity-webgl";
+import Overlay from "./Overlay";
 
-const Box = styled.div`
-background: #d9d9d9;
-width: 800px;
-height: 450px;
-margin-bottom: 2rem;
-margin-top: 4rem;
-`;
+const unityContext = new UnityContext({
+  loaderUrl: "build/Apps.loader.js",
+  dataUrl: "build/Apps.data",
+  frameworkUrl: "build/Apps.framework.js",
+  codeUrl: "build/Apps.wasm",
+  streamingAssetsUrl: "streamingassets",
+});
 
-const WebGLCanvas = styled.canvas`
-background: #9bad9a;
-width: inherit;
-height: inherit;
+// const unityContext = new UnityContext({
+//   loaderUrl: "build/Builds.loader.js",
+//   dataUrl: "build/Builds.data",
+//   frameworkUrl: "build/Builds.framework.js",
+//   codeUrl: "build/Builds.wasm",
+// });
+
+const WebglRoot = styled.div`
+  display: relative;
+  width: 1600px;
+  height: 700px;
+  margin-bottom: 2rem;
+  margin-top: 4rem;
 `;
 
 const WebglBox = (): JSX.Element => {
-  const componentDidMount = () => {
-    init(`webgl`);
-  };
+  function handleOnClickFullscreen() {
+    unityContext.setFullscreen(true);
+  }
   return (
-    <Box>
-      <WebGLCanvas id="webgl" onMouseOver={componentDidMount}/>
-    </Box>
+    <WebglRoot>
+      <Unity
+        unityContext={unityContext}
+        style={{
+          height: "inherit",
+          width: "inherit",
+          background: "#9a2323",
+          position: "absolute",
+          zIndex: 0,
+        }}
+      />
+      <Overlay />
+    </WebglRoot>
   );
 };
 export default WebglBox;

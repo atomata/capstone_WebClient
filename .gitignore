@@ -1,6 +1,6 @@
 # Editor config folders
 .vscode/
-
+.idea/*
 # Logs
 logs
 *.log
