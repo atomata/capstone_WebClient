@@ -1,13 +1,15 @@
 import styled from "styled-components";
 import ApparatusSelectedListBox from "./ApparatusSelectedListBox";
 import ApparatusTriggerListBox from "./ApparatusTriggerListBox";
+import ApparatusListBox from "./ApparatusListBox";
+
 
 const OverlayRoot = styled.div`
   display: absolute;
   width: inherit;
   height: inherit;
   z-index: 0;
-  opacity: 0.4;
+  opacity: 2;
   pointer-events: none
 `;
 
@@ -63,7 +65,7 @@ const Overlay = (): JSX.Element => (
         <ApparatusSelectedListBox />
       </OverlayGridItem1>
       <OverlayGridItem2>
-          <JustinsSuperTestButton/>
+          <ApparatusListBox />
       </OverlayGridItem2>
       <OverlayGridItem3>
         <ApparatusTriggerListBox />
