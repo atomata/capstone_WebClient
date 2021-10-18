@@ -11,10 +11,11 @@ const unityContext = new UnityContext({
 });
 
 // const unityContext = new UnityContext({
-//   loaderUrl: "build/Builds.loader.js",
-//   dataUrl: "build/Builds.data",
-//   frameworkUrl: "build/Builds.framework.js",
-//   codeUrl: "build/Builds.wasm",
+//     loaderUrl: "build/Builds.loader.js",
+//     dataUrl: "build/Builds.data",
+//     frameworkUrl: "build/Builds.framework.js",
+//     codeUrl: "build/Builds.wasm",
+//     streamingAssetsUrl: "streamingassets"
 // });
 
 const WebglRoot = styled.div`
