@@ -1,5 +1,10 @@
 # Editor config folders
+<<<<<<< HEAD
 
+=======
+.vscode/
+.idea/*
+>>>>>>> origin/main
 # Logs
 logs
 *.log

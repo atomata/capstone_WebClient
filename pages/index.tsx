@@ -16,10 +16,8 @@ const Content = styled.div`
 const Home = (): JSX.Element => (
   <main>
     <Content>
-    <ApparatusListBox />
-      <ApparatusSelectedListBox />
+   {/* /<ApparatusListBox /> */}
       <WebglBox />
-      <ApparatusTriggerListBox />
       <NavigationBox />
       <Getimage/>
     </Content>
