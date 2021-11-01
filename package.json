@@ -14,12 +14,9 @@
     "azurite-stop": "docker container rm -f azurite"
   },
   "dependencies": {
-<<<<<<< HEAD
     "@azure/storage-blob": "^12.8.0",
-=======
     "@emotion/react": "^11.4.1",
     "@emotion/styled": "^11.3.0",
->>>>>>> origin/main
     "@material-ui/core": "^4.11.4",
     "@material-ui/icons": "^4.11.2",
     "@mui/material": "^5.0.2",
