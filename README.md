@@ -12,6 +12,12 @@ To run the development server:
 ```bash
 yarn install --dev
 yarn dev
+
+open new terminal 
+
+cd api
+yarn install --dev
+yarn start
 ```
 
 To build and run a production version of the app (served by NGINX):
