@@ -1,0 +1,8 @@
+{
+    "Values": {
+    },
+    "Host": {
+      "CORS": "*",
+      "FUCTIONS_WORKER_RUNTIME": "node"
+    }
+  }
