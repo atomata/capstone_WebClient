@@ -3,6 +3,7 @@ import { useState } from "react";
 import ApparatusSelectedListBox from "./ApparatusSelectedListBox";
 import ApparatusTriggerListBox from "./ApparatusTriggerListBox";
 import ApparatusListBox from "./ApparatusListBox";
+import earth from "../data/earth.json"
 
 
 const OverlayRoot = styled.div`
@@ -61,6 +62,7 @@ const OverlayGridItem3 = styled.div`
   grid-row: 8 / span 2;
   z-index: 2;
   pointer-events: auto;
+  height: 18em;
 `;
 
 const ToggleDiv = styled.div`
@@ -99,10 +101,10 @@ function Overlay(): JSX.Element {
               <ApparatusSelectedListBox />
             </OverlayGridItem1>
             <OverlayGridItem2>
-            <ApparatusListBox/>
+            <ApparatusListBox props={earth.Id.Identifier}/>
             </OverlayGridItem2>
             <OverlayGridItem3>
-              <ApparatusTriggerListBox />
+              <ApparatusTriggerListBox  props={earth.Metadata.Data} />
             </OverlayGridItem3>
           </OverlayGrid>
         </OverlayShown>
@@ -112,9 +114,11 @@ function Overlay(): JSX.Element {
             <OverlayGridItem1>
               <ApparatusSelectedListBox />
             </OverlayGridItem1>
-            <OverlayGridItem2/>
+            <OverlayGridItem2>
+            <ApparatusListBox props={earth.Id.Identifier}/>
+              </OverlayGridItem2>
             <OverlayGridItem3>
-              <ApparatusTriggerListBox />
+              <ApparatusTriggerListBox props={earth.Metadata.Data}/>
             </OverlayGridItem3>
           </OverlayGrid>
         </OverlayHidden>

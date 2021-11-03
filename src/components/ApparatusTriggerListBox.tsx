@@ -1,29 +1,39 @@
-import { useState } from "react";
+import Button from '@mui/material/Button';
 import styled from "styled-components";
 
 const TriggerBox = styled.div`
   background: grey;
   min-width: 100%;
-  min-height: 100%;
-  /* margin-bottom: 2rem;
-margin-top: 1rem;
-position: absolute;
-left: 2rem;
-right: auto;
-bottom: 0px;
-top: 535px; */
-  p {
-    font-size: 1em;
-    text-align: center;
-    font-family: Trebuchet MS;
-    font-weight: bold;
-    margin: 0;
-  }
+  overflow-y: scroll;
+  border: 1px solid black;
+  height: 18em;
 `;
 
-const ApparatusTriggerListBox = () => (
+const ListHeading = styled.h1 `
+font-size:20px;
+text-align: center;
+font-family: Trebuchet MS;
+font-weight: bold;
+color: black;
+`
+const ListButton = styled.div `
+  text-align: center;
+  margin: 5px;
+`
+
+const ApparatusTriggerListBox = ({props}) => {
+
+  const DisplayList = () => 
+  <div>{ 
+    props.map((detail) => (<ListButton><Button variant="contained" color="primary">{detail}</Button></ListButton>)
+    )
+  }</div>;
+
+  return (
   <TriggerBox>
-    <p>Selected Apparatus Trigger List</p>
+    <ListHeading>Selected Apparatus Trigger List</ListHeading>
+    <DisplayList  />  
   </TriggerBox>
-);
+  );
+};
 export default ApparatusTriggerListBox;
