@@ -29,12 +29,12 @@ const button = (): JSX.Element => {
         fetch(urlFor("api/get_pic"))
         .then((got) => got.blob())
         .then((blob) => setData(URL.createObjectURL(blob)));
+        console.log(data);
     }
-
+    console.log(data);
     return (
         <div>
             <MyButton type = "button" onClick = {getData}></MyButton>
-            <p>{getData}</p>
             <KittyImage src={data} alt="Kitty" />
         </div>
     );
