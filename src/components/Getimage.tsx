@@ -8,6 +8,7 @@ const KittyImage = styled.img`
   height: auto;
 `;
 
+
 const MyButton = styled.button.attrs({
     children: "Button"
     })`
@@ -22,7 +23,7 @@ const MyButton = styled.button.attrs({
     `;
 
 
-const button = (): JSX.Element => {
+const getimagebutton = (): JSX.Element => {
     const [data, setData] = useState("");
 
     const getData = () => {
@@ -34,10 +35,9 @@ const button = (): JSX.Element => {
     return (
         <div>
             <MyButton type = "button" onClick = {getData}></MyButton>
-            <p>{getData}</p>
             <KittyImage src={data} alt="Kitty" />
         </div>
     );
 };
 
-export default button;
+export default getimagebutton;
