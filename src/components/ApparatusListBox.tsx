@@ -8,7 +8,7 @@ border: 1px solid black;
 min-width: 100%;
 min-height: 100%;
 overflow-y: scroll;
-`
+`;
 
 const ListHeading = styled.h1 `
 font-size:20px;
@@ -16,19 +16,24 @@ text-align: center;
 font-family: Trebuchet MS;
 font-weight: bold;
 color: black;
-`
+`;
 
 const ListButton = styled.div `
   text-align: center;
   margin: 5px;
-`
+`;
 
-const ApparatusListBox = ({props}) => {
+const ApparatusListBox = (props) => {
 
     return (
         <ListBox>
-          <ListHeading> Selected Apparatus List</ListHeading>
-          <ListButton><Button variant="contained" color="primary">{props}</Button><br/></ListButton> 
+          <ListHeading>Apparatus List</ListHeading>
+          <ListButton>
+            <Button variant="contained" color="secondary">{props.sphere}</Button>
+            <br/>
+            <br/>
+            <Button variant="contained" color="secondary">{props.earth}</Button>
+          </ListButton> 
         </ListBox>
     );
   };

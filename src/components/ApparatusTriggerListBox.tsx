@@ -1,15 +1,9 @@
 import styled from "styled-components";
 import * as React from 'react';
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Switch from '@mui/material/Switch';
-
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
-
-import { useState } from "react";
 import { Button } from "@material-ui/core";
 
 const TriggerBox = styled.div`
@@ -26,11 +20,8 @@ text-align: center;
 font-family: Trebuchet MS;
 font-weight: bold;
 color: black;
-`
-const ListButton = styled.div `
-  text-align: center;
-  margin: 5px;
-`
+`;
+
 
 const ApparatusTriggerListBox = ({props}) => {
   let actionArray = [];

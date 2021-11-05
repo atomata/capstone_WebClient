@@ -3,8 +3,8 @@ import { useState } from "react";
 import ApparatusSelectedListBox from "./ApparatusSelectedListBox";
 import ApparatusTriggerListBox from "./ApparatusTriggerListBox";
 import ApparatusListBox from "./ApparatusListBox";
-import earth from "../data/earth.json"
-import sphere from "../data/sphere.json"
+import earth from "../data/earth.json";
+import sphere from "../data/sphere.json";
         
 const OverlayRoot = styled.div`
   display: absolute;
@@ -97,10 +97,10 @@ function Overlay(): JSX.Element {
         <OverlayShown>
           <OverlayGrid>
             <OverlayGridItem1>
-              <ApparatusSelectedListBox />
+              <ApparatusSelectedListBox props={sphere.Id.Identifier} />
             </OverlayGridItem1>
             <OverlayGridItem2>
-            <ApparatusListBox props={sphere.Id.Identifier}/>
+            <ApparatusListBox sphere={sphere.Id.Identifier} earth= {earth.Id.Identifier}/>
             </OverlayGridItem2>
             <OverlayGridItem3>
               <ApparatusTriggerListBox  props={sphere.Metadata} />
@@ -111,10 +111,10 @@ function Overlay(): JSX.Element {
         <OverlayHidden>
           <OverlayGrid>
             <OverlayGridItem1>
-              <ApparatusSelectedListBox />
+              <ApparatusSelectedListBox props={sphere.Id.Identifier} />
             </OverlayGridItem1>
             <OverlayGridItem2>
-            <ApparatusListBox props={sphere.Id.Identifier}/>
+            <ApparatusListBox sphere={sphere.Id.Identifier} earth= {earth.Id.Identifier}/>
               </OverlayGridItem2>
             <OverlayGridItem3>
               <ApparatusTriggerListBox props={sphere.Metadata}/>
