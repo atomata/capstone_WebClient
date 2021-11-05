@@ -4,7 +4,6 @@ import ApparatusSelectedListBox from "./ApparatusSelectedListBox";
 import ApparatusTriggerListBox from "./ApparatusTriggerListBox";
 import ApparatusListBox from "./ApparatusListBox";
 
-
 const OverlayRoot = styled.div`
   display: absolute;
   width: inherit;
@@ -86,7 +85,6 @@ function Overlay(): JSX.Element {
   const toggleOverlay = () => {
     setOverlay((prev) => !prev);
   };
-
   return (
     <OverlayRoot>
            <ToggleDiv>

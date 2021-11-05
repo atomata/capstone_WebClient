@@ -8,6 +8,7 @@ const KittyImage = styled.img`
   height: auto;
 `;
 
+
 const MyButton = styled.button.attrs({
     children: "Button"
     })`
@@ -22,16 +23,15 @@ const MyButton = styled.button.attrs({
     `;
 
 
-const button = (): JSX.Element => {
+const getimagebutton = (): JSX.Element => {
     const [data, setData] = useState("");
 
     const getData = () => {
         fetch(urlFor("api/get_pic"))
         .then((got) => got.blob())
         .then((blob) => setData(URL.createObjectURL(blob)));
-        console.log(data);
     }
-    console.log(data);
+
     return (
         <div>
             <MyButton type = "button" onClick = {getData}></MyButton>
@@ -40,4 +40,4 @@ const button = (): JSX.Element => {
     );
 };
 
-export default button;
+export default getimagebutton;
