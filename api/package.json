@@ -10,7 +10,8 @@
     "test": "echo \"No tests yet...\""
   },
   "dependencies": {
-    "azure-storage": "^2.10.5"
+    "azure-storage": "^2.10.5",
+    "cors": "^2.8.5"
   },
   "devDependencies": {
     "@azure/functions": "^1.2.3",

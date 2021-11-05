@@ -5,6 +5,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import { useState } from "react";
 import DropddownList from "../components/DropdownListBox";
+import { Button } from "@material-ui/core";
 
 const TriggerBox = styled.div`
   background: grey;
@@ -26,12 +27,20 @@ const ListButton = styled.div `
   margin: 5px;
 `
 
-  const ApparatusTriggerListBox = ({props}) => {
-  
-    return (
+const ApparatusTriggerListBox = ({props}) => {
+   
+  //to resolve unit key issue
+  let counter= 0;
+
+  return (
   <TriggerBox>
     <ListHeading>Selected Apparatus Trigger List</ListHeading>
-    <DropddownList buttonName={props.Paths[2]} buttonOption={props.Data}/> 
+    {
+      props.map((detail) => (
+        <div key={counter++}>
+          <ListButton><Button variant="contained" color="primary">{detail}</Button></ListButton>
+        </div>))
+    }
   </TriggerBox>
   );
 };
