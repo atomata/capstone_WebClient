@@ -7,7 +7,7 @@ import {
 
 const getPic = async (): Promise<BlobDownloadResponseParsed> => BlobServiceClient.fromConnectionString("DefaultEndpointsProtocol=https;AccountName=capstonewebclient;AccountKey=q9g8YPdHkWgsVQyV37v7puMfLzRfSrZH3ufZnB4DGzq1WSnkYgz3KSFVy0JW1vB0lNigYhEvl4k0GHm5yDS1aA==;EndpointSuffix=core.windows.net"
 
-).getContainerClient("apparatus").getBlobClient("earth.json").download(0,undefined,{maxRetryRequests: 20})
+).getContainerClient("cat").getBlobClient("collcat.jpg").download(0,undefined,{maxRetryRequests: 20})
 
 const httpTrigger: AzureFunction = 
     async (context: Context): Promise<void> => {
