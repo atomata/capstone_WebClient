@@ -27,6 +27,7 @@ const ApparatusTriggerListBox = ({props}) => {
   let counter= 0;
 
   return (
+    
   <TriggerBox>
     <ListHeading>Selected Apparatus Trigger List</ListHeading>
     {

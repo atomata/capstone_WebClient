@@ -19,7 +19,7 @@ const Home = (): JSX.Element => (
    {/* /<ApparatusListBox /> */}
       <WebglBox />
       <NavigationBox />
-      <Getimage/>
+      {/* <Getimage/> */}
     </Content>
   </main>
 );

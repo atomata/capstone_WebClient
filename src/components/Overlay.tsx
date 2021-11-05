@@ -5,7 +5,6 @@ import ApparatusTriggerListBox from "./ApparatusTriggerListBox";
 import ApparatusListBox from "./ApparatusListBox";
 import earth from "../data/earth.json"
 
-
 const OverlayRoot = styled.div`
   display: absolute;
   width: inherit;
@@ -88,7 +87,6 @@ function Overlay(): JSX.Element {
   const toggleOverlay = () => {
     setOverlay((prev) => !prev);
   };
-
   return (
     <OverlayRoot>
            <ToggleDiv>
