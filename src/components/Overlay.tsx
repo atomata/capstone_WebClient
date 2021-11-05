@@ -3,7 +3,7 @@ import { useState } from "react";
 import ApparatusSelectedListBox from "./ApparatusSelectedListBox";
 import ApparatusTriggerListBox from "./ApparatusTriggerListBox";
 import ApparatusListBox from "./ApparatusListBox";
-import earth from "../data/earth.json"
+import sphere from "../data/wobble-sphere.json"
 
 
 const OverlayRoot = styled.div`
@@ -101,10 +101,10 @@ function Overlay(): JSX.Element {
               <ApparatusSelectedListBox />
             </OverlayGridItem1>
             <OverlayGridItem2>
-            <ApparatusListBox props={earth.Id.Identifier}/>
+            <ApparatusListBox props={sphere.Id.Identifier}/>
             </OverlayGridItem2>
             <OverlayGridItem3>
-              <ApparatusTriggerListBox  props={earth.Metadata.Data} />
+              <ApparatusTriggerListBox  props={sphere.Metadata} />
             </OverlayGridItem3>
           </OverlayGrid>
         </OverlayShown>
@@ -115,10 +115,10 @@ function Overlay(): JSX.Element {
               <ApparatusSelectedListBox />
             </OverlayGridItem1>
             <OverlayGridItem2>
-            <ApparatusListBox props={earth.Id.Identifier}/>
+            <ApparatusListBox props={sphere.Id.Identifier}/>
               </OverlayGridItem2>
             <OverlayGridItem3>
-              <ApparatusTriggerListBox props={earth.Metadata.Data}/>
+              <ApparatusTriggerListBox props={sphere.Metadata}/>
             </OverlayGridItem3>
           </OverlayGrid>
         </OverlayHidden>

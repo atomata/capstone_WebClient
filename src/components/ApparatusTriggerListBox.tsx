@@ -1,5 +1,10 @@
-import Button from '@mui/material/Button';
 import styled from "styled-components";
+import * as React from 'react';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Switch from '@mui/material/Switch';
+import { useState } from "react";
+import DropddownList from "../components/DropdownListBox";
 
 const TriggerBox = styled.div`
   background: grey;
@@ -21,18 +26,12 @@ const ListButton = styled.div `
   margin: 5px;
 `
 
-const ApparatusTriggerListBox = ({props}) => {
-
-  const DisplayList = () => 
-  <div>{ 
-    props.map((detail) => (<ListButton><Button variant="contained" color="primary">{detail}</Button></ListButton>)
-    )
-  }</div>;
-
-  return (
+  const ApparatusTriggerListBox = ({props}) => {
+  
+    return (
   <TriggerBox>
     <ListHeading>Selected Apparatus Trigger List</ListHeading>
-    <DisplayList  />  
+    <DropddownList buttonName={props.Paths[2]} buttonOption={props.Data}/> 
   </TriggerBox>
   );
 };
