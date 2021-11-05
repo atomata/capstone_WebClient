@@ -35,72 +35,53 @@ const ListButton = styled.div `
 
 const ApparatusTriggerListBox = ({props}) => {
 
-  const DisplayList = () => {
-    const [showText, setShowText] = useState(false);
+  let actionArray = [];
+  // Array holds
+  // [id][0] = path = props.Paths[id]
+  // [id][1] = name
+  // [id][2+] = actions
 
-    const stringLabel =props.Data[3].split(':');
-    const stringPath = props.Data[3].split('@');
-    let stringOutput = <p></p>;
-    if (showText) {
-      stringOutput = <p>{props.Paths[stringPath[0]]}@{stringLabel[2]}?True</p>;
-    } else {
-      stringOutput = <p>{props.Paths[stringPath[0]]}@{stringLabel[2]}?False</p>;
+  for (let i = 0; i < props.Data.length; i++) {
+    let identifier = props.Data[i].split('@');
+    let action = identifier[1].split(':');
+
+    if(action[0] == "input"){
+      if(actionArray[identifier[0]] == null || actionArray[identifier[0]] == undefined)
+        actionArray[identifier[0]] = [props.Paths[identifier[0]], props.Data[i-1].split('@')[1].split(':')[1]];
+      actionArray[identifier[0]].push([action[2]]);
     }
+  };
 
-    let actionArray = [];
-    // Array holds
-    // [id][0] = path = props.Paths[id]
-    // [id][1] = name
-    // [id][2+] = actions
-
-    for (let i = 0; i < props.Data.length; i++) {
-      let identifier = props.Data[i].split('@');
-      let action = identifier[1].split(':');
-
-      if(action[0] == "input"){
-        if(actionArray[identifier[0]] == null || actionArray[identifier[0]] == undefined)
-          actionArray[identifier[0]] = [props.Paths[identifier[0]], props.Data[i-1].split('@')[1].split(':')[1]];
-        actionArray[identifier[0]].push([action[2]]);
-      }
-    };
-
-    function callToWebGL(path, input){
-      alert(path + "@" + input +"?false");
-      //uin.SendMessage()
-    }
-
-    return (
-      <div>
-        {stringOutput}
-        -----
-        {actionArray.map(function(data, index){
-          return (<Accordion>
-            <AccordionSummary
-              
-              aria-controls="panel1a-content"
-              id="panel1a-header"
-            >
-              <Typography>{data[1]}</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Typography>
-                {data.map(function(input, i){
-                    if(i > 1){
-                      return <Button variant="contained" onClick={() => callToWebGL(data[0], data[i])} id={data[0]}>{input}</Button>
-                    }    
-                })}
-              </Typography>
-            </AccordionDetails>
-          </Accordion>);
-        })}
-    </div> 
-    );
+  function callToWebGL(path, input){
+    alert(path + "@" + input +"?false");
+    //uin.SendMessage()
   }
 
   return (
   <TriggerBox>
     <ListHeading>Selected Apparatus Trigger List</ListHeading>
-    <DisplayList  />
+        {actionArray.map((data, index) => (
+          <div key={index}>
+            <Accordion>
+              <AccordionSummary         
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+              >
+                <Typography>{data[1]}</Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Typography>
+                  {data.map(function(input, i){
+                      if(i > 1){
+                        return <Button key={i} variant="contained" onClick={() => callToWebGL(data[0], data[i])} id={data[0]}>{input}</Button>
+                      }    
+                  })}
+                </Typography>
+              </AccordionDetails>
+            </Accordion>
+          </div>)
+        )}
+    
   </TriggerBox>
   );
 };
