@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start -p $PORT",
     "test": "jest",
+    "test-coverage" : "jest --coverage",
     "export": "next export -o build",
     "deploy": "yarn build && yarn export",
     "swa-start": "swa start build/ --api api",
