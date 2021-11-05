@@ -33,7 +33,6 @@ const ListButton = styled.div `
 `
 
 const ApparatusTriggerListBox = ({props}) => {
-
   let actionArray = [];
   // Array holds
   // [id][0] = path = props.Paths[id]
@@ -56,7 +55,9 @@ const ApparatusTriggerListBox = ({props}) => {
     //uin.SendMessage()
   }
 
+
   return (
+    
   <TriggerBox>
     <ListHeading>Selected Apparatus Trigger List</ListHeading>
         {actionArray.map((data, index) => (
@@ -80,7 +81,6 @@ const ApparatusTriggerListBox = ({props}) => {
             </Accordion>
           </div>)
         )}
-    
   </TriggerBox>
   );
 };
