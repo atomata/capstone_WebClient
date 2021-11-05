@@ -22,17 +22,19 @@ const ListButton = styled.div `
 `
 
 const ApparatusTriggerListBox = ({props}) => {
-
-  const DisplayList = () => 
-  <div>{ 
-    props.map((detail) => (<ListButton><Button variant="contained" color="primary">{detail}</Button></ListButton>)
-    )
-  }</div>;
+   
+  //to resolve unit key issue
+  let counter= 0;
 
   return (
   <TriggerBox>
     <ListHeading>Selected Apparatus Trigger List</ListHeading>
-    <DisplayList  />  
+    {
+      props.map((detail) => (
+        <div key={counter++}>
+          <ListButton><Button variant="contained" color="primary">{detail}</Button></ListButton>
+        </div>))
+    }
   </TriggerBox>
   );
 };
