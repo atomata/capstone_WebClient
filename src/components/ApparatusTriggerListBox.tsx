@@ -1,5 +1,16 @@
-import Button from '@mui/material/Button';
 import styled from "styled-components";
+import * as React from 'react';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Switch from '@mui/material/Switch';
+
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import Typography from '@mui/material/Typography';
+
+import { useState } from "react";
+import { Button } from "@material-ui/core";
 
 const TriggerBox = styled.div`
   background: grey;
@@ -22,20 +33,54 @@ const ListButton = styled.div `
 `
 
 const ApparatusTriggerListBox = ({props}) => {
-   
-  //to resolve unit key issue
-  let counter= 0;
+  let actionArray = [];
+  // Array holds
+  // [id][0] = path = props.Paths[id]
+  // [id][1] = name
+  // [id][2+] = actions
+
+  for (let i = 0; i < props.Data.length; i++) {
+    let identifier = props.Data[i].split('@');
+    let action = identifier[1].split(':');
+
+    if(action[0] == "input"){
+      if(actionArray[identifier[0]] == null || actionArray[identifier[0]] == undefined)
+        actionArray[identifier[0]] = [props.Paths[identifier[0]], props.Data[i-1].split('@')[1].split(':')[1]];
+      actionArray[identifier[0]].push([action[2]]);
+    }
+  };
+
+  function callToWebGL(path, input){
+    alert(path + "@" + input +"?false");
+    //uin.SendMessage()
+  }
+
 
   return (
     
   <TriggerBox>
     <ListHeading>Selected Apparatus Trigger List</ListHeading>
-    {
-      props.map((detail) => (
-        <div key={counter++}>
-          <ListButton><Button variant="contained" color="primary">{detail}</Button></ListButton>
-        </div>))
-    }
+        {actionArray.map((data, index) => (
+          <div key={index}>
+            <Accordion>
+              <AccordionSummary         
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+              >
+                <Typography>{data[1]}</Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Typography>
+                  {data.map(function(input, i){
+                      if(i > 1){
+                        return <Button key={i} variant="contained" onClick={() => callToWebGL(data[0], data[i])} id={data[0]}>{input}</Button>
+                      }    
+                  })}
+                </Typography>
+              </AccordionDetails>
+            </Accordion>
+          </div>)
+        )}
   </TriggerBox>
   );
 };
