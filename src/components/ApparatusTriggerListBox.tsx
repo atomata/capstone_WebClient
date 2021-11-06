@@ -5,6 +5,7 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import { Button } from "@material-ui/core";
+import {voidTrigger} from "./WebglBox";
 
 const TriggerBox = styled.div`
   background: grey;
@@ -42,8 +43,8 @@ const ApparatusTriggerListBox = ({props}) => {
   };
 
   function callToWebGL(path, input){
-    alert(path + "@" + input +"?false");
-    //uin.SendMessage()
+    let arg = path + "@" + input;
+    voidTrigger(arg);
   }
 
 

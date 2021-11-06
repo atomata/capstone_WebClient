@@ -1,6 +1,7 @@
 import Button from '@mui/material/Button';
 import styled from "styled-components";
-
+import {loadEarth} from "./WebglBox";
+import {loadSphere} from "./WebglBox";
 
 const ListBox = styled.div `
 background: #FFFAF0;
@@ -29,10 +30,10 @@ const ApparatusListBox = (props) => {
         <ListBox>
           <ListHeading>Apparatus List</ListHeading>
           <ListButton>
-            <Button variant="contained" color="secondary">{props.sphere}</Button>
+            <Button variant="contained" color="secondary" onClick = {loadSphere}>{props.sphere}</Button>
             <br/>
             <br/>
-            <Button variant="contained" color="secondary">{props.earth}</Button>
+            <Button variant="contained" color="secondary" onClick = {loadEarth}>{props.earth}</Button>
           </ListButton> 
         </ListBox>
     );
