@@ -18,13 +18,10 @@ const WebglRoot = styled.div`
   margin-top: 4rem;
 `;
 
-export function loadEarth() {
-    unityContext.send("Container", "LoadApparatus", "earth");
+export function load(arg) {
+    unityContext.send("Container", "LoadApparatus", arg);
 }
 
-export function loadSphere() {
-    unityContext.send("Container", "LoadApparatus", "wobble-sphere");
-}
 
 export function voidTrigger(arg){
     unityContext.send("Container", "VoidTrigger", arg);
