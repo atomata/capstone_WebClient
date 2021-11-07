@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import { useState } from "react";
-import ApparatusSelectedListBox from "./ApparatusSelectedListBox";
-import ApparatusTriggerListBox from "./ApparatusTriggerListBox";
-import ApparatusListBox from "./ApparatusListBox";
-import earth from "../data/earth.json";
-import sphere from "../data/sphere.json";
+import ApparatusSelectedListBox from "../apparatusLists/ApparatusSelectedListBox";
+import ApparatusTriggerListBox from "../apparatusLists/ApparatusTriggerListBox";
+import ApparatusListBox from "../apparatusLists/ApparatusListBox";
+import earth from "../../data/earth.json";
+import sphere from "../../data/sphere.json";
         
 const OverlayRoot = styled.div`
   display: absolute;

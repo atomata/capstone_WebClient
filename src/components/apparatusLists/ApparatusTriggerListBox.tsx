@@ -5,7 +5,7 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import { Button } from "@material-ui/core";
-import {voidTrigger} from "./WebglBox";
+import {voidTrigger} from "../webgl/WebglBox";
 
 const TriggerBox = styled.div`
   background: grey;

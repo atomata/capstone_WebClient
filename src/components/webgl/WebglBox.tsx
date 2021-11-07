@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Unity, {UnityContext} from "react-unity-webgl";
-import Overlay from "./Overlay";
+import Overlay from "../Overlay/Overlay";
 
 
 const unityContext = new UnityContext({
