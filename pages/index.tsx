@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import ApparatusListBox from "../src/components/ApparatusListBox";
-import ApparatusSelectedListBox from "../src/components/ApparatusSelectedListBox";
-import ApparatusTriggerListBox from "../src/components/ApparatusTriggerListBox";
+import ApparatusListBox from "../src/components/apparatusLists/ApparatusListBox";
+import ApparatusSelectedListBox from "../src/components/apparatusLists/ApparatusSelectedListBox";
+import ApparatusTriggerListBox from "../src/components/apparatusLists/ApparatusTriggerListBox";
 import NavigationBox from "../src/components/NavigationBox";
-import WebglBox from "../src/components/WebglBox";
+import WebglBox from "../src/components/webgl/WebglBox";
 import Getimage from "../src/components/Getimage";
 
 const Content = styled.div`

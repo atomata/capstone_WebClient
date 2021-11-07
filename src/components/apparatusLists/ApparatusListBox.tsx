@@ -1,6 +1,6 @@
 import Button from '@mui/material/Button';
 import styled from "styled-components";
-import {load} from "./WebglBox";
+import {load} from "../webgl/WebglBox";
 
 
 const ListBox = styled.div `
