@@ -1,6 +1,6 @@
 import Button from '@mui/material/Button';
 import styled from "styled-components";
-import {load} from "../webgl/WebglBox";
+import { load } from '../../util/unityContextActions';
 
 
 const ListBox = styled.div `
@@ -24,8 +24,7 @@ const ListButton = styled.div `
   margin: 5px;
 `;
 
-const ApparatusListBox = (props) => {
-    return (
+const ApparatusListBox = (props) => (
         <ListBox>
           <ListHeading>Apparatus List</ListHeading>
           <ListButton>
@@ -36,5 +35,4 @@ const ApparatusListBox = (props) => {
           </ListButton> 
         </ListBox>
     );
-  };
 export default ApparatusListBox;

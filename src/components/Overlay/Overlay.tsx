@@ -103,7 +103,7 @@ function Overlay(): JSX.Element {
             <ApparatusListBox sphere={sphere.Id.Identifier} earth= {earth.Id.Identifier}/>
             </OverlayGridItem2>
             <OverlayGridItem3>
-              <ApparatusTriggerListBox  props={sphere.Metadata} />
+              <ApparatusTriggerListBox  metadata={sphere.Metadata} />
             </OverlayGridItem3>
           </OverlayGrid>
         </OverlayShown>
@@ -117,7 +117,7 @@ function Overlay(): JSX.Element {
             <ApparatusListBox sphere={sphere.Id.Identifier} earth= {earth.Id.Identifier}/>
               </OverlayGridItem2>
             <OverlayGridItem3>
-              <ApparatusTriggerListBox props={sphere.Metadata}/>
+              <ApparatusTriggerListBox metadata={sphere.Metadata}/>
             </OverlayGridItem3>
           </OverlayGrid>
         </OverlayHidden>
