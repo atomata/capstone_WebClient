@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import ApparatusListBox from "../src/components/apparatusLists/ApparatusListBox";
-import ApparatusSelectedListBox from "../src/components/apparatusLists/ApparatusSelectedListBox";
+import ApparatusSelectedListBox from "../src/components/apparatusLists/ActionSequenceBox";
 import ApparatusTriggerListBox from "../src/components/apparatusLists/ApparatusTriggerListBox";
 import NavigationBox from "../src/components/NavigationBox";
 import WebglBox from "../src/components/webgl/WebglBox";
