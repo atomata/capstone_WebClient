@@ -5,7 +5,7 @@ import ApparatusTriggerListBox from "../apparatusLists/ApparatusTriggerListBox";
 import ApparatusListBox from "../apparatusLists/ApparatusListBox";
 import earth from "../../data/earth.json";
 import sphere from "../../data/sphere.json";
-        
+
 const OverlayRoot = styled.div`
   display: absolute;
   width: inherit;
@@ -27,7 +27,7 @@ const OverlayHidden = styled.div`
   display: absolute;
   width: inherit;
   height: inherit;
-  opacity: 0.0;
+  opacity: 0;
   pointer-events: none;
 `;
 
@@ -42,9 +42,10 @@ const OverlayGrid = styled.div`
 const OverlayGridItem1 = styled.div`
   background-color: red;
   grid-column: 1 / span 2;
-  grid-row: 2 / span 6;
+  grid-row: 2 / span 5;
   z-index: 2;
   pointer-events: auto;
+  margin: 5%;
 `;
 
 const OverlayGridItem2 = styled.div`
@@ -54,15 +55,17 @@ const OverlayGridItem2 = styled.div`
   padding: none;
   z-index: 2;
   pointer-events: auto;
+  margin: 5%;
 `;
 
 const OverlayGridItem3 = styled.div`
   background-color: #120b1a;
-  grid-column: 3 / span 5;
-  grid-row: 8 / span 2;
+  grid-column: 1 / span 2;
+  grid-row: 7 / span 2;
   z-index: 2;
   pointer-events: auto;
   height: 18em;
+  margin: 5%;
 `;
 
 const ToggleDiv = styled.div`
@@ -79,7 +82,7 @@ const ToggleOverlayButton = styled.button.attrs({
   z-index: inherit;
   pointer-events: auto;
   margin: 0.75em;
-  color:white
+  color: white;
 `;
 
 function Overlay(): JSX.Element {
@@ -90,20 +93,23 @@ function Overlay(): JSX.Element {
   };
   return (
     <OverlayRoot>
-           <ToggleDiv>
+      <ToggleDiv>
         <ToggleOverlayButton onClick={toggleOverlay} />
       </ToggleDiv>
       {showOverlay ? (
         <OverlayShown>
           <OverlayGrid>
             <OverlayGridItem1>
-              <ApparatusSelectedListBox props={sphere.Id.Identifier} />
+              <ApparatusListBox
+                sphere={sphere.Id.Identifier}
+                earth={earth.Id.Identifier}
+              />
             </OverlayGridItem1>
             <OverlayGridItem2>
-            <ApparatusListBox sphere={sphere.Id.Identifier} earth= {earth.Id.Identifier}/>
+              <ApparatusSelectedListBox props={sphere.Id.Identifier} />
             </OverlayGridItem2>
             <OverlayGridItem3>
-              <ApparatusTriggerListBox  metadata={sphere.Metadata} />
+              <ApparatusTriggerListBox metadata={sphere.Metadata} />
             </OverlayGridItem3>
           </OverlayGrid>
         </OverlayShown>
@@ -114,10 +120,13 @@ function Overlay(): JSX.Element {
               <ApparatusSelectedListBox props={sphere.Id.Identifier} />
             </OverlayGridItem1>
             <OverlayGridItem2>
-            <ApparatusListBox sphere={sphere.Id.Identifier} earth= {earth.Id.Identifier}/>
-              </OverlayGridItem2>
+              <ApparatusListBox
+                sphere={sphere.Id.Identifier}
+                earth={earth.Id.Identifier}
+              />
+            </OverlayGridItem2>
             <OverlayGridItem3>
-              <ApparatusTriggerListBox metadata={sphere.Metadata}/>
+              <ApparatusTriggerListBox metadata={sphere.Metadata} />
             </OverlayGridItem3>
           </OverlayGrid>
         </OverlayHidden>
@@ -126,5 +135,3 @@ function Overlay(): JSX.Element {
   );
 }
 export default Overlay;
-
-
