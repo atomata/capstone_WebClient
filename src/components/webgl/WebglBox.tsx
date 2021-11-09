@@ -1,14 +1,7 @@
 import styled from "styled-components";
-import Unity, {UnityContext} from "react-unity-webgl";
+import Unity from "react-unity-webgl";
 import Overlay from "../Overlay/Overlay";
-
-
-const unityContext = new UnityContext({
-    loaderUrl: "build/Build.loader.js",
-    dataUrl: "build/Build.data",
-    frameworkUrl: "build/Build.framework.js",
-    codeUrl: "build/Build.wasm"
-});
+import { unityContext } from "../../util/unityContextActions";
 
 const WebglRoot = styled.div`
   display: relative;
@@ -18,23 +11,7 @@ const WebglRoot = styled.div`
   margin-top: 4rem;
 `;
 
-export function load(arg) {
-    unityContext.send("Container", "LoadApparatus", arg);
-}
-
-
-export function voidTrigger(arg){
-    unityContext.send("Container", "VoidTrigger", arg);
-}
-
-const WebglBox = (): JSX.Element => {
-
-
-    function handleOnClickFullscreen() {
-        unityContext.setFullscreen(true);
-    }
-
-    return (
+const WebglBox = (): JSX.Element => (
         <WebglRoot>
             <Unity
                 unityContext={unityContext}
@@ -49,5 +26,4 @@ const WebglBox = (): JSX.Element => {
             <Overlay/>
         </WebglRoot>
     );
-};
 export default WebglBox;
