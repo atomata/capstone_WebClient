@@ -4,7 +4,7 @@ import ActionSequenceBox from "../apparatusLists/ActionSequenceBox";
 import ApparatusTriggerListBox from "../apparatusLists/ApparatusTriggerListBox";
 import ApparatusListBox from "../apparatusLists/ApparatusListBox";
 import wobbleSphere from "../../data/wobble-sphere.json";
-import evilCylinder from "../../data/evil-cylinder.json"
+import evilCylinder from "../../data/evil-cylinder.json";
 
 const OverlayRoot = styled.div`
   display: absolute;
@@ -99,12 +99,10 @@ function Overlay(): JSX.Element {
         <OverlayShown>
           <OverlayGrid>
             <OverlayGridItem1>
-              <ApparatusListBox
-                metadata={evilCylinder.Metadata}
-              />
+              <ApparatusListBox metadata={evilCylinder.Metadata} />
             </OverlayGridItem1>
             <OverlayGridItem2>
-              <ActionSequenceBox />
+              <ActionSequenceBox metadata={evilCylinder.Metadata} />
             </OverlayGridItem2>
             <OverlayGridItem3>
               <ApparatusTriggerListBox metadata={evilCylinder.Metadata} />
@@ -115,15 +113,13 @@ function Overlay(): JSX.Element {
         <OverlayHidden>
           <OverlayGrid>
             <OverlayGridItem1>
-            <ApparatusListBox
-                metadata={evilCylinder.Metadata}
-              />
+              <ApparatusListBox metadata={evilCylinder.Metadata} />
             </OverlayGridItem1>
             <OverlayGridItem2>
-            <ActionSequenceBox />
+              <ActionSequenceBox metadata={evilCylinder.Metadata} />
             </OverlayGridItem2>
             <OverlayGridItem3>
-              <ApparatusTriggerListBox  metadata={evilCylinder.Metadata} />
+              <ApparatusTriggerListBox metadata={evilCylinder.Metadata} />
             </OverlayGridItem3>
           </OverlayGrid>
         </OverlayHidden>
