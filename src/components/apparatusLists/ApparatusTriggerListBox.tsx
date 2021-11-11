@@ -5,8 +5,8 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import { Button } from "@material-ui/core";
-import { voidTrigger } from "../../util/unityContextActions";
-import { parseActions , Metadata } from "../../util/parsing";
+import { callToWebGL } from "../../util/unityContextActions";
+import { parseActions, Metadata } from "../../util/parsing";
 
 const TriggerBox = styled.div`
   background: grey;
@@ -29,11 +29,6 @@ const ApparatusTriggerListBox = ({ metadata }: { metadata: Metadata }) => {
 
   const actionArray = React.useMemo(() => parseActions(metadata), [metadata]);
   // everytime metadata is rendered we reparse metadata using useMemo hook
-
-  function callToWebGL(path, input) {
-    const arg = `${path}@${input}`;
-    voidTrigger(arg);
-  }
 
   return (
     <TriggerBox>

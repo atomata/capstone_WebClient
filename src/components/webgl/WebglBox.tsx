@@ -18,7 +18,6 @@ const WebglBox = (): JSX.Element => (
                 style={{
                     height: "inherit",
                     width: "inherit",
-                    background: "#9a2323",
                     position: "absolute",
                     zIndex: 0,
                 }}

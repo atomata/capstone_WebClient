@@ -3,6 +3,23 @@ type Metadata = {
   Data: string[];
 };
 
+function parseAssets(metadata: Metadata) {
+  const assetArray = [];
+
+  for (let i = 0; i < metadata.Data.length; i += 1) {
+    const identifier = metadata.Data[i].split("@");
+    const nonAction = identifier[1].split("/");
+
+    if (nonAction[1] === "AssetBundle") {
+      console.log("Found AssetBundle!");
+      const keyMeta = metadata.Data[i + 1].split("@");
+      const key = keyMeta[1].split(":");
+      assetArray.push(key[1]);
+    }
+  }
+  return assetArray;
+}
+
 function parseActions(metadata: Metadata) {
   const actionArray = [];
 
@@ -26,12 +43,5 @@ function parseActions(metadata: Metadata) {
   return actionArray;
 }
 
-function func1() {
-
-  // some function
-  console.log("Sample Function")
-
-}
-
-export { parseActions, func1 };
+export { parseActions, parseAssets };
 export type { Metadata };

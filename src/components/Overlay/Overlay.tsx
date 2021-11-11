@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import { useState } from "react";
-import ApparatusSelectedListBox from "../apparatusLists/ApparatusSelectedListBox";
+import ActionSequenceBox from "../apparatusLists/ActionSequenceBox";
 import ApparatusTriggerListBox from "../apparatusLists/ApparatusTriggerListBox";
 import ApparatusListBox from "../apparatusLists/ApparatusListBox";
-import earth from "../../data/earth.json";
-import sphere from "../../data/sphere.json";
+import wobbleSphere from "../../data/wobble-sphere.json";
+import evilCylinder from "../../data/evil-cylinder.json";
 
 const OverlayRoot = styled.div`
   display: absolute;
@@ -42,7 +42,7 @@ const OverlayGrid = styled.div`
 const OverlayGridItem1 = styled.div`
   background-color: red;
   grid-column: 1 / span 2;
-  grid-row: 2 / span 5;
+  grid-row: 2 / span 4;
   z-index: 2;
   pointer-events: auto;
   margin: 5%;
@@ -61,10 +61,9 @@ const OverlayGridItem2 = styled.div`
 const OverlayGridItem3 = styled.div`
   background-color: #120b1a;
   grid-column: 1 / span 2;
-  grid-row: 7 / span 2;
+  grid-row: 6 / span 2;
   z-index: 2;
   pointer-events: auto;
-  height: 18em;
   margin: 5%;
 `;
 
@@ -86,7 +85,7 @@ const ToggleOverlayButton = styled.button.attrs({
 `;
 
 function Overlay(): JSX.Element {
-  const [showOverlay, setOverlay] = useState(true);
+  const [showOverlay, setOverlay] = useState(false);
 
   const toggleOverlay = () => {
     setOverlay((prev) => !prev);
@@ -100,16 +99,13 @@ function Overlay(): JSX.Element {
         <OverlayShown>
           <OverlayGrid>
             <OverlayGridItem1>
-              <ApparatusListBox
-                sphere={sphere.Id.Identifier}
-                earth={earth.Id.Identifier}
-              />
+              <ApparatusListBox metadata={evilCylinder.Metadata} />
             </OverlayGridItem1>
             <OverlayGridItem2>
-              <ApparatusSelectedListBox props={sphere.Id.Identifier} />
+              <ActionSequenceBox metadata={evilCylinder.Metadata} />
             </OverlayGridItem2>
             <OverlayGridItem3>
-              <ApparatusTriggerListBox metadata={sphere.Metadata} />
+              <ApparatusTriggerListBox metadata={evilCylinder.Metadata} />
             </OverlayGridItem3>
           </OverlayGrid>
         </OverlayShown>
@@ -117,16 +113,13 @@ function Overlay(): JSX.Element {
         <OverlayHidden>
           <OverlayGrid>
             <OverlayGridItem1>
-              <ApparatusSelectedListBox props={sphere.Id.Identifier} />
+              <ApparatusListBox metadata={evilCylinder.Metadata} />
             </OverlayGridItem1>
             <OverlayGridItem2>
-              <ApparatusListBox
-                sphere={sphere.Id.Identifier}
-                earth={earth.Id.Identifier}
-              />
+              <ActionSequenceBox metadata={evilCylinder.Metadata} />
             </OverlayGridItem2>
             <OverlayGridItem3>
-              <ApparatusTriggerListBox metadata={sphere.Metadata} />
+              <ApparatusTriggerListBox metadata={evilCylinder.Metadata} />
             </OverlayGridItem3>
           </OverlayGrid>
         </OverlayHidden>

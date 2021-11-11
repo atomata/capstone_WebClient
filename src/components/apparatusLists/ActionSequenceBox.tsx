@@ -1,7 +1,8 @@
 import Button from '@mui/material/Button';
 import styled from "styled-components";
+import { Metadata } from '../../util/parsing';
 
-const SelectledListBox = styled.div`
+const ActionListBox = styled.div`
   background: #FFFDD0;
   min-width: 100%;
   min-height: 100%;
@@ -23,10 +24,10 @@ const ListButton = styled.div `
 `;
 
 
-const ApparatusSelectedListBox = ({props}) => (
-  <SelectledListBox>
-      <ListHeading>Selected Apparatus List</ListHeading>
-      <ListButton><Button variant="contained" color="primary">{props}</Button><br/></ListButton> 
-  </SelectledListBox>
+const ActionSequenceBox = ({ metadata }: { metadata: Metadata }) => (
+  <ActionListBox>
+      <ListHeading>Action List</ListHeading>
+      <ListButton><Button variant="contained" color="primary">Some action</Button><br/></ListButton> 
+  </ActionListBox>
 );
-export default ApparatusSelectedListBox;
+export default ActionSequenceBox;
