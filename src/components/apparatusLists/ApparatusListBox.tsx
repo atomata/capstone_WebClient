@@ -63,46 +63,6 @@ const ApparatusListBox = ({ metadata }: { metadata: Metadata }) => {
             Some Asset
           </Button>
         </ListButton>
-        <ListButton>
-          <Button variant="contained" color="secondary">
-            Some Asset
-          </Button>
-        </ListButton>
-        <ListButton>
-          <Button variant="contained" color="secondary">
-            Some Asset
-          </Button>
-        </ListButton>
-        <ListButton>
-          <Button variant="contained" color="secondary">
-            Some Asset
-          </Button>
-        </ListButton>
-        <ListButton>
-          <Button variant="contained" color="secondary">
-            Some Asset
-          </Button>
-        </ListButton>
-        <ListButton>
-          <Button variant="contained" color="secondary">
-            Some Asset
-          </Button>
-        </ListButton>
-        <ListButton>
-          <Button variant="contained" color="secondary">
-            Some Asset
-          </Button>
-        </ListButton>
-        <ListButton>
-          <Button variant="contained" color="secondary">
-            Some Asset
-          </Button>
-        </ListButton>
-        <ListButton>
-          <Button variant="contained" color="secondary">
-            Some Asset
-          </Button>
-        </ListButton>
       </ListBoxScroller>
       {/* <Button variant="contained" color="secondary" onClick = {() => load(props.sphere)}>{props.sphere}</Button>
             <br/>
