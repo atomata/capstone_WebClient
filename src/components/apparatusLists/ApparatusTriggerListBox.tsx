@@ -21,28 +21,35 @@ const ListHeading = styled.h1`
   color: black;
 `;
 
-const ApparatusTriggerListBox = ({metadata}: { metadata: Metadata }) => {
+const ApparatusTriggerListBox = ({metadata,asset}: { metadata: Metadata , asset: string}) => {
     // dont use props as a props property, no caps,
 
     const actionMap = React.useMemo(() => parseActions(metadata), [metadata]);
-    const actionlist = actionMap.get("wobble-sphere");
+    const actionlist = actionMap.get(asset);
     // everytime metadata is rendered we reparse metadata using useMemo hook
-
-    return (
-        <TriggerBox>
-            <ListHeading>Selected Apparatus Trigger List</ListHeading>
-            {actionlist.map((data) => (
-                <Typography>
-                    <Button
-                        key={data[0]}
-                        variant="contained"
-                        onClick={() => callToWebGL(data[1], data[0])}
-                        id={data[0]}
-                    >
-                        {data[0]}
-                    </Button>
-                </Typography>
-            ))}
-        </TriggerBox>);
+    if(actionlist !== undefined) {
+        return (
+            <TriggerBox>
+                <ListHeading>Selected Apparatus Trigger List</ListHeading>
+                {actionlist.map((data) => (
+                    <Typography>
+                        <Button
+                            key={data[0]}
+                            variant="contained"
+                            onClick={() => callToWebGL(data[1], data[0])}
+                            id={data[0]}
+                        >
+                            {data[0]}
+                        </Button>
+                    </Typography>
+                ))}
+            </TriggerBox>);
+    }
+    
+        return (
+            <TriggerBox>
+            </TriggerBox>
+        );
+    
 };
 export default ApparatusTriggerListBox;

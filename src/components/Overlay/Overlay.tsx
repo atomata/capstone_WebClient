@@ -85,10 +85,12 @@ const ToggleOverlayButton = styled.button.attrs({
 `;
 
 function Overlay(): JSX.Element {
-  const [showOverlay, setOverlay] = useState(false);
+  const [apparatus, setApparatus] = useState("wobble-sphere");
+  const [showOverlay,setOverlay] = useState(false);
+
 
   const toggleOverlay = () => {
-    setOverlay((prev) => !prev);
+    setOverlay((show) => !show);
   };
   return (
     <OverlayRoot>
@@ -99,13 +101,13 @@ function Overlay(): JSX.Element {
         <OverlayShown>
           <OverlayGrid>
             <OverlayGridItem1>
-              <ApparatusListBox metadata={evilCylinder.Metadata} />
+              <ApparatusListBox metadata={evilCylinder.Metadata} handleApparatusChange={(data) => setApparatus(data)}/>
             </OverlayGridItem1>
             <OverlayGridItem2>
               <ActionSequenceBox metadata={evilCylinder.Metadata} />
             </OverlayGridItem2>
             <OverlayGridItem3>
-              <ApparatusTriggerListBox metadata={evilCylinder.Metadata} />
+              <ApparatusTriggerListBox metadata={evilCylinder.Metadata} asset= {apparatus} />
             </OverlayGridItem3>
           </OverlayGrid>
         </OverlayShown>
@@ -113,13 +115,13 @@ function Overlay(): JSX.Element {
         <OverlayHidden>
           <OverlayGrid>
             <OverlayGridItem1>
-              <ApparatusListBox metadata={evilCylinder.Metadata} />
+              <ApparatusListBox metadata={evilCylinder.Metadata} handleApparatusChange={(data) => setApparatus(data)}/>
             </OverlayGridItem1>
             <OverlayGridItem2>
               <ActionSequenceBox metadata={evilCylinder.Metadata} />
             </OverlayGridItem2>
             <OverlayGridItem3>
-              <ApparatusTriggerListBox metadata={evilCylinder.Metadata} />
+              <ApparatusTriggerListBox metadata={evilCylinder.Metadata} asset={apparatus} />
             </OverlayGridItem3>
           </OverlayGrid>
         </OverlayHidden>

@@ -41,7 +41,7 @@ const ListButton = styled.div`
   margin: 5px;
 `;
 
-const ApparatusListBox = ({ metadata }: { metadata: Metadata }) => {
+const ApparatusListBox = ({ metadata, handleApparatusChange }) => {
   const assetArray = React.useMemo(() => parseAssets(metadata), [metadata]);
   return (
     <ListBox>
@@ -52,7 +52,7 @@ const ApparatusListBox = ({ metadata }: { metadata: Metadata }) => {
             <Button
               variant="contained"
               color="secondary"
-              onClick={() => load(data)}
+              onClick={() => {load(data); handleApparatusChange(data);}}
             >
               {data}
             </Button>
