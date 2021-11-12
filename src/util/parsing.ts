@@ -1,3 +1,5 @@
+import {tupleExpression} from "@babel/types";
+
 type Metadata = {
     Paths: string[];
     Data: string[];
@@ -8,7 +10,7 @@ function parseAssets(metadata: Metadata) {
     for (let i = 0; i < metadata.Data.length; i += 1) {
         const data = metadata.Data[i];
         const regex = /\d@type\/AssetBundle/;
-        // assuming that the next item in the list is a key 
+        // assuming that the next item in the list is a key
         if (data.match(regex)) {
             const keyMeta = metadata.Data[i + 1].split("@");
             const key = keyMeta[1].split(":");
@@ -19,26 +21,27 @@ function parseAssets(metadata: Metadata) {
 }
 
 function parseActions(metadata: Metadata) {
-    const actionArray = [];
-
+    const actionMap = new Map();
+    let trigger :[string,string][] = [];
+    let identifier = "";
     for (let i = 0; i < metadata.Data.length; i += 1) {
-        const identifier = metadata.Data[i].split("@");
-        const action = identifier[1].split(":");
+        const data = metadata.Data[i];
+        const regexTrigger = /\d@input:void:.+/;
+        const regexIdentifier = /\d@associatedNode\/.+/;
 
-        if (action[0] === "input") {
-            if (
-                actionArray[identifier[0]] == null ||
-                actionArray[identifier[0]] === undefined
-            )
-                actionArray[identifier[0]] = [
-                    metadata.Paths[identifier[0]],
-                    metadata.Data[i - 1].split("@")[1].split(":")[1],
-                ];
-            actionArray[identifier[0]].push([action[2]]);
+        if(data.match(regexIdentifier)){
+            identifier = data.split("/")[1];
+            trigger = [];
+            actionMap.set(identifier,trigger);
+        }
+        else if (data.match(regexTrigger)) {
+            const vals = data.split(":");
+            const actionName = vals[2];
+            const path = metadata.Paths[vals[0].split("@")[0]];
+            trigger.push([actionName,path]);
         }
     }
-
-    return actionArray;
+    return actionMap;
 }
 
 export {parseActions, parseAssets};
