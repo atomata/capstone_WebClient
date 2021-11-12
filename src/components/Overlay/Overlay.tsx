@@ -5,6 +5,7 @@ import ApparatusTriggerListBox from "../apparatusLists/ApparatusTriggerListBox";
 import ApparatusListBox from "../apparatusLists/ApparatusListBox";
 import wobbleSphere from "../../data/wobble-sphere.json";
 import evilCylinder from "../../data/evil-cylinder.json";
+import fakeData1 from "../../data/fake-data-1.json";
 
 const OverlayRoot = styled.div`
   display: absolute;
@@ -101,13 +102,13 @@ function Overlay(): JSX.Element {
         <OverlayShown>
           <OverlayGrid>
             <OverlayGridItem1>
-              <ApparatusListBox metadata={evilCylinder.Metadata} handleApparatusChange={(data) => setApparatus(data)}/>
+              <ApparatusListBox metadata={fakeData1.Metadata} handleApparatusChange={(data) => setApparatus(data)}/>
             </OverlayGridItem1>
             <OverlayGridItem2>
-              <ActionSequenceBox metadata={evilCylinder.Metadata} />
+              <ActionSequenceBox metadata={fakeData1.Metadata} />
             </OverlayGridItem2>
             <OverlayGridItem3>
-              <ApparatusTriggerListBox metadata={evilCylinder.Metadata} asset= {apparatus} />
+              <ApparatusTriggerListBox metadata={fakeData1.Metadata} asset= {apparatus} />
             </OverlayGridItem3>
           </OverlayGrid>
         </OverlayShown>
@@ -115,13 +116,13 @@ function Overlay(): JSX.Element {
         <OverlayHidden>
           <OverlayGrid>
             <OverlayGridItem1>
-              <ApparatusListBox metadata={evilCylinder.Metadata} handleApparatusChange={(data) => setApparatus(data)}/>
+              <ApparatusListBox metadata={fakeData1.Metadata} handleApparatusChange={(data) => setApparatus(data)}/>
             </OverlayGridItem1>
             <OverlayGridItem2>
-              <ActionSequenceBox metadata={evilCylinder.Metadata} />
+              <ActionSequenceBox metadata={fakeData1.Metadata} />
             </OverlayGridItem2>
             <OverlayGridItem3>
-              <ApparatusTriggerListBox metadata={evilCylinder.Metadata} asset={apparatus} />
+              <ApparatusTriggerListBox metadata={fakeData1.Metadata} asset={apparatus} />
             </OverlayGridItem3>
           </OverlayGrid>
         </OverlayHidden>

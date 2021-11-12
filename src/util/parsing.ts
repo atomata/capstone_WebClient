@@ -22,8 +22,9 @@ function parseAssets(metadata: Metadata) {
 
 function parseActions(metadata: Metadata) {
     const actionMap = new Map();
-    let trigger :[string,string][] = [];
+    let trigger = [];
     let identifier = "";
+    let path = "";
     for (let i = 0; i < metadata.Data.length; i += 1) {
         const data = metadata.Data[i];
         const regexTrigger = /\d@input:void:.+/;
@@ -32,13 +33,14 @@ function parseActions(metadata: Metadata) {
         if(data.match(regexIdentifier)){
             identifier = data.split("/")[1];
             trigger = [];
-            actionMap.set(identifier,trigger);
+            path = metadata.Paths[data.split("@")[0]];
+            actionMap.set(identifier,[path,trigger]);
+
         }
         else if (data.match(regexTrigger)) {
             const vals = data.split(":");
             const actionName = vals[2];
-            const path = metadata.Paths[vals[0].split("@")[0]];
-            trigger.push([actionName,path]);
+            trigger.push(actionName);
         }
     }
     return actionMap;

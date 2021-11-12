@@ -31,15 +31,15 @@ const ApparatusTriggerListBox = ({metadata,asset}: { metadata: Metadata , asset:
         return (
             <TriggerBox>
                 <ListHeading>Selected Apparatus Trigger List</ListHeading>
-                {actionlist.map((data) => (
+                {actionlist[1].map((data) => (
                     <Typography>
                         <Button
-                            key={data[0]}
+                            key={data}
                             variant="contained"
-                            onClick={() => callToWebGL(data[1], data[0])}
-                            id={data[0]}
+                            onClick={() => callToWebGL(actionlist[0],data)}
+                            id={data}
                         >
-                            {data[0]}
+                            {data}
                         </Button>
                     </Typography>
                 ))}
