@@ -60,9 +60,9 @@ const OverlayGridItem2 = styled.div`
 `;
 
 const OverlayGridItem3 = styled.div`
-  background-color: #120b1a;
+   background-color: red;
   grid-column: 1 / span 2;
-  grid-row: 6 / span 2;
+  grid-row: 6 / span 4;
   z-index: 2;
   pointer-events: auto;
   margin: 5%;

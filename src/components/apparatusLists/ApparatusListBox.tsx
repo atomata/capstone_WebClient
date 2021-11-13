@@ -64,10 +64,6 @@ const ApparatusListBox = ({ metadata, handleApparatusChange }) => {
           </Button>
         </ListButton>
       </ListBoxScroller>
-      {/* <Button variant="contained" color="secondary" onClick = {() => load(props.sphere)}>{props.sphere}</Button>
-            <br/>
-            <br/>
-            <Button variant="contained" color="secondary" onClick = {() => load(props.earth)}>{props.earth}</Button> */}
     </ListBox>
   );
 };

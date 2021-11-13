@@ -83,7 +83,11 @@
         "9@type/Event",
         "9@associatedNode/gracious-cube",
         "9@input:void:Rotate",
-        "9@input:void:Zoom"
+        "9@input:void:Zoom-center",
+        "9@input:void:Zoom-up",
+        "9@input:void:Zoom-down",
+        "9@input:void:Rotate",
+        "9@input:void:Split"
       ]
     }
   }

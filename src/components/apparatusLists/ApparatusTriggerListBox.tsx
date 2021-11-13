@@ -6,11 +6,23 @@ import {callToWebGL} from "../../util/unityContextActions";
 import {Metadata, parseActions} from "../../util/parsing";
 
 const TriggerBox = styled.div`
-  background: grey;
-  min-width: 100%;
-  overflow-y: scroll;
+  background: #fffaf0;
   border: 1px solid black;
-  height: 18em;
+  min-width: 100%;
+  min-height: 100%;
+  max-height: 100%;
+  max-width: 100%;
+`;
+
+const ListBoxScroller = styled.div`
+  max-height: 13em;
+  min-width: 100%;
+  max-width: 100%;
+  min-height: 12em;
+  overflow-y: scroll;
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const ListHeading = styled.h1`
@@ -21,35 +33,43 @@ const ListHeading = styled.h1`
   color: black;
 `;
 
-const ApparatusTriggerListBox = ({metadata,asset}: { metadata: Metadata , asset: string}) => {
+
+const ListButton = styled.div`
+  text-align: center;
+  margin: 5px;
+`;
+
+const ApparatusTriggerListBox = ({metadata, asset}: { metadata: Metadata, asset: string }) => {
     // dont use props as a props property, no caps,
 
     const actionMap = React.useMemo(() => parseActions(metadata), [metadata]);
     const actionlist = actionMap.get(asset);
     // everytime metadata is rendered we reparse metadata using useMemo hook
-    if(actionlist !== undefined) {
+    if (actionlist !== undefined) {
         return (
             <TriggerBox>
                 <ListHeading>Selected Apparatus Trigger List</ListHeading>
-                {actionlist[1].map((data) => (
-                    <Typography>
-                        <Button
-                            key={data}
-                            variant="contained"
-                            onClick={() => callToWebGL(actionlist[0],data)}
-                            id={data}
-                        >
-                            {data}
-                        </Button>
-                    </Typography>
-                ))}
+                <ListBoxScroller>
+                    {actionlist[1].map((data) => (
+                            <ListButton>
+                                <Button
+                                    key={data}
+                                    variant="contained"
+                                    color="secondary"
+                                    onClick={() => callToWebGL(actionlist[0], data)}
+                                    id={data}
+                                >
+                                    {data}
+                                </Button>
+                            </ListButton>
+                    ))}
+                </ListBoxScroller>
             </TriggerBox>);
     }
-    
-        return (
-            <TriggerBox>
-            </TriggerBox>
-        );
-    
+    return (
+        <TriggerBox>
+        </TriggerBox>
+    );
+
 };
 export default ApparatusTriggerListBox;
