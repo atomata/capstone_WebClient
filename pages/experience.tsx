@@ -6,6 +6,9 @@ import NavigationBox from "../src/components/NavigationBox";
 import WebglBox from "../src/components/webgl/WebglBox";
 import Getimage from "../src/components/Getimage";
 
+import wobbleSphere from "../src/data/wobble-sphere.json";
+import evilCylinder from "../src/data/evil-cylinder.json";
+
 const Content = styled.div`
   justify-content: center;
   flex-direction: column;
@@ -14,11 +17,21 @@ const Content = styled.div`
 `;
 
 
+// TEMPORARY FUNCTION
+// REPLACE WHEN WE LOAD FROM AZURE DB
+const loadJSON = (id) => {
+    if(id == "wobble-sphere")
+      return wobbleSphere;
+
+    return evilCylinder;
+
+};
+
 const Experience = ({id}): JSX.Element => (
   <main>
     <Content>
-   {/* /<ApparatusListBox /> */}
-      <WebglBox />
+      {/* /<ApparatusListBox /> */}
+      <WebglBox json={loadJSON(id)}/>
       <NavigationBox />
       {/* <Getimage/> */}
     </Content>

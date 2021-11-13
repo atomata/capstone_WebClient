@@ -11,7 +11,7 @@ const WebglRoot = styled.div`
   margin-top: 4rem;
 `;
 
-const WebglBox = (): JSX.Element => (
+const WebglBox = ({ json }: { json: Object }): JSX.Element => (
         <WebglRoot>
             <Unity
                 unityContext={unityContext}
@@ -22,7 +22,8 @@ const WebglBox = (): JSX.Element => (
                     zIndex: 0,
                 }}
             />
-            <Overlay/>
+            <Overlay json={json}/>
         </WebglRoot>
     );
+
 export default WebglBox;
