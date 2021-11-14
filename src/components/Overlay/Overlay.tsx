@@ -86,9 +86,14 @@ const ToggleOverlayButton = styled.button.attrs({
 `;
 
 function Overlay(): JSX.Element {
-  const [apparatus, setApparatus] = useState("wobble-sphere");
+  const [identifier, setIdentifier] = useState("wobble-sphere");
   const [showOverlay,setOverlay] = useState(false);
+  const [actionList, setActionList] = useState([]);
 
+  function addActionToList([path,input]){
+    actionList.push([path,input])
+    setActionList([...actionList]);
+  }
 
   const toggleOverlay = () => {
     setOverlay((show) => !show);
@@ -102,13 +107,13 @@ function Overlay(): JSX.Element {
         <OverlayShown>
           <OverlayGrid>
             <OverlayGridItem1>
-              <ApparatusListBox metadata={fakeData1.Metadata} handleApparatusChange={(data) => setApparatus(data)}/>
+              <ApparatusListBox metadata={fakeData1.Metadata} handleApparatusChange={(data) => setIdentifier(data)}/>
             </OverlayGridItem1>
             <OverlayGridItem2>
-              <ActionSequenceBox metadata={fakeData1.Metadata} />
+              <ActionSequenceBox actionList={actionList}/>
             </OverlayGridItem2>
             <OverlayGridItem3>
-              <ApparatusTriggerListBox metadata={fakeData1.Metadata} asset= {apparatus} />
+              <ApparatusTriggerListBox metadata={fakeData1.Metadata} identifier= {identifier} addAction={([path,input]) => addActionToList([path,input])}/>
             </OverlayGridItem3>
           </OverlayGrid>
         </OverlayShown>
@@ -116,13 +121,13 @@ function Overlay(): JSX.Element {
         <OverlayHidden>
           <OverlayGrid>
             <OverlayGridItem1>
-              <ApparatusListBox metadata={fakeData1.Metadata} handleApparatusChange={(data) => setApparatus(data)}/>
+              <ApparatusListBox metadata={fakeData1.Metadata} handleApparatusChange={(data) => setIdentifier(data)}/>
             </OverlayGridItem1>
             <OverlayGridItem2>
-              <ActionSequenceBox metadata={fakeData1.Metadata} />
+              <ActionSequenceBox actionList={actionList} />
             </OverlayGridItem2>
             <OverlayGridItem3>
-              <ApparatusTriggerListBox metadata={fakeData1.Metadata} asset={apparatus} />
+              <ApparatusTriggerListBox metadata={fakeData1.Metadata} identifier={identifier} addAction={([path,input]) => addActionToList([path,input])}/>
             </OverlayGridItem3>
           </OverlayGrid>
         </OverlayHidden>

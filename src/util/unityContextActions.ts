@@ -16,7 +16,6 @@ function voidTrigger(arg: string) {
 }
 
 function callToWebGL(path :string , input:string) {
-    console.log(path);
   const arg = `${path}@${input}`;
   voidTrigger(arg);
 }

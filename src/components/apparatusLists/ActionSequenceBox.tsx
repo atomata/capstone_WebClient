@@ -1,6 +1,6 @@
 import Button from '@mui/material/Button';
 import styled from "styled-components";
-import { Metadata } from '../../util/parsing';
+import React, {useState,useEffect} from "react";
 
 const ActionListBox = styled.div`
   background: #FFFDD0;
@@ -23,11 +23,30 @@ const ListButton = styled.div `
   margin: 5px;
 `;
 
+const ListBoxScroller = styled.div`
+  max-height: 13em;
+  min-width: 100%;
+  max-width: 100%;
+  min-height: 12em;
+  overflow-y: scroll;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+`;
 
-const ActionSequenceBox = ({ metadata }: { metadata: Metadata }) => (
-  <ActionListBox>
-      <ListHeading>Action List</ListHeading>
-      <ListButton><Button variant="contained" color="primary">Some action</Button><br/></ListButton> 
-  </ActionListBox>
-);
+const ActionSequenceBox = ({actionList}) =>{
+    return (
+        <ActionListBox>
+        <ListHeading>Action List</ListHeading>
+        <ListBoxScroller>
+            {actionList.map((data) => (
+                <ListButton>
+                    <Button variant="contained" color="secondary">
+                        {data[1]}
+                    </Button>
+                </ListButton>
+            ))}
+        </ListBoxScroller>
+    </ActionListBox>);
+};
 export default ActionSequenceBox;

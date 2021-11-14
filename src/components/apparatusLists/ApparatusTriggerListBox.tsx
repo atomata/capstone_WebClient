@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import * as React from "react";
-import Typography from "@mui/material/Typography";
-import {Button} from "@material-ui/core";
+import {Button, IconButton, List,ListItem, ListItemSecondaryAction} from "@material-ui/core";
+import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import {callToWebGL} from "../../util/unityContextActions";
 import {Metadata, parseActions} from "../../util/parsing";
 
@@ -35,15 +35,15 @@ const ListHeading = styled.h1`
 
 
 const ListButton = styled.div`
-  text-align: center;
-  margin: 5px;
+  text-align: left;
+  margin: 10px;
 `;
 
-const ApparatusTriggerListBox = ({metadata, asset}: { metadata: Metadata, asset: string }) => {
+const ApparatusTriggerListBox = ({metadata, identifier, addAction}) => {
     // dont use props as a props property, no caps,
 
     const actionMap = React.useMemo(() => parseActions(metadata), [metadata]);
-    const actionlist = actionMap.get(asset);
+    const actionlist = actionMap.get(identifier);
     // everytime metadata is rendered we reparse metadata using useMemo hook
     if (actionlist !== undefined) {
         return (
@@ -51,7 +51,8 @@ const ApparatusTriggerListBox = ({metadata, asset}: { metadata: Metadata, asset:
                 <ListHeading>Selected Apparatus Trigger List</ListHeading>
                 <ListBoxScroller>
                     {actionlist[1].map((data) => (
-                            <ListButton>
+                        <List>
+                            <ListItem>
                                 <Button
                                     key={data}
                                     variant="contained"
@@ -61,13 +62,20 @@ const ApparatusTriggerListBox = ({metadata, asset}: { metadata: Metadata, asset:
                                 >
                                     {data}
                                 </Button>
-                            </ListButton>
+                            </ListItem>
+                            <ListItemSecondaryAction>
+                                <IconButton onClick={() => addAction([actionlist[0], data])}>
+                                    <AddOutlinedIcon/>
+                                </IconButton>
+                            </ListItemSecondaryAction>
+                        </List>
                     ))}
                 </ListBoxScroller>
             </TriggerBox>);
     }
     return (
         <TriggerBox>
+            <ListHeading>Selected Apparatus Trigger List</ListHeading>
         </TriggerBox>
     );
 
