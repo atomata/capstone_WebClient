@@ -95,6 +95,11 @@ function Overlay(): JSX.Element {
     setActionList([...actionList]);
   }
 
+  function removeActionFromList(index){
+      actionList.splice(index,1);
+      setActionList([...actionList]);
+  }
+
   const toggleOverlay = () => {
     setOverlay((show) => !show);
   };
@@ -110,7 +115,7 @@ function Overlay(): JSX.Element {
               <ApparatusListBox metadata={fakeData1.Metadata} handleApparatusChange={(data) => setIdentifier(data)}/>
             </OverlayGridItem1>
             <OverlayGridItem2>
-              <ActionSequenceBox actionList={actionList}/>
+              <ActionSequenceBox actionList={actionList}  removeAction={(index) => removeActionFromList(index)}/>
             </OverlayGridItem2>
             <OverlayGridItem3>
               <ApparatusTriggerListBox metadata={fakeData1.Metadata} identifier= {identifier} addAction={([path,input]) => addActionToList([path,input])}/>
@@ -124,7 +129,7 @@ function Overlay(): JSX.Element {
               <ApparatusListBox metadata={fakeData1.Metadata} handleApparatusChange={(data) => setIdentifier(data)}/>
             </OverlayGridItem1>
             <OverlayGridItem2>
-              <ActionSequenceBox actionList={actionList} />
+              <ActionSequenceBox actionList={actionList}  removeAction={(index) => removeActionFromList(index)} />
             </OverlayGridItem2>
             <OverlayGridItem3>
               <ApparatusTriggerListBox metadata={fakeData1.Metadata} identifier={identifier} addAction={([path,input]) => addActionToList([path,input])}/>

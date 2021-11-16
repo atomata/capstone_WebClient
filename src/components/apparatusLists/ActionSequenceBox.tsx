@@ -1,6 +1,8 @@
 import Button from '@mui/material/Button';
 import styled from "styled-components";
-import React, {useState,useEffect} from "react";
+import React, {useState} from "react";
+import {IconButton, List, ListItem, ListItemSecondaryAction} from "@material-ui/core";
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const ActionListBox = styled.div`
   background: #FFFDD0;
@@ -34,17 +36,24 @@ const ListBoxScroller = styled.div`
   }
 `;
 
-const ActionSequenceBox = ({actionList}) =>{
+const ActionSequenceBox = ({actionList,removeAction}) =>{
     return (
         <ActionListBox>
         <ListHeading>Action List</ListHeading>
         <ListBoxScroller>
-            {actionList.map((data) => (
-                <ListButton>
+            {actionList.map((data,index) => (
+              <List>
+                <ListItem>
                     <Button variant="contained" color="secondary">
                         {data[1]}
                     </Button>
-                </ListButton>
+                </ListItem>
+                  <ListItemSecondaryAction>
+                      <IconButton >
+                          <DeleteIcon onClick = {() => removeAction(index)}/>
+                      </IconButton>
+                  </ListItemSecondaryAction>
+              </List>
             ))}
         </ListBoxScroller>
     </ActionListBox>);
