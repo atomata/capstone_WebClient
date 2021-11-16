@@ -32,6 +32,12 @@ const Home = (): JSX.Element => (
     }}>
       <Button>Wobble-Sphere</Button>
     </Link>
+    <Link  href={{
+      pathname: "/testjson",
+      query: { id: "test" },
+    }}>
+      <Button>test</Button>
+    </Link>
     </Content>
   </main>
 );
