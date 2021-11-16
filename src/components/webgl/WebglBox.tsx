@@ -3,7 +3,7 @@ import Unity from "react-unity-webgl";
 import Overlay from "../Overlay/Overlay";
 import { unityContext, load } from "../../util/unityContextActions";
 import { parseAssets, Metadata } from "../../util/parsing";
-import { React, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 const WebglRoot = styled.div`
   display: relative;
