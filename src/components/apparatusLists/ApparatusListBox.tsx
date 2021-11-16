@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { load } from "../../util/unityContextActions";
 import { parseAssets, Metadata } from "../../util/parsing";
 
-const ListBox = styled.div`
+const Box = styled.div`
   background: #fffaf0;
   border: 1px solid black;
   min-width: 100%;
@@ -44,15 +44,18 @@ const ListButton = styled.div`
 const ApparatusListBox = ({ metadata, handleApparatusChange }) => {
   const assetArray = React.useMemo(() => parseAssets(metadata), [metadata]);
   return (
-    <ListBox>
-      <ListHeading>Apparatus List</ListHeading>
+    <Box>
+      <ListHeading>Apparatus</ListHeading>
       <ListBoxScroller>
         {assetArray.map((data, index) => (
           <ListButton key={index}>
             <Button
               variant="contained"
               color="secondary"
-              onClick={() => {load(data); handleApparatusChange(data);}}
+              onClick={() => {
+                load(data);
+                handleApparatusChange(data);
+              }}
             >
               {data}
             </Button>
@@ -64,7 +67,7 @@ const ApparatusListBox = ({ metadata, handleApparatusChange }) => {
           </Button>
         </ListButton>
       </ListBoxScroller>
-    </ListBox>
+    </Box>
   );
 };
 export default ApparatusListBox;

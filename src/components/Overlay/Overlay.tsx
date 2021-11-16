@@ -1,10 +1,8 @@
 import styled from "styled-components";
 import { useState } from "react";
 import ActionSequenceBox from "../apparatusLists/ActionSequenceBox";
-import ApparatusTriggerListBox from "../apparatusLists/ApparatusTriggerListBox";
+import ActionBox from "../apparatusLists/ActionBox";
 import ApparatusListBox from "../apparatusLists/ApparatusListBox";
-import wobbleSphere from "../../data/wobble-sphere.json";
-import evilCylinder from "../../data/evil-cylinder.json";
 import fakeData1 from "../../data/fake-data-1.json";
 
 const OverlayRoot = styled.div`
@@ -60,7 +58,7 @@ const OverlayGridItem2 = styled.div`
 `;
 
 const OverlayGridItem3 = styled.div`
-   background-color: red;
+  background-color: red;
   grid-column: 1 / span 2;
   grid-row: 6 / span 4;
   z-index: 2;
@@ -86,18 +84,18 @@ const ToggleOverlayButton = styled.button.attrs({
 `;
 
 function Overlay(): JSX.Element {
-  const [identifier, setIdentifier] = useState("wobble-sphere");
-  const [showOverlay,setOverlay] = useState(false);
+  const [identifier, setIdentifier] = useState("");
+  const [showOverlay, setOverlay] = useState(false);
   const [actionList, setActionList] = useState([]);
 
-  function addActionToList([path,input]){
-    actionList.push([path,input])
+  function addActionToList([path, input]) {
+    actionList.push([path, input]);
     setActionList([...actionList]);
   }
 
-  function removeActionFromList(index){
-      actionList.splice(index,1);
-      setActionList([...actionList]);
+  function removeActionFromList(index) {
+    actionList.splice(index, 1);
+    setActionList([...actionList]);
   }
 
   const toggleOverlay = () => {
@@ -112,13 +110,23 @@ function Overlay(): JSX.Element {
         <OverlayShown>
           <OverlayGrid>
             <OverlayGridItem1>
-              <ApparatusListBox metadata={fakeData1.Metadata} handleApparatusChange={(data) => setIdentifier(data)}/>
+              <ApparatusListBox
+                metadata={fakeData1.Metadata}
+                handleApparatusChange={(data) => setIdentifier(data)}
+              />
             </OverlayGridItem1>
             <OverlayGridItem2>
-              <ActionSequenceBox actionList={actionList}  removeAction={(index) => removeActionFromList(index)}/>
+              <ActionSequenceBox
+                actionList={actionList}
+                removeAction={(index) => removeActionFromList(index)}
+              />
             </OverlayGridItem2>
             <OverlayGridItem3>
-              <ApparatusTriggerListBox metadata={fakeData1.Metadata} identifier= {identifier} addAction={([path,input]) => addActionToList([path,input])}/>
+              <ActionBox
+                metadata={fakeData1.Metadata}
+                identifier={identifier}
+                addAction={([path, input]) => addActionToList([path, input])}
+              />
             </OverlayGridItem3>
           </OverlayGrid>
         </OverlayShown>
@@ -126,13 +134,23 @@ function Overlay(): JSX.Element {
         <OverlayHidden>
           <OverlayGrid>
             <OverlayGridItem1>
-              <ApparatusListBox metadata={fakeData1.Metadata} handleApparatusChange={(data) => setIdentifier(data)}/>
+              <ApparatusListBox
+                metadata={fakeData1.Metadata}
+                handleApparatusChange={(data) => setIdentifier(data)}
+              />
             </OverlayGridItem1>
             <OverlayGridItem2>
-              <ActionSequenceBox actionList={actionList}  removeAction={(index) => removeActionFromList(index)} />
+              <ActionSequenceBox
+                actionList={actionList}
+                removeAction={(index) => removeActionFromList(index)}
+              />
             </OverlayGridItem2>
             <OverlayGridItem3>
-              <ApparatusTriggerListBox metadata={fakeData1.Metadata} identifier={identifier} addAction={([path,input]) => addActionToList([path,input])}/>
+              <ActionBox
+                metadata={fakeData1.Metadata}
+                identifier={identifier}
+                addAction={([path, input]) => addActionToList([path, input])}
+              />
             </OverlayGridItem3>
           </OverlayGrid>
         </OverlayHidden>
