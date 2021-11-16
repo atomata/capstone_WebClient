@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import Link from 'next/link'
-import React from "react";
 import { Button } from "@material-ui/core";
 
 
@@ -10,16 +9,6 @@ const Content = styled.div`
   justify-items: center;
   display: flex;
 `;
-
-// `onClick`, `href`, and `ref` need to be passed to the DOM element
-// for proper handling
-const LinkButton = React.forwardRef(({ onClick, href }, ref) => {
-  return (
-    <a href={href} onClick={onClick} ref={ref}>
-      Click Me
-    </a>
-  )
-})
 
 /*
   TODO:
