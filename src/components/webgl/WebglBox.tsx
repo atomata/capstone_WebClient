@@ -18,16 +18,13 @@ function WebglBox ({ json }: { json: any }): JSX.Element {
 
     useEffect(function () {
         unityContext.on("loaded", function () {
-            console.log("asdf my test")
-            console.log(json)
-            console.log(json.Metadata)
-            // const assetArray = parseAssets(json.Metadata);
+            const assetArray = parseAssets(json.Metadata);
 
             // For some reason the unityContext.send("Container", "LoadApparatus", arg) in load() cannot be called at this point
             // Having a timeout bypasses this
-            // setTimeout(function() { 
-            //     load(assetArray[0]);
-            // }, 100)
+            setTimeout(function() { 
+                load(assetArray[0]);
+            }, 100)
         });
     }, []);
 
