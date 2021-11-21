@@ -1,10 +1,10 @@
-export function getjsonfromurl (){
-    return fetch('https://capstonewebclient.blob.core.windows.net/apparatus/evil-cylinder.json',{mode:'no-cors'})
+export function getjsonfromurl (id){
+    return fetch('https://capstonewebclient.blob.core.windows.net/apparatus/'+id+'.json',{mode:'cors'})
     .then((response) => response.json())
     .then((responseJson) => {
-        return responseJson
+        return responseJson;
     })
     .catch((error) => {
-        console.error(error)
+        return error;
     })
 }

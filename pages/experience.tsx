@@ -13,14 +13,6 @@ const Content = styled.div`
   display: flex;
 `;
 
-// TEMPORARY FUNCTION
-// REPLACE WHEN WE LOAD FROM AZURE DB
-const loadJSON = (id) => {
-  //if (id === "wobble-sphere") return wobbleSphere;
-
-  return Promise.resolve(getjsonfromurl());
-};
-
 const LoadedView = ({ id }): JSX.Element => (
   <main>
     <Content>
@@ -43,37 +35,18 @@ function Experience ({ id }):  JSX.Element {
   const [loading, setLoading] = useState(true);
   const [jsonFile, setJsonFile] = useState([]);
 
-  /*React.useEffect(function effectFunction() {
-    return fetch('https://capstonewebclient.blob.core.windows.net/apparatus/evil-cylinder.json')
-    .then((response) => response.json())
-    .then((responseJson) => {
-      console.log(responseJson);
-        return responseJson;
-    })
-    .catch((error) => {
-        console.error(error)
-    })
-  }, []);*/
-
   React.useEffect(function effectFunction() {
-    getjsonfromurl();
-    console.log("1 - " + getjsonfromurl());
-    getjsonfromurl().then((responseJson) => {
-      console.log(responseJson);
+    getjsonfromurl(id).then((responseJson) => {
       setJsonFile(responseJson);
       setLoading(false);
     });
    }, []);
 
-  //getjsonfromurl();
-
   return (
     (!loading) ?
     <main>
       <Content>
-        <WebglBox json={jsonFile} />
-        <p>Help --> {jsonFile}</p>
-        
+        <WebglBox json={jsonFile} />       
         <NavigationBox />
       </Content>
     </main> : <EmptyView/>
