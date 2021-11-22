@@ -49,7 +49,7 @@ function Experience ({ id }):  JSX.Element {
       </Content>
     </main> : <LoadingView/>
   );
-};
+}
 
 Experience.getInitialProps = ({ query: { id } }) => ({ id });
 
