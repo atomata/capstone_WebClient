@@ -62,6 +62,7 @@ function convertPathDataToTree(metadata: Metadata) {
   return tree;
 }
 
+// travers the tree depth first to find the asset bundle nodes
 function traverseNodeDepthFirst(node, assetBundleList) {
   if (node !== undefined) {
     if (node.type !== undefined && node.type[0] === "AssetBundle") {
@@ -75,6 +76,7 @@ function traverseNodeDepthFirst(node, assetBundleList) {
   }
 }
 
+// returns the list of assetnbundle nodes in the tree
 function getAssetBundles(metadata: Metadata) {
   const assetTree = convertPathDataToTree(metadata);
   const assetBundleList = [];
@@ -82,6 +84,7 @@ function getAssetBundles(metadata: Metadata) {
   return assetBundleList;
 }
 
+// returns the list of actions of the given node
 function getActions(node) {
   for (let child in node.Children) {
     if (node.Children[child].type[0] === "Event") {

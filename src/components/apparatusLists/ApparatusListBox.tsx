@@ -2,7 +2,7 @@ import React from "react";
 import Button from "@mui/material/Button";
 import styled from "styled-components";
 import { load } from "../../util/unityContextActions";
-import { getAssetBundles} from "../../util/tree_parsing";
+import { getAssetBundles } from "../../util/tree_parsing";
 
 const Box = styled.div`
   background: #fffaf0;
@@ -46,7 +46,7 @@ const ApparatusListBox = ({ metadata, handleApparatusChange }) => {
     () => getAssetBundles(metadata),
     [metadata]
   );
-  
+
   return (
     <Box>
       <ListHeading>Apparatus</ListHeading>

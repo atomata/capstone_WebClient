@@ -1,9 +1,8 @@
 import styled from "styled-components";
 import Unity from "react-unity-webgl";
+import { useEffect } from "react";
 import Overlay from "../Overlay/Overlay";
 import { unityContext, load } from "../../util/unityContextActions";
-import { parseAssets, Metadata } from "../../util/parsing";
-import { useEffect, useState } from "react";
 
 const WebglRoot = styled.div`
   display: relative;
@@ -16,14 +15,12 @@ const WebglRoot = styled.div`
 
 function WebglBox ({ json }: { json: any }): JSX.Element {
 
-    useEffect(function () {
-        unityContext.on("loaded", function () {
-            const assetArray = parseAssets(json.Metadata);
-
+    useEffect(() => {
+        unityContext.on("loaded", () => {
             // For some reason the unityContext.send("Container", "LoadApparatus", arg) in load() cannot be called at this point
             // Having a timeout bypasses this
-            setTimeout(function() { 
-                load(assetArray[0]);
+            setTimeout(() => { 
+                load(json.Id.Identifier);
             }, 100)
         });
     }, []);

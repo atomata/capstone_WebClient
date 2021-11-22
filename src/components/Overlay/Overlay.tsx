@@ -3,8 +3,6 @@ import { useState } from "react";
 import ActionSequenceBox from "../apparatusLists/ActionSequenceBox";
 import ActionBox from "../apparatusLists/ActionBox";
 import ApparatusListBox from "../apparatusLists/ApparatusListBox";
-import wobblesphere from "../../data/wobble-sphere.json";
-import fakedata from "../../data/fake-data-1.json";
 
 const OverlayRoot = styled.div`
   display: absolute;
@@ -84,7 +82,7 @@ const ToggleOverlayButton = styled.button.attrs({
   color: white;
 `;
 
-function Overlay(): JSX.Element {
+function Overlay({ json }: { json: any }): JSX.Element {
   const [assetbundle, setAssetbundle] = useState({});
   const [showOverlay, setOverlay] = useState(false);
   const [actionList, setActionList] = useState([]);
@@ -113,7 +111,7 @@ function Overlay(): JSX.Element {
           <OverlayGrid>
             <OverlayGridItem1>
               <ApparatusListBox
-                metadata={fakedata.Metadata}
+                metadata={json.Metadata}
                 handleApparatusChange={(data) => setAssetbundle(data)}
               />
             </OverlayGridItem1>
@@ -136,7 +134,7 @@ function Overlay(): JSX.Element {
           <OverlayGrid>
             <OverlayGridItem1>
               <ApparatusListBox
-                metadata={fakedata.Metadata}
+                metadata={json.Metadata}
                 handleApparatusChange={(data) => setAssetbundle(data)}
               />
             </OverlayGridItem1>
