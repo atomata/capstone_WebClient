@@ -3,7 +3,6 @@ import { useState } from "react";
 import ActionSequenceBox from "../apparatusLists/ActionSequenceBox";
 import ActionBox from "../apparatusLists/ActionBox";
 import ApparatusListBox from "../apparatusLists/ApparatusListBox";
-import fakeData1 from "../../data/fake-data-1.json";
 
 const OverlayRoot = styled.div`
   display: absolute;
@@ -83,7 +82,7 @@ const ToggleOverlayButton = styled.button.attrs({
   color: white;
 `;
 
-function Overlay(): JSX.Element {
+function Overlay({ json }: { json: any }): JSX.Element {
   const [identifier, setIdentifier] = useState("");
   const [showOverlay, setOverlay] = useState(false);
   const [actionList, setActionList] = useState([]);
@@ -101,7 +100,7 @@ function Overlay(): JSX.Element {
   const toggleOverlay = () => {
     setOverlay((show) => !show);
   };
-  
+
   return (
     <OverlayRoot>
       <ToggleDiv>
@@ -112,7 +111,7 @@ function Overlay(): JSX.Element {
           <OverlayGrid>
             <OverlayGridItem1>
               <ApparatusListBox
-                metadata={fakeData1.Metadata}
+                metadata={json.Metadata}
                 handleApparatusChange={(data) => setIdentifier(data)}
               />
             </OverlayGridItem1>
@@ -124,7 +123,7 @@ function Overlay(): JSX.Element {
             </OverlayGridItem2>
             <OverlayGridItem3>
               <ActionBox
-                metadata={fakeData1.Metadata}
+                metadata={json.Metadata}
                 identifier={identifier}
                 addAction={([path, input]) => addActionToList([path, input])}
               />
@@ -136,7 +135,7 @@ function Overlay(): JSX.Element {
           <OverlayGrid>
             <OverlayGridItem1>
               <ApparatusListBox
-                metadata={fakeData1.Metadata}
+                metadata={json.Metadata}
                 handleApparatusChange={(data) => setIdentifier(data)}
               />
             </OverlayGridItem1>
@@ -148,7 +147,7 @@ function Overlay(): JSX.Element {
             </OverlayGridItem2>
             <OverlayGridItem3>
               <ActionBox
-                metadata={fakeData1.Metadata}
+                metadata={json.Metadata}
                 identifier={identifier}
                 addAction={([path, input]) => addActionToList([path, input])}
               />
