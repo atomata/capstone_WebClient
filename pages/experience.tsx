@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import NavigationBox from "../src/components/NavigationBox";
 import WebglBox from "../src/components/webgl/WebglBox";
-import {getjsonfromurl} from "../api/getjson/getjson"
-import React, { useState } from 'react';
+import { getjsonfromurl } from "../api/getjson/getjson";
+import React, { useState } from "react";
 
 const Content = styled.div`
   justify-content: center;
@@ -21,15 +21,15 @@ const LoadedView = ({ id }): JSX.Element => (
   </main>
 );
 
-const LoadingView = () : JSX.Element => (
+const LoadingView = (): JSX.Element => (
   <main>
     <Content>
       <p>Loading....</p>
     </Content>
   </main>
-)
+);
 
-function Experience ({ id }):  JSX.Element {
+function Experience({ id }): JSX.Element {
   const [loading, setLoading] = useState(true);
   const [jsonFile, setJsonFile] = useState([]);
 
@@ -38,16 +38,17 @@ function Experience ({ id }):  JSX.Element {
       setJsonFile(responseJson);
       setLoading(false);
     });
-   }, []);
+  }, []);
 
-  return (
-    (!loading) ?
+  return !loading ? (
     <main>
       <Content>
-        <WebglBox json={jsonFile} />       
+        <WebglBox json={jsonFile} />
         <NavigationBox />
       </Content>
-    </main> : <LoadingView/>
+    </main>
+  ) : (
+    <LoadingView />
   );
 }
 
