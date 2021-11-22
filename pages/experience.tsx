@@ -1,8 +1,6 @@
 import styled from "styled-components";
 import NavigationBox from "../src/components/NavigationBox";
 import WebglBox from "../src/components/webgl/WebglBox";
-import wobbleSphere from "../src/data/wobble-sphere.json";
-import evilCylinder from "../src/data/evil-cylinder.json";
 import {getjsonfromurl} from "../api/getjson/getjson"
 import React, { useState } from 'react';
 
@@ -23,10 +21,10 @@ const LoadedView = ({ id }): JSX.Element => (
   </main>
 );
 
-const EmptyView = () : JSX.Element => (
+const LoadingView = () : JSX.Element => (
   <main>
     <Content>
-      <p>No</p>
+      <p>Loading....</p>
     </Content>
   </main>
 )
@@ -49,7 +47,7 @@ function Experience ({ id }):  JSX.Element {
         <WebglBox json={jsonFile} />       
         <NavigationBox />
       </Content>
-    </main> : <EmptyView/>
+    </main> : <LoadingView/>
   );
 };
 

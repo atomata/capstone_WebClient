@@ -2,7 +2,6 @@ import styled from "styled-components";
 import Link from 'next/link'
 import { Button } from "@material-ui/core";
 
-
 const Content = styled.div`
   justify-content: center;
   flex-direction: column;
@@ -10,35 +9,27 @@ const Content = styled.div`
   display: flex;
 `;
 
-/*
-  TODO:
-  - Generate Apparatus List by reading all apparatuses (not hard coded)
-  - Load JSON based on Apparatus ID
-*/
+const ApparatusList = () => {
+  const apparatusIDList = ["evil-cylinder", "wobble-sphere"];
+
+  return (
+    <Content>     
+      {apparatusIDList.map((data, index) => (
+          <Link key={index} href={{
+            pathname: "/experience",
+            query: { id: data },
+          }}>
+            <Button>{data}</Button>
+          </Link>
+      ))}
+    </Content>
+  );
+};
 
 const Home = (): JSX.Element => (
-  <main>
-    <Content>
+  <main> 
     <h1>SELECT AN APPARATUS</h1>
-    <Link  href={{
-      pathname: "/experience",
-      query: { id: "evil-cylinder" },
-    }}>
-      <Button>Evil-Cylinder</Button>
-    </Link>
-    <Link  href={{
-      pathname: "/experience",
-      query: { id: "wobble-sphere" },
-    }}>
-      <Button>Wobble-Sphere</Button>
-    </Link>
-    <Link  href={{
-      pathname: "/testjson",
-      query: { id: "test" },
-    }}>
-      <Button>test</Button>
-    </Link>
-    </Content>
+    <ApparatusList/>  
   </main>
 );
 
