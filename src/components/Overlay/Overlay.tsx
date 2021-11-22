@@ -4,6 +4,7 @@ import ActionSequenceBox from "../apparatusLists/ActionSequenceBox";
 import ActionBox from "../apparatusLists/ActionBox";
 import ApparatusListBox from "../apparatusLists/ApparatusListBox";
 import wobblesphere from "../../data/wobble-sphere.json";
+import fakedata from "../../data/fake-data-1.json";
 
 const OverlayRoot = styled.div`
   display: absolute;
@@ -111,7 +112,7 @@ function Overlay(): JSX.Element {
           <OverlayGrid>
             <OverlayGridItem1>
               <ApparatusListBox
-                metadata={wobblesphere.Metadata}
+                metadata={fakedata.Metadata}
                 handleApparatusChange={(data) => setAssetbundle(data)}
               />
             </OverlayGridItem1>
@@ -134,7 +135,7 @@ function Overlay(): JSX.Element {
           <OverlayGrid>
             <OverlayGridItem1>
               <ApparatusListBox
-                metadata={wobblesphere.Metadata}
+                metadata={fakedata.Metadata}
                 handleApparatusChange={(data) => setAssetbundle(data)}
               />
             </OverlayGridItem1>
