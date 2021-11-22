@@ -2,7 +2,7 @@ import React from "react";
 import Button from "@mui/material/Button";
 import styled from "styled-components";
 import { load } from "../../util/unityContextActions";
-import { parseAssets, Metadata } from "../../util/parsing";
+import { parseAssets} from "../../util/parsing";
 
 const Box = styled.div`
   background: #fffaf0;
