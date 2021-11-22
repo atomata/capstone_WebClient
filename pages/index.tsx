@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Link from 'next/link'
+import Link from "next/link";
 import { Button } from "@material-ui/core";
 
 const Content = styled.div`
@@ -9,33 +9,30 @@ const Content = styled.div`
   display: flex;
 `;
 
-/*
-  TODO:
-  - Generate Apparatus List by reading all apparatuses (not hard coded)
-  - Load JSON based on Apparatus ID
-*/
-
 const ApparatusList = () => {
   const apparatusIDList = ["evil-cylinder", "wobble-sphere"];
 
   return (
-    <Content>     
+    <Content>
       {apparatusIDList.map((data, index) => (
-          <Link key={index} href={{
+        <Link
+          key={index}
+          href={{
             pathname: "/experience",
             query: { id: data },
-          }}>
-            <Button>{data}</Button>
-          </Link>
+          }}
+        >
+          <Button>{data}</Button>
+        </Link>
       ))}
     </Content>
   );
 };
 
 const Home = (): JSX.Element => (
-  <main> 
+  <main>
     <h1>SELECT AN APPARATUS</h1>
-    <ApparatusList/>  
+    <ApparatusList />
   </main>
 );
 
