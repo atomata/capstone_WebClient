@@ -3,7 +3,7 @@ import { useState } from "react";
 import ActionSequenceBox from "../apparatusLists/ActionSequenceBox";
 import ActionBox from "../apparatusLists/ActionBox";
 import ApparatusListBox from "../apparatusLists/ApparatusListBox";
-import fakeData1 from "../../data/fake-data-1.json";
+import wobblesphere from "../../data/wobble-sphere.json";
 
 const OverlayRoot = styled.div`
   display: absolute;
@@ -84,7 +84,7 @@ const ToggleOverlayButton = styled.button.attrs({
 `;
 
 function Overlay(): JSX.Element {
-  const [identifier, setIdentifier] = useState("");
+  const [assetbundle, setAssetbundle] = useState({});
   const [showOverlay, setOverlay] = useState(false);
   const [actionList, setActionList] = useState([]);
 
@@ -111,8 +111,8 @@ function Overlay(): JSX.Element {
           <OverlayGrid>
             <OverlayGridItem1>
               <ApparatusListBox
-                metadata={fakeData1.Metadata}
-                handleApparatusChange={(data) => setIdentifier(data)}
+                metadata={wobblesphere.Metadata}
+                handleApparatusChange={(data) => setAssetbundle(data)}
               />
             </OverlayGridItem1>
             <OverlayGridItem2>
@@ -123,8 +123,7 @@ function Overlay(): JSX.Element {
             </OverlayGridItem2>
             <OverlayGridItem3>
               <ActionBox
-                metadata={fakeData1.Metadata}
-                identifier={identifier}
+                assetbundle={assetbundle}
                 addAction={([path, input]) => addActionToList([path, input])}
               />
             </OverlayGridItem3>
@@ -135,8 +134,8 @@ function Overlay(): JSX.Element {
           <OverlayGrid>
             <OverlayGridItem1>
               <ApparatusListBox
-                metadata={fakeData1.Metadata}
-                handleApparatusChange={(data) => setIdentifier(data)}
+                metadata={wobblesphere.Metadata}
+                handleApparatusChange={(data) => setAssetbundle(data)}
               />
             </OverlayGridItem1>
             <OverlayGridItem2>
@@ -147,8 +146,7 @@ function Overlay(): JSX.Element {
             </OverlayGridItem2>
             <OverlayGridItem3>
               <ActionBox
-                metadata={fakeData1.Metadata}
-                identifier={identifier}
+                assetbundle={assetbundle}
                 addAction={([path, input]) => addActionToList([path, input])}
               />
             </OverlayGridItem3>

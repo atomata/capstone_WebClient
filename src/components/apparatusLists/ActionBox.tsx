@@ -9,7 +9,7 @@ import {
 } from "@material-ui/core";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import { callToWebGL } from "../../util/unityContextActions";
-import {parseActions } from "../../util/parsing";
+import { getActions } from "../../util/tree_parsing";
 
 const Box = styled.div`
   background: #fffaf0;
@@ -44,32 +44,35 @@ const ListButton = styled.div`
   margin: 10px;
 `;
 
-const ActionBox = ({ metadata, identifier, addAction }) => {
+const ActionBox = ({ assetbundle, addAction }) => {
   // dont use props as a props property, no caps,
 
-  const actionMap = React.useMemo(() => parseActions(metadata), [metadata]);
-  const actionlist = actionMap.get(identifier);
+  const actiondata = React.useMemo(
+    () => getActions(assetbundle),
+    [assetbundle]
+  );
+
   // everytime metadata is rendered we reparse metadata using useMemo hook
-  if (actionlist !== undefined) {
+  if (actiondata !== undefined) {
     return (
       <Box>
         <ListHeading>Actions</ListHeading>
         <ListBoxScroller>
-          {actionlist[1].map((data) => (
+          {actiondata[0].map((data) => (
             <List>
               <ListItem>
                 <Button
                   key={data}
                   variant="contained"
                   color="secondary"
-                  onClick={() => callToWebGL(actionlist[0], data)}
+                  onClick={() => callToWebGL(actiondata[1], data)}
                   id={data}
                 >
                   {data}
                 </Button>
               </ListItem>
               <ListItemSecondaryAction>
-                <IconButton onClick={() => addAction([actionlist[0], data])}>
+                <IconButton onClick={() => addAction([actiondata[1], data])}>
                   <AddOutlinedIcon />
                 </IconButton>
               </ListItemSecondaryAction>
