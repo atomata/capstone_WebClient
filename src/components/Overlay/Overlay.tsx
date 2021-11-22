@@ -84,12 +84,13 @@ const ToggleOverlayButton = styled.button.attrs({
   color: white;
 `;
 
-function Overlay(): JSX.Element {
+function Overlay({ json }: { json : any }): JSX.Element {
   const [showOverlay, setOverlay] = useState(false);
 
   const toggleOverlay = () => {
     setOverlay((prev) => !prev);
   };
+  
   return (
     <OverlayRoot>
       <ToggleDiv>
@@ -99,29 +100,18 @@ function Overlay(): JSX.Element {
         <OverlayShown>
           <OverlayGrid>
             <OverlayGridItem1>
-              <ApparatusListBox metadata={evilCylinder.Metadata} />
+              <ApparatusListBox metadata={json.Metadata} />
             </OverlayGridItem1>
             <OverlayGridItem2>
-              <ActionSequenceBox metadata={evilCylinder.Metadata} />
+              <ActionSequenceBox metadata={json.Metadata} />
             </OverlayGridItem2>
             <OverlayGridItem3>
-              <ApparatusTriggerListBox metadata={evilCylinder.Metadata} />
+              <ApparatusTriggerListBox metadata={json.Metadata} />
             </OverlayGridItem3>
           </OverlayGrid>
         </OverlayShown>
       ) : (
         <OverlayHidden>
-          <OverlayGrid>
-            <OverlayGridItem1>
-              <ApparatusListBox metadata={evilCylinder.Metadata} />
-            </OverlayGridItem1>
-            <OverlayGridItem2>
-              <ActionSequenceBox metadata={evilCylinder.Metadata} />
-            </OverlayGridItem2>
-            <OverlayGridItem3>
-              <ApparatusTriggerListBox metadata={evilCylinder.Metadata} />
-            </OverlayGridItem3>
-          </OverlayGrid>
         </OverlayHidden>
       )}
     </OverlayRoot>
