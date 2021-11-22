@@ -102,6 +102,7 @@ function Overlay(): JSX.Element {
   const toggleOverlay = () => {
     setOverlay((show) => !show);
   };
+
   return (
     <OverlayRoot>
       <ToggleDiv>

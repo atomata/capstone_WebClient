@@ -1,5 +1,3 @@
-import {tupleExpression} from "@babel/types";
-
 type Metadata = {
     Paths: string[];
     Data: string[];

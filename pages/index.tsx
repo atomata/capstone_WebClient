@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import NavigationBox from "../src/components/NavigationBox";
-import WebglBox from "../src/components/webgl/WebglBox";
+import Link from 'next/link'
+import { Button } from "@material-ui/core";
 
 const Content = styled.div`
   justify-content: center;
@@ -9,14 +9,33 @@ const Content = styled.div`
   display: flex;
 `;
 
-const Home = (): JSX.Element => (
-  <main>
-    <Content>
-   {/* /<ApparatusListBox /> */}
-      <WebglBox />
-      <NavigationBox />
-      {/* <Getimage/> */}
+/*
+  TODO:
+  - Generate Apparatus List by reading all apparatuses (not hard coded)
+  - Load JSON based on Apparatus ID
+*/
+
+const ApparatusList = () => {
+  const apparatusIDList = ["evil-cylinder", "wobble-sphere"];
+
+  return (
+    <Content>     
+      {apparatusIDList.map((data, index) => (
+          <Link key={index} href={{
+            pathname: "/experience",
+            query: { id: data },
+          }}>
+            <Button>{data}</Button>
+          </Link>
+      ))}
     </Content>
+  );
+};
+
+const Home = (): JSX.Element => (
+  <main> 
+    <h1>SELECT AN APPARATUS</h1>
+    <ApparatusList/>  
   </main>
 );
 
