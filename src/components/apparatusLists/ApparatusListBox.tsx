@@ -2,9 +2,9 @@ import React from "react";
 import Button from "@mui/material/Button";
 import styled from "styled-components";
 import { load } from "../../util/unityContextActions";
-import { parseAssets, Metadata } from "../../util/parsing";
+import { parseAssets} from "../../util/parsing";
 
-const ListBox = styled.div`
+const Box = styled.div`
   background: #fffaf0;
   border: 1px solid black;
   min-width: 100%;
@@ -41,18 +41,21 @@ const ListButton = styled.div`
   margin: 5px;
 `;
 
-const ApparatusListBox = ({ metadata }: { metadata: Metadata }) => {
+const ApparatusListBox = ({ metadata, handleApparatusChange }) => {
   const assetArray = React.useMemo(() => parseAssets(metadata), [metadata]);
   return (
-    <ListBox>
-      <ListHeading>Apparatus List</ListHeading>
+    <Box>
+      <ListHeading>Apparatus</ListHeading>
       <ListBoxScroller>
         {assetArray.map((data, index) => (
           <ListButton key={index}>
             <Button
               variant="contained"
               color="secondary"
-              onClick={() => load(data)}
+              onClick={() => {
+                load(data);
+                handleApparatusChange(data);
+              }}
             >
               {data}
             </Button>
@@ -63,52 +66,8 @@ const ApparatusListBox = ({ metadata }: { metadata: Metadata }) => {
             Some Asset
           </Button>
         </ListButton>
-        <ListButton>
-          <Button variant="contained" color="secondary">
-            Some Asset
-          </Button>
-        </ListButton>
-        <ListButton>
-          <Button variant="contained" color="secondary">
-            Some Asset
-          </Button>
-        </ListButton>
-        <ListButton>
-          <Button variant="contained" color="secondary">
-            Some Asset
-          </Button>
-        </ListButton>
-        <ListButton>
-          <Button variant="contained" color="secondary">
-            Some Asset
-          </Button>
-        </ListButton>
-        <ListButton>
-          <Button variant="contained" color="secondary">
-            Some Asset
-          </Button>
-        </ListButton>
-        <ListButton>
-          <Button variant="contained" color="secondary">
-            Some Asset
-          </Button>
-        </ListButton>
-        <ListButton>
-          <Button variant="contained" color="secondary">
-            Some Asset
-          </Button>
-        </ListButton>
-        <ListButton>
-          <Button variant="contained" color="secondary">
-            Some Asset
-          </Button>
-        </ListButton>
       </ListBoxScroller>
-      {/* <Button variant="contained" color="secondary" onClick = {() => load(props.sphere)}>{props.sphere}</Button>
-            <br/>
-            <br/>
-            <Button variant="contained" color="secondary" onClick = {() => load(props.earth)}>{props.earth}</Button> */}
-    </ListBox>
+    </Box>
   );
 };
 export default ApparatusListBox;

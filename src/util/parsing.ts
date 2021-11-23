@@ -1,47 +1,48 @@
 type Metadata = {
-  Paths: string[];
-  Data: string[];
+    Paths: string[];
+    Data: string[];
 };
 
 function parseAssets(metadata: Metadata) {
-  const assetArray = [];
-
-  for (let i = 0; i < metadata.Data.length; i += 1) {
-    const identifier = metadata.Data[i].split("@");
-    const nonAction = identifier[1].split("/");
-
-    if (nonAction[1] === "AssetBundle") {
-      console.log("Found AssetBundle!");
-      const keyMeta = metadata.Data[i + 1].split("@");
-      const key = keyMeta[1].split(":");
-      assetArray.push(key[1]);
+    const assetArray = [];
+    for (let i = 0; i < metadata.Data.length; i += 1) {
+        const data = metadata.Data[i];
+        const regex = /\d@type\/AssetBundle/;
+        // assuming that the next item in the list is a key
+        if (data.match(regex)) {
+            const keyMeta = metadata.Data[i + 1].split("@");
+            const key = keyMeta[1].split(":");
+            assetArray.push(key[1]);
+        }
     }
-  }
-  return assetArray;
+    return assetArray;
 }
 
 function parseActions(metadata: Metadata) {
-  const actionArray = [];
+    const actionMap = new Map();
+    let trigger = [];
+    let identifier = "";
+    let path = "";
+    for (let i = 0; i < metadata.Data.length; i += 1) {
+        const data = metadata.Data[i];
+        const regexTrigger = /\d@input:void:.+/;
+        const regexIdentifier = /\d@associatedNode\/.+/;
 
-  for (let i = 0; i < metadata.Data.length; i += 1) {
-    const identifier = metadata.Data[i].split("@");
-    const action = identifier[1].split(":");
+        if(data.match(regexIdentifier)){
+            identifier = data.split("/")[1];
+            trigger = [];
+            path = metadata.Paths[data.split("@")[0]];
+            actionMap.set(identifier,[path,trigger]);
 
-    if (action[0] === "input") {
-      if (
-        actionArray[identifier[0]] == null ||
-        actionArray[identifier[0]] === undefined
-      )
-        actionArray[identifier[0]] = [
-          metadata.Paths[identifier[0]],
-          metadata.Data[i - 1].split("@")[1].split(":")[1],
-        ];
-      actionArray[identifier[0]].push([action[2]]);
+        }
+        else if (data.match(regexTrigger)) {
+            const vals = data.split(":");
+            const actionName = vals[2];
+            trigger.push(actionName);
+        }
     }
-  }
-
-  return actionArray;
+    return actionMap;
 }
 
-export { parseActions, parseAssets };
-export type { Metadata };
+export {parseActions, parseAssets};
+export type {Metadata};

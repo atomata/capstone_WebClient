@@ -1,10 +1,8 @@
 import styled from "styled-components";
 import { useState } from "react";
 import ActionSequenceBox from "../apparatusLists/ActionSequenceBox";
-import ApparatusTriggerListBox from "../apparatusLists/ApparatusTriggerListBox";
+import ActionBox from "../apparatusLists/ActionBox";
 import ApparatusListBox from "../apparatusLists/ApparatusListBox";
-import wobbleSphere from "../../data/wobble-sphere.json";
-import evilCylinder from "../../data/evil-cylinder.json";
 
 const OverlayRoot = styled.div`
   display: absolute;
@@ -59,9 +57,9 @@ const OverlayGridItem2 = styled.div`
 `;
 
 const OverlayGridItem3 = styled.div`
-  background-color: #120b1a;
+  background-color: red;
   grid-column: 1 / span 2;
-  grid-row: 6 / span 2;
+  grid-row: 6 / span 4;
   z-index: 2;
   pointer-events: auto;
   margin: 5%;
@@ -84,13 +82,25 @@ const ToggleOverlayButton = styled.button.attrs({
   color: white;
 `;
 
-function Overlay({ json }: { json : any }): JSX.Element {
+function Overlay({ json }: { json: any }): JSX.Element {
+  const [identifier, setIdentifier] = useState("");
   const [showOverlay, setOverlay] = useState(false);
+  const [actionList, setActionList] = useState([]);
+
+  function addActionToList([path, input]) {
+    actionList.push([path, input]);
+    setActionList([...actionList]);
+  }
+
+  function removeActionFromList(index) {
+    actionList.splice(index, 1);
+    setActionList([...actionList]);
+  }
 
   const toggleOverlay = () => {
-    setOverlay((prev) => !prev);
+    setOverlay((show) => !show);
   };
-  
+
   return (
     <OverlayRoot>
       <ToggleDiv>
@@ -100,19 +110,28 @@ function Overlay({ json }: { json : any }): JSX.Element {
         <OverlayShown>
           <OverlayGrid>
             <OverlayGridItem1>
-              <ApparatusListBox metadata={json.Metadata} />
+              <ApparatusListBox
+                metadata={json.Metadata}
+                handleApparatusChange={(data) => setIdentifier(data)}
+              />
             </OverlayGridItem1>
             <OverlayGridItem2>
-              <ActionSequenceBox metadata={json.Metadata} />
+              <ActionSequenceBox
+                actionList={actionList}
+                removeAction={(index) => removeActionFromList(index)}
+              />
             </OverlayGridItem2>
             <OverlayGridItem3>
-              <ApparatusTriggerListBox metadata={json.Metadata} />
+              <ActionBox
+                metadata={json.Metadata}
+                identifier={identifier}
+                addAction={([path, input]) => addActionToList([path, input])}
+              />
             </OverlayGridItem3>
           </OverlayGrid>
         </OverlayShown>
       ) : (
-        <OverlayHidden>
-        </OverlayHidden>
+        <OverlayHidden />
       )}
     </OverlayRoot>
   );

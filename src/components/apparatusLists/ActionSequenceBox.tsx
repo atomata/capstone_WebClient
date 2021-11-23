@@ -1,33 +1,66 @@
-import Button from '@mui/material/Button';
+import Button from "@mui/material/Button";
 import styled from "styled-components";
-import { Metadata } from '../../util/parsing';
+import React from "react";
+import {
+  IconButton,
+  List,
+  ListItem,
+  ListItemSecondaryAction,
+} from "@material-ui/core";
+import DeleteIcon from "@mui/icons-material/Delete";
 
-const ActionListBox = styled.div`
-  background: #FFFDD0;
+const Box = styled.div`
+  background: #fffdd0;
   min-width: 100%;
   min-height: 100%;
   border: 1px solid black;
-  overflow-y: scroll;
 `;
 
-const ListHeading = styled.h1 `
-font-size:20px;
-text-align: center;
-font-family: Trebuchet MS;
-font-weight: bold;
-color: black;
+const ListHeading = styled.h1`
+  font-size: 20px;
+  text-align: center;
+  font-family: Trebuchet MS;
+  font-weight: bold;
+  color: black;
 `;
 
-const ListButton = styled.div `
+const ListButton = styled.div`
   text-align: center;
   margin: 5px;
 `;
 
+const ListBoxScroller = styled.div`
+  max-height: 25em;
+  min-width: 100%;
+  max-width: 100%;
+  min-height: 25em;
+  overflow-y: scroll;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+`;
 
-const ActionSequenceBox = ({ metadata }: { metadata: Metadata }) => (
-  <ActionListBox>
-      <ListHeading>Action List</ListHeading>
-      <ListButton><Button variant="contained" color="primary">Some action</Button><br/></ListButton> 
-  </ActionListBox>
-);
+const ActionSequenceBox = ({ actionList, removeAction }) => {
+  return (
+    <Box>
+      <ListHeading>Action Sequence</ListHeading>
+      <ListBoxScroller>
+        {actionList.map((data, index) => (
+          <List>
+            <ListItem>
+              <Button variant="contained" color="secondary">
+                {data[1]}
+              </Button>
+            </ListItem>
+            <ListItemSecondaryAction>
+              <IconButton>
+                <DeleteIcon onClick={() => removeAction(index)} />
+              </IconButton>
+            </ListItemSecondaryAction>
+          </List>
+        ))}
+      </ListBoxScroller>
+    </Box>
+  );
+};
 export default ActionSequenceBox;
