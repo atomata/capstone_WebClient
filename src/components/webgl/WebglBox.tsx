@@ -13,35 +13,33 @@ const WebglRoot = styled.div`
   margin-top: 4rem;
 `;
 
+function WebglBox({ json }: { json: any }): JSX.Element {
+  useEffect(function () {
+    unityContext.on("loaded", function () {
+      const assetArray = parseAssets(json.Metadata);
 
-function WebglBox ({ json }: { json: any }): JSX.Element {
+      // For some reason the unityContext.send("Container", "LoadApparatus", arg) in load() cannot be called at this point
+      // Having a timeout bypasses this
+      setTimeout(function () {
+        load(assetArray[0]);
+      }, 100);
+    });
+  }, []);
 
-    useEffect(function () {
-        unityContext.on("loaded", function () {
-            const assetArray = parseAssets(json.Metadata);
-
-            // For some reason the unityContext.send("Container", "LoadApparatus", arg) in load() cannot be called at this point
-            // Having a timeout bypasses this
-            setTimeout(function() { 
-                load(assetArray[0]);
-            }, 100)
-        });
-    }, []);
-
-    return (
-        <WebglRoot>           
-            <Unity
-                unityContext={unityContext}
-                style={{
-                    height: "inherit",
-                    width: "inherit",
-                    position: "absolute",
-                    zIndex: 0,
-                }}
-            />
-            <Overlay json={json}/>
-        </WebglRoot>
-    );
+  return (
+    <WebglRoot>
+      <Unity
+        unityContext={unityContext}
+        style={{
+          height: "inherit",
+          width: "inherit",
+          position: "absolute",
+          zIndex: 0,
+        }}
+      />
+      <Overlay json={json} />
+    </WebglRoot>
+  );
 }
 
 export default WebglBox;
