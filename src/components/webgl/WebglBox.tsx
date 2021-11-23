@@ -12,8 +12,18 @@ const WebglRoot = styled.div`
   margin-top: 4rem;
 `;
 
+function WebglBox({ json }: { json: any }): JSX.Element {
+  useEffect(function () {
+    unityContext.on("loaded", function () {
+      const assetArray = parseAssets(json.Metadata);
 
-function WebglBox ({ json }: { json: any }): JSX.Element {
+      // For some reason the unityContext.send("Container", "LoadApparatus", arg) in load() cannot be called at this point
+      // Having a timeout bypasses this
+      setTimeout(function () {
+        load(assetArray[0]);
+      }, 100);
+    });
+  }, []);
 
     useEffect(() => {
         unityContext.on("loaded", () => {
