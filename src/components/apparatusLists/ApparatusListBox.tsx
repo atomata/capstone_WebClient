@@ -57,7 +57,6 @@ const ApparatusListBox = ({ metadata, handleApparatusChange }) => {
               variant="contained"
               color="secondary"
               onClick={() => {
-                load(data.identifier[0]);
                 handleApparatusChange(data);
               }}
             >
