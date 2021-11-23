@@ -2,7 +2,7 @@ import React from "react";
 import Button from "@mui/material/Button";
 import styled from "styled-components";
 import { load } from "../../util/unityContextActions";
-import { parseAssets} from "../../util/parsing";
+import { getAssetBundles } from "../../util/tree_parsing";
 
 const Box = styled.div`
   background: #fffaf0;
@@ -42,22 +42,25 @@ const ListButton = styled.div`
 `;
 
 const ApparatusListBox = ({ metadata, handleApparatusChange }) => {
-  const assetArray = React.useMemo(() => parseAssets(metadata), [metadata]);
+  const assetbundles = React.useMemo(
+    () => getAssetBundles(metadata),
+    [metadata]
+  );
+
   return (
     <Box>
       <ListHeading>Apparatus</ListHeading>
       <ListBoxScroller>
-        {assetArray.map((data, index) => (
+        {assetbundles.map((data, index) => (
           <ListButton key={index}>
             <Button
               variant="contained"
               color="secondary"
               onClick={() => {
-                load(data);
                 handleApparatusChange(data);
               }}
             >
-              {data}
+              {data.identifier[0]}
             </Button>
           </ListButton>
         ))}

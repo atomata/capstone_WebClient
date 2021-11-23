@@ -83,7 +83,7 @@ const ToggleOverlayButton = styled.button.attrs({
 `;
 
 function Overlay({ json }: { json: any }): JSX.Element {
-  const [identifier, setIdentifier] = useState("");
+  const [assetbundle, setAssetbundle] = useState({});
   const [showOverlay, setOverlay] = useState(false);
   const [actionList, setActionList] = useState([]);
 
@@ -112,7 +112,7 @@ function Overlay({ json }: { json: any }): JSX.Element {
             <OverlayGridItem1>
               <ApparatusListBox
                 metadata={json.Metadata}
-                handleApparatusChange={(data) => setIdentifier(data)}
+                handleApparatusChange={(data) => setAssetbundle(data)}
               />
             </OverlayGridItem1>
             <OverlayGridItem2>
@@ -123,15 +123,14 @@ function Overlay({ json }: { json: any }): JSX.Element {
             </OverlayGridItem2>
             <OverlayGridItem3>
               <ActionBox
-                metadata={json.Metadata}
-                identifier={identifier}
+                assetbundle={assetbundle}
                 addAction={([path, input]) => addActionToList([path, input])}
               />
             </OverlayGridItem3>
           </OverlayGrid>
         </OverlayShown>
       ) : (
-        <OverlayHidden />
+        <OverlayHidden/>
       )}
     </OverlayRoot>
   );

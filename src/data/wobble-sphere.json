@@ -33,20 +33,26 @@
       "Paths": [
         "wobble-sphere",
         "wobble-sphere/wobble-sphere",
-        "wobble-sphere/wobble-sphere/animations"
+        "wobble-sphere/wobble-sphere/animations",
+        "wobble-sphere/wobble-sphere/test1",
+        "wobble-sphere/wobble-sphere/test1/test2"
       ],
       "Data": [
         "0@identifier:wobble-sphere",
-        "0@type/Serialization",
+        "0@type:Serialization",
         "1@identifier:wobble-sphere",
-        "1@type/AssetBundle",
+        "1@type:AssetBundle",
         "1@key:wobble-sphere",
         "2@identifier:animations",
-        "2@type/Event",
-        "2@associatedNode/wobble-sphere",
-        "2@input:void:Still",
-        "2@input:void:Wobble",
-        "2@input:void:Bounce"
+        "2@type:Event",
+        "2@associatedNode:wobble-sphere/wobble-sphere",
+        "2@input:void/Still",
+        "2@input:void/Wobble",
+        "2@input:void/Bounce",
+        "3@type:AssetBundle",
+        "3@identifier:test1",
+        "4@type:AssetBundle",
+        "4@identifier:test2"
       ]
     }
   }
