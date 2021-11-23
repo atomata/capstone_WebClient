@@ -26,7 +26,11 @@ function linkPathsToData(metadata: Metadata) {
     if (pathDataList[index].Data[dataSplit[0]] === undefined) {
       pathDataList[index].Data[dataSplit[0]] = [];
     }
-    pathDataList[index].Data[dataSplit[0]].push(dataSplit[1]);
+    if (dataSplit[0] === "input") {
+      pathDataList[index].Data[dataSplit[0]].push(dataSplit[1].split("/")[1]);
+    } else {
+      pathDataList[index].Data[dataSplit[0]].push(dataSplit[1]);
+    }
   });
   // return the created object
   return pathDataList;
@@ -88,7 +92,7 @@ function getAssetBundles(metadata: Metadata) {
 function getActions(node) {
   for (let child in node.Children) {
     if (node.Children[child].type[0] === "Event") {
-      return [node.Children[child].input, node.Children[child].path];
+      return [node.Children[child].input, node.Children[child].Path];
     }
   }
 }
