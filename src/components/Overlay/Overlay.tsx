@@ -131,29 +131,7 @@ function Overlay({ json }: { json: any }): JSX.Element {
           </OverlayGrid>
         </OverlayShown>
       ) : (
-        <OverlayHidden>
-          <OverlayGrid>
-            <OverlayGridItem1>
-              <ApparatusListBox
-                metadata={json.Metadata}
-                handleApparatusChange={(data) => setIdentifier(data)}
-              />
-            </OverlayGridItem1>
-            <OverlayGridItem2>
-              <ActionSequenceBox
-                actionList={actionList}
-                removeAction={(index) => removeActionFromList(index)}
-              />
-            </OverlayGridItem2>
-            <OverlayGridItem3>
-              <ActionBox
-                metadata={json.Metadata}
-                identifier={identifier}
-                addAction={([path, input]) => addActionToList([path, input])}
-              />
-            </OverlayGridItem3>
-          </OverlayGrid>
-        </OverlayHidden>
+        <OverlayHidden />
       )}
     </OverlayRoot>
   );
