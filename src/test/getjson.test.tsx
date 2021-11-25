@@ -1,4 +1,4 @@
-import getjsonfromurl from '../util/getjson';
+import getjsonfromurl from '../util/getjsonfromurl';
 
 global.fetch = jest.fn(() =>
   Promise.resolve({
