@@ -3,5 +3,5 @@ import React from 'react';
 import WebglBox from '../components/webgl/WebglBox'
 
 test('ApparatusSelectedListBox renders without crashing', ()=>{
-    render(<WebglBox/>);
+    render(<WebglBox json={{}}/>);
 })
