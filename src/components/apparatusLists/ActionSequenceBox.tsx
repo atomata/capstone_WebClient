@@ -51,11 +51,13 @@ const ActionSequenceBox = ({ actionList, removeAction }) => {
 
   //Settig the postion of the item dragged and dropped.
   function handleOnDragEnd (result) {
-    console.log(result);
+    //console.log(result);
     const items = Array.from(list);
-    const [reorderItem] = items.splice(result.source.index,1);
-    items.splice(result.destination.index, 0, reorderItem);
-    setList(items);
+    if ( result.destination  != null) {
+      const [reorderItem] = items.splice(result.source.index,1);
+      items.splice(result.destination.index, 0, reorderItem);
+      setList(items);
+    }
 
   }
 
