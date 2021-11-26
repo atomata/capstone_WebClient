@@ -1,4 +1,4 @@
-import { AzureFunction, Context, HttpRequest } from "@azure/functions"
+import { AzureFunction, Context} from "@azure/functions"
 import {
     BlobDownloadResponseParsed,
     BlobServiceClient
