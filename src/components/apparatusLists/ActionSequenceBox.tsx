@@ -69,7 +69,7 @@ const ActionSequenceBox = ({ actionList, removeAction }) => {
                   
                   {actionList.map((data, index) => (
               
-                    <Draggable key {...index} index={index} draggableId={index.toString()}>
+                    <Draggable key={index} index={index} draggableId={index.toString()}>
                       {(provided) =>(
                         <DragContainer {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
                           <List>
