@@ -1,4 +1,4 @@
-import getjsonfromurl from '../util/getjsonfromurl';
+import {getjsonfromurl} from '../util/getjsonfromurl';
 
 global.fetch = jest.fn(() =>
   Promise.resolve({
@@ -11,5 +11,8 @@ test('based on the url, it should return a json object', () => {
     const output = "object";
     const testoutput = typeof getjsonfromurl(id)
     expect(testoutput).toBe(output)
-    
+
+    expect(() => {
+      const model = new Sample(resolvedSample)
+   }).toThrow(TypeError);
 })
