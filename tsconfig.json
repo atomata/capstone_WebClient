@@ -15,6 +15,6 @@
     "jsx": "preserve",
     "downlevelIteration": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/test/getimage.test.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/test/getimage.test.ts"],
   "exclude": ["node_modules"]
 }

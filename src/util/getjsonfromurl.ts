@@ -1,4 +1,4 @@
-export function getjsonfromurl(id) {
+function getjsonfromurl(id) {
   return fetch(
     "https://capstonewebclient.blob.core.windows.net/apparatus/" + id + ".json",
     { mode: "cors" }
@@ -11,3 +11,5 @@ export function getjsonfromurl(id) {
       return error;
     });
 }
+
+export default getjsonfromurl
