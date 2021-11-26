@@ -40,22 +40,7 @@ const ListBoxScroller = styled.div`
   }
 `;
 
-const ActionSequenceBox = ({ actionList, removeAction }) => {
-
-  //Settig the postion of the item dragged and dropped.
-  function handleOnDragEnd (result) {
-
-    // dropped outside the list
-    if (!result.destination) {
-      return;
-    }
-
-    //console.log(result);
-    const items = actionList;
-    const [reorderItem] = items.splice(result.source.index,1);
-    items.splice(result.destination.index, 0, reorderItem);
-      
-  }
+const ActionSequenceBox = ({ actionList, removeAction, handleOnDragEnd}) => {
 
   //Ensuring the array from parameter is not empty.
   if ( actionList !== undefined) {
@@ -85,12 +70,12 @@ const ActionSequenceBox = ({ actionList, removeAction }) => {
                             </ListItemSecondaryAction>
                           </List>
                         </DragContainer>
-                      
                       )}
                     </Draggable>
                   
                   ))}
                   {provided.placeholder}
+                  
                 </ListBoxScroller>
             )}
           </Droppable>
