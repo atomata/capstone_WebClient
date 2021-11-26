@@ -9,7 +9,6 @@ import {
 } from "@material-ui/core";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import { useState}  from "react";
 
 const Box = styled.div`
   background: #fffdd0;
@@ -43,22 +42,19 @@ const ListBoxScroller = styled.div`
 
 const ActionSequenceBox = ({ actionList, removeAction }) => {
 
-  //Setting the array from the parameter with hook.
-  const [list,setList] = useState(actionList);
-  if (list.length != actionList.length) {
-    setList(actionList);
-  }
-
   //Settig the postion of the item dragged and dropped.
   function handleOnDragEnd (result) {
-    //console.log(result);
-    const items = Array.from(list);
-    if ( result.destination  != null) {
-      const [reorderItem] = items.splice(result.source.index,1);
-      items.splice(result.destination.index, 0, reorderItem);
-      setList(items);
+
+    // dropped outside the list
+    if (!result.destination) {
+      return;
     }
 
+    //console.log(result);
+    const items = actionList;
+    const [reorderItem] = items.splice(result.source.index,1);
+    items.splice(result.destination.index, 0, reorderItem);
+      
   }
 
   //Ensuring the array from parameter is not empty.
@@ -71,9 +67,9 @@ const ActionSequenceBox = ({ actionList, removeAction }) => {
             {(provided) =>(
                 <ListBoxScroller {...provided.droppableProps} ref={provided.innerRef}>
                   
-                  {list.map((data, index) => (
+                  {actionList.map((data, index) => (
               
-                    <Draggable key={index} index={index} draggableId={index.toString()}>
+                    <Draggable key {...index} index={index} draggableId={index.toString()}>
                       {(provided) =>(
                         <DragContainer {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
                           <List>
