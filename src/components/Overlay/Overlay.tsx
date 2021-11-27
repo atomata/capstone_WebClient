@@ -101,6 +101,19 @@ function Overlay({ json }: { json: any }): JSX.Element {
     setOverlay((show) => !show);
   };
 
+   //Setting the postion of the item dragged and dropped.
+   function handleOnDragEnd (result) {
+
+    //dropped outside the list
+    if (!result.destination) {
+      return;
+    }
+    
+    const [reorderItem] = actionList.splice(result.source.index,1);
+    actionList.splice(result.destination.index, 0, reorderItem);
+      
+  }
+
   return (
     <OverlayRoot>
       <ToggleDiv>
@@ -119,6 +132,7 @@ function Overlay({ json }: { json: any }): JSX.Element {
               <ActionSequenceBox
                 actionList={actionList}
                 removeAction={(index) => removeActionFromList(index)}
+                handleOnDragEnd = {handleOnDragEnd}
               />
             </OverlayGridItem2>
             <OverlayGridItem3>
