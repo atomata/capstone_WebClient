@@ -2,7 +2,7 @@ import React from "react";
 import Button from "@mui/material/Button";
 import styled from "styled-components";
 import { load } from "../../util/unityContextActions";
-import { getAssetBundles } from "../../util/tree_parsing";
+import { getAssetBundles , checkIfParent } from "../../util/tree_parsing";
 
 const Box = styled.div`
   background: #fffaf0;
@@ -55,7 +55,7 @@ const ApparatusListBox = ({ metadata, handleApparatusChange }) => {
           <ListButton key={index}>
             <Button
               variant="contained"
-              color="secondary"
+              color= {checkIfParent(data)? "primary":"secondary"}
               onClick={() => {
                 handleApparatusChange(data);
               }}

@@ -96,4 +96,17 @@ function getActions(node) {
     }
   }
 }
-export { getAssetBundles, getActions };
+
+function checkIfParent(node) {
+  if (node.Children !== undefined) {
+    for (let child in node.Children) {
+      if (node.Children[child].type[0] === "AssetBundle") {
+        return true;
+      } else if(checkIfParent(node.Children[child])){
+          return true;
+        }
+    }
+  }
+  return false;
+}
+export { getAssetBundles, getActions, checkIfParent };
