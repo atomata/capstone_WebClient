@@ -1,7 +1,7 @@
 import { render } from "@testing-library/react";
 import { useState } from "react";
 import Overlay from "../components/Overlay/Overlay";
-import {addActionToList, removeActionFromList} from "../util/overlayfunc/overlayfunc"
+import {addActionToList} from "../util/overlayfunc/overlayfunc"
 test('Overlay renders without crashing', ()=>{
     render(<Overlay json={undefined}/>);
 })
