@@ -1,8 +1,8 @@
 import styled from "styled-components";
+import React, { useState } from "react";
 import NavigationBox from "../src/components/NavigationBox";
 import WebglBox from "../src/components/webgl/WebglBox";
 import getjsonfromurl from "../src/util/getjsonfromurl";
-import React, { useState } from "react";
 
 const Content = styled.div`
   justify-content: center;
@@ -29,11 +29,11 @@ const LoadingView = (): JSX.Element => (
   </main>
 );
 
-function Experience({ id }): JSX.Element {
+function Experience({id}): JSX.Element {
   const [loading, setLoading] = useState(true);
   const [jsonFile, setJsonFile] = useState([]);
 
-  React.useEffect(function effectFunction() {
+  React.useEffect(() => {
     getjsonfromurl(id).then((responseJson) => {
       setJsonFile(responseJson);
       setLoading(false);
