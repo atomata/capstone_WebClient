@@ -30,16 +30,16 @@ const LoadingView = (): JSX.Element => (
   </main>
 );
 
-function Experience({ id }): JSX.Element {
+function Experience({id}): JSX.Element {
   const [loading, setLoading] = useState(true);
   const [jsonFile, setJsonFile] = useState([]);
 
-  React.useEffect(function effectFunction() {
+  React.useEffect(() => {
     getjsonfromurl(id).then((responseJson) => {
       setJsonFile(responseJson);
       setLoading(false);
     });
-  }, []);
+  }, [id]);
 
   return !loading ? (
     <main>
