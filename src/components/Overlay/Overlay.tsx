@@ -3,8 +3,9 @@ import React, { useState } from "react";
 import ActionSequenceBox from "../apparatusLists/ActionSequenceBox";
 import ActionBox from "../apparatusLists/ActionBox";
 import ApparatusListBox from "../apparatusLists/ApparatusListBox";
-import Button from "@mui/material/Button";
+import { addActionToList, removeActionFromList } from "../../util/overlayfunc/overlayfunc";
 import saveExperienceToCloud from "../../util/saveExperienceToCloud";
+import Button from "@mui/material/Button";
 
 const OverlayRoot = styled.div`
   display: absolute;
@@ -93,19 +94,10 @@ const ToggleOverlayButton = styled.button.attrs({
 `;
 
 function Overlay({ json }: { json: any }): JSX.Element {
+
   const [assetbundle, setAssetbundle] = useState({});
   const [showOverlay, setOverlay] = useState(false);
   const [actionList, setActionList] = useState([]);
-
-  function addActionToList([path, input]) {
-    actionList.push([path, input]);
-    setActionList([...actionList]);
-  }
-
-  function removeActionFromList(index) {
-    actionList.splice(index, 1);
-    setActionList([...actionList]);
-  }
 
   const toggleOverlay = () => {
     setOverlay((show) => !show);
@@ -139,14 +131,14 @@ function Overlay({ json }: { json: any }): JSX.Element {
             <OverlayGridItem2>
               <ActionSequenceBox
                 actionList={actionList}
-                removeAction={(index) => removeActionFromList(index)}
-                handleOnDragEnd={handleOnDragEnd}
+                removeAction={(index) => removeActionFromList(index, actionList, setActionList)}
+                handleOnDragEnd = {handleOnDragEnd}
               />
             </OverlayGridItem2>
             <OverlayGridItem3>
               <ActionBox
                 assetbundle={assetbundle}
-                addAction={([path, input]) => addActionToList([path, input])}
+                addAction={([path, input]) => addActionToList([path, input],actionList,setActionList)}
               />
             </OverlayGridItem3>
             <OverlayGridItem4>

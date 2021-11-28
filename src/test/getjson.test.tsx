@@ -11,5 +11,4 @@ test('based on the url, it should return a json object', () => {
     const output = "object";
     const testoutput = typeof getApparatusFromCloud(id)
     expect(testoutput).toBe(output)
-    
 })
