@@ -65,7 +65,7 @@ const OverlayGridItem2 = styled.div`
 const OverlayGridItem3 = styled.div`
   background-color: red;
   grid-column: 1 / span 2;
-  grid-row: 6 / span 4;
+  grid-row: 6 / span 5;
   z-index: 2;
   pointer-events: auto;
   margin: 5%;
@@ -73,7 +73,7 @@ const OverlayGridItem3 = styled.div`
 
 const OverlayGridItem4 = styled.div`
   grid-column: 8 / span 2;
-  grid-row: 10 / span 1;
+  grid-row: 1 / span 1;
   z-index: 2;
   pointer-events: auto;
   margin: 5%;
