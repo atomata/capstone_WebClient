@@ -55,7 +55,7 @@ const ApparatusListBox = ({ metadata, handleApparatusChange }) => {
           <ListButton key={index}>
             <Button
               variant="contained"
-              color= {checkIfParent(data)? "primary":"secondary"}
+              color= {checkIfParent(data)? "primary":"secondary"}     // checks if node is a parent
               onClick={() => {
                 handleApparatusChange(data);
               }}

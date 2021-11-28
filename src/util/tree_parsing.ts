@@ -97,6 +97,7 @@ function getActions(node) {
   }
 }
 
+// Checks if a given node is a parent node or not by recursively checking if it has any direct/indirect children of type 'AssetBundle'
 function checkIfParent(node) {
   if (node.Children !== undefined) {
     for (let child in node.Children) {
