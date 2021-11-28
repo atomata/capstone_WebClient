@@ -1,8 +1,11 @@
 import styled from "styled-components";
-import { useState } from "react";
+import React, { useState } from "react";
 import ActionSequenceBox from "../apparatusLists/ActionSequenceBox";
 import ActionBox from "../apparatusLists/ActionBox";
 import ApparatusListBox from "../apparatusLists/ApparatusListBox";
+import Button from "@mui/material/Button";
+import experience from "../../data/experience.json"
+import uploadFileToBlob from "../../util/save"
 
 const OverlayRoot = styled.div`
   display: absolute;
@@ -65,6 +68,14 @@ const OverlayGridItem3 = styled.div`
   margin: 5%;
 `;
 
+const OverlayGridItem4 = styled.div`
+  grid-column: 8 / span 2;
+  grid-row: 10 / span 1;
+  z-index: 2;
+  pointer-events: auto;
+  margin: 5%;
+`;
+
 const ToggleDiv = styled.div`
   position: absolute;
   pointer-events: auto;
@@ -97,6 +108,18 @@ function Overlay({ json }: { json: any }): JSX.Element {
     setActionList([...actionList]);
   }
 
+  // const saveExperience = () => {
+  //       const jsonData = {User_ID: "test" , Actions : actionList, Apparatus : json.Id.Identifier}
+  //       const fileData = JSON.stringify(jsonData);
+  //       const blob = new Blob([fileData], {type: "text/plain"});
+  //       const url = URL.createObjectURL(blob);
+  //       const link = document.createElement('a');
+  //       link.download = 'experience.json';
+  //       link.href = url;
+  //       link.click();
+  //   }
+
+
   const toggleOverlay = () => {
     setOverlay((show) => !show);
   };
@@ -108,10 +131,10 @@ function Overlay({ json }: { json: any }): JSX.Element {
     if (!result.destination) {
       return;
     }
-    
+
     const [reorderItem] = actionList.splice(result.source.index,1);
     actionList.splice(result.destination.index, 0, reorderItem);
-      
+
   }
 
   return (
@@ -141,6 +164,15 @@ function Overlay({ json }: { json: any }): JSX.Element {
                 addAction={([path, input]) => addActionToList([path, input])}
               />
             </OverlayGridItem3>
+              <OverlayGridItem4>
+                  <Button variant="contained" color="secondary" onClick = {() => {
+                      const jsonData = {User_ID: "test" , Actions : actionList, Apparatus : json.Id.Identifier};
+                      const blob = new File([JSON.stringify(jsonData)], `${jsonData.User_ID}.json`);
+                      uploadFileToBlob(blob);
+                  }} >
+                    Save Experience
+                  </Button>
+              </OverlayGridItem4>
           </OverlayGrid>
         </OverlayShown>
       ) : (
