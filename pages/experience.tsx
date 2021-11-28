@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import NavigationBox from "../src/components/NavigationBox";
 import WebglBox from "../src/components/webgl/WebglBox";
-import getjsonfromurl from "../src/util/getjsonfromurl";
+import { getApparatusFromCloud } from "../src/util/getDataFromCloud";
 import React, { useState } from "react";
 
 const Content = styled.div`
@@ -34,7 +34,7 @@ function Experience({ id }): JSX.Element {
   const [jsonFile, setJsonFile] = useState([]);
 
   React.useEffect(function effectFunction() {
-    getjsonfromurl(id).then((responseJson) => {
+    getApparatusFromCloud(id).then((responseJson) => {
       setJsonFile(responseJson);
       setLoading(false);
     });
