@@ -4,8 +4,7 @@ async function getjsonfromurl(id: string) {
       `https://capstonewebclient.blob.core.windows.net/apparatus/${id}.json`,
       { mode: "cors" }
     );
-    const responseJson = await response.json();
-    return responseJson;
+    return await response.json();
   } catch (error) {
     return error;
   }
