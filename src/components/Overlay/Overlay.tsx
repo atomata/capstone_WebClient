@@ -1,9 +1,14 @@
 import styled from "styled-components";
-import { useState } from "react";
+import React, { useState } from "react";
+import Button from "@mui/material/Button";
 import ActionSequenceBox from "../apparatusLists/ActionSequenceBox";
 import ActionBox from "../apparatusLists/ActionBox";
 import ApparatusListBox from "../apparatusLists/ApparatusListBox";
-import { addActionToList, removeActionFromList } from "../../util/overlayfunc/overlayfunc";
+import {
+  addActionToList,
+  removeActionFromList,
+} from "../../util/overlayfunc/overlayfunc";
+import saveExperienceToCloud from "../../util/saveExperienceToCloud";
 
 const OverlayRoot = styled.div`
   display: absolute;
@@ -60,7 +65,15 @@ const OverlayGridItem2 = styled.div`
 const OverlayGridItem3 = styled.div`
   background-color: red;
   grid-column: 1 / span 2;
-  grid-row: 6 / span 4;
+  grid-row: 6 / span 5;
+  z-index: 2;
+  pointer-events: auto;
+  margin: 5%;
+`;
+
+const OverlayGridItem4 = styled.div`
+  grid-column: 8 / span 2;
+  grid-row: 1 / span 1;
   z-index: 2;
   pointer-events: auto;
   margin: 5%;
@@ -84,7 +97,6 @@ const ToggleOverlayButton = styled.button.attrs({
 `;
 
 function Overlay({ json }: { json: any }): JSX.Element {
-
   const [assetbundle, setAssetbundle] = useState({});
   const [showOverlay, setOverlay] = useState(false);
   const [actionList, setActionList] = useState([]);
@@ -93,17 +105,15 @@ function Overlay({ json }: { json: any }): JSX.Element {
     setOverlay((show) => !show);
   };
 
-   //Setting the postion of the item dragged and dropped.
-   function handleOnDragEnd (result) {
-
-    //dropped outside the list
+  // Setting the postion of the item dragged and dropped.
+  function handleOnDragEnd(result) {
+    // dropped outside the list
     if (!result.destination) {
       return;
     }
-    
-    const [reorderItem] = actionList.splice(result.source.index,1);
+
+    const [reorderItem] = actionList.splice(result.source.index, 1);
     actionList.splice(result.destination.index, 0, reorderItem);
-      
   }
 
   return (
@@ -123,20 +133,42 @@ function Overlay({ json }: { json: any }): JSX.Element {
             <OverlayGridItem2>
               <ActionSequenceBox
                 actionList={actionList}
-                removeAction={(index) => removeActionFromList(index, actionList, setActionList)}
-                handleOnDragEnd = {handleOnDragEnd}
+                removeAction={(index) =>
+                  removeActionFromList(index, actionList, setActionList)
+                }
+                handleOnDragEnd={handleOnDragEnd}
               />
             </OverlayGridItem2>
             <OverlayGridItem3>
               <ActionBox
                 assetbundle={assetbundle}
-                addAction={([path, input]) => addActionToList([path, input],actionList,setActionList)}
+                addAction={([path, input]) =>
+                  addActionToList([path, input], actionList, setActionList)
+                }
               />
             </OverlayGridItem3>
+            <OverlayGridItem4>
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={() => {
+                  const userId = "test_user1";
+                  const experienceId = "test_exp1";
+                  saveExperienceToCloud(
+                    userId,
+                    experienceId,
+                    json.Id.Identifier,
+                    actionList
+                  );
+                }}
+              >
+                Save Experience
+              </Button>
+            </OverlayGridItem4>
           </OverlayGrid>
         </OverlayShown>
       ) : (
-        <OverlayHidden/>
+        <OverlayHidden />
       )}
     </OverlayRoot>
   );
