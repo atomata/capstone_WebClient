@@ -1,3 +1,4 @@
+/* eslint-disable prefer-arrow-callback */
 import styled from "styled-components";
 import React, { useState } from "react";
 import NavigationBox from "../src/components/NavigationBox";

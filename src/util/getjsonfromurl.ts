@@ -1,3 +1,4 @@
+/* eslint-disable arrow-body-style */
 async function getjsonfromurl(id: string) {
   try {
     const response = await fetch(
