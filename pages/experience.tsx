@@ -1,8 +1,9 @@
+/* eslint-disable prefer-arrow-callback */
 import styled from "styled-components";
+import React, { useState } from "react";
 import NavigationBox from "../src/components/NavigationBox";
 import WebglBox from "../src/components/webgl/WebglBox";
-import getjsonfromurl from "../src/util/getjsonfromurl";
-import React, { useState } from "react";
+import { getApparatusFromCloud } from "../src/util/getDataFromCloud";
 
 const Content = styled.div`
   justify-content: center;
@@ -33,12 +34,12 @@ function Experience({ id }): JSX.Element {
   const [loading, setLoading] = useState(true);
   const [jsonFile, setJsonFile] = useState([]);
 
-  React.useEffect(function effectFunction() {
-    getjsonfromurl(id).then((responseJson) => {
+  React.useEffect(() => {
+    getApparatusFromCloud(id).then((responseJson) => {
       setJsonFile(responseJson);
       setLoading(false);
     });
-  }, []);
+  }, [id]);
 
   return !loading ? (
     <main>

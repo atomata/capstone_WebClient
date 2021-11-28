@@ -1,4 +1,4 @@
-import getjsonfromurl from '../util/getjsonfromurl';
+import {getApparatusFromCloud} from '../util/getDataFromCloud';
 
 global.fetch = jest.fn(() =>
   Promise.resolve({
@@ -9,7 +9,6 @@ global.fetch = jest.fn(() =>
 test('based on the url, it should return a json object', () => {
     const id = 'fake-data-1'
     const output = "object";
-    const testoutput = typeof getjsonfromurl(id)
+    const testoutput = typeof getApparatusFromCloud(id)
     expect(testoutput).toBe(output)
-    
 })
