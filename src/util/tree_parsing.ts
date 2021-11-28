@@ -101,9 +101,7 @@ function getActions(node) {
 function checkIfParent(node) {
   if (node.Children !== undefined) {
     for (let child in node.Children) {
-      if (node.Children[child].type[0] === "AssetBundle") {
-        return true;
-      } else if(checkIfParent(node.Children[child])){
+      if (node.Children[child].type[0] === "AssetBundle"||checkIfParent(node.Children[child])){
           return true;
         }
     }
