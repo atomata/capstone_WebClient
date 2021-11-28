@@ -108,10 +108,10 @@ function Overlay({ json }: { json: any }): JSX.Element {
     if (!result.destination) {
       return;
     }
-    
-    const [reorderItem] = actionList.splice(result.source.index,1);
-    actionList.splice(result.destination.index, 0, reorderItem);
-      
+   //console.log(result);
+    const items = actionList;
+    const [reorderItem] = items.splice(result.source.index,1);
+    items.splice(result.destination.index, 0, reorderItem);
   }
 
   return (
