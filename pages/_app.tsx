@@ -3,7 +3,7 @@ import Head from "next/head";
 import PropTypes from "prop-types";
 import { useEffect } from "react";
 import styled, { ThemeProvider } from "styled-components";
-import theme from "../src/util/styles";
+import theme from "../src/util/theme";
 import { assetPrefix } from "../src/util/utils";
 import "./app.global.css";
 
