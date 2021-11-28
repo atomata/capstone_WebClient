@@ -30,7 +30,7 @@ const LoadingView = (): JSX.Element => (
   </main>
 );
 
-function Experience({id}): JSX.Element {
+function Experience({ id }): JSX.Element {
   const [loading, setLoading] = useState(true);
   const [jsonFile, setJsonFile] = useState([]);
 
