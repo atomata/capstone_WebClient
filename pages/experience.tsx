@@ -38,7 +38,7 @@ function Experience({id}): JSX.Element {
       setJsonFile(responseJson);
       setLoading(false);
     });
-  }, []);
+  }, [id]);
 
   return !loading ? (
     <main>
