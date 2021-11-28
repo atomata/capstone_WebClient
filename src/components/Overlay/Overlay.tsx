@@ -112,7 +112,9 @@ function Overlay({ json }: { json: any }): JSX.Element {
       return;
     }
 
+
     const [reorderItem] = actionList.splice(result.source.index, 1);
+
     actionList.splice(result.destination.index, 0, reorderItem);
   }
 

@@ -96,4 +96,16 @@ function getActions(node) {
     }
   }
 }
-export { getAssetBundles, getActions };
+
+// Checks if a given node is a parent node or not by recursively checking if it has any direct/indirect children of type 'AssetBundle'
+function checkIfParent(node) {
+  if (node.Children !== undefined) {
+    for (let child in node.Children) {
+      if (node.Children[child].type[0] === "AssetBundle"||checkIfParent(node.Children[child])){
+          return true;
+        }
+    }
+  }
+  return false;
+}
+export { getAssetBundles, getActions, checkIfParent };
