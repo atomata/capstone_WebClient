@@ -10,18 +10,17 @@ const saveExperienceToCloud = async (
   experienceId: string,
   apparatusId: string,
   actionList: any[]
-): Promise<string[]> => {
+): Promise<any> => {
   const experience = { Apparatus: apparatusId, Actions: actionList };
   let userdata = {};
   getExperienceFromCloud(userId).then(async (responseJson) => {
     // The user file exists. then either we are adding a new experience or we are modifying an existing experience
     if (responseJson !== null) {
       userdata = responseJson;
-      console.log("the reponse value is ", responseJson);
+      console.log("the response value is ", responseJson);
     }
     userdata[experienceId] = experience;
     const file = new File([JSON.stringify(userdata)], `${userId}.json`);
-    if (!file) return [];
 
     // get BlobService = notice `?` is pulled out of sasToken - if created in Azure portal
     const blobService = new BlobServiceClient(

@@ -1,8 +1,8 @@
 import styled from "styled-components";
+import React, { useState } from "react";
 import NavigationBox from "../src/components/NavigationBox";
 import WebglBox from "../src/components/webgl/WebglBox";
 import { getApparatusFromCloud } from "../src/util/getDataFromCloud";
-import React, { useState } from "react";
 
 const Content = styled.div`
   justify-content: center;
