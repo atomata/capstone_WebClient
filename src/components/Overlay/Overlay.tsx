@@ -154,8 +154,8 @@ function Overlay({ json }: { json: any }): JSX.Element {
                 variant="contained"
                 color="secondary"
                 onClick={() => {
-                  const userId = "test_user1";
-                  const experienceId = "test_exp1";
+                  const userId = "testuser1";
+                  const experienceId = "testexp1";
                   saveExperienceToCloud(
                     userId,
                     experienceId,
