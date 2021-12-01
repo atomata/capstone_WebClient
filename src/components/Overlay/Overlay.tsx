@@ -9,6 +9,7 @@ import {
   removeActionFromList,
 } from "../../util/overlayfunc/overlayfunc";
 import saveExperienceToCloud from "../../util/saveExperienceToCloud";
+import {ExperienceData} from "../../util/types";
 
 const OverlayRoot = styled.div`
   display: absolute;
@@ -96,10 +97,10 @@ const ToggleOverlayButton = styled.button.attrs({
   color: white;
 `;
 
-function Overlay({ json }: { json: any }): JSX.Element {
+function Overlay(userId , experienceData): JSX.Element {
   const [assetbundle, setAssetbundle] = useState({});
   const [showOverlay, setOverlay] = useState(false);
-  const [actionList, setActionList] = useState([]);
+  const [actionList, setActionList] = useState(experienceData.initializationData.actionList);
 
   const toggleOverlay = () => {
     setOverlay((show) => !show);
@@ -128,8 +129,8 @@ function Overlay({ json }: { json: any }): JSX.Element {
           <OverlayGrid>
             <OverlayGridItem1>
               <ApparatusListBox
-                metadata={json.Metadata}
-                handleApparatusChange={(data) => setAssetbundle(data)}
+                metadata={experienceData.apparatusMetadata}
+                handleAssetBundleChange={(data) => setAssetbundle(data)}
               />
             </OverlayGridItem1>
             <OverlayGridItem2>
@@ -154,12 +155,11 @@ function Overlay({ json }: { json: any }): JSX.Element {
                 variant="contained"
                 color="secondary"
                 onClick={() => {
-                  const userId = "testuser1";
                   const experienceId = "testexp1";
                   saveExperienceToCloud(
                     userId,
                     experienceId,
-                    json.Id.Identifier,
+                    experienceData.apparatusId,
                     actionList
                   );
                 }}
