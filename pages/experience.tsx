@@ -29,13 +29,15 @@ function Experience({ userId, dataId, isApparatusId }): JSX.Element {
   const [experienceData, setExperienceData] = useState<ExperienceData>();
   // either apparatusID is provided or experience id but not both
   const [test, setTest] = useState<boolean>(isApparatusId);
+
   const experience: ExperienceData = {
     apparatusMetadata: { Paths: [], Data: [] },
     apparatusId: "",
     initializationData: { actionList: [] },
   };
+
   React.useEffect(() => {
-    if (test) {
+    if (isApparatusId === 'true') {
       getApparatusFromCloud(dataId).then((apparatusJson) => {
         experience.apparatusId = apparatusJson.Id.Identifier;
         experience.apparatusMetadata = apparatusJson.Metadata;

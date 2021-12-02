@@ -13,7 +13,7 @@ const WebglRoot = styled.div`
   margin-top: 4rem;
 `;
 
-function WebglBox(userId , experienceData): JSX.Element {
+function WebglBox({userId , experienceData}): JSX.Element {
     useEffect(() => {
         unityContext.on("loaded", () => {
             // For some reason the unityContext.send("Container", "LoadApparatus", arg) in load() cannot be called at this point

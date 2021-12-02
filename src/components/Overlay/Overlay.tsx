@@ -97,7 +97,7 @@ const ToggleOverlayButton = styled.button.attrs({
   color: white;
 `;
 
-function Overlay(userId , experienceData): JSX.Element {
+function Overlay({userId , experienceData}): JSX.Element {
   const [assetbundle, setAssetbundle] = useState({});
   const [showOverlay, setOverlay] = useState(false);
   const [actionList, setActionList] = useState(experienceData.initializationData.actionList);
