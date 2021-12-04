@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Link from "next/link";
 import { Button } from "@material-ui/core";
+import { verifyLogIn, logOut } from "../src/util/loginCookies";
 
 const Content = styled.div`
   justify-content: center;
@@ -29,18 +30,16 @@ const ApparatusList = () => {
   );
 };
 
-const Home = (): JSX.Element => (
-  <main>
+function Home(): JSX.Element {
+  verifyLogIn();
+
+  return (
+    <main>
     <h1>SELECT AN APPARATUS</h1>
     <ApparatusList />
-    <Link
-      href={{
-        pathname: "/login",
-      }}
-    >
-      <Button>Log In</Button>
-    </Link>
+    <Button onClick={logOut}>Log Out</Button>
   </main>
-);
+  );
+}
 
 export default Home;

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import React, { useState } from "react";
 import LoginBox from "../src/components/LoginBox";
 import Cookies from 'universal-cookie';
-import { checkIfLoggedIn } from "../src/util/loginCookies";
+import { verifyNotLogIn, checkIfLoggedIn } from "../src/util/loginCookies";
 
 const Content = styled.div`
   justify-content: center;
@@ -22,11 +22,7 @@ const LoadingView = (): JSX.Element => (
 
 function Login(): JSX.Element {
   const [loading, setLoading] = useState(false);
-  const cookies = new Cookies();
-
-  console.log(checkIfLoggedIn());
-
-  console.log(cookies.get('user'));
+  verifyNotLogIn();
 
   return !loading ? (
     <main>
