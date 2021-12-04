@@ -60,7 +60,7 @@ const ActionSequenceBox = ({ actionList, removeAction, handleOnDragEnd}) => {
                           <List>
                             <ListItem>
                               <Button variant="contained" color="secondary" >
-                                {data[1]}
+                                {data[2]}:{data[1]}
                               </Button>
                             </ListItem>
                             <ListItemSecondaryAction>
