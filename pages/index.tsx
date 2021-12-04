@@ -33,6 +33,13 @@ const Home = (): JSX.Element => (
   <main>
     <h1>SELECT AN APPARATUS</h1>
     <ApparatusList />
+    <Link
+      href={{
+        pathname: "/login",
+      }}
+    >
+      <Button>Log In</Button>
+    </Link>
   </main>
 );
 
