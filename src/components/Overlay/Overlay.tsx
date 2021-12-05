@@ -97,7 +97,7 @@ const ToggleOverlayButton = styled.button.attrs({
 `;
 
 function Overlay({ json }: { json: any }): JSX.Element {
-  const [assetbundle, setAssetbundle] = useState({});
+  const [assetbundle, setAssetbundle] = useState({identifier:[]});
   const [showOverlay, setOverlay] = useState(false);
   const [actionList, setActionList] = useState([]);
 
