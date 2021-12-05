@@ -28,7 +28,6 @@ function Experience({ userId, dataId, isApparatusId }): JSX.Element {
   const [loading, setLoading] = useState(true);
   const [experienceData, setExperienceData] = useState<ExperienceData>();
   // either apparatusID is provided or experience id but not both
-  const [test, setTest] = useState<boolean>(isApparatusId);
 
   const experience: ExperienceData = {
     apparatusMetadata: { Paths: [], Data: [] },
@@ -37,14 +36,14 @@ function Experience({ userId, dataId, isApparatusId }): JSX.Element {
   };
 
   React.useEffect(() => {
-    if (isApparatusId === 'true') {
+    if (isApparatusId === "true") {
       getApparatusFromCloud(dataId).then((apparatusJson) => {
         experience.apparatusId = apparatusJson.Id.Identifier;
         experience.apparatusMetadata = apparatusJson.Metadata;
         setExperienceData(experience);
         setLoading(false);
       });
-    } else{
+    } else {
       getExperienceFromCloud(userId, dataId).then((experienceJson) => {
         experience.initializationData.actionList = experienceJson.actionList;
         getApparatusFromCloud(experienceJson.apparatusId).then(

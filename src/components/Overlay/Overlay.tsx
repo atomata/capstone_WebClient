@@ -9,7 +9,7 @@ import {
   removeActionFromList,
 } from "../../util/overlayfunc/overlayfunc";
 import saveExperienceToCloud from "../../util/saveExperienceToCloud";
-import {ExperienceData} from "../../util/types";
+import { ExperienceData } from "../../util/types";
 
 const OverlayRoot = styled.div`
   display: absolute;
@@ -97,10 +97,12 @@ const ToggleOverlayButton = styled.button.attrs({
   color: white;
 `;
 
-function Overlay({userId , experienceData}): JSX.Element {
+function Overlay({ userId, experienceData }): JSX.Element {
   const [assetbundle, setAssetbundle] = useState({});
   const [showOverlay, setOverlay] = useState(false);
-  const [actionList, setActionList] = useState(experienceData.initializationData.actionList);
+  const [actionList, setActionList] = useState(
+    experienceData.initializationData.actionList
+  );
 
   const toggleOverlay = () => {
     setOverlay((show) => !show);
@@ -143,7 +145,11 @@ function Overlay({userId , experienceData}): JSX.Element {
               <ActionBox
                 assetbundle={assetbundle}
                 addAction={([path, input]) =>
-                  addActionToList([path, input,assetbundle.identifier[0]], actionList, setActionList)
+                  addActionToList(
+                    [path, input, assetbundle.identifier[0]],
+                    actionList,
+                    setActionList
+                  )
                 }
               />
             </OverlayGridItem3>
