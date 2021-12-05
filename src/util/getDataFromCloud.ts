@@ -8,9 +8,9 @@ function getApparatusFromCloud(id) {
     .catch((error) => error);
 }
 
-function getExperienceFromCloud(id) {
+function getExperienceFromCloud(container,id) {
   return fetch(
-      `https://addressabletest1.blob.core.windows.net/experiences/${  id  }.json`,
+      `https://addressabletest1.blob.core.windows.net/${  container  }/${  id  }.json`,
       { mode: "cors" }
   )
       .then((response) => response.json())

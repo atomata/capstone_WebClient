@@ -97,7 +97,7 @@ const ToggleOverlayButton = styled.button.attrs({
 `;
 
 function Overlay({ json }: { json: any }): JSX.Element {
-  const [assetbundle, setAssetbundle] = useState({});
+  const [assetbundle, setAssetbundle] = useState({identifier:[]});
   const [showOverlay, setOverlay] = useState(false);
   const [actionList, setActionList] = useState([]);
 
@@ -111,10 +111,7 @@ function Overlay({ json }: { json: any }): JSX.Element {
     if (!result.destination) {
       return;
     }
-
-
     const [reorderItem] = actionList.splice(result.source.index, 1);
-
     actionList.splice(result.destination.index, 0, reorderItem);
   }
 
@@ -145,7 +142,7 @@ function Overlay({ json }: { json: any }): JSX.Element {
               <ActionBox
                 assetbundle={assetbundle}
                 addAction={([path, input]) =>
-                  addActionToList([path, input], actionList, setActionList)
+                  addActionToList([path, input,assetbundle.identifier[0]], actionList, setActionList)
                 }
               />
             </OverlayGridItem3>
@@ -154,8 +151,8 @@ function Overlay({ json }: { json: any }): JSX.Element {
                 variant="contained"
                 color="secondary"
                 onClick={() => {
-                  const userId = "test_user1";
-                  const experienceId = "test_exp1";
+                  const userId = "testuser1";
+                  const experienceId = "testexp1";
                   saveExperienceToCloud(
                     userId,
                     experienceId,
