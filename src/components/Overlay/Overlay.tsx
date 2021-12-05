@@ -112,10 +112,7 @@ function Overlay({userId , experienceData}): JSX.Element {
     if (!result.destination) {
       return;
     }
-
-
     const [reorderItem] = actionList.splice(result.source.index, 1);
-
     actionList.splice(result.destination.index, 0, reorderItem);
   }
 
@@ -146,7 +143,7 @@ function Overlay({userId , experienceData}): JSX.Element {
               <ActionBox
                 assetbundle={assetbundle}
                 addAction={([path, input]) =>
-                  addActionToList([path, input], actionList, setActionList)
+                  addActionToList([path, input,assetbundle.identifier[0]], actionList, setActionList)
                 }
               />
             </OverlayGridItem3>

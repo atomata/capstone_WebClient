@@ -47,32 +47,32 @@ const ListButton = styled.div`
 const ActionBox = ({ assetbundle, addAction }) => {
   // dont use props as a props property, no caps,
 
-  const actiondata = React.useMemo(
+  const actionData = React.useMemo(
     () => getActions(assetbundle),
     [assetbundle]
   );
 
   // everytime metadata is rendered we reparse metadata using useMemo hook
-  if (actiondata !== undefined) {
+  if (actionData !== undefined) {
     return (
       <Box>
         <ListHeading>Actions</ListHeading>
         <ListBoxScroller>
-          {actiondata[0].map((data) => (
+          {actionData[0].map((data) => (
             <List>
               <ListItem>
                 <Button
                   key={data}
                   variant="contained"
                   color="secondary"
-                  onClick={() => callToWebGL(actiondata[1], data)}
+                  onClick={() => callToWebGL(actionData[1], data)}
                   id={data}
                 >
                   {data}
                 </Button>
               </ListItem>
               <ListItemSecondaryAction>
-                <IconButton onClick={() => addAction([actiondata[1], data])}>
+                <IconButton onClick={() => addAction([actionData[1], data])}>
                   <AddOutlinedIcon />
                 </IconButton>
               </ListItemSecondaryAction>
