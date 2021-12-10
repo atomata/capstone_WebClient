@@ -1,7 +1,6 @@
 /* eslint-disable prefer-arrow-callback */
 import styled from "styled-components";
 import React, { useState } from "react";
-import NavigationBox from "../src/components/NavigationBox";
 import WebglBox from "../src/components/webgl/WebglBox";
 import {
   getApparatusFromCloud,
@@ -10,6 +9,7 @@ import {
 import { ExperienceData } from "../src/util/types";
 
 const Content = styled.div`
+  width: 100%;
   justify-content: center;
   flex-direction: column;
   justify-items: center;
@@ -62,7 +62,6 @@ function Experience({ userId, dataId, isApparatusId }): JSX.Element {
     <main>
       <Content>
         <WebglBox userId={userId} experienceData={experienceData} />
-        <NavigationBox />
       </Content>
     </main>
   ) : (

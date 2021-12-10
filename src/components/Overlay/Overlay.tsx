@@ -14,7 +14,7 @@ import styles from "../../styles/NavbarStyle.module.css";
 const OverlayRoot = styled.div`
   display: absolute;
   width: inherit;
-  height: inherit;
+  height: 750px;
   z-index: 0;
   opacity: 1;
   pointer-events: none;
@@ -23,7 +23,7 @@ const OverlayRoot = styled.div`
 const OverlayShown = styled.div`
   display: absolute;
   width: inherit;
-  height: inherit;
+  height: 750px;
   opacity: 1;
   pointer-events: auto;
 `;
