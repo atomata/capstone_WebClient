@@ -8,7 +8,7 @@ import {
   removeActionFromList,
 } from "../../util/overlayfunc/overlayfunc";
 import saveExperienceToCloud from "../../util/saveExperienceToCloud";
-import ResponsiveAppBar from "../Navbar";
+import Navbar from "../Navbar";
 import styles from "../../styles/NavbarStyle.module.css";
 
 const OverlayRoot = styled.div`
@@ -94,7 +94,7 @@ function Overlay({ userId, experienceData }): JSX.Element {
   return (
     <OverlayRoot>
       <NavbarDiv>
-        <ResponsiveAppBar
+        <Navbar
           save={() => {
             const experienceId = "testexp1";
             saveExperienceToCloud(

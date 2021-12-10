@@ -13,7 +13,7 @@ const NavButton = styled(Button)`
     display: block-inline;
   }
 `;
-const ResponsiveAppBar = ({ save, toggle }) => (
+const Navbar = ({ save, toggle }) => (
   <AppBar position="static">
     <Container maxWidth="xl">
       <Toolbar disableGutters>
@@ -39,4 +39,4 @@ const ResponsiveAppBar = ({ save, toggle }) => (
     </Container>
   </AppBar>
 );
-export default ResponsiveAppBar;
+export default Navbar;
