@@ -6,7 +6,7 @@ const Home = (): JSX.Element => (
       <Link
           key="selectionPage"
           href={{
-              pathname: "/apparatusSelection",
+              pathname: "/selection",
           }}
       >
           <Button> Create New Experience</Button>
