@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "@mui/material/Button";
 import styled from "styled-components";
-import { getAssetBundles , checkIfParent } from "../../util/tree_parsing";
+import { getAssetBundles, checkIfParent } from "../../util/JsonParsing";
 
 const Box = styled.div`
   background: #fffaf0;
@@ -40,7 +40,7 @@ const ListButton = styled.div`
   margin: 5px;
 `;
 
-const ApparatusListBox = ({ metadata, handleAssetBundleChange}) => {
+const ApparatusListBox = ({ metadata, handleAssetBundleChange }) => {
   const assetbundles = React.useMemo(
     () => getAssetBundles(metadata),
     [metadata]
@@ -54,7 +54,7 @@ const ApparatusListBox = ({ metadata, handleAssetBundleChange}) => {
           <ListButton key={index}>
             <Button
               variant="contained"
-              color= {checkIfParent(data)? "primary":"secondary"}     // checks if node is a parent
+              color={checkIfParent(data) ? "primary" : "secondary"} // checks if node is a parent
               onClick={() => {
                 handleAssetBundleChange(data);
               }}
