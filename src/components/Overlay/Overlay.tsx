@@ -72,8 +72,11 @@ const NavbarDiv = styled.div`
 function Overlay({ userId, experienceData }): JSX.Element {
   const [assetbundle, setAssetbundle] = useState({});
   const [showOverlay, setOverlay] = useState(false);
-  const [actionList, setActionList] = useState( (experienceData !== undefined)?
-    experienceData.initializationData.actionList : []);
+  const [actionList, setActionList] = useState(
+    experienceData !== undefined
+      ? experienceData.initializationData.actionList
+      : []
+  );
 
   const toggleOverlay = () => {
     setOverlay((show) => !show);
@@ -87,10 +90,6 @@ function Overlay({ userId, experienceData }): JSX.Element {
     }
     const [reorderItem] = actionList.splice(result.source.index, 1);
     actionList.splice(result.destination.index, 0, reorderItem);
-  }
-
-  if(experienceData !== undefined){
-
   }
   return (
     <OverlayRoot>
@@ -112,7 +111,11 @@ function Overlay({ userId, experienceData }): JSX.Element {
         <OverlayGrid>
           <OverlayGridItem1>
             <ApparatusListBox
-              metadata={(experienceData !== undefined)? experienceData.apparatusMetadata: undefined}
+              metadata={
+                experienceData !== undefined
+                  ? experienceData.apparatusMetadata
+                  : undefined
+              }
               handleAssetBundleChange={(data) => setAssetbundle(data)}
             />
           </OverlayGridItem1>

@@ -1,4 +1,3 @@
-import Selection from "./apparatusSelection";
 import Link from "next/link";
 import {Button} from "@material-ui/core";
 
