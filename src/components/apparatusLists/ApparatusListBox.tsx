@@ -41,34 +41,42 @@ const ListButton = styled.div`
 `;
 
 const ApparatusListBox = ({ metadata, handleAssetBundleChange }) => {
-  const assetbundles = React.useMemo(
-    () => getAssetBundles(metadata),
-    [metadata]
-  );
+  if (metadata !== undefined) {
+    const assetbundles = React.useMemo(
+      () => getAssetBundles(metadata),
+      [metadata]
+    );
 
+    return (
+      <Box>
+        <ListHeading>Apparatus</ListHeading>
+        <ListBoxScroller>
+          {assetbundles.map((data, index) => (
+            <ListButton key={index}>
+              <Button
+                variant="contained"
+                color={checkIfParent(data) ? "primary" : "secondary"} // checks if node is a parent
+                onClick={() => {
+                  handleAssetBundleChange(data);
+                }}
+              >
+                {data.identifier[0]}
+              </Button>
+            </ListButton>
+          ))}
+          <ListButton>
+            <Button variant="contained" color="secondary">
+              Some Asset
+            </Button>
+          </ListButton>
+        </ListBoxScroller>
+      </Box>
+    );
+  }
   return (
     <Box>
       <ListHeading>Apparatus</ListHeading>
-      <ListBoxScroller>
-        {assetbundles.map((data, index) => (
-          <ListButton key={index}>
-            <Button
-              variant="contained"
-              color={checkIfParent(data) ? "primary" : "secondary"} // checks if node is a parent
-              onClick={() => {
-                handleAssetBundleChange(data);
-              }}
-            >
-              {data.identifier[0]}
-            </Button>
-          </ListButton>
-        ))}
-        <ListButton>
-          <Button variant="contained" color="secondary">
-            Some Asset
-          </Button>
-        </ListButton>
-      </ListBoxScroller>
+      <Button disabled />
     </Box>
   );
 };
