@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import React, { useState } from "react";
-import Button from "@mui/material/Button";
 import ActionSequenceBox from "../apparatusLists/ActionSequenceBox";
 import ActionBox from "../apparatusLists/ActionBox";
 import ApparatusListBox from "../apparatusLists/ApparatusListBox";
@@ -9,7 +8,8 @@ import {
   removeActionFromList,
 } from "../../util/overlayfunc/overlayfunc";
 import saveExperienceToCloud from "../../util/saveExperienceToCloud";
-import { ExperienceData } from "../../util/types";
+import ResponsiveAppBar from "../Navbar";
+import styles from "../../styles/NavbarStyle.module.css";
 
 const OverlayRoot = styled.div`
   display: absolute;
@@ -28,14 +28,6 @@ const OverlayShown = styled.div`
   pointer-events: auto;
 `;
 
-const OverlayHidden = styled.div`
-  display: absolute;
-  width: inherit;
-  height: inherit;
-  opacity: 0;
-  pointer-events: none;
-`;
-
 const OverlayGrid = styled.div`
   display: grid;
   width: inherit;
@@ -45,7 +37,6 @@ const OverlayGrid = styled.div`
 `;
 
 const OverlayGridItem1 = styled.div`
-  background-color: red;
   grid-column: 1 / span 2;
   grid-row: 2 / span 4;
   z-index: 2;
@@ -64,7 +55,6 @@ const OverlayGridItem2 = styled.div`
 `;
 
 const OverlayGridItem3 = styled.div`
-  background-color: red;
   grid-column: 1 / span 2;
   grid-row: 6 / span 5;
   z-index: 2;
@@ -72,29 +62,11 @@ const OverlayGridItem3 = styled.div`
   margin: 5%;
 `;
 
-const OverlayGridItem4 = styled.div`
-  grid-column: 8 / span 2;
-  grid-row: 1 / span 1;
-  z-index: 2;
-  pointer-events: auto;
-  margin: 5%;
-`;
-
-const ToggleDiv = styled.div`
+const NavbarDiv = styled.div`
   position: absolute;
+  width: 100%;
   pointer-events: auto;
   z-index: 3;
-`;
-const ToggleOverlayButton = styled.button.attrs({
-  children: "Toggle Overlay",
-})`
-  background-color: rgba(0, 0, 255, 0.5);
-  width: 8em;
-  height: 3em;
-  z-index: inherit;
-  pointer-events: auto;
-  margin: 0.75em;
-  color: white;
 `;
 
 function Overlay({ userId, experienceData }): JSX.Element {
@@ -120,61 +92,51 @@ function Overlay({ userId, experienceData }): JSX.Element {
 
   return (
     <OverlayRoot>
-      <ToggleDiv>
-        <ToggleOverlayButton onClick={toggleOverlay} />
-      </ToggleDiv>
-      {showOverlay ? (
-        <OverlayShown>
-          <OverlayGrid>
-            <OverlayGridItem1>
-              <ApparatusListBox
-                metadata={experienceData.apparatusMetadata}
-                handleAssetBundleChange={(data) => setAssetbundle(data)}
-              />
-            </OverlayGridItem1>
-            <OverlayGridItem2>
-              <ActionSequenceBox
-                actionList={actionList}
-                removeAction={(index) =>
-                  removeActionFromList(index, actionList, setActionList)
-                }
-                handleOnDragEnd={handleOnDragEnd}
-              />
-            </OverlayGridItem2>
-            <OverlayGridItem3>
-              <ActionBox
-                assetbundle={assetbundle}
-                addAction={([path, input]) =>
-                  addActionToList(
-                    [path, input, assetbundle.identifier[0]],
-                    actionList,
-                    setActionList
-                  )
-                }
-              />
-            </OverlayGridItem3>
-            <OverlayGridItem4>
-              <Button
-                variant="contained"
-                color="secondary"
-                onClick={() => {
-                  const experienceId = "testexp1";
-                  saveExperienceToCloud(
-                    userId,
-                    experienceId,
-                    experienceData.apparatusId,
-                    actionList
-                  );
-                }}
-              >
-                Save Experience
-              </Button>
-            </OverlayGridItem4>
-          </OverlayGrid>
-        </OverlayShown>
-      ) : (
-        <OverlayHidden />
-      )}
+      <NavbarDiv>
+        <ResponsiveAppBar
+          save={() => {
+            const experienceId = "testexp1";
+            saveExperienceToCloud(
+              userId,
+              experienceId,
+              experienceData.apparatusId,
+              actionList
+            );
+          }}
+          toggle={toggleOverlay}
+        />
+      </NavbarDiv>
+      <OverlayShown className={showOverlay ? styles.visible : styles.invisible}>
+        <OverlayGrid>
+          <OverlayGridItem1>
+            <ApparatusListBox
+              metadata={experienceData.apparatusMetadata}
+              handleAssetBundleChange={(data) => setAssetbundle(data)}
+            />
+          </OverlayGridItem1>
+          <OverlayGridItem2>
+            <ActionSequenceBox
+              actionList={actionList}
+              removeAction={(index) =>
+                removeActionFromList(index, actionList, setActionList)
+              }
+              handleOnDragEnd={handleOnDragEnd}
+            />
+          </OverlayGridItem2>
+          <OverlayGridItem3>
+            <ActionBox
+              assetbundle={assetbundle}
+              addAction={([path, input]) =>
+                addActionToList(
+                  [path, input, assetbundle.identifier[0]],
+                  actionList,
+                  setActionList
+                )
+              }
+            />
+          </OverlayGridItem3>
+        </OverlayGrid>
+      </OverlayShown>
     </OverlayRoot>
   );
 }
