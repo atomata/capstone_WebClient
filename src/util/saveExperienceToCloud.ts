@@ -9,7 +9,7 @@ const saveExperienceToCloud = async (
   apparatusId: string,
   actionList: any[]
 ): Promise<any> => {
-  const experience = { Apparatus: apparatusId, Actions: actionList };
+  const experience = { apparatusId, actionList };
 
   const file = new File([JSON.stringify(experience)], `${experienceId}.json`);
 
