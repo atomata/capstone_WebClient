@@ -2,7 +2,6 @@
 import styled from "styled-components";
 import React, { useState } from "react";
 import LoginBox from "../src/components/LoginBox";
-import Cookies from 'universal-cookie';
 import { verifyNotLogIn, checkIfLoggedIn } from "../src/util/loginCookies";
 
 const Content = styled.div`

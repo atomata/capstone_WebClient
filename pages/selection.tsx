@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import Link from "next/link";
 import { Button } from "@material-ui/core";
+import { useEffect } from "react";
+import { verifyLogIn, checkIfLoggedIn } from "../src/util/loginCookies";
 
 const Content = styled.div`
   justify-content: center;
@@ -30,11 +32,18 @@ const SelectionList = () => {
   );
 };
 
-const Selection = (): JSX.Element => (
-  <main>
-    <h1>SELECT AN APPARATUS</h1>
-    <SelectionList />
-  </main>
-);
+function Selection(): JSX.Element {
+   useEffect(() => {verifyLogIn()}, [])
+
+  return checkIfLoggedIn() ? (
+    <main>
+      <h1>SELECT AN APPARATUS</h1>
+      <SelectionList />
+    </main>
+  ) :
+  (
+    <main/>
+  );
+}
 
 export default Selection;
