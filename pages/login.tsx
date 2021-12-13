@@ -22,9 +22,10 @@ const LoadingView = (): JSX.Element => (
 
 function Login(): JSX.Element {
   const [loading, setLoading] = useState(false);
-  verifyNotLogIn();
 
-  return !loading ? (
+  React.useEffect(() => {verifyNotLogIn()}, [])
+
+  return !loading && !checkIfLoggedIn() ? (
     <main>
       <Content>
         <LoginBox />

@@ -1,5 +1,4 @@
 import Cookies from 'universal-cookie';
-import { useEffect } from "react";
 import Router from "next/router";
 
 const cookies = new Cookies();
