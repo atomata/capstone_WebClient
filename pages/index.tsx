@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Link from "next/link";
 import { Button } from "@material-ui/core";
 import { useEffect } from "react";
-import { verifyLogIn, logOut, checkIfLoggedIn } from "../src/util/loginCookies";
+import { verifyLogIn, logOut, checkIfLoggedIn, getUserName } from "../src/util/loginCookies";
 
 const Content = styled.div`
   justify-content: center;
@@ -39,10 +39,11 @@ function Home(): JSX.Element {
   ) :
   (
     <main>
-    <h1>SELECT AN APPARATUS</h1>
-    <ApparatusList />
-    <Button onClick={logOut}>Log Out</Button>
-  </main>
+      <h2>Welcome {getUserName()}!</h2>
+      <h1>SELECT AN APPARATUS</h1>
+      <ApparatusList />
+      <Button onClick={logOut}>Log Out</Button>
+    </main>
   );
 }
 

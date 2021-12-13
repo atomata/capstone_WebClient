@@ -51,4 +51,4 @@ function redirectToLogIn(){
 }
 
 
-export {checkIfLoggedIn, logIn, logOut, verifyLogIn, verifyNotLogIn}
+export {checkIfLoggedIn, logIn, logOut, verifyLogIn, verifyNotLogIn, getUserName}
