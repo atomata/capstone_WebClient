@@ -8,10 +8,10 @@ import {
   ListItemSecondaryAction,
 } from "@material-ui/core";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 const Box = styled.div`
-  background: #fffdd0;
+  background: #fffaf0;
   min-width: 100%;
   min-height: 100%;
   border: 1px solid black;
@@ -40,54 +40,60 @@ const ListBoxScroller = styled.div`
   }
 `;
 
-const ActionSequenceBox = ({ actionList, removeAction, handleOnDragEnd}) => {
-
+const ActionSequenceBox = ({ actionList, removeAction, handleOnDragEnd }) => {
   //Ensuring the array from parameter is not empty.
-  if ( actionList !== undefined) {
+  if (actionList !== undefined) {
     return (
       <Box>
-        <ListHeading >Action Sequence</ListHeading>
+        <ListHeading>Action Sequence</ListHeading>
         <DragDropContext onDragEnd={handleOnDragEnd}>
           <Droppable droppableId="droppable">
-            {(provided) =>(
-                <ListBoxScroller {...provided.droppableProps} ref={provided.innerRef}>
-                  
-                  {actionList.map((data, index) => (
-              
-                    <Draggable key={index} index={index} draggableId={index.toString()}>
-                      {(provided) =>(
-                        <DragContainer {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
-                          <List>
-                            <ListItem>
-                              <Button variant="contained" color="secondary" >
-                                {data[1]}
-                              </Button>
-                            </ListItem>
-                            <ListItemSecondaryAction>
-                              <IconButton>
-                                <DeleteIcon onClick={() => removeAction(index)} />
-                              </IconButton>
-                            </ListItemSecondaryAction>
-                          </List>
-                        </DragContainer>
-                      )}
-                    </Draggable>
-                  
-                  ))}
-                  {provided.placeholder}
-                  
-                </ListBoxScroller>
+            {(provided) => (
+              <ListBoxScroller
+                {...provided.droppableProps}
+                ref={provided.innerRef}
+              >
+                {actionList.map((data, index) => (
+                  <Draggable
+                    key={index}
+                    index={index}
+                    draggableId={index.toString()}
+                  >
+                    {(provided) => (
+                      <DragContainer
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                        ref={provided.innerRef}
+                      >
+                        <List>
+                          <ListItem>
+                            <Button variant="contained" color="secondary">
+                              {data[2]}:{data[1]}
+                            </Button>
+                          </ListItem>
+                          <ListItemSecondaryAction>
+                            <IconButton>
+                              <DeleteIcon onClick={() => removeAction(index)} />
+                            </IconButton>
+                          </ListItemSecondaryAction>
+                        </List>
+                      </DragContainer>
+                    )}
+                  </Draggable>
+                ))}
+                {provided.placeholder}
+              </ListBoxScroller>
             )}
           </Droppable>
         </DragDropContext>
       </Box>
-    ); 
+    );
   }
   return (
     <Box>
       <ListHeading>Action Sequence</ListHeading>
+      <Button disabled />
     </Box>
   );
-
 };
 export default ActionSequenceBox;

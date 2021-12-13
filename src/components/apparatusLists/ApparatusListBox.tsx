@@ -1,8 +1,7 @@
 import React from "react";
 import Button from "@mui/material/Button";
 import styled from "styled-components";
-import { load } from "../../util/unityContextActions";
-import { getAssetBundles , checkIfParent } from "../../util/tree_parsing";
+import { getAssetBundles, checkIfParent } from "../../util/JsonParsing";
 
 const Box = styled.div`
   background: #fffaf0;
@@ -41,35 +40,43 @@ const ListButton = styled.div`
   margin: 5px;
 `;
 
-const ApparatusListBox = ({ metadata, handleApparatusChange }) => {
-  const assetbundles = React.useMemo(
-    () => getAssetBundles(metadata),
-    [metadata]
-  );
+const ApparatusListBox = ({ metadata, handleAssetBundleChange }) => {
+  if (metadata !== undefined) {
+    const assetbundles = React.useMemo(
+      () => getAssetBundles(metadata),
+      [metadata]
+    );
 
+    return (
+      <Box>
+        <ListHeading>Apparatus</ListHeading>
+        <ListBoxScroller>
+          {assetbundles.map((data, index) => (
+            <ListButton key={index}>
+              <Button
+                variant="contained"
+                color={checkIfParent(data) ? "primary" : "secondary"} // checks if node is a parent
+                onClick={() => {
+                  handleAssetBundleChange(data);
+                }}
+              >
+                {data.identifier[0]}
+              </Button>
+            </ListButton>
+          ))}
+          <ListButton>
+            <Button variant="contained" color="secondary">
+              Some Asset
+            </Button>
+          </ListButton>
+        </ListBoxScroller>
+      </Box>
+    );
+  }
   return (
     <Box>
       <ListHeading>Apparatus</ListHeading>
-      <ListBoxScroller>
-        {assetbundles.map((data, index) => (
-          <ListButton key={index}>
-            <Button
-              variant="contained"
-              color= {checkIfParent(data)? "primary":"secondary"}     // checks if node is a parent
-              onClick={() => {
-                handleApparatusChange(data);
-              }}
-            >
-              {data.identifier[0]}
-            </Button>
-          </ListButton>
-        ))}
-        <ListButton>
-          <Button variant="contained" color="secondary">
-            Some Asset
-          </Button>
-        </ListButton>
-      </ListBoxScroller>
+      <Button disabled />
     </Box>
   );
 };
