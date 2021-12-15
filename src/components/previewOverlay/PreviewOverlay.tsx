@@ -53,7 +53,7 @@ const PreviewGridRight = styled.div`
 const ActionTabList = styled.div`
   display: flex;
   overflow-x: scroll;
-
+  align-items: center;
 `;
 const ActionTabListItem = styled.div`
   min-height: 1em;
@@ -61,9 +61,10 @@ const ActionTabListItem = styled.div`
   outline-width: 0.1em;
   outline-color: black;
   margin: 1em;
+  align-self: center;
 `;
 
-function PreviewOverlay({ userId, experienceData }): JSX.Element {
+function PreviewOverlay({ userId, experienceData ,actionList}): JSX.Element {
   return (
     <PreviewRoot>
       <PreviewGrid>
@@ -82,33 +83,9 @@ function PreviewOverlay({ userId, experienceData }): JSX.Element {
         </PreviewGridLeft>
         <PreviewGridCenter>
           <ActionTabList>
-            <ActionTabListItem>
-              <Button>1</Button>
-            </ActionTabListItem>
-            <ActionTabListItem>
-              <Button>2</Button>
-            </ActionTabListItem>
-            <ActionTabListItem>
-              <Button>3</Button>
-            </ActionTabListItem>
-            <ActionTabListItem>
-              <Button>4</Button>
-            </ActionTabListItem>
-            <ActionTabListItem>
-              <Button>5</Button>
-            </ActionTabListItem>
-            <ActionTabListItem>
-              <Button>6</Button>
-            </ActionTabListItem>
-            <ActionTabListItem>
-              <Button>7</Button>
-            </ActionTabListItem>
-            <ActionTabListItem>
-              <Button>8</Button>
-            </ActionTabListItem>
-            <ActionTabListItem>
-              <Button>9</Button>
-            </ActionTabListItem>
+            {actionList.map((data, index) => (<ActionTabListItem key={index}>
+              <Button>{index}</Button>
+            </ActionTabListItem>))}
           </ActionTabList>
         </PreviewGridCenter>
         <PreviewGridRight>
