@@ -72,7 +72,7 @@ const NavbarDiv = styled.div`
 
 function Overlay({ userId, experienceData }): JSX.Element {
   const [assetbundle, setAssetbundle] = useState({ identifier: [] });
-  const [showOverlay, setOverlay] = useState(false);
+  const [showOverlay, setOverlay] = useState(true);
   const [actionList, setActionList] = useState(
     experienceData !== undefined
       ? experienceData.initializationData.actionList
