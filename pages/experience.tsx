@@ -2,8 +2,6 @@
 import styled from "styled-components";
 import React, { useState } from "react";
 import WebglBox from "../src/components/webgl/WebglBox";
-import { verifyLogIn, checkIfLoggedIn } from "../src/util/loginCookies";
-import { isForwardRef } from "react-is";
 import {
   getApparatusFromCloud,
   getExperienceFromCloud,
@@ -30,6 +28,7 @@ function Experience({ userId, dataId, isApparatusId }): JSX.Element {
   const [loading, setLoading] = useState(true);
   const [experienceData, setExperienceData] = useState<ExperienceData>();
   // either apparatusID is provided or experience id but not both
+
   const experience: ExperienceData = {
     apparatusMetadata: { Paths: [], Data: [] },
     apparatusId: "",
@@ -68,11 +67,6 @@ userld]); */
         setLoading(false);
       });
     }
-	
-	// Don't load if you aren't logged in
-	if(!checkIfLoggedIn())
-	  return;
-	
     if (isApparatusId === "true") {
       getApparatusFromCIoudHeIper(dataId);
     } else {
@@ -82,9 +76,6 @@ userld]); */
       });
     }
   }, [isApparatusId]);
-
-  React.useEffect(() => {verifyLogIn()}, [])
-
 
   return !loading ? (
     <main>
