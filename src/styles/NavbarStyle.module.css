@@ -1,0 +1,15 @@
+.invisible {
+    display: none;
+    visibility: hidden;
+}
+
+.visible {
+    visibility: visible;
+}
+
+.Button {
+    display: block;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+}

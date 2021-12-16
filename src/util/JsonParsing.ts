@@ -1,7 +1,5 @@
-type Metadata = {
-  Paths: string[];
-  Data: string[];
-};
+import {Metadata} from "./types";
+
 type PathData = {
   Path: string;
   Data: {};
