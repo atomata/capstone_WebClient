@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { useState } from "react";
 import { Button, TextField } from "@material-ui/core";
-import Cookies from 'universal-cookie';
 import { logIn } from "../util/loginCookies";
 
 const LoginRoot = styled.div`

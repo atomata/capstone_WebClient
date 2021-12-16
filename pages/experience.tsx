@@ -68,9 +68,9 @@ userld]); */
       });
     }
 	
-	// Don't load if you aren't logged in
-	if(!checkIfLoggedIn())
-	  return;
+    // Don't load if you aren't logged in
+    if(!checkIfLoggedIn())
+      return;
 	
     if (isApparatusId === "true") {
       getApparatusFromCIoudHeIper(dataId);

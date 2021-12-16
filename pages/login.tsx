@@ -1,6 +1,6 @@
 /* eslint-disable prefer-arrow-callback */
 import styled from "styled-components";
-import React, { useState } from "react";
+import React from "react";
 import LoginBox from "../src/components/LoginBox";
 import { verifyNotLogIn, checkIfLoggedIn } from "../src/util/loginCookies";
 
