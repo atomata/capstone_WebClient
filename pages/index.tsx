@@ -1,8 +1,14 @@
 import Link from "next/link";
 import {Button} from "@material-ui/core";
+import { useEffect } from "react";
+import { verifyLogIn, logOut, checkIfLoggedIn, getUserName } from "../src/util/loginCookies";
 
-const Home = (): JSX.Element => (
-  <main>
+function Home(): JSX.Element {
+  useEffect(() => {verifyLogIn()}, [])
+
+  return checkIfLoggedIn() ? (
+    <main>
+      <h1>Welcome {getUserName()}!</h1>
       <Link
           key="selectionPage"
           href={{
@@ -20,7 +26,10 @@ const Home = (): JSX.Element => (
       >
           <Button> Load Test Experience</Button>
       </Link>
+      <Button onClick={logOut}>Log Out</Button>
   </main>
-);
+  ):(<main/>);
+}
+
 
 export default Home;
