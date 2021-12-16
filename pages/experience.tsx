@@ -3,7 +3,6 @@ import styled from "styled-components";
 import React, { useState } from "react";
 import WebglBox from "../src/components/webgl/WebglBox";
 import { verifyLogIn, checkIfLoggedIn } from "../src/util/loginCookies";
-import { isForwardRef } from "react-is";
 import {
   getApparatusFromCloud,
   getExperienceFromCloud,

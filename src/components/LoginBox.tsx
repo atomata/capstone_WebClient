@@ -1,11 +1,8 @@
 import styled from "styled-components";
-import Unity from "react-unity-webgl";
 import { useState } from "react";
 import { Button, TextField } from "@material-ui/core";
-import { Label } from "@material-ui/icons";
 import Cookies from 'universal-cookie';
 import { logIn } from "../util/loginCookies";
-import { ErrorSharp } from "@mui/icons-material";
 
 const LoginRoot = styled.div`
   margin-bottom: 2rem;
@@ -37,7 +34,6 @@ const LoginButton = styled(Button)`
 `;
 
 function LoginBox(): JSX.Element {
-    const cookies = new Cookies();
     const [name, setName] = useState('');
     const [pass, setPass] = useState('');
     const [nameErr, setNameErr] = useState('');
