@@ -23,6 +23,19 @@ const LoginContainer = styled.div`
   background-color: grey;
 `;
 
+const LoginFields = styled.div`
+    margin-top: 65px;
+    padding: 15px;
+`;
+
+const LoginButton = styled(Button)`
+  && {
+    background-color: #5dc0cb;
+    display: block-inline;
+    margin-top: 45px;
+  }
+`;
+
 function LoginBox(): JSX.Element {
     const cookies = new Cookies();
     const [name, setName] = useState('');
@@ -59,25 +72,29 @@ function LoginBox(): JSX.Element {
             <LoginContainer>
                 <form className="loginForm" noValidate autoComplete="off">
                     <h1>LOG IN</h1>
-                    <TextField
-                        required
-                        error={nameErr !== ''}
-                        id="username-input"
-                        label="Username"
-                        helperText={nameErr}
-                        onChange={(e) => setName(e.target.value)}
-                    />
-                    <TextField
-                        required
-                        error={passErr !== ''}
-                        id="password-input"
-                        label="Password"
-                        type="password"
-                        autoComplete="current-password"
-                        helperText={passErr}
-                        onChange={(e) => setPass(e.target.value)}
-                    />
-                    <Button onClick={() => ValidateLogin()}>Log In</Button>
+                    <LoginFields>
+                        <TextField
+                            required
+                            error={nameErr !== ''}
+                            id="username-input"
+                            label="Username"
+                            helperText={nameErr}
+                            onChange={(e) => setName(e.target.value)}
+                        />
+                        <br/>
+                        <TextField
+                            required
+                            error={passErr !== ''}
+                            id="password-input"
+                            label="Password"
+                            type="password"
+                            autoComplete="current-password"
+                            helperText={passErr}
+                            onChange={(e) => setPass(e.target.value)}
+                        />
+                        <br/>
+                        <LoginButton variant="contained" onClick={() => ValidateLogin()}>Log In</LoginButton>
+                    </LoginFields> 
                 </form>
             </LoginContainer>                   
         </LoginRoot>
