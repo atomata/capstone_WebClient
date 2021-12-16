@@ -10,7 +10,7 @@ const Content = styled.div`
 `;
 
 const SelectionList = () => {
-  //TODO change this to get the name of appratus files from a json file in cloud
+  // need to change this to get the name of appratus files from a json file in cloud
   const apparatusIDList = ["evil-cylinder", "wobble-sphere"];
 
   return (

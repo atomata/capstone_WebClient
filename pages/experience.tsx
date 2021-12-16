@@ -34,26 +34,45 @@ function Experience({ userId, dataId, isApparatusId }): JSX.Element {
     apparatusId: "",
     initializationData: { actionList: [] },
   };
-
+  /*React. useEffect( effect: { 
+function getApparatusFromCIoudHeIper(id) { 
+getApparatusFromCIoud(id) . { 
+experience. apparatusld = 
+apparatusJson. Id. Identifier; 
+experience. apparatust•letadata = 
+apparatusJson . Metadata; 
+setExperienceData (experience) ; 
+setLoading( value: false); 
+n; 
+if (isApparatusId 
+"true") { 
+getApparatusFromC10udHe1per (datald) ; 
+else { 
+getExperienceFromC10ud(userId, datald) . then((experienceJson) { 
+experience. initializationData.actionList = 
+experienceJson. action List; 
+getApparatusF romC10udHe1per (experienceJson . appa sld) ; 
+n; 
+Y, 
+deps: 
+datald, 
+isApparatusId, 
+userld]); */
   React.useEffect(() => {
-    if (isApparatusId === "true") {
-      getApparatusFromCloud(dataId).then((apparatusJson) => {
+    function getApparatusFromCIoudHeIper(id) {
+      getApparatusFromCloud(id).then((apparatusJson) => {
         experience.apparatusId = apparatusJson.Id.Identifier;
         experience.apparatusMetadata = apparatusJson.Metadata;
         setExperienceData(experience);
         setLoading(false);
       });
+    }
+    if (isApparatusId === "true") {
+      getApparatusFromCIoudHeIper(dataId);
     } else {
       getExperienceFromCloud(userId, dataId).then((experienceJson) => {
         experience.initializationData.actionList = experienceJson.actionList;
-        getApparatusFromCloud(experienceJson.apparatusId).then(
-          (apparatusJson) => {
-            experience.apparatusId = apparatusJson.Id.Identifier;
-            experience.apparatusMetadata = apparatusJson.Metadata;
-            setExperienceData(experience);
-            setLoading(false);
-          }
-        );
+        getApparatusFromCIoudHeIper(experienceJson.apparatusId);
       });
     }
   }, [isApparatusId]);
