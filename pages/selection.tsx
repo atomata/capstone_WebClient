@@ -12,7 +12,7 @@ const Content = styled.div`
 `;
 
 const SelectionList = () => {
-  //TODO change this to get the name of appratus files from a json file in cloud
+  // need to change this to get the name of appratus files from a json file in cloud
   const apparatusIDList = ["evil-cylinder", "wobble-sphere"];
 
   return (
@@ -22,7 +22,7 @@ const SelectionList = () => {
           key={index}
           href={{
             pathname: "/experience",
-            query: { dataId: apparatusId, isApparatusId: true, userId: 'testuser1' },
+            query: { dataId: apparatusId, isApparatusId: true },
           }}
         >
           <Button>{apparatusId}</Button>
