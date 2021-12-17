@@ -82,13 +82,14 @@ function PreviewOverlay({ userId, experienceData ,actionList}): JSX.Element {
             <ChevronLeftSharpIcon />
           </IconButton>
         </PreviewGridLeft>
+        {actionList[0] !== undefined ? 
         <PreviewGridCenter>
           <ActionTabList>
             {actionList.map((data, index) => (<ActionTabListItem key={index}>
               <Button onClick={() => callToWebGL(data[0], data[1])}>{index}</Button>
             </ActionTabListItem>))}
           </ActionTabList>
-        </PreviewGridCenter>
+        </PreviewGridCenter> : <div/>}
         <PreviewGridRight>
           <IconButton
             style={{
