@@ -148,7 +148,7 @@ function Overlay({ userId, experienceData }): JSX.Element {
         </OverlayShown>
       ) : (
         <OverlayShown>
-          <PreviewOverlay userId={userId} experienceData={experienceData} actionList = {actionList} />
+          <PreviewOverlay actionList = {actionList} />
         </OverlayShown>
       )}
     </OverlayRoot>

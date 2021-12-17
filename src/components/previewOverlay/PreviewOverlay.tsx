@@ -3,6 +3,7 @@ import ChevronLeftSharpIcon from "@mui/icons-material/ChevronLeftSharp";
 import ChevronRightSharpIcon from "@mui/icons-material/ChevronRightSharp";
 import { Button, IconButton } from "@material-ui/core";
 import { callToWebGL } from "../../util/unityContextActions";
+import { useState } from "react";
 
 const PreviewRoot = styled.div`
   display: absolute;
@@ -65,9 +66,21 @@ const ActionTabListItem = styled.div`
   align-self: center;
 `;
 
-function PreviewOverlay({ userId, experienceData ,actionList}): JSX.Element {
+const ActionTabSelectedListItem = styled.div`
+background-color: white;
+`;
+
+function PreviewOverlay({actionList}): JSX.Element {
+
+  const [selected, setCount] = useState(0);
+
+
+
+
   return (
     <PreviewRoot>
+      
+      {actionList[0] !== undefined ? 
       <PreviewGrid>
         <PreviewGridLeft>
           <IconButton
@@ -79,17 +92,22 @@ function PreviewOverlay({ userId, experienceData ,actionList}): JSX.Element {
               outlineColor: "black",
             }}
           >
-            <ChevronLeftSharpIcon />
+            <ChevronLeftSharpIcon onClick={selected > 0 ? ()=>{setCount(selected - 1); callToWebGL(actionList[selected][0], actionList[selected][1]) } :undefined} />
           </IconButton>
         </PreviewGridLeft>
-        {actionList[0] !== undefined ? 
+       
         <PreviewGridCenter>
+          {selected}
           <ActionTabList>
-            {actionList.map((data, index) => (<ActionTabListItem key={index}>
-              <Button onClick={() => callToWebGL(data[0], data[1])}>{index}</Button>
-            </ActionTabListItem>))}
+            {actionList.map((data, index) => (  
+            <ActionTabListItem key={index}>
+              {selected===index ? <ActionTabSelectedListItem>
+                <Button onClick={() => {callToWebGL(data[0], data[1]); setCount(index)}}>{index}</Button>
+              </ActionTabSelectedListItem>:<Button onClick={() => {callToWebGL(data[0], data[1]); setCount(index)}}>{index}</Button>}
+            </ActionTabListItem>   
+            ))}
           </ActionTabList>
-        </PreviewGridCenter> : <div/>}
+        </PreviewGridCenter> 
         <PreviewGridRight>
           <IconButton
             style={{
@@ -100,10 +118,12 @@ function PreviewOverlay({ userId, experienceData ,actionList}): JSX.Element {
               outlineColor: "black",
             }}
           >
-            <ChevronRightSharpIcon />
+            <ChevronRightSharpIcon onClick={ selected <= actionList.length-1 ? ()=>{setCount(selected + 1) ; callToWebGL(actionList[selected][0], actionList[selected][1]) } :undefined} />
           </IconButton>
         </PreviewGridRight>
+        
       </PreviewGrid>
+      : <div/>}
     </PreviewRoot>
   );
 }
