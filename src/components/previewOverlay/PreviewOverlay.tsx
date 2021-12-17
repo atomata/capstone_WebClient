@@ -2,6 +2,7 @@ import styled from "styled-components";
 import ChevronLeftSharpIcon from "@mui/icons-material/ChevronLeftSharp";
 import ChevronRightSharpIcon from "@mui/icons-material/ChevronRightSharp";
 import { Button, IconButton } from "@material-ui/core";
+import { callToWebGL } from "../../util/unityContextActions";
 
 const PreviewRoot = styled.div`
   display: absolute;
@@ -84,7 +85,7 @@ function PreviewOverlay({ userId, experienceData ,actionList}): JSX.Element {
         <PreviewGridCenter>
           <ActionTabList>
             {actionList.map((data, index) => (<ActionTabListItem key={index}>
-              <Button>{index}</Button>
+              <Button onClick={() => callToWebGL(data[0], data[1])}>{index}</Button>
             </ActionTabListItem>))}
           </ActionTabList>
         </PreviewGridCenter>
