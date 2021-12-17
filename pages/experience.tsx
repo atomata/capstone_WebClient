@@ -2,7 +2,7 @@
 import styled from "styled-components";
 import React, { useState } from "react";
 import WebglBox from "../src/components/webgl/WebglBox";
-import { verifyLogIn, checkIfLoggedIn } from "../src/util/loginCookies";
+import { verifyLogIn, checkIfLoggedIn, getUserName } from "../src/util/loginCookies";
 import {
   getApparatusFromCloud,
   getExperienceFromCloud,
@@ -25,15 +25,18 @@ const LoadingView = (): JSX.Element => (
   </main>
 );
 
-function Experience({ userId, dataId, isApparatusId }): JSX.Element {
+function Experience({ dataId, isApparatusId }): JSX.Element {
   const [loading, setLoading] = useState(true);
+  const [userId] = useState(getUserName());
   const [experienceData, setExperienceData] = useState<ExperienceData>();
+
   // either apparatusID is provided or experience id but not both
   const experience: ExperienceData = {
     apparatusMetadata: { Paths: [], Data: [] },
     apparatusId: "",
     initializationData: { actionList: [] },
   };
+
   /*React. useEffect( effect: { 
 function getApparatusFromCIoudHeIper(id) { 
 getApparatusFromCIoud(id) . { 
@@ -58,6 +61,7 @@ deps:
 datald, 
 isApparatusId, 
 userld]); */
+
   React.useEffect(() => {
     function getApparatusFromCIoudHeIper(id) {
       getApparatusFromCloud(id).then((apparatusJson) => {
@@ -84,7 +88,6 @@ userld]); */
 
   React.useEffect(() => {verifyLogIn()}, [])
 
-
   return !loading ? (
     <main>
       <Content>
@@ -97,10 +100,9 @@ userld]); */
 }
 
 Experience.getInitialProps = ({ query }) => {
-  const userId = query.userId;
   const dataId = query.dataId;
   const isApparatusId = query.isApparatusId;
-  return { userId, dataId, isApparatusId };
+  return { dataId, isApparatusId };
 };
 
 export default Experience;

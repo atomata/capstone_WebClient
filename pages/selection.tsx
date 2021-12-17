@@ -22,7 +22,7 @@ const SelectionList = () => {
           key={index}
           href={{
             pathname: "/experience",
-            query: { dataId: apparatusId, isApparatusId: true, userId: 'testuser1' },
+            query: { dataId: apparatusId, isApparatusId: true },
           }}
         >
           <Button>{apparatusId}</Button>
