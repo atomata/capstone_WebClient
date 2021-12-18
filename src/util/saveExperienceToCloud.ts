@@ -2,13 +2,14 @@ import { BlobServiceClient, ContainerClient } from "@azure/storage-blob";
 
 const sasToken =
   "?sv=2020-08-04&ss=b&srt=sco&sp=rwdlacitfx&se=2022-09-30T20:46:30Z&st=2021-11-30T13:46:30Z&spr=https&sig=e3MgX4FkExWFc5LWFv5RGZdLdyzSMy3ZSSX76%2BPzGFs%3D";
+
 const saveExperienceToCloud = async (
   userId: string,
   experienceId: string,
   apparatusId: string,
   actionList: any[]
 ): Promise<any> => {
-  const experience = { Apparatus: apparatusId, Actions: actionList };
+  const experience = { apparatusId, actionList };
 
   const file = new File([JSON.stringify(experience)], `${experienceId}.json`);
 

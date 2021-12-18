@@ -9,7 +9,7 @@ import {
 } from "@material-ui/core";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import { callToWebGL } from "../../util/unityContextActions";
-import { getActions } from "../../util/tree_parsing";
+import { getActions } from "../../util/JsonParsing";
 
 const Box = styled.div`
   background: #fffaf0;
@@ -37,11 +37,6 @@ const ListHeading = styled.h1`
   font-family: Trebuchet MS;
   font-weight: bold;
   color: black;
-`;
-
-const ListButton = styled.div`
-  text-align: left;
-  margin: 10px;
 `;
 
 const ActionBox = ({ assetbundle, addAction }) => {
@@ -84,7 +79,8 @@ const ActionBox = ({ assetbundle, addAction }) => {
   }
   return (
     <Box>
-      <ListHeading>Selected Apparatus Trigger List</ListHeading>
+      <ListHeading>Actions</ListHeading>
+      <Button disabled />
     </Box>
   );
 };
