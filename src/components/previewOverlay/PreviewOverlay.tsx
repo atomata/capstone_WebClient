@@ -91,13 +91,12 @@ function PreviewOverlay({actionList}): JSX.Element {
               outlineWidth: "0.1em",
               outlineColor: "black",
             }}
+            onClick={selected > 0 ? ()=>{setCount(selected - 1); callToWebGL(actionList[selected-1][0], actionList[selected-1][1]) } :undefined}
           >
-            <ChevronLeftSharpIcon onClick={selected > 0 ? ()=>{setCount(selected - 1); callToWebGL(actionList[selected][0], actionList[selected][1]) } :undefined} />
+            <ChevronLeftSharpIcon  />
           </IconButton>
         </PreviewGridLeft>
-       
         <PreviewGridCenter>
-          {selected}
           <ActionTabList>
             {actionList.map((data, index) => (  
             <ActionTabListItem key={index}>
@@ -117,8 +116,9 @@ function PreviewOverlay({actionList}): JSX.Element {
               outlineWidth: "0.1em",
               outlineColor: "black",
             }}
+            onClick={ selected < actionList.length-1 ? ()=>{setCount(selected + 1) ; callToWebGL(actionList[selected+1][0], actionList[selected+1][1]) } :undefined}
           >
-            <ChevronRightSharpIcon onClick={ selected <= actionList.length-1 ? ()=>{setCount(selected + 1) ; callToWebGL(actionList[selected][0], actionList[selected][1]) } :undefined} />
+            <ChevronRightSharpIcon  />
           </IconButton>
         </PreviewGridRight>
         
