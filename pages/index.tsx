@@ -1,11 +1,10 @@
 import Link from "next/link";
 import {Button} from "@material-ui/core";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { verifyLogIn, logOut, checkIfLoggedIn, getUserName } from "../src/util/loginCookies";
 import styled from "styled-components";
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import React from "react";
 
 
 const OuterBox = styled.div`
@@ -74,7 +73,6 @@ const CreateInnerBox = styled.div`
 `;
 
 const CreateExperience = () => {
-  //const [experienceName, setExperienceName] = useState('');
 
   return (
     <CreateInnerBox>
@@ -132,7 +130,6 @@ function Home(): JSX.Element {
         <LoadExperience />
         <CreateExperience />
       </OuterBox>
-
   </main>
   ):(<main/>);
 }
