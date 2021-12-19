@@ -9,6 +9,7 @@ import {
 } from "../../util/overlayfunc/overlayfunc";
 import saveExperienceToCloud from "../../util/saveExperienceToCloud";
 import Navbar from "../Navbar";
+import PreviewOverlay from "../previewOverlay/PreviewOverlay";
 import styles from "../../styles/NavbarStyle.module.css";
 
 const OverlayRoot = styled.div`
@@ -70,8 +71,8 @@ const NavbarDiv = styled.div`
 `;
 
 function Overlay({ userId, experienceData }): JSX.Element {
-  const [assetbundle, setAssetbundle] = useState({identifier:[]});
-  const [showOverlay, setOverlay] = useState(false);
+  const [assetbundle, setAssetbundle] = useState({ identifier: [] });
+  const [showOverlay, setOverlay] = useState(true);
   const [actionList, setActionList] = useState(
     experienceData !== undefined
       ? experienceData.initializationData.actionList
@@ -107,42 +108,58 @@ function Overlay({ userId, experienceData }): JSX.Element {
           toggle={toggleOverlay}
         />
       </NavbarDiv>
-      <OverlayShown className={showOverlay ? styles.visible : styles.invisible}>
-        <OverlayGrid>
-          <OverlayGridItem1>
-            <ApparatusListBox
-              metadata={
-                experienceData !== undefined
-                  ? experienceData.apparatusMetadata
-                  : undefined
-              }
-              handleAssetBundleChange={(data) => setAssetbundle(data)}
-            />
-          </OverlayGridItem1>
-          <OverlayGridItem2>
-            <ActionSequenceBox
-              actionList={actionList}
-              removeAction={(index) =>
-                removeActionFromList(index, actionList, setActionList)
-              }
-              handleOnDragEnd={handleOnDragEnd}
-            />
-          </OverlayGridItem2>
-          <OverlayGridItem3>
-            <ActionBox
-              assetbundle={assetbundle}
-              addAction={([path, input]) =>
-                addActionToList(
-                  [path, input, assetbundle.identifier[0]],
-                  actionList,
-                  setActionList
-                )
-              }
-            />
-          </OverlayGridItem3>
-        </OverlayGrid>
-      </OverlayShown>
+      {showOverlay ? (
+        <OverlayShown
+          className={swapOverlayStyles()}
+        >
+          <OverlayGrid>
+            <OverlayGridItem1>
+              <ApparatusListBox
+                metadata={
+                  checkIfMetaExists()
+                }
+                handleAssetBundleChange={(data) => setAssetbundle(data)}
+              />
+            </OverlayGridItem1>
+            <OverlayGridItem2>
+              <ActionSequenceBox
+                actionList={actionList}
+                removeAction={(index) =>
+                  removeActionFromList(index, actionList, setActionList)
+                }
+                handleOnDragEnd={handleOnDragEnd}
+              />
+            </OverlayGridItem2>
+            <OverlayGridItem3>
+              <ActionBox
+                assetbundle={assetbundle}
+                addAction={([path, input]) =>
+                  addActionToList(
+                    [path, input, assetbundle.identifier[0]],
+                    actionList,
+                    setActionList
+                  )
+                }
+              />
+            </OverlayGridItem3>
+          </OverlayGrid>
+        </OverlayShown>
+      ) : (
+        <OverlayShown>
+          <PreviewOverlay actionList = {actionList} />
+        </OverlayShown>
+      )}
     </OverlayRoot>
   );
+
+  function checkIfMetaExists(): any {
+    return experienceData !== undefined
+      ? experienceData.apparatusMetadata
+      : undefined;
+  }
+
+  function swapOverlayStyles(): string {
+    return showOverlay ? styles.visible : styles.invisible;
+  }
 }
 export default Overlay;

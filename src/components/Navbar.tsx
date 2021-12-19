@@ -29,7 +29,7 @@ const Navbar = ({ save, toggle }) => (
             </Link>
           </NavButton>
           <NavButton key="toggle" onClick={toggle}>
-            Hide/Show Bars
+            Toggle Preview Mode
           </NavButton>
           <NavButton key="save" onClick={save}>
             Save
