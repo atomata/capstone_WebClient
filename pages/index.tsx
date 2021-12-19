@@ -6,7 +6,6 @@ import styled from "styled-components";
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import React from "react";
-//import { useExperienceName, getExperienceName } from "../src/util/getExperienceName";
 
 
 const OuterBox = styled.div`
@@ -74,13 +73,16 @@ const CreateInnerBox = styled.div`
   margin-top:2%;
 `;
 
-const CreateExperience = ({setHook, viewHook}) => {
+const CreateExperience = () => {
+  //const [experienceName, setExperienceName] = useState('');
+
   return (
     <CreateInnerBox>
     <Box sx={{ display: 'flex', alignItems: 'center'}}>
       <TextField fullWidth helperText="Enter a name for your new experience" 
-      onChange={(e) => setHook(e.target.value)}
-      variant="standard"/>
+      //onChange={(e) => setExperienceName(e.target.value)}
+      variant="standard"
+      disabled/>
       <Link key="selectionPage" href={{ pathname: "/selection",}}>
           <CreateButton> Create New Experience </CreateButton>
       </Link>
@@ -90,32 +92,17 @@ const CreateExperience = ({setHook, viewHook}) => {
 }
 
 const LoadExperience = () => {
-  //const experienceId = getExperienceName();
     return (
       <InnerBox>
-        <Link key="selectionPage" href={{ pathname: "/selection",}}>
-          <LoadButton>Experience 1</LoadButton>
-        </Link>
-        <Link key="experiencePage" href={{pathname: "/experience", query: { dataId: "testexp1", isApparatusId: false }, }} >
-          <LoadButton>Experience 2</LoadButton>
-        </Link>
-        <Link key="experiencePage" href={{pathname: "/experience", query: { dataId: "testexp1" , isApparatusId: false }, }} >
-          <LoadButton >Experience 3</LoadButton>
-        </Link>
-        <Link key="experiencePage" href={{pathname: "/experience", query: { dataId: "testexp1" , isApparatusId: false }, }} >
-          <LoadButton>Experience 4</LoadButton>
-        </Link>
-        <Link key="experiencePage" href={{pathname: "/experience", query: { dataId: "testexp1" , isApparatusId: false }, }} >
-          <LoadButton>Experience 5</LoadButton>
-        </Link>        
+       <Link key="experiencePage" href={{ pathname: "/experience", query: { dataId: "testexp1" , isApparatusId: false },}}>
+        <LoadButton> testexp1 </LoadButton>
+      </Link>
       </InnerBox>
     );
   };
 
 
 function Home(): JSX.Element {
-  const [experienceName, setExperienceName] = useState('');
-
   useEffect(() => {verifyLogIn()}, [])
 
   return checkIfLoggedIn() ? (
@@ -143,7 +130,7 @@ function Home(): JSX.Element {
       <OuterBox>
         <ListHeading>Load an Experience</ListHeading>
         <LoadExperience />
-        <CreateExperience setHook={setExperienceName} viewHook={experienceName}/>
+        <CreateExperience />
       </OuterBox>
 
   </main>
