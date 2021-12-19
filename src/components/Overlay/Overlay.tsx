@@ -110,15 +110,13 @@ function Overlay({ userId, experienceData }): JSX.Element {
       </NavbarDiv>
       {showOverlay ? (
         <OverlayShown
-          className={showOverlay ? styles.visible : styles.invisible}
+          className={swapOverlayStyles()}
         >
           <OverlayGrid>
             <OverlayGridItem1>
               <ApparatusListBox
                 metadata={
-                  experienceData !== undefined
-                    ? experienceData.apparatusMetadata
-                    : undefined
+                  checkIfMetaExists()
                 }
                 handleAssetBundleChange={(data) => setAssetbundle(data)}
               />
@@ -153,5 +151,15 @@ function Overlay({ userId, experienceData }): JSX.Element {
       )}
     </OverlayRoot>
   );
+
+  function checkIfMetaExists(): any {
+    return experienceData !== undefined
+      ? experienceData.apparatusMetadata
+      : undefined;
+  }
+
+  function swapOverlayStyles(): string {
+    return showOverlay ? styles.visible : styles.invisible;
+  }
 }
 export default Overlay;
