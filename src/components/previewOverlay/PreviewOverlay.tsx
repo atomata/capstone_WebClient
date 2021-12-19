@@ -91,7 +91,7 @@ function PreviewOverlay({actionList}): JSX.Element {
               outlineWidth: "0.1em",
               outlineColor: "black",
             }}
-            onClick={selected > 0 ? ()=>{setCount(selected - 1); callToWebGL(actionList[selected-1][0], actionList[selected-1][1]) } :undefined}
+            onClick={cyclePreviewLeft()}
           >
             <ChevronLeftSharpIcon  />
           </IconButton>
@@ -116,7 +116,7 @@ function PreviewOverlay({actionList}): JSX.Element {
               outlineWidth: "0.1em",
               outlineColor: "black",
             }}
-            onClick={ selected < actionList.length-1 ? ()=>{setCount(selected + 1) ; callToWebGL(actionList[selected+1][0], actionList[selected+1][1]) } :undefined}
+            onClick={ cyclePreviewRight()}
           >
             <ChevronRightSharpIcon  />
           </IconButton>
@@ -126,6 +126,14 @@ function PreviewOverlay({actionList}): JSX.Element {
       : <div/>}
     </PreviewRoot>
   );
+
+  function cyclePreviewRight() {
+    return selected < actionList.length - 1 ? () => { setCount(selected + 1); callToWebGL(actionList[selected + 1][0], actionList[selected + 1][1]); } : undefined;
+  }
+
+  function cyclePreviewLeft() {
+    return selected > 0 ? () => { setCount(selected - 1); callToWebGL(actionList[selected - 1][0], actionList[selected - 1][1]); } : undefined;
+  }
 }
 
 export default PreviewOverlay;
