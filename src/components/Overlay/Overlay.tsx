@@ -4,8 +4,8 @@ import ActionSequenceBox from "../apparatusLists/ActionSequenceBox";
 import ActionBox from "../apparatusLists/ActionBox";
 import ApparatusListBox from "../apparatusLists/ApparatusListBox";
 import {
-  addActionToList,
-  removeActionFromList,
+  useOverlay,
+  useActionList,
 } from "../../util/overlayfunc/overlayfunc";
 import saveExperienceToCloud from "../../util/saveExperienceToCloud";
 import Navbar from "../Navbar";
@@ -72,16 +72,8 @@ const NavbarDiv = styled.div`
 
 function Overlay({ userId, experienceData }): JSX.Element {
   const [assetbundle, setAssetbundle] = useState({ identifier: [] });
-  const [showOverlay, setOverlay] = useState(true);
-  const [actionList, setActionList] = useState(
-    experienceData !== undefined
-      ? experienceData.initializationData.actionList
-      : []
-  );
-
-  const toggleOverlay = () => {
-    setOverlay((show) => !show);
-  };
+  const {showOverlay,toggleOverlay} = useOverlay()
+  const {actionList, setActionList, addActionToList, removeActionFromList} = useActionList(experienceData)
 
   // Setting the postion of the item dragged and dropped.
   function handleOnDragEnd(result) {
