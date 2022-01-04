@@ -1,6 +1,7 @@
 /* eslint-disable prefer-arrow-callback */
 import styled from "styled-components";
 import React, { useState } from "react";
+import { Box, CircularProgress} from "@material-ui/core";
 import WebglBox from "../src/components/webgl/WebglBox";
 import { verifyLogIn, checkIfLoggedIn, getUserName } from "../src/util/loginCookies";
 import {
@@ -23,6 +24,16 @@ const LoadingView = (): JSX.Element => (
       <p>Loading....</p>
     </Content>
   </main>
+);
+
+const SpinnyBoi = (): JSX.Element => (
+  <Box
+    display='flex'
+    justifyContent='center'
+    style={{ paddingTop: '38vh' }}
+  >
+    <CircularProgress color='secondary' />
+  </Box>
 );
 
 function Experience({ dataId, isApparatusId }): JSX.Element {
@@ -95,7 +106,7 @@ userld]); */
       </Content>
     </main>
   ) : (
-    <LoadingView />
+    <SpinnyBoi />
   );
 }
 

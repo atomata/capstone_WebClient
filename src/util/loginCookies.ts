@@ -29,12 +29,14 @@ function getUserName(){
 // Logs user in with given param username
 function logIn(username){
     cookies.set('user', username, {domain: 'localhost', path: '/', secure: true, sameSite: 'none'});
+    //cookies.set('user', username, {domain: 'localhost', path: '/', secure: true, sameSite: 'none'});
     redirectToIndex();
 }
 
 // Logs user out by removing their cookie
 function logOut(){
     cookies.remove('user', {domain: 'localhost', path: '/', secure: true, sameSite: 'none'});
+    //cookies.remove('user', {domain: 'localhost', path: '/', secure: true, sameSite: 'none'});
     console.log(getUserName());
     redirectToLogIn();
 }
