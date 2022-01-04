@@ -19,6 +19,10 @@ const useActionList = (experienceData) => {
         hookinput.push([path, input,assetID]);
         functioninput([...hookinput]);
     }
+    // const addActionToList2 = ([path,input,assetID],hookinput,functioninput) => {
+    //     hookinput.push([path,input,assetID]);
+    //     functioninput([...hookinput])
+    // }
     
     function removeActionFromList(index, hookinput: Array<[string,string]>, functioninput: Function) {
         hookinput.splice(index, 1);
