@@ -40,6 +40,7 @@ function LoginBox(): JSX.Element {
 
     function ValidateLogin(){
         let loginError = false;
+        var format = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
 
         // Check if name and pass are not empty
         if(name === ''){
@@ -48,6 +49,10 @@ function LoginBox(): JSX.Element {
         }
         else if (name.length < 3){
             setNameErr("Name field cannot be under 3 characters long");
+            loginError = true;
+        }
+        else if (format.test(name)){
+            setNameErr("Name field cannot contain special characters");
             loginError = true;
         }
         else
