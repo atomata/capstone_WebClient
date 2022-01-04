@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import Unity from "react-unity-webgl";
 import { useEffect, useState } from "react";
-import { Box, CircularProgress} from "@material-ui/core";
 import Overlay from "../Overlay/Overlay";
+import Loading from "../Loading";
 import { unityContext, load } from "../../util/unityContextActions";
 
 const WebglRoot = styled.div`
@@ -10,16 +10,6 @@ const WebglRoot = styled.div`
   width: 100%;
   height: 100%;
 `;
-
-const SpinnyBoi = (): JSX.Element => (
-  <Box
-    display='flex'
-    justifyContent='center'
-    style={{ paddingTop: '38vh' }}
-  >
-    <CircularProgress color='secondary' />
-  </Box>
-);
 
 function WebglBox({ userId, experienceData }): JSX.Element {
   const [loading, setLoading] = useState(true);
@@ -59,7 +49,7 @@ function WebglBox({ userId, experienceData }): JSX.Element {
           zIndex: 0,
         }}
       />
-      <SpinnyBoi/>
+      <Loading/>
     </WebglRoot>
     
   );

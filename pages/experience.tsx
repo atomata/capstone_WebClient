@@ -1,7 +1,6 @@
 /* eslint-disable prefer-arrow-callback */
 import styled from "styled-components";
 import React, { useState } from "react";
-import { Box, CircularProgress} from "@material-ui/core";
 import WebglBox from "../src/components/webgl/WebglBox";
 import { verifyLogIn, checkIfLoggedIn, getUserName } from "../src/util/loginCookies";
 import {
@@ -9,6 +8,7 @@ import {
   getExperienceFromCloud,
 } from "../src/util/getDataFromCloud";
 import { ExperienceData } from "../src/util/types";
+import Loading from "../src/components/Loading";
 
 const Content = styled.div`
   width: 100%;
@@ -17,24 +17,6 @@ const Content = styled.div`
   justify-items: center;
   display: flex;
 `;
-
-const LoadingView = (): JSX.Element => (
-  <main>
-    <Content>
-      <p>Loading....</p>
-    </Content>
-  </main>
-);
-
-const SpinnyBoi = (): JSX.Element => (
-  <Box
-    display='flex'
-    justifyContent='center'
-    style={{ paddingTop: '38vh' }}
-  >
-    <CircularProgress color='secondary' />
-  </Box>
-);
 
 function Experience({ dataId, isApparatusId }): JSX.Element {
   const [loading, setLoading] = useState(true);
@@ -47,31 +29,6 @@ function Experience({ dataId, isApparatusId }): JSX.Element {
     apparatusId: "",
     initializationData: { actionList: [] },
   };
-
-  /*React. useEffect( effect: { 
-function getApparatusFromCIoudHeIper(id) { 
-getApparatusFromCIoud(id) . { 
-experience. apparatusld = 
-apparatusJson. Id. Identifier; 
-experience. apparatust•letadata = 
-apparatusJson . Metadata; 
-setExperienceData (experience) ; 
-setLoading( value: false); 
-n; 
-if (isApparatusId 
-"true") { 
-getApparatusFromC10udHe1per (datald) ; 
-else { 
-getExperienceFromC10ud(userId, datald) . then((experienceJson) { 
-experience. initializationData.actionList = 
-experienceJson. action List; 
-getApparatusF romC10udHe1per (experienceJson . appa sld) ; 
-n; 
-Y, 
-deps: 
-datald, 
-isApparatusId, 
-userld]); */
 
   React.useEffect(() => {
     function getApparatusFromCIoudHeIper(id) {
@@ -106,7 +63,7 @@ userld]); */
       </Content>
     </main>
   ) : (
-    <SpinnyBoi />
+    <Loading />
   );
 }
 
