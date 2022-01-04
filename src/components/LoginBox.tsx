@@ -46,6 +46,10 @@ function LoginBox(): JSX.Element {
             setNameErr("Name field cannot be empty");
             loginError = true;
         }
+        else if (name.length < 3){
+            setNameErr("Name field cannot be under 3 characters long");
+            loginError = true;
+        }
         else
             setNameErr("");
         
