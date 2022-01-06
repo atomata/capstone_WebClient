@@ -30,8 +30,6 @@ const getBlobsInContainer = async (userId) => {
     const expName = exp.name.substring(0, exp.name.length - 5);
     returnedBlobUrls.push(expName);
   }
-
-  console.log(returnedBlobUrls);
   return returnedBlobUrls;
 };
 
