@@ -37,7 +37,7 @@ function Experience({ dataId, isApparatusId }): JSX.Element {
     initializationData: { actionList: [] },
   };
 
-  /* React. useEffect( effect: { 
+  /*React. useEffect( effect: { 
 function getApparatusFromCIoudHeIper(id) { 
 getApparatusFromCIoud(id) . { 
 experience. apparatusld = 
@@ -100,8 +100,8 @@ userld]); */
 }
 
 Experience.getInitialProps = ({ query }) => {
-  const {dataId} = query;
-  const {isApparatusId} = query;
+  const dataId = query.dataId;
+  const isApparatusId = query.isApparatusId;
   return { dataId, isApparatusId };
 };
 

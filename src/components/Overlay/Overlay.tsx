@@ -4,8 +4,8 @@ import ActionSequenceBox from "../apparatusLists/ActionSequenceBox";
 import ActionBox from "../apparatusLists/ActionBox";
 import ApparatusListBox from "../apparatusLists/ApparatusListBox";
 import {
-  useOverlay,
-  useActionList,
+  addActionToList,
+  removeActionFromList,
 } from "../../util/overlayfunc/overlayfunc";
 import saveExperienceToCloud from "../../util/saveExperienceToCloud";
 import Navbar from "../Navbar";
@@ -72,18 +72,26 @@ const NavbarDiv = styled.div`
 
 function Overlay({ userId, experienceData }): JSX.Element {
   const [assetbundle, setAssetbundle] = useState({ identifier: [] });
-  const {showOverlay,toggleOverlay} = useOverlay()
-  const {actionList, setActionList, addActionToList, removeActionFromList, handleOnDragEnd} = useActionList(experienceData)
+  const [showOverlay, setOverlay] = useState(true);
+  const [actionList, setActionList] = useState(
+    experienceData !== undefined
+      ? experienceData.initializationData.actionList
+      : []
+  );
+
+  const toggleOverlay = () => {
+    setOverlay((show) => !show);
+  };
 
   // Setting the postion of the item dragged and dropped.
-  // function handleOnDragEnd(result) {
-  //   // dropped outside the list
-  //   if (!result.destination) {
-  //     return;
-  //   }
-  //   const [reorderItem] = actionList.splice(result.source.index, 1);
-  //   actionList.splice(result.destination.index, 0, reorderItem);
-  // }
+  function handleOnDragEnd(result) {
+    // dropped outside the list
+    if (!result.destination) {
+      return;
+    }
+    const [reorderItem] = actionList.splice(result.source.index, 1);
+    actionList.splice(result.destination.index, 0, reorderItem);
+  }
   return (
     <OverlayRoot>
       <NavbarDiv>
