@@ -4,8 +4,7 @@ function getApparatusFromCloud(id) {
     { mode: "cors" }
   )
     .then((response) => response.json())
-    .then((responseJson) => responseJson)
-    .catch((error) => error);
+    .then((responseJson) => responseJson);
 }
 
 function getExperienceFromCloud(userId,experienceId) {
@@ -15,7 +14,6 @@ function getExperienceFromCloud(userId,experienceId) {
   )
       .then((response) => response.json())
       .then((responseJson) => responseJson)
-      .catch((error) => {console.log("error ", error); return null;})
 }
 
 export  {getApparatusFromCloud, getExperienceFromCloud}

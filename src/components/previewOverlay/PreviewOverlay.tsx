@@ -3,7 +3,7 @@ import ChevronLeftSharpIcon from "@mui/icons-material/ChevronLeftSharp";
 import ChevronRightSharpIcon from "@mui/icons-material/ChevronRightSharp";
 import { Button, IconButton } from "@material-ui/core";
 import { callToWebGL } from "../../util/unityContextActions";
-import { useState } from "react";
+import { useSelected } from "../../util/previewOverlayFun/previewOverlayfunc";
 
 const PreviewRoot = styled.div`
   display: absolute;
@@ -72,10 +72,7 @@ background-color: white;
 
 function PreviewOverlay({actionList}): JSX.Element {
 
-  const [selected, setCount] = useState(0);
-
-
-
+  const {selected, setCount, cyclePreviewLeft,cyclePreviewRight} = useSelected({actionList})
 
   return (
     <PreviewRoot>
@@ -127,13 +124,6 @@ function PreviewOverlay({actionList}): JSX.Element {
     </PreviewRoot>
   );
 
-  function cyclePreviewRight() {
-    return selected < actionList.length - 1 ? () => { setCount(selected + 1); callToWebGL(actionList[selected + 1][0], actionList[selected + 1][1]); } : undefined;
-  }
-
-  function cyclePreviewLeft() {
-    return selected > 0 ? () => { setCount(selected - 1); callToWebGL(actionList[selected - 1][0], actionList[selected - 1][1]); } : undefined;
-  }
 }
 
 export default PreviewOverlay;
