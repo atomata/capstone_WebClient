@@ -73,17 +73,17 @@ const NavbarDiv = styled.div`
 function Overlay({ userId, experienceData }): JSX.Element {
   const [assetbundle, setAssetbundle] = useState({ identifier: [] });
   const {showOverlay,toggleOverlay} = useOverlay()
-  const {actionList, setActionList, addActionToList, removeActionFromList} = useActionList(experienceData)
+  const {actionList, setActionList, addActionToList, removeActionFromList, handleOnDragEnd} = useActionList(experienceData)
 
   // Setting the postion of the item dragged and dropped.
-  function handleOnDragEnd(result) {
-    // dropped outside the list
-    if (!result.destination) {
-      return;
-    }
-    const [reorderItem] = actionList.splice(result.source.index, 1);
-    actionList.splice(result.destination.index, 0, reorderItem);
-  }
+  // function handleOnDragEnd(result) {
+  //   // dropped outside the list
+  //   if (!result.destination) {
+  //     return;
+  //   }
+  //   const [reorderItem] = actionList.splice(result.source.index, 1);
+  //   actionList.splice(result.destination.index, 0, reorderItem);
+  // }
   return (
     <OverlayRoot>
       <NavbarDiv>
