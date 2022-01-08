@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { render } from "@testing-library/react";
 import {act, renderHook} from '@testing-library/react-hooks';
+import { number } from "prop-types";
 import Overlay from "../components/Overlay/Overlay";
 import {useActionList, useOverlay} from "../util/overlayfunc/overlayfunc";
 
@@ -50,14 +51,18 @@ describe('ActionList', () => {
 
     it('handleOnDragEnd', () => {
         const {result} = renderHook(useActionList)
+
         act(() => {
-            const testresult = {{{1;2}}}
+            const testresult1 = { 
+                destination: { index: 0, }, 
+                source: { index: 1, }, }
+        
             const testTuple: [string,string,string] = ['test1','testinput2','testasset3']
             const testTuple2: [string,string,string] = ['test4','testinput5','testasset6']
             result.current.addActionToList(testTuple,result.current.actionList,result.current.setActionList)
             result.current.addActionToList(testTuple2,result.current.actionList,result.current.setActionList)
-            result.current.handleOnDragEnd(testresult)
+            result.current.handleOnDragEnd(testresult1)
         })
-        expect(result.current.actionList).toBe(mockActionList)
+        expect(result.current.actionList).toEqual(expect.arrayContaining([['test1','testinput2','testasset3']]))
     })
 })

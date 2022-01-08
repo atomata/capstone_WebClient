@@ -7,6 +7,7 @@ import { Dispatch, SetStateAction, useState } from "react";
 /*
 *custom hook for overlay, action list
 */
+
 const useActionList = (experienceData: { initializationData: { actionList: any; }; }) => {
 
     const [actionList, setActionList] = useState(
@@ -25,12 +26,13 @@ const useActionList = (experienceData: { initializationData: { actionList: any; 
         functioninput([...hookinput]);
     }
 
-    const handleOnDragEnd = (result: { destination: { index: number; }; source: { index: number; }; }) => {
+    const handleOnDragEnd = (result: { destination: { index: number; }; source: { index: number; } }) => {
         if(!result.destination) {
             return;
         }
         const [reorderItem] = actionList.splice(result.source.index,1);
         actionList.splice(result.destination.index,0,reorderItem)
+
     }
 
 

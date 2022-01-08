@@ -144,7 +144,7 @@ function Overlay({ userId, experienceData }): JSX.Element {
     </OverlayRoot>
   );
 
-  function checkIfMetaExists(): any {
+  function checkIfMetaExists(): unknown {
     return experienceData !== undefined
       ? experienceData.apparatusMetadata
       : undefined;

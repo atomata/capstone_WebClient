@@ -10,6 +10,7 @@ const useSelected = ({actionList}) => {
     }
     
     function cyclePreviewLeft() {
+        console.log(actionList)
         return selected > 0 ? () => { setCount(selected - 1); callToWebGL(actionList[selected - 1][0], actionList[selected - 1][1]); } : undefined;
     }
 
