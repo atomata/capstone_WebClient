@@ -3,13 +3,16 @@ import { BlobServiceClient, ContainerClient } from "@azure/storage-blob";
 const sasToken =
   "?sv=2020-08-04&ss=b&srt=sco&sp=rwdlacitfx&se=2022-09-30T20:46:30Z&st=2021-11-30T13:46:30Z&spr=https&sig=e3MgX4FkExWFc5LWFv5RGZdLdyzSMy3ZSSX76%2BPzGFs%3D";
 
+//Store the name of the experience
 var ExperienceName: string = "Experience";
 
+//Set the name of the experience
 function setExperienceName(name: string) {
   ExperienceName=name;
   console.log(ExperienceName);
 }
 
+//Get the name of the experience
 function getExperienceName() {
   console.log(ExperienceName);
   return ExperienceName;

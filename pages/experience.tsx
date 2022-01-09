@@ -8,7 +8,7 @@ import {
     getExperienceFromCloud,
 } from "../src/util/getDataFromCloud";
 import {ExperienceData} from "../src/util/types";
-
+import { setExperienceName } from "../src/util/getExperienceName";
 const Content = styled.div`
   width: 100%;
   justify-content: center;
@@ -44,6 +44,11 @@ function Experience({dataId, isApparatusId}): JSX.Element {
                 experience.apparatusMetadata = apparatusJson.Metadata;
                 setExperienceData(experience);
                 setLoading(false);
+
+                //If the experience already exists.
+                if(experience.apparatusId != dataId ) {
+                    setExperienceName(dataId);
+                }
             });
         }
 
