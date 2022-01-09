@@ -10,7 +10,7 @@ import {
 import styled from "styled-components";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import { getBlobsInContainer } from "../src/util/getExperienceName";
+import { setExperienceName, getBlobsInContainer } from "../src/util/getExperienceName";
 
 const OuterBox = styled.div`
   margin-top: 5%;
@@ -82,11 +82,13 @@ const CreateExperience = () => {
     <CreateInnerBox>
       <Box sx={{ display: "flex", alignItems: "center" }}>
         <TextField
+          required
+          label="Required"
+          defaultValue="Experience"
           fullWidth
           helperText="Enter a name for your new experience"
-          //onChange={(e) => setExperienceName(e.target.value)}
+          onChange={(e) => setExperienceName(e.target.value)}
           variant="standard"
-          disabled
         />
         <Link key="selectionPage" href={{ pathname: "/selection" }}>
           <CreateButton> Create New Experience </CreateButton>

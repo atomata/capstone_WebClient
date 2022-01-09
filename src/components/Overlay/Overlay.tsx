@@ -11,6 +11,7 @@ import saveExperienceToCloud from "../../util/saveExperienceToCloud";
 import Navbar from "../Navbar";
 import PreviewOverlay from "../previewOverlay/PreviewOverlay";
 import styles from "../../styles/NavbarStyle.module.css";
+import { getExperienceName } from "../../util/getExperienceName"
 
 const OverlayRoot = styled.div`
   display: absolute;
@@ -97,7 +98,7 @@ function Overlay({ userId, experienceData }): JSX.Element {
       <NavbarDiv>
         <Navbar
           save={() => {
-            const experienceId = "testexp1";
+            const experienceId = getExperienceName();
             saveExperienceToCloud(
               userId,
               experienceId,
