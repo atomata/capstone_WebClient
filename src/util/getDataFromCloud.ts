@@ -1,4 +1,4 @@
-function getApparatusFromCloud(id) {
+function getApparatusFromCloud(id: string) {
   return fetch(
     `https://capstonewebclient.blob.core.windows.net/apparatus/${  id  }.json`,
     { mode: "cors" }

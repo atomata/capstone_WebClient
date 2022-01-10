@@ -36,7 +36,7 @@ function linkPathsToData(metadata: Metadata) {
 
 // takes a string[] path and makes sure it's in the tree
 // returns the node at that path
-function addPathToTreeAndReturnNode(items: string[], tree) {
+function addPathToTreeAndReturnNode(items: string[], tree: { Children: any[]; }) {
   let node = tree;
 
   items.forEach((item) => {
@@ -96,7 +96,7 @@ function getActions(node) {
 }
 
 // Checks if a given node is a parent node or not by recursively checking if it has any direct/indirect children of type 'AssetBundle'
-function checkIfParent(node) {
+function checkIfParent(node: { Children: { [x: string]: unknown; }; }) {
   if (node.Children !== undefined) {
     for (let child in node.Children) {
       if (node.Children[child].type[0] === "AssetBundle"||checkIfParent(node.Children[child])){
@@ -106,4 +106,5 @@ function checkIfParent(node) {
   }
   return false;
 }
-export { getAssetBundles, getActions, checkIfParent };
+export { getAssetBundles, getActions, checkIfParent,linkPathsToData,convertPathDataToTree };
+ 

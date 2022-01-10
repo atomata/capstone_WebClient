@@ -8,7 +8,7 @@ import { Dispatch, SetStateAction, useState } from "react";
 *custom hook for overlay, action list
 */
 
-const useActionList = (experienceData: { initializationData: { actionList: any; }; }) => {
+const useActionList = (experienceData: { initializationData: { actionList: Array<[string,string,string]>; }; }) => {
 
     const [actionList, setActionList] = useState(
         experienceData !== undefined

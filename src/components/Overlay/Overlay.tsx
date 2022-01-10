@@ -75,15 +75,6 @@ function Overlay({ userId, experienceData }): JSX.Element {
   const {showOverlay,toggleOverlay} = useOverlay()
   const {actionList, setActionList, addActionToList, removeActionFromList, handleOnDragEnd} = useActionList(experienceData)
 
-  // Setting the postion of the item dragged and dropped.
-  // function handleOnDragEnd(result) {
-  //   // dropped outside the list
-  //   if (!result.destination) {
-  //     return;
-  //   }
-  //   const [reorderItem] = actionList.splice(result.source.index, 1);
-  //   actionList.splice(result.destination.index, 0, reorderItem);
-  // }
   return (
     <OverlayRoot>
       <NavbarDiv>
@@ -116,7 +107,7 @@ function Overlay({ userId, experienceData }): JSX.Element {
             <OverlayGridItem2>
               <ActionSequenceBox
                 actionList={actionList}
-                removeAction={(index) =>
+                removeAction={(index:number) =>
                   removeActionFromList(index, actionList, setActionList)
                 }
                 handleOnDragEnd={handleOnDragEnd}
@@ -126,7 +117,7 @@ function Overlay({ userId, experienceData }): JSX.Element {
               <ActionBox
                 assetbundle={assetbundle}
                 addAction={([path, input]) =>
-                  addActionToList(
+                  addActionToList( 
                     [path, input, assetbundle.identifier[0]],
                     actionList,
                     setActionList

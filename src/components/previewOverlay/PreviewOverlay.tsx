@@ -70,7 +70,11 @@ const ActionTabSelectedListItem = styled.div`
 background-color: white;
 `;
 
-function PreviewOverlay({actionList}): JSX.Element {
+type PreviewOverlayProps = {
+  actionList: Array<[string,string,string]>
+};
+
+function PreviewOverlay({actionList}:PreviewOverlayProps): JSX.Element {
 
   const {selected, setCount, cyclePreviewLeft,cyclePreviewRight} = useSelected({actionList})
 

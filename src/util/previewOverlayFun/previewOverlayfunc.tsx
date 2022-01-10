@@ -1,7 +1,12 @@
 import { useState } from "react";
 import { callToWebGL } from "../unityContextActions";
 
-const useSelected = ({actionList}) => {
+type ActionListType = {
+    actionList: Array<[string,string,string]>
+  };
+
+  
+const useSelected = ({actionList}:ActionListType) => {
 
     const [selected, setCount] = useState(0)
 
@@ -10,11 +15,10 @@ const useSelected = ({actionList}) => {
     }
     
     function cyclePreviewLeft() {
-        console.log(actionList)
         return selected > 0 ? () => { setCount(selected - 1); callToWebGL(actionList[selected - 1][0], actionList[selected - 1][1]); } : undefined;
     }
 
-    return{selected,setCount, cyclePreviewLeft,cyclePreviewRight};
+    return {selected,setCount, cyclePreviewLeft,cyclePreviewRight};
 }
 
 

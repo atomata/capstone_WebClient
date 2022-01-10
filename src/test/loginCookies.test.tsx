@@ -1,4 +1,5 @@
 import Cookie from 'js-cookie'
+import { act } from 'react-test-renderer'
 import {checkIfLoggedIn, logIn, logOut, verifyLogIn, verifyNotLogIn, getUserName} from '../util/loginCookies'
 
 
@@ -9,6 +10,5 @@ beforeEach(() => {
 })
 
 test('verify not login in', () => {
-    const spy = jest.spyOn(verifyLogIn,)
-    verifyLogIn()
+    act()
 })

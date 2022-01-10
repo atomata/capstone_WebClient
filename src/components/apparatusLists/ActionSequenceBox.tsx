@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-shadow */
 import Button from "@mui/material/Button";
 import styled from "styled-components";
-import React from "react";
+import React, {  } from "react";
 import {
   IconButton,
   List,
@@ -39,9 +40,21 @@ const ListBoxScroller = styled.div`
     display: none;
   }
 `;
+type removeActionType = {
+  index: number
+}
 
-const ActionSequenceBox = ({ actionList, removeAction, handleOnDragEnd }) => {
-  //Ensuring the array from parameter is not empty.
+type ActionSequenceBoxType ={
+  actionList: Array<[string,string,string]>,
+  removeAction: removeActionType,
+  handleOnDragEnd: { destination: { index: number; }; source: { index: number; } }
+}
+
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+const ActionSequenceBox = ({ actionList, removeAction, handleOnDragEnd }: ActionSequenceBoxType) => {
+
+  // Ensuring the array from parameter is not empty.
+  
   if (actionList !== undefined) {
     return (
       <Box>
