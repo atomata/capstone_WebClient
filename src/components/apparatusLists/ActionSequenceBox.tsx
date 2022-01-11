@@ -40,14 +40,10 @@ const ListBoxScroller = styled.div`
     display: none;
   }
 `;
-type removeActionType = {
-  index: number
-}
-
 type ActionSequenceBoxType ={
   actionList: Array<[string,string,string]>,
-  removeAction: removeActionType,
-  handleOnDragEnd: { destination: { index: number; }; source: { index: number; } }
+  removeAction: {index: number},
+  handleOnDragEnd: {result: { destination: { index: number; }; source: { index: number; } }}
 }
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types

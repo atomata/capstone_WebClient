@@ -36,7 +36,7 @@ function linkPathsToData(metadata: Metadata) {
 
 // takes a string[] path and makes sure it's in the tree
 // returns the node at that path
-function addPathToTreeAndReturnNode(items: string[], tree: { Children: any[]; }) {
+function addPathToTreeAndReturnNode(items: string[], tree: { Children: string[]; }) {
   let node = tree;
 
   items.forEach((item) => {
@@ -79,7 +79,7 @@ function traverseNodeDepthFirst(node, assetBundleList) {
 }
 
 // returns the list of assetnbundle nodes in the tree
-function getAssetBundles(metadata: Metadata) {
+function getAssetBundles(metadata: Metadata): unknown[] {
   const assetTree = convertPathDataToTree(metadata);
   const assetBundleList = [];
   traverseNodeDepthFirst(assetTree, assetBundleList);

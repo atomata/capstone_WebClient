@@ -61,7 +61,7 @@ const ActionBox = ({ assetbundle, addAction }: ActionBoxType): JSX.Element => {
         <ListHeading>Actions</ListHeading>
         <ListBoxScroller>
           {actionData[0].map((data) => (
-            <List>
+            <List key = {data}>
               <ListItem>
                 <Button
                   key={data}
