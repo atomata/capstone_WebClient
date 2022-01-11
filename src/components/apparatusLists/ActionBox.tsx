@@ -39,14 +39,14 @@ const ListHeading = styled.h1`
   color: black;
 `;
 
-type ActionBoxType = {
-  assetbundle:{ identifier: [] },
-  addAction: {
-    path: string,
-    input: string
-  }
-}
-const ActionBox = ({ assetbundle, addAction }: ActionBoxType) => {
+// type ActionBoxType = {
+//   assetbundle:{ identifier: [] },
+//   addAction: {
+//     path: string,
+//     input: string
+//   }
+// }
+const ActionBox = ({ assetbundle, addAction }) => {
   // dont use props as a props property, no caps,
 
   const actionData = React.useMemo(
