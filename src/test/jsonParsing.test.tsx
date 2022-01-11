@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 import {checkIfParent,getAssetBundles,getActions,linkPathsToData,convertPathDataToTree} from '../util/JsonParsing'
 import {Metadata,InitializationData,ExperienceData} from '../util/types'
 
@@ -182,19 +183,8 @@ describe("getAssetBundles to return assetBundleList", () => {
         "5@input:void/Bounce"
       ]
     } 
-    // const testResultAssetBundleList = {
-    //   "Children": [], 
-    //   "Path": "evil-cylinder/evil-cylinder", 
-    //   "identifier": ["evil-cylinder"], 
-    //   "key": ["evil-cylinder"], 
-    //   "type": ["AssetBundle"]}, 
-    //   {"Children": [], 
-    //   "Path": "evil-cylinder/evil-cylinder/delta/wobble-sphere/wobble-sphere", 
-    //   "identifier": ["wobble-sphere"],
-    //   "key": ["wobble-sphere"], 
-    //   "type": ["AssetBundle"]
-    // }
     const testAssetBundleList = getAssetBundles(testmetadata)
-    expect(testAssetBundleList).toBe(testAssetBundleList)
+
+    expect(getAssetBundles(testmetadata)).toEqual(testAssetBundleList)
   })
 })
