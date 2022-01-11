@@ -40,14 +40,21 @@ const ListBoxScroller = styled.div`
     display: none;
   }
 `;
-type ActionSequenceBoxType ={
-  actionList: Array<[string,string,string]>,
-  removeAction: {index: number},
-  handleOnDragEnd: {result: { destination: { index: number; }; source: { index: number; } }}
-}
+type ActionSequenceBoxType = {
+  actionList: Array<[string, string, string]>;
+  removeAction: (index: number) => void;
+  handleOnDragEnd: (result: {
+    destination: { index: number };
+    source: { index: number };
+  }) => void;
+};
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-const ActionSequenceBox = ({ actionList, removeAction, handleOnDragEnd }: ActionSequenceBoxType): JSX.Element => {
+const ActionSequenceBox = ({
+  actionList,
+  removeAction,
+  handleOnDragEnd,
+}: ActionSequenceBoxType): JSX.Element => {
   // Ensuring the array from parameter is not empty.
 
   if (actionList !== undefined) {

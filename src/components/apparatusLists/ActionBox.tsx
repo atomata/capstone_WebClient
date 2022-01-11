@@ -40,12 +40,9 @@ const ListHeading = styled.h1`
 `;
 
 type ActionBoxType = {
-  assetbundle:{ identifier: [] },
-  addAction: {
-    path: string,
-    input: string
-  }
-}
+  assetbundle: { identifier: unknown[] };
+  addAction: ([path, input]: [string, string]) => void;
+};
 const ActionBox = ({ assetbundle, addAction }: ActionBoxType): JSX.Element => {
   // dont use props as a props property, no caps,
 
@@ -61,7 +58,7 @@ const ActionBox = ({ assetbundle, addAction }: ActionBoxType): JSX.Element => {
         <ListHeading>Actions</ListHeading>
         <ListBoxScroller>
           {actionData[0].map((data) => (
-            <List key = {data}>
+            <List key={data}>
               <ListItem>
                 <Button
                   key={data}
