@@ -1,16 +1,16 @@
-import ApparatusListBox from '../components/apparatusLists/ApparatusListBox'
+import ApparatusListBox from "../components/apparatusLists/ApparatusListBox";
 
-it('renders correctly', () => {
-  const testMetaData =  {
-    "Paths": [
+it("renders correctly", () => {
+  const testMetaData = {
+    Paths: [
       "evil-cylinder",
       "evil-cylinder/evil-cylinder",
       "evil-cylinder/evil-cylinder/delta",
       "evil-cylinder/evil-cylinder/delta/wobble-sphere",
       "evil-cylinder/evil-cylinder/delta/wobble-sphere/wobble-sphere",
-      "evil-cylinder/evil-cylinder/delta/wobble-sphere/wobble-sphere/animations"
+      "evil-cylinder/evil-cylinder/delta/wobble-sphere/wobble-sphere/animations",
     ],
-    "Data": [
+    Data: [
       "0@identifier:evil-cylinder",
       "0@type:Serialization",
       "1@identifier:evil-cylinder",
@@ -35,9 +35,9 @@ it('renders correctly', () => {
       "5@associatedNode:wobble-sphere",
       "5@input:void/Still",
       "5@input:void/Wobble",
-      "5@input:void/Bounce"
-    ]
-  } 
-    const tree = ApparatusListBox({testMetaData,handleAssetBundleChange});
-    expect(tree).toMatchSnapshot();
-  });
+      "5@input:void/Bounce",
+    ],
+  };
+  const tree = ApparatusListBox({ testMetaData, handleAssetBundleChange });
+  expect(tree).toMatchSnapshot();
+});

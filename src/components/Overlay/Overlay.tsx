@@ -3,10 +3,7 @@ import React, { useState } from "react";
 import ActionSequenceBox from "../apparatusLists/ActionSequenceBox";
 import ActionBox from "../apparatusLists/ActionBox";
 import ApparatusListBox from "../apparatusLists/ApparatusListBox";
-import {
-  useOverlay,
-  useActionList,
-} from "../../util/overlayfunc/overlayfunc";
+import { useOverlay, useActionList } from "../../util/overlayfunc/overlayfunc";
 import saveExperienceToCloud from "../../util/saveExperienceToCloud";
 import Navbar from "../Navbar";
 import PreviewOverlay from "../previewOverlay/PreviewOverlay";
@@ -72,8 +69,14 @@ const NavbarDiv = styled.div`
 
 function Overlay({ userId, experienceData }): JSX.Element {
   const [assetbundle, setAssetbundle] = useState({ identifier: [] });
-  const {showOverlay,toggleOverlay} = useOverlay()
-  const {actionList, setActionList, addActionToList, removeActionFromList, handleOnDragEnd} = useActionList(experienceData)
+  const { showOverlay, toggleOverlay } = useOverlay();
+  const {
+    actionList,
+    setActionList,
+    addActionToList,
+    removeActionFromList,
+    handleOnDragEnd,
+  } = useActionList(experienceData);
 
   return (
     <OverlayRoot>
@@ -92,22 +95,18 @@ function Overlay({ userId, experienceData }): JSX.Element {
         />
       </NavbarDiv>
       {showOverlay ? (
-        <OverlayShown
-          className={swapOverlayStyles()}
-        >
+        <OverlayShown className={swapOverlayStyles()}>
           <OverlayGrid>
             <OverlayGridItem1>
               <ApparatusListBox
-                metadata={
-                  checkIfMetaExists()
-                }
+                metadata={checkIfMetaExists()}
                 handleAssetBundleChange={(data) => setAssetbundle(data)}
               />
             </OverlayGridItem1>
             <OverlayGridItem2>
               <ActionSequenceBox
                 actionList={actionList}
-                removeAction={(index:number) =>
+                removeAction={(index: number) =>
                   removeActionFromList(index, actionList, setActionList)
                 }
                 handleOnDragEnd={handleOnDragEnd}
@@ -117,7 +116,7 @@ function Overlay({ userId, experienceData }): JSX.Element {
               <ActionBox
                 assetbundle={assetbundle}
                 addAction={([path, input]) =>
-                  addActionToList( 
+                  addActionToList(
                     [path, input, assetbundle.identifier[0]],
                     actionList,
                     setActionList
@@ -129,7 +128,7 @@ function Overlay({ userId, experienceData }): JSX.Element {
         </OverlayShown>
       ) : (
         <OverlayShown>
-          <PreviewOverlay actionList = {actionList} />
+          <PreviewOverlay actionList={actionList} />
         </OverlayShown>
       )}
     </OverlayRoot>

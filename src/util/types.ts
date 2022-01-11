@@ -3,7 +3,7 @@ type Metadata = {
     Data: string[];
 };
 type InitializationData = {
-    actionList:[];
+    actionList: [];
 };
 type ExperienceData = {
     apparatusId: string;
@@ -11,4 +11,4 @@ type ExperienceData = {
     initializationData: InitializationData;
 };
 
-export type {Metadata,InitializationData,ExperienceData};
+export type { Metadata, InitializationData, ExperienceData };

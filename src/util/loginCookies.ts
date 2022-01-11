@@ -5,48 +5,48 @@ const cookies = new Cookies();
 
 // Verify that the user is not logged in
 // If so and on the Login Page, redirect to Index page
-function verifyNotLogIn() : void{
-    if(cookies.get('user') !== undefined)
+function verifyNotLogIn(): void {
+    if (cookies.get('user') !== undefined)
         redirectToIndex();
 }
 
 // Verify that the user is logged in
 // If not and on anything but the Login Page, redirect to Login page
-function verifyLogIn(): void{
-    if(cookies.get('user') === undefined)
-        redirectToLogIn();      
+function verifyLogIn(): void {
+    if (cookies.get('user') === undefined)
+        redirectToLogIn();
 }
 
 // Checks cookies to see if user is logged in
-function checkIfLoggedIn(): boolean{
+function checkIfLoggedIn(): boolean {
     return cookies.get('user') !== undefined;
 }
 
-function getUserName(): boolean{
+function getUserName(): boolean {
     return cookies.get('user');
 }
 
 // Logs user in with given param username
-function logIn(username: string): void{
-    cookies.set('user', username, {domain: 'localhost', path: '/', secure: true, sameSite: 'none'});
+function logIn(username: string): void {
+    cookies.set('user', username, { domain: 'localhost', path: '/', secure: true, sameSite: 'none' });
     redirectToIndex();
 }
 
 // Logs user out by removing their cookie
-function logOut(): void{
-    cookies.remove('user', {domain: 'localhost', path: '/', secure: true, sameSite: 'none'});
+function logOut(): void {
+    cookies.remove('user', { domain: 'localhost', path: '/', secure: true, sameSite: 'none' });
     redirectToLogIn();
 }
 
 // After user logs in
-function redirectToIndex(){
+function redirectToIndex() {
     Router.push('/');
 }
 
 // After user logs out
-function redirectToLogIn(){
+function redirectToLogIn() {
     Router.push('/login');
 }
 
 
-export {checkIfLoggedIn, logIn, logOut, verifyLogIn, verifyNotLogIn, getUserName}
+export { checkIfLoggedIn, logIn, logOut, verifyLogIn, verifyNotLogIn, getUserName }

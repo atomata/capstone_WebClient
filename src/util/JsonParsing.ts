@@ -1,4 +1,4 @@
-import {Metadata} from "./types";
+import { Metadata } from "./types";
 
 type PathData = {
   Path: string;
@@ -99,12 +99,11 @@ function getActions(node) {
 function checkIfParent(node: { Children: { [x: string]: unknown; }; }) {
   if (node.Children !== undefined) {
     for (let child in node.Children) {
-      if (node.Children[child].type[0] === "AssetBundle"||checkIfParent(node.Children[child])){
-          return true;
-        }
+      if (node.Children[child].type[0] === "AssetBundle" || checkIfParent(node.Children[child])) {
+        return true;
+      }
     }
   }
   return false;
 }
-export { getAssetBundles, getActions, checkIfParent,linkPathsToData,convertPathDataToTree };
- 
+export { getAssetBundles, getActions, checkIfParent, linkPathsToData, convertPathDataToTree };

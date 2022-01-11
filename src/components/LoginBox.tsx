@@ -20,8 +20,8 @@ const LoginContainer = styled.div`
 `;
 
 const LoginFields = styled.div`
-    margin-top: 65px;
-    padding: 15px;
+  margin-top: 65px;
+  padding: 15px;
 `;
 
 const LoginButton = styled(Button)`
@@ -33,67 +33,64 @@ const LoginButton = styled(Button)`
 `;
 
 function LoginBox(): JSX.Element {
-    const [name, setName] = useState('');
-    const [pass, setPass] = useState('');
-    const [nameErr, setNameErr] = useState('');
-    const [passErr, setPassErr] = useState('');
+  const [name, setName] = useState("");
+  const [pass, setPass] = useState("");
+  const [nameErr, setNameErr] = useState("");
+  const [passErr, setPassErr] = useState("");
 
-    function ValidateLogin(){
-        let loginError = false;
+  function ValidateLogin() {
+    let loginError = false;
 
-        // Check if name and pass are not empty
-        if(name === ''){
-            setNameErr("Name field cannot be empty");
-            loginError = true;
-        }
-        else
-            setNameErr("");
-        
-        if(pass === ''){
-            setPassErr("Password field cannot be empty");
-            loginError = true;
-        }
-        else
-            setPassErr("");
+    // Check if name and pass are not empty
+    if (name === "") {
+      setNameErr("Name field cannot be empty");
+      loginError = true;
+    } else setNameErr("");
 
-        // No errors, go and log in
-        if(!loginError)
-            logIn(name);
-    }
+    if (pass === "") {
+      setPassErr("Password field cannot be empty");
+      loginError = true;
+    } else setPassErr("");
 
-    // https://mui.com/components/text-fields/
-    return (
-        <LoginRoot> 
-            <LoginContainer>
-                <form className="loginForm" noValidate autoComplete="off">
-                    <h1>LOG IN</h1>
-                    <LoginFields>
-                        <TextField
-                            required
-                            error={nameErr !== ''}
-                            id="username-input"
-                            label="Username"
-                            helperText={nameErr}
-                            onChange={(e) => setName(e.target.value)}
-                        />
-                        <br/>
-                        <TextField
-                            required
-                            error={passErr !== ''}
-                            id="password-input"
-                            label="Password"
-                            type="password"
-                            autoComplete="current-password"
-                            helperText={passErr}
-                            onChange={(e) => setPass(e.target.value)}
-                        />
-                        <br/>
-                        <LoginButton variant="contained" onClick={() => ValidateLogin()}>Log In</LoginButton>
-                    </LoginFields> 
-                </form>
-            </LoginContainer>                   
-        </LoginRoot>
-    );
+    // No errors, go and log in
+    if (!loginError) logIn(name);
+  }
+
+  // https://mui.com/components/text-fields/
+  return (
+    <LoginRoot>
+      <LoginContainer>
+        <form className="loginForm" noValidate autoComplete="off">
+          <h1>LOG IN</h1>
+          <LoginFields>
+            <TextField
+              required
+              error={nameErr !== ""}
+              id="username-input"
+              label="Username"
+              helperText={nameErr}
+              onChange={(e) => setName(e.target.value)}
+            />
+            <br />
+            <TextField
+              required
+              error={passErr !== ""}
+              id="password-input"
+              label="Password"
+              type="password"
+              autoComplete="current-password"
+              helperText={passErr}
+              onChange={(e) => setPass(e.target.value)}
+            />
+            <br />
+            <LoginButton variant="contained" onClick={() => ValidateLogin()}>
+              Log In
+            </LoginButton>
+          </LoginFields>
+        </form>
+      </LoginContainer>
+    </LoginRoot>
+  );
 }
 
 export default LoginBox;

@@ -67,67 +67,84 @@ const ActionTabListItem = styled.div`
 `;
 
 const ActionTabSelectedListItem = styled.div`
-background-color: white;
+  background-color: white;
 `;
 
 type PreviewOverlayProps = {
-  actionList: Array<[string,string,string]>
+  actionList: Array<[string, string, string]>;
 };
 
-function PreviewOverlay({actionList}:PreviewOverlayProps): JSX.Element {
-
-  const {selected, setCount, cyclePreviewLeft,cyclePreviewRight} = useSelected({actionList})
+function PreviewOverlay({ actionList }: PreviewOverlayProps): JSX.Element {
+  const { selected, setCount, cyclePreviewLeft, cyclePreviewRight } =
+    useSelected({ actionList });
 
   return (
     <PreviewRoot>
-      
-      {actionList[0] !== undefined ? 
-      <PreviewGrid>
-        <PreviewGridLeft>
-          <IconButton
-            style={{
-              minWidth: "100%",
-              minHeight: "100%",
-              outlineStyle: "solid",
-              outlineWidth: "0.1em",
-              outlineColor: "black",
-            }}
-            onClick={cyclePreviewLeft()}
-          >
-            <ChevronLeftSharpIcon  />
-          </IconButton>
-        </PreviewGridLeft>
-        <PreviewGridCenter>
-          <ActionTabList>
-            {actionList.map((data, index) => (  
-            <ActionTabListItem key={index}>
-              {selected===index ? <ActionTabSelectedListItem>
-                <Button onClick={() => {callToWebGL(data[0], data[1]); setCount(index)}}>{index}</Button>
-              </ActionTabSelectedListItem>:<Button onClick={() => {callToWebGL(data[0], data[1]); setCount(index)}}>{index}</Button>}
-            </ActionTabListItem>   
-            ))}
-          </ActionTabList>
-        </PreviewGridCenter> 
-        <PreviewGridRight>
-          <IconButton
-            style={{
-              minWidth: "100%",
-              minHeight: "100%",
-              outlineStyle: "solid",
-              outlineWidth: "0.1em",
-              outlineColor: "black",
-            }}
-            onClick={cyclePreviewRight()}
-          >
-            <ChevronRightSharpIcon  />
-          </IconButton>
-        </PreviewGridRight>
-        
-      </PreviewGrid>
-      : <div/>}
+      {actionList[0] !== undefined ? (
+        <PreviewGrid>
+          <PreviewGridLeft>
+            <IconButton
+              style={{
+                minWidth: "100%",
+                minHeight: "100%",
+                outlineStyle: "solid",
+                outlineWidth: "0.1em",
+                outlineColor: "black",
+              }}
+              onClick={cyclePreviewLeft()}
+            >
+              <ChevronLeftSharpIcon />
+            </IconButton>
+          </PreviewGridLeft>
+          <PreviewGridCenter>
+            <ActionTabList>
+              {actionList.map((data, index) => (
+                <ActionTabListItem key={index}>
+                  {selected === index ? (
+                    <ActionTabSelectedListItem>
+                      <Button
+                        onClick={() => {
+                          callToWebGL(data[0], data[1]);
+                          setCount(index);
+                        }}
+                      >
+                        {index}
+                      </Button>
+                    </ActionTabSelectedListItem>
+                  ) : (
+                    <Button
+                      onClick={() => {
+                        callToWebGL(data[0], data[1]);
+                        setCount(index);
+                      }}
+                    >
+                      {index}
+                    </Button>
+                  )}
+                </ActionTabListItem>
+              ))}
+            </ActionTabList>
+          </PreviewGridCenter>
+          <PreviewGridRight>
+            <IconButton
+              style={{
+                minWidth: "100%",
+                minHeight: "100%",
+                outlineStyle: "solid",
+                outlineWidth: "0.1em",
+                outlineColor: "black",
+              }}
+              onClick={cyclePreviewRight()}
+            >
+              <ChevronRightSharpIcon />
+            </IconButton>
+          </PreviewGridRight>
+        </PreviewGrid>
+      ) : (
+        <div />
+      )}
     </PreviewRoot>
   );
-
 }
 
 export default PreviewOverlay;
