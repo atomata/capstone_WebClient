@@ -117,7 +117,7 @@ function PreviewOverlay({actionList}:PreviewOverlayProps): JSX.Element {
               outlineWidth: "0.1em",
               outlineColor: "black",
             }}
-            onClick={ cyclePreviewRight()}
+            onClick={cyclePreviewRight()}
           >
             <ChevronRightSharpIcon  />
           </IconButton>
