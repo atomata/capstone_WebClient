@@ -40,14 +40,7 @@ const ListButton = styled.div`
   margin: 5px;
 `;
 
-type ApparatusListBox = {
-  metadata: {
-    Paths: string[];
-    Data: string[];
-  },
-  handleAssetBundleChange: Any
-}
-const ApparatusListBox = ({ metadata, handleAssetBundleChange }: ApparatusListBox) => {
+const ApparatusListBox = ({ metadata, handleAssetBundleChange }) => {
   if (metadata !== undefined) {
     const assetbundles = React.useMemo(
       () => getAssetBundles(metadata),
