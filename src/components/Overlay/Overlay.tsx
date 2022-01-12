@@ -8,7 +8,7 @@ import saveExperienceToCloud from "../../util/saveExperienceToCloud";
 import Navbar from "../Navbar";
 import PreviewOverlay from "../previewOverlay/PreviewOverlay";
 import styles from "../../styles/NavbarStyle.module.css";
-import {ExperienceData} from "../../util/types";
+import {ExperienceData, Metadata} from "../../util/types";
 
 const OverlayRoot = styled.div`
   display: absolute;
@@ -146,7 +146,7 @@ function Overlay({ userId, experienceData }: OverlayProps): JSX.Element {
     </OverlayRoot>
   );
 
-  function checkIfMetaExists(): unknown {
+  function checkIfMetaExists(): Metadata {
     return experienceData !== undefined
       ? experienceData.apparatusMetadata
       : undefined;
