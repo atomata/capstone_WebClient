@@ -8,6 +8,7 @@ import saveExperienceToCloud from "../../util/saveExperienceToCloud";
 import Navbar from "../Navbar";
 import PreviewOverlay from "../previewOverlay/PreviewOverlay";
 import styles from "../../styles/NavbarStyle.module.css";
+import {ExperienceData} from "../../util/types";
 
 const OverlayRoot = styled.div`
   display: absolute;
@@ -67,7 +68,14 @@ const NavbarDiv = styled.div`
   z-index: 3;
 `;
 
-function Overlay({ userId, experienceData }): JSX.Element {
+
+
+type OverlayProps = {
+  userId:string,
+  experienceData: ExperienceData
+}
+
+function Overlay({ userId, experienceData }: OverlayProps): JSX.Element {
   const [assetbundle, setAssetbundle] = useState({
     Children: [],
     Path: "",
@@ -148,3 +156,4 @@ function Overlay({ userId, experienceData }): JSX.Element {
     return showOverlay ? styles.visible : styles.invisible;
   }
 }
+export default Overlay;

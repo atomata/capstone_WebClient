@@ -2,6 +2,7 @@ import React from "react";
 import Button from "@mui/material/Button";
 import styled from "styled-components";
 import { getAssetBundles, checkIfParent } from "../../util/JsonParsing";
+import { Metadata } from "../../util/types";
 
 const Box = styled.div`
   background: #fffaf0;
@@ -40,7 +41,12 @@ const ListButton = styled.div`
   margin: 5px;
 `;
 
-const ApparatusListBox = ({ metadata, handleAssetBundleChange }) => {
+type ApparatusListProps = {
+  metadata: Metadata;
+  handleAssetBundleChange: (data) => void;
+};
+
+const ApparatusListBox = ({ metadata, handleAssetBundleChange }:ApparatusListProps) => {
   if (metadata !== undefined) {
     const assetbundles = React.useMemo(
       () => getAssetBundles(metadata),

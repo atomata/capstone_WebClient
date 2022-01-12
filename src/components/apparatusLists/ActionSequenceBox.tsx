@@ -40,7 +40,7 @@ const ListBoxScroller = styled.div`
     display: none;
   }
 `;
-type ActionSequenceBoxType = {
+type ActionSequenceBoxProps = {
   actionList: Array<[string, string, string]>;
   removeAction: (index: number) => void;
   handleOnDragEnd: (result: {
@@ -54,7 +54,7 @@ const ActionSequenceBox = ({
   actionList,
   removeAction,
   handleOnDragEnd,
-}: ActionSequenceBoxType): JSX.Element => {
+}: ActionSequenceBoxProps): JSX.Element => {
   // Ensuring the array from parameter is not empty.
 
   if (actionList !== undefined) {
