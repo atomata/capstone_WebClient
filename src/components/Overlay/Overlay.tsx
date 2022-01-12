@@ -68,7 +68,11 @@ const NavbarDiv = styled.div`
 `;
 
 function Overlay({ userId, experienceData }): JSX.Element {
-  const [assetbundle, setAssetbundle] = useState({ identifier: [] });
+  const [assetbundle, setAssetbundle] = useState({
+    Children: [],
+    Path: "",
+    identifier: [],
+  });
   const { showOverlay, toggleOverlay } = useOverlay();
   const {
     actionList,
@@ -144,4 +148,3 @@ function Overlay({ userId, experienceData }): JSX.Element {
     return showOverlay ? styles.visible : styles.invisible;
   }
 }
-export default Overlay;
