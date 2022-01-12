@@ -2,7 +2,6 @@ import { render } from "@testing-library/react";
 import { renderHook } from "@testing-library/react-hooks";
 import { act } from "react-dom/test-utils";
 import {
-  ActionListType,
   useSelected,
 } from "../util/previewOverlayFun/previewOverlayfunc";
 
@@ -40,18 +39,7 @@ test("previewOverlay renders without crashing", () => {
 });
 
 describe("test use selected", () => {
-  // beforeEach(()=>{
-  //     const {result} = renderHook(useActionList)
 
-  //     const testTuple: [string,string,string] = ['test1','testinput2','testasset3']
-  //     const testTuple2: [string,string,string] = ['test4','testinput5','testasset6']
-  //     act(() => {
-  //         result.current.addActionToList(testTuple,result.current.actionList,result.current.setActionList)
-  //         result.current.addActionToList(testTuple2,result.current.actionList,result.current.setActionList)
-  //     })
-
-  //     const testActionList = result.current.actionList
-  // })
   it("cyclePreviewRight", () => {
     const { result } = renderHook(useSelected, {
       initialProps: {

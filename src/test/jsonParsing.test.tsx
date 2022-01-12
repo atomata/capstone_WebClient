@@ -1,20 +1,8 @@
 /* eslint-disable no-unused-expressions */
 import {
-  checkIfParent,
   getAssetBundles,
-  getActions,
   linkPathsToData,
-  convertPathDataToTree,
 } from "../util/JsonParsing";
-import { Metadata, InitializationData, ExperienceData } from "../util/types";
-
-// // test checkIfParent
-// describe('check if a given node is a parent of not by recursively',() => {
-//     it('check if it returns true', () => {
-//         const testNode =
-//         const result = checkIfParent()
-//     })
-// })
 
 describe("linkpathsToData returns the correct pathDataList", () => {
   it("returns the correct pathlist", () => {

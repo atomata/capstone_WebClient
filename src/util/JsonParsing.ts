@@ -2,7 +2,7 @@ import { Metadata } from "./types";
 
 type PathData = {
   Path: string;
-  Data: {};
+  Data: unknown;
 };
 
 // Creates a list of path-data objects
@@ -36,7 +36,7 @@ function linkPathsToData(metadata: Metadata) {
 
 // takes a string[] path and makes sure it's in the tree
 // returns the node at that path
-function addPathToTreeAndReturnNode(items: string[], tree: { Children: string[]; }) {
+function addPathToTreeAndReturnNode(items: string[], tree: { Children: any[]; }) {
   let node = tree;
 
   items.forEach((item) => {
