@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import Unity from "react-unity-webgl";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Overlay from "../Overlay/Overlay";
+import Loading from "../Loading";
 import { unityContext, load } from "../../util/unityContextActions";
 
 const WebglRoot = styled.div`
@@ -11,17 +12,20 @@ const WebglRoot = styled.div`
 `;
 
 function WebglBox({ userId, experienceData }): JSX.Element {
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     unityContext.on("loaded", () => {
       // For some reason the unityContext.send("Container", "LoadApparatus", arg) in load() cannot be called at this point
       // Having a timeout bypasses this
       setTimeout(() => {
+        setLoading(false);
         load(experienceData.apparatusId);
       }, 100);
     });
   }, []);
 
-  return (
+  return !loading ? (
     <WebglRoot>
       <Unity
         unityContext={unityContext}
@@ -34,6 +38,20 @@ function WebglBox({ userId, experienceData }): JSX.Element {
       />
       <Overlay userId={userId} experienceData={experienceData} />
     </WebglRoot>
+  ) : (
+    <WebglRoot>
+      <Unity
+        unityContext={unityContext}
+        style={{
+          height: "inherit",
+          width: "inherit",
+          position: "absolute",
+          zIndex: 0,
+        }}
+      />
+      <Loading/>
+    </WebglRoot>
+    
   );
 }
 

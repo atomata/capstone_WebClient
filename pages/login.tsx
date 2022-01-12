@@ -3,6 +3,7 @@ import styled from "styled-components";
 import React from "react";
 import LoginBox from "../src/components/LoginBox";
 import { verifyNotLogIn, checkIfLoggedIn } from "../src/util/loginCookies";
+import Loading from "../src/components/Loading";
 
 const Content = styled.div`
   justify-content: center;
@@ -10,14 +11,6 @@ const Content = styled.div`
   justify-items: center;
   display: flex;
 `;
-
-const LoadingView = (): JSX.Element => (
-  <main>
-    <Content>
-      <p>Loading....</p>
-    </Content>
-  </main>
-);
 
 function Login(): JSX.Element {
   React.useEffect(() => {verifyNotLogIn()}, [])
@@ -29,7 +22,7 @@ function Login(): JSX.Element {
       </Content>
     </main>
   ) : (
-    <LoadingView />
+    <Loading/>
   );
 }
 
