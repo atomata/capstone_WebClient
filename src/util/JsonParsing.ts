@@ -81,7 +81,7 @@ function getAssetBundles(metadata: Metadata): AssetBundle[] {
 }
 
 // returns the list of actions of the given node
-function getActions(node: Tree) : any[] {
+function getActions(node: AssetBundle) : any[] {
   for (const child in node.Children) {
     if (node.Children[child].type[0] === "Event") {
       return [node.Children[child].input, node.Children[child].Path];

@@ -10,6 +10,7 @@ import {
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import { callToWebGL } from "../../util/unityContextActions";
 import { getActions } from "../../util/JsonParsing";
+import {AssetBundle} from "../../util/types";
 
 const Box = styled.div`
   background: #fffaf0;
@@ -40,7 +41,7 @@ const ListHeading = styled.h1`
 `;
 
 type ActionBoxType = {
-  assetbundle: { identifier: unknown[] };
+  assetbundle: AssetBundle;
   addAction: ([path, input]: [string, string]) => void;
 };
 const ActionBox = ({ assetbundle, addAction }: ActionBoxType): JSX.Element => {
