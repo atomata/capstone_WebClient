@@ -8,7 +8,7 @@ import saveExperienceToCloud from "../../util/saveExperienceToCloud";
 import Navbar from "../Navbar";
 import PreviewOverlay from "../previewOverlay/PreviewOverlay";
 import styles from "../../styles/NavbarStyle.module.css";
-import {ExperienceData, Metadata} from "../../util/types";
+import { ExperienceData, Metadata } from "../../util/types";
 
 const OverlayRoot = styled.div`
   display: absolute;
@@ -68,12 +68,10 @@ const NavbarDiv = styled.div`
   z-index: 3;
 `;
 
-
-
 type OverlayProps = {
-  userId:string,
-  experienceData: ExperienceData
-}
+  userId: string;
+  experienceData: ExperienceData;
+};
 
 function Overlay({ userId, experienceData }: OverlayProps): JSX.Element {
   const [assetbundle, setAssetbundle] = useState({
@@ -90,7 +88,7 @@ function Overlay({ userId, experienceData }: OverlayProps): JSX.Element {
     handleOnDragEnd,
   } = useActionList(experienceData);
 
-  return (
+  return experienceData !== undefined ? (
     <OverlayRoot>
       <NavbarDiv>
         <Navbar
@@ -144,6 +142,8 @@ function Overlay({ userId, experienceData }: OverlayProps): JSX.Element {
         </OverlayShown>
       )}
     </OverlayRoot>
+  ) : (
+    <div>Error: corrupted experience data</div>
   );
 
   function checkIfMetaExists(): Metadata {

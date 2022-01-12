@@ -22,7 +22,7 @@ function checkIfLoggedIn(): boolean {
     return cookies.get('user') !== undefined;
 }
 
-function getUserName(): boolean {
+function getUserName(): string {
     return cookies.get('user');
 }
 

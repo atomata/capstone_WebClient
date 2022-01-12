@@ -89,6 +89,6 @@ describe("test use selected", () => {
       result.current.setCount(1);
       result.current.cyclePreviewLeft();
     });
-    expect(result.current.cyclePreviewLeft()(setCount)).toBe(0);
+    expect(result.current.cyclePreviewLeft().setCount(0)).toBe(0);
   });
 });

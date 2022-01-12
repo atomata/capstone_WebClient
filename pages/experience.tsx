@@ -2,7 +2,11 @@
 import styled from "styled-components";
 import React, { useState } from "react";
 import WebglBox from "../src/components/webgl/WebglBox";
-import { verifyLogIn, checkIfLoggedIn, getUserName } from "../src/util/loginCookies";
+import {
+  verifyLogIn,
+  checkIfLoggedIn,
+  getUserName,
+} from "../src/util/loginCookies";
 import {
   getApparatusFromCloud,
   getExperienceFromCloud,
@@ -25,7 +29,12 @@ const LoadingView = (): JSX.Element => (
   </main>
 );
 
-function Experience({ dataId, isApparatusId }): JSX.Element {
+type ExperienceProps = {
+  dataId: string;
+  isApparatusId: string;
+};
+
+function Experience({ dataId, isApparatusId }: ExperienceProps): JSX.Element {
   const [loading, setLoading] = useState(true);
   const [userId] = useState(getUserName());
   const [experienceData, setExperienceData] = useState<ExperienceData>();
@@ -37,33 +46,8 @@ function Experience({ dataId, isApparatusId }): JSX.Element {
     initializationData: { actionList: [] },
   };
 
-  /* React. useEffect( effect: { 
-function getApparatusFromCIoudHeIper(id) { 
-getApparatusFromCIoud(id) . { 
-experience. apparatusld = 
-apparatusJson. Id. Identifier; 
-experience. apparatust•letadata = 
-apparatusJson . Metadata; 
-setExperienceData (experience) ; 
-setLoading( value: false); 
-n; 
-if (isApparatusId 
-"true") { 
-getApparatusFromC10udHe1per (datald) ; 
-else { 
-getExperienceFromC10ud(userId, datald) . then((experienceJson) { 
-experience. initializationData.actionList = 
-experienceJson. action List; 
-getApparatusF romC10udHe1per (experienceJson . appa sld) ; 
-n; 
-Y, 
-deps: 
-datald, 
-isApparatusId, 
-userld]); */
-
   React.useEffect(() => {
-    function getApparatusFromCIoudHeIper(id) {
+    function getApparatusFromCloudHelper(id) {
       getApparatusFromCloud(id).then((apparatusJson) => {
         experience.apparatusId = apparatusJson.Id.Identifier;
         experience.apparatusMetadata = apparatusJson.Metadata;
@@ -71,23 +55,25 @@ userld]); */
         setLoading(false);
       });
     }
-	
+
     // Don't load if you aren't logged in
-    if(!checkIfLoggedIn())
-      return;
-	
+    if (!checkIfLoggedIn()) return;
+
     if (isApparatusId === "true") {
-      getApparatusFromCIoudHeIper(dataId);
+      getApparatusFromCloudHelper(dataId);
     } else {
       getExperienceFromCloud(userId, dataId).then((experienceJson) => {
         experience.initializationData.actionList = experienceJson.actionList;
-        getApparatusFromCIoudHeIper(experienceJson.apparatusId);
+        getApparatusFromCloudHelper(experienceJson.apparatusId);
       });
     }
-  }, [isApparatusId]);
+  }, [dataId, experience, isApparatusId, userId]);
 
-  React.useEffect(() => {verifyLogIn()}, [])
+  React.useEffect(() => {
+    verifyLogIn();
+  }, []);
 
+  //Todo what if the experienceData and userID are undefined? we should show an error message
   return !loading ? (
     <main>
       <Content>
@@ -100,8 +86,8 @@ userld]); */
 }
 
 Experience.getInitialProps = ({ query }) => {
-  const {dataId} = query;
-  const {isApparatusId} = query;
+  const { dataId } = query;
+  const { isApparatusId } = query;
   return { dataId, isApparatusId };
 };
 

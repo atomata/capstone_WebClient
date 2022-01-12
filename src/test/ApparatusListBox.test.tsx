@@ -1,7 +1,7 @@
 import ApparatusListBox from "../components/apparatusLists/ApparatusListBox";
 
 it("renders correctly", () => {
-  const testMetaData = {
+  const metadata = {
     Paths: [
       "evil-cylinder",
       "evil-cylinder/evil-cylinder",
@@ -38,6 +38,7 @@ it("renders correctly", () => {
       "5@input:void/Bounce",
     ],
   };
-  const tree = ApparatusListBox({ testMetaData, handleAssetBundleChange });
+  const handleAssetBundleChange = (data) =>{ console.log("success")}
+  const tree = ApparatusListBox({ metadata, handleAssetBundleChange });
   expect(tree).toMatchSnapshot();
 });

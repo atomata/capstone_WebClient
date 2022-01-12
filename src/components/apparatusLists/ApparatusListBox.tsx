@@ -46,13 +46,15 @@ type ApparatusListProps = {
   handleAssetBundleChange: (data) => void;
 };
 
-const ApparatusListBox = ({ metadata, handleAssetBundleChange }:ApparatusListProps) => {
+const ApparatusListBox = ({
+  metadata,
+  handleAssetBundleChange,
+}: ApparatusListProps): JSX.Element => {
+  const assetbundles = React.useMemo(
+    () => getAssetBundles(metadata),
+    [metadata]
+  );
   if (metadata !== undefined) {
-    const assetbundles = React.useMemo(
-      () => getAssetBundles(metadata),
-      [metadata]
-    );
-
     return (
       <Box>
         <ListHeading>Apparatus</ListHeading>

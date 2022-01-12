@@ -10,7 +10,7 @@ import {
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import { callToWebGL } from "../../util/unityContextActions";
 import { getActions } from "../../util/JsonParsing";
-import {AssetBundle} from "../../util/types";
+import { AssetBundle } from "../../util/types";
 
 const Box = styled.div`
   background: #fffaf0;
@@ -53,36 +53,33 @@ const ActionBox = ({ assetbundle, addAction }: ActionBoxProps): JSX.Element => {
   );
 
   // everytime metadata is rendered we reparse metadata using useMemo hook
-  if (actionData !== undefined) {
-    return (
-      <Box>
-        <ListHeading>Actions</ListHeading>
-        <ListBoxScroller>
-          {actionData[0].map((data) => (
-            <List key={data}>
-              <ListItem>
-                <Button
-                  key={data}
-                  variant="contained"
-                  color="secondary"
-                  onClick={() => callToWebGL(actionData[1], data)}
-                  id={data}
-                >
-                  {data}
-                </Button>
-              </ListItem>
-              <ListItemSecondaryAction>
-                <IconButton onClick={() => addAction([actionData[1], data])}>
-                  <AddOutlinedIcon />
-                </IconButton>
-              </ListItemSecondaryAction>
-            </List>
-          ))}
-        </ListBoxScroller>
-      </Box>
-    );
-  }
-  return (
+  return actionData !== undefined ? (
+    <Box>
+      <ListHeading>Actions</ListHeading>
+      <ListBoxScroller>
+        {actionData[0].map((data) => (
+          <List key={data}>
+            <ListItem>
+              <Button
+                key={data}
+                variant="contained"
+                color="secondary"
+                onClick={() => callToWebGL(actionData[1], data)}
+                id={data}
+              >
+                {data}
+              </Button>
+            </ListItem>
+            <ListItemSecondaryAction>
+              <IconButton onClick={() => addAction([actionData[1], data])}>
+                <AddOutlinedIcon />
+              </IconButton>
+            </ListItemSecondaryAction>
+          </List>
+        ))}
+      </ListBoxScroller>
+    </Box>
+  ) : (
     <Box>
       <ListHeading>Actions</ListHeading>
       <Button disabled />
