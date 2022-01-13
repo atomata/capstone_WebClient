@@ -16,11 +16,13 @@ type WebglProps = {
   experienceData: ExperienceData;
 };
 
+// TODO we assume when Webglbox is called, the userId and experienceData are defined ?
 function WebglBox({ userId, experienceData }:WebglProps): JSX.Element {
   useEffect(() => {
     unityContext.on("loaded", () => {
       // For some reason the unityContext.send("Container", "LoadApparatus", arg) in load() cannot be called at this point
       // Having a timeout bypasses this
+
       setTimeout(() => {
         load(experienceData.apparatusId);
       }, 100);

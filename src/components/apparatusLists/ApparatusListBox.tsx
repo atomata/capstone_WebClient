@@ -46,6 +46,7 @@ type ApparatusListProps = {
   handleAssetBundleChange: (data) => void;
 };
 
+// TODO what if metadata is not defined or assetbundles list is empty?
 const ApparatusListBox = ({
   metadata,
   handleAssetBundleChange,

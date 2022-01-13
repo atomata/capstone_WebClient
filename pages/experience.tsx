@@ -47,6 +47,7 @@ function Experience({ dataId, isApparatusId }: ExperienceProps): JSX.Element {
   };
 
   React.useEffect(() => {
+
     function getApparatusFromCloudHelper(id) {
       getApparatusFromCloud(id).then((apparatusJson) => {
         experience.apparatusId = apparatusJson.Id.Identifier;
@@ -57,8 +58,11 @@ function Experience({ dataId, isApparatusId }: ExperienceProps): JSX.Element {
     }
 
     // Don't load if you aren't logged in
+    // TODO test to see if this is  working properly
     if (!checkIfLoggedIn()) return;
 
+    // TODO change apparatusID to boolean instead of string or an enum
+    // TODO what if getting data from cloud is unsuccessful?
     if (isApparatusId === "true") {
       getApparatusFromCloudHelper(dataId);
     } else {
@@ -73,7 +77,7 @@ function Experience({ dataId, isApparatusId }: ExperienceProps): JSX.Element {
     verifyLogIn();
   }, []);
 
-  //Todo what if the experienceData and userID are undefined? we should show an error message
+  // Todo what if the experienceData and userID are undefined? we should show an error message
   return !loading ? (
     <main>
       <Content>

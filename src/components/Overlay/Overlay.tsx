@@ -73,6 +73,7 @@ type OverlayProps = {
   experienceData: ExperienceData;
 };
 
+// TODO can we assume that experincedata and userID are defined properly at this stage?
 function Overlay({ userId, experienceData }: OverlayProps): JSX.Element {
   const [assetbundle, setAssetbundle] = useState({
     Children: [],

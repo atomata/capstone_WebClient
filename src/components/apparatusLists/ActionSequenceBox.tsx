@@ -49,7 +49,8 @@ type ActionSequenceBoxProps = {
   }) => void;
 };
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+
+// TODO what if the actionlist is empty?
 const ActionSequenceBox = ({
   actionList,
   removeAction,
