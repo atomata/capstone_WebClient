@@ -16,8 +16,15 @@ type PathData = {
   Data: Record<string, any[]>;
 };
 
-type AssetBundle = { Children: any[]; Path: string ,identifier: string[] };
+type AssetBundle = { Children: any[]; Path: string; identifier: string[] };
 
 type Tree = { Children: any[]; Path: string };
 
-export type { Metadata, InitializationData, ExperienceData, AssetBundle, Tree , PathData};
+export type {
+  Metadata,
+  InitializationData,
+  ExperienceData,
+  AssetBundle,
+  Tree,
+  PathData,
+};
