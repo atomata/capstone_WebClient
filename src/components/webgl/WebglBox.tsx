@@ -17,7 +17,7 @@ function WebglBox({ userId, experienceData }): JSX.Element {
       // Having a timeout bypasses this
       setTimeout(() => {
         load(experienceData.apparatusId);
-      }, 5);
+      }, 100);
     });
   }, []);
 
