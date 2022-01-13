@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Overlay from "../Overlay/Overlay";
 import Loading from "../Loading";
 import { unityContext, load } from "../../util/unityContextActions";
-import {ExperienceData} from "../../util/types";
+import { ExperienceData } from "../../util/types";
 
 const WebglRoot = styled.div`
   display: relative;
@@ -18,7 +18,8 @@ type WebglProps = {
 };
 
 // TODO we assume when Webglbox is called, the userId and experienceData are defined ?
-function WebglBox({ userId, experienceData }:WebglProps): JSX.Element {
+function WebglBox({ userId, experienceData }: WebglProps): JSX.Element {
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     unityContext.on("loaded", () => {
       // For some reason the unityContext.send("Container", "LoadApparatus", arg) in load() cannot be called at this point
@@ -55,9 +56,8 @@ function WebglBox({ userId, experienceData }:WebglProps): JSX.Element {
           zIndex: 0,
         }}
       />
-      <Loading/>
+      <Loading />
     </WebglRoot>
-    
   );
 }
 
