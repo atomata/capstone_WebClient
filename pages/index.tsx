@@ -22,7 +22,7 @@ function Home(): JSX.Element {
           key="experiencePage"
           href={{
               pathname: "/experience",
-              query: { dataId: "testexp1" , isApparatusId: false },
+              query: { dataId: "testexp1" , dataType: "experience" },
           }}
       >
           <Button> Load Test Experience</Button>
