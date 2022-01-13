@@ -38,14 +38,41 @@ function LoginBox(): JSX.Element {
   const [nameErr, setNameErr] = useState("");
   const [passErr, setPassErr] = useState("");
 
-  function ValidateLogin() {
-    let loginError = false;
+    const userFormat = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+    const passFormat = /\s/;
 
-    // Check if name and pass are not empty
-    if (name === "") {
-      setNameErr("Name field cannot be empty");
-      loginError = true;
-    } else setNameErr("");
+    function ValidateLogin(){
+        let loginError = false;
+
+        console.log("N -> " + name);
+        console.log("P -> " + pass);
+
+        // Check if name and pass are not empty
+        if(name === ''){
+            setNameErr("Name field cannot be empty");
+            loginError = true;
+        }
+        else if (name.length < 3){
+            setNameErr("Name field cannot be under 3 characters long");
+            loginError = true;
+        }
+        else if (userFormat.test(name)){
+            setNameErr("Name field cannot contain special characters");
+            loginError = true;
+        }
+        else
+            setNameErr("");
+        
+        if(pass === ''){
+            setPassErr("Password field cannot be empty");
+            loginError = true;
+        }
+        else if (passFormat.test(pass)){
+            setPassErr("Password field cannot contain blank spaces");
+            loginError = true;
+        }
+        else
+            setPassErr("");
 
     if (pass === "") {
       setPassErr("Password field cannot be empty");

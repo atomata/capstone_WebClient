@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import Unity from "react-unity-webgl";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Overlay from "../Overlay/Overlay";
+import Loading from "../Loading";
 import { unityContext, load } from "../../util/unityContextActions";
 import {ExperienceData} from "../../util/types";
 
@@ -24,12 +25,13 @@ function WebglBox({ userId, experienceData }:WebglProps): JSX.Element {
       // Having a timeout bypasses this
 
       setTimeout(() => {
+        setLoading(false);
         load(experienceData.apparatusId);
       }, 100);
     });
   }, [experienceData.apparatusId]);
 
-  return (
+  return !loading ? (
     <WebglRoot>
       <Unity
         unityContext={unityContext}
@@ -42,6 +44,20 @@ function WebglBox({ userId, experienceData }:WebglProps): JSX.Element {
       />
       <Overlay userId={userId} experienceData={experienceData} />
     </WebglRoot>
+  ) : (
+    <WebglRoot>
+      <Unity
+        unityContext={unityContext}
+        style={{
+          height: "inherit",
+          width: "inherit",
+          position: "absolute",
+          zIndex: 0,
+        }}
+      />
+      <Loading/>
+    </WebglRoot>
+    
   );
 }
 

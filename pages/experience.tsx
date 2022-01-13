@@ -12,6 +12,7 @@ import {
   getExperienceFromCloud,
 } from "../src/util/getDataFromCloud";
 import { ExperienceData } from "../src/util/types";
+import Loading from "../src/components/Loading";
 
 const Content = styled.div`
   width: 100%;
@@ -85,7 +86,7 @@ function Experience({ dataId, isApparatusId }: ExperienceProps): JSX.Element {
       </Content>
     </main>
   ) : (
-    <LoadingView />
+    <Loading />
   );
 }
 
