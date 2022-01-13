@@ -8,7 +8,7 @@ import {
     getExperienceFromCloud,
 } from "../src/util/getDataFromCloud";
 import {ExperienceData} from "../src/util/types";
-import { setExperienceName } from "../src/util/getExperienceName";
+import { setExperienceName } from "../src/util/getExperienceFromCloud";
 const Content = styled.div`
   width: 100%;
   justify-content: center;

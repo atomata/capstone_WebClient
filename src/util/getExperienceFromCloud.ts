@@ -27,8 +27,12 @@ const getBlobsInContainer = async (userId) => {
   );
 
   // get Container - full public read access
-  const containerClient: ContainerClient =
-    blobService.getContainerClient(userId);
+  const containerClient: ContainerClient = blobService.getContainerClient(userId);
+
+  //Ensures when new user can create experience
+  await containerClient.createIfNotExists({
+    access: "container",
+  });
 
   // get list of blobs in container
   for await (const exp of containerClient.listBlobsFlat()) {

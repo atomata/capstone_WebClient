@@ -11,7 +11,7 @@ import saveExperienceToCloud from "../../util/saveExperienceToCloud";
 import Navbar from "../Navbar";
 import PreviewOverlay from "../previewOverlay/PreviewOverlay";
 import styles from "../../styles/NavbarStyle.module.css";
-import { getExperienceName } from "../../util/getExperienceName";
+import { getExperienceName } from "../../util/getExperienceFromCloud";
 
 const OverlayRoot = styled.div`
   display: absolute;

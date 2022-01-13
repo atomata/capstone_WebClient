@@ -10,7 +10,7 @@ import {
 import styled from "styled-components";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import { setExperienceName, getBlobsInContainer } from "../src/util/getExperienceName";
+import { setExperienceName, getBlobsInContainer } from "../src/util/getExperienceFromCloud";
 
 const OuterBox = styled.div`
   margin-top: 5%;
