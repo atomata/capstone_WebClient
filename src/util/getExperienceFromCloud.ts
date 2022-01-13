@@ -9,12 +9,10 @@ var ExperienceName: string = "Experience";
 //Set the name of the experience
 function setExperienceName(name: string) {
   ExperienceName=name;
-  console.log(ExperienceName);
 }
 
 //Get the name of the experience
 function getExperienceName() {
-  console.log(ExperienceName);
   return ExperienceName;
 }
 
