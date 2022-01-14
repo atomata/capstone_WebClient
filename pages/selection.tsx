@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Button } from "@material-ui/core";
 import { useEffect } from "react";
 import { verifyLogIn, checkIfLoggedIn } from "../src/util/loginCookies";
+import Loading from "../src/components/Loading";
 
 const Content = styled.div`
   justify-content: center;
@@ -42,7 +43,7 @@ function Selection(): JSX.Element {
     </main>
   ) :
   (
-    <main/>
+    <Loading/>
   );
 }
 

@@ -1,12 +1,8 @@
 import { Button } from "@material-ui/core";
 import { useEffect } from "react";
-import {
-  verifyLogIn,
-  logOut,
-  checkIfLoggedIn,
-  getUserName,
-} from "../src/util/loginCookies";
-import {OuterBox, ListHeading, LoadExperience, CreateExperience } from "../src/components/SupportingComponents/Workbench"
+import { verifyLogIn, logOut, checkIfLoggedIn, getUserName } from "../src/util/loginCookies";
+import Loading from "../src/components/Loading";
+import {OuterBox, ListHeading, LoadExperience, CreateExperience } from "../src/components/SupportingComponents/Workbench";
 
 const Home = () => {
   useEffect(() => {
@@ -22,10 +18,9 @@ const Home = () => {
         <LoadExperience />
         <CreateExperience />
       </OuterBox>
-    </main>
-  ) : (
-    <main />
-  );
-};
+  </main>
+  ):(<Loading/>);
+}
+
 
 export default Home;
