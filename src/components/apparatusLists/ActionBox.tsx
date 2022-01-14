@@ -10,6 +10,7 @@ import {
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import { callToWebGL } from "../../util/unityContextActions";
 import { getActions } from "../../util/JsonParsing";
+import { AssetBundle } from "../../util/types";
 
 const Box = styled.div`
   background: #fffaf0;
@@ -39,8 +40,13 @@ const ListHeading = styled.h1`
   color: black;
 `;
 
-const ActionBox = ({ assetbundle, addAction }) => {
-  // dont use props as a props property, no caps,
+type ActionBoxProps = {
+  assetbundle: AssetBundle;
+  addAction: ([path, input]: [string, string]) => void;
+};
+
+// TODO what if assetbundle is undefined or the actiondata is undefined or empty
+const ActionBox = ({ assetbundle, addAction }: ActionBoxProps): JSX.Element => {
 
   const actionData = React.useMemo(
     () => getActions(assetbundle),
@@ -48,36 +54,33 @@ const ActionBox = ({ assetbundle, addAction }) => {
   );
 
   // everytime metadata is rendered we reparse metadata using useMemo hook
-  if (actionData !== undefined) {
-    return (
-      <Box>
-        <ListHeading>Actions</ListHeading>
-        <ListBoxScroller>
-          {actionData[0].map((data) => (
-            <List>
-              <ListItem>
-                <Button
-                  key={data}
-                  variant="contained"
-                  color="secondary"
-                  onClick={() => callToWebGL(actionData[1], data)}
-                  id={data}
-                >
-                  {data}
-                </Button>
-              </ListItem>
-              <ListItemSecondaryAction>
-                <IconButton onClick={() => addAction([actionData[1], data])}>
-                  <AddOutlinedIcon />
-                </IconButton>
-              </ListItemSecondaryAction>
-            </List>
-          ))}
-        </ListBoxScroller>
-      </Box>
-    );
-  }
-  return (
+  return actionData !== undefined ? (
+    <Box>
+      <ListHeading>Actions</ListHeading>
+      <ListBoxScroller>
+        {actionData[0].map((data) => (
+          <List key={data}>
+            <ListItem>
+              <Button
+                key={data}
+                variant="contained"
+                color="secondary"
+                onClick={() => callToWebGL(actionData[1], data)}
+                id={data}
+              >
+                {data}
+              </Button>
+            </ListItem>
+            <ListItemSecondaryAction>
+              <IconButton onClick={() => addAction([actionData[1], data])}>
+                <AddOutlinedIcon />
+              </IconButton>
+            </ListItemSecondaryAction>
+          </List>
+        ))}
+      </ListBoxScroller>
+    </Box>
+  ) : (
     <Box>
       <ListHeading>Actions</ListHeading>
       <Button disabled />

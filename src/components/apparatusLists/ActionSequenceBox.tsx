@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-shadow */
 import Button from "@mui/material/Button";
 import styled from "styled-components";
 import React from "react";
@@ -39,9 +40,24 @@ const ListBoxScroller = styled.div`
     display: none;
   }
 `;
+type ActionSequenceBoxProps = {
+  actionList: Array<[string, string, string]>;
+  removeAction: (index: number) => void;
+  handleOnDragEnd: (result: {
+    destination: { index: number };
+    source: { index: number };
+  }) => void;
+};
 
-const ActionSequenceBox = ({ actionList, removeAction, handleOnDragEnd }) => {
-  //Ensuring the array from parameter is not empty.
+
+// TODO what if the actionlist is empty?
+const ActionSequenceBox = ({
+  actionList,
+  removeAction,
+  handleOnDragEnd,
+}: ActionSequenceBoxProps): JSX.Element => {
+  // Ensuring the array from parameter is not empty.
+
   if (actionList !== undefined) {
     return (
       <Box>
