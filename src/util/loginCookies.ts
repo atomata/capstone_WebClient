@@ -28,11 +28,8 @@ function getUserName(){
 
 // Logs user in with given param username
 function logIn(username){
-    // We're testing on localhost
-    if(document.location.host === "localhost:3000")
-        cookies.set('user', username, {domain: window.location.hostname, path: '/', secure: true, sameSite: 'none'});
-    else
-        cookies.set('user', username, {domain: window.location.hostname, path: '/', secure: true, sameSite: 'none'});
+
+    cookies.set('user', username, {domain: window.location.hostname, path: '/', secure: true, sameSite: 'none'});
 
     console.log(document.location.host);
     console.log(window.location.hostname);
