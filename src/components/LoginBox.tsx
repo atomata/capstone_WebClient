@@ -42,9 +42,6 @@ function LoginBox(): JSX.Element {
     function ValidateLogin(name: string, pass: string){
         let loginError = false;
 
-        console.log("N -> " + name);
-        console.log("P -> " + pass);
-
         // Check if name and pass are not empty
         if(name === ''){
             setNameErr("Name field cannot be empty");
@@ -79,11 +76,8 @@ function LoginBox(): JSX.Element {
 
     const handleSubmit = (event : any) => {
         event.preventDefault();
-        console.log(event.target.elements["username-input"]._valueTracker.getValue());
-
-        console.log(event.target);
-
         // Retreive the name and password manually
+        // Normally we could just use states and update user/pass on change, but that doesn't work with autofill
         ValidateLogin(event.target.elements["username-input"]._valueTracker.getValue(), event.target.elements["password-input"]._valueTracker.getValue());
       };
 
