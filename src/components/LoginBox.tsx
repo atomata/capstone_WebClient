@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useState, FormEvent } from "react";
+import { useState } from "react";
 import { Button, TextField } from "@material-ui/core";
 import { logIn } from "../util/loginCookies";
 
@@ -74,7 +74,7 @@ function LoginBox(): JSX.Element {
             logIn(name);
     }
 
-    const handleSubmit = (event : FormEvent<HTMLFormElement>) => {
+    const handleSubmit = (event) => {
         event.preventDefault();
         // Retreive the name and password manually
         // Normally we could just use states and update user/pass on change, but that doesn't work with autofill
