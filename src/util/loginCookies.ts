@@ -28,13 +28,23 @@ function getUserName(){
 
 // Logs user in with given param username
 function logIn(username){
-    cookies.set('user', username, {domain: 'localhost', path: '/', secure: true, sameSite: 'none'});
+    // We're testing on localhost
+    if(document.location.host === "localhost:3000")
+        cookies.set('user', username, {domain: 'localhost', path: '/', secure: true, sameSite: 'none'});
+    else
+        cookies.set('user', username, {domain: 'azurestaticapps.net', path: '/', secure: true, sameSite: 'none'});
+
     redirectToIndex();
 }
 
 // Logs user out by removing their cookie
 function logOut(){
-    cookies.remove('user', {domain: 'localhost', path: '/', secure: true, sameSite: 'none'});
+    // We're testing on localhost
+    if(document.location.host === "localhost:3000")
+        cookies.remove('user', {domain: 'localhost', path: '/', secure: true, sameSite: 'none'});
+    else
+        cookies.remove('user', {domain: 'azurestaticapps.net', path: '/', secure: true, sameSite: 'none'});
+        
     console.log(getUserName());
     redirectToLogIn();
 }

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { Button, TextField } from "@material-ui/core";
 import { logIn } from "../util/loginCookies";
 
@@ -33,15 +33,13 @@ const LoginButton = styled(Button)`
 `;
 
 function LoginBox(): JSX.Element {
-    const [name, setName] = useState('');
-    const [pass, setPass] = useState('');
     const [nameErr, setNameErr] = useState('');
     const [passErr, setPassErr] = useState('');
 
     const userFormat = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
     const passFormat = /\s/;
 
-    function ValidateLogin(){
+    function ValidateLogin(name: string, pass: string){
         let loginError = false;
 
         console.log("N -> " + name);
@@ -79,11 +77,21 @@ function LoginBox(): JSX.Element {
             logIn(name);
     }
 
+    const handleSubmit = (event : any) => {
+        event.preventDefault();
+        console.log(event.target.elements["username-input"]._valueTracker.getValue());
+
+        console.log(event.target);
+
+        // Retreive the name and password manually
+        ValidateLogin(event.target.elements["username-input"]._valueTracker.getValue(), event.target.elements["password-input"]._valueTracker.getValue());
+      };
+
     // https://mui.com/components/text-fields/
     return (
         <LoginRoot> 
             <LoginContainer>
-                <form className="loginForm" noValidate autoComplete="off">
+                <form className="loginForm" autoComplete="off" onSubmit={handleSubmit}>
                     <h1>LOG IN</h1>
                     <LoginFields>
                         <TextField
@@ -92,7 +100,6 @@ function LoginBox(): JSX.Element {
                             id="username-input"
                             label="Username"
                             helperText={nameErr}
-                            onChange={(e) => setName(e.target.value)}
                         />
                         <br/>
                         <TextField
@@ -103,10 +110,9 @@ function LoginBox(): JSX.Element {
                             type="password"
                             autoComplete="current-password"
                             helperText={passErr}
-                            onChange={(e) => setPass(e.target.value)}
                         />
                         <br/>
-                        <LoginButton variant="contained" onClick={() => ValidateLogin()}>Log In</LoginButton>
+                        <LoginButton type="submit" variant="contained">Log In</LoginButton>
                     </LoginFields> 
                 </form>
             </LoginContainer>                   
