@@ -7,13 +7,17 @@ const unityContext = new UnityContext({
   codeUrl: "build/Build.wasm",
 });
 
+// TODO what if args string is empty?
 function load(arg: string) {
   unityContext.send("Container", "LoadApparatus", arg);
 }
+
+// TODO what if args string is empty?
 function voidTrigger(arg: string) {
   unityContext.send("Container", "VoidTrigger", arg);
 }
 
+// TODO what if args string is empty?
 function callToWebGL(path: string, input: string) {
   const arg = `${path}@${input}`;
   voidTrigger(arg);

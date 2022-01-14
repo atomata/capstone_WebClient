@@ -1,36 +1,44 @@
 import Link from "next/link";
-import {Button} from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import { useEffect } from "react";
-import { verifyLogIn, logOut, checkIfLoggedIn, getUserName } from "../src/util/loginCookies";
+import {
+  verifyLogIn,
+  logOut,
+  checkIfLoggedIn,
+  getUserName,
+} from "../src/util/loginCookies";
 import Loading from "../src/components/Loading";
 
 function Home(): JSX.Element {
-  useEffect(() => {verifyLogIn()}, [])
+  useEffect(() => {
+    verifyLogIn();
+  }, []);
 
   return checkIfLoggedIn() ? (
     <main>
       <h1>Welcome {getUserName()}!</h1>
       <Link
-          key="selectionPage"
-          href={{
-              pathname: "/selection",
-          }}
+        key="selectionPage"
+        href={{
+          pathname: "/selection",
+        }}
       >
-          <Button> Create New Experience</Button>
+        <Button> Create New Experience</Button>
       </Link>
       <Link
-          key="experiencePage"
-          href={{
-              pathname: "/experience",
-              query: { dataId: "testexp1" , isApparatusId: false },
-          }}
+        key="experiencePage"
+        href={{
+          pathname: "/experience",
+          query: { dataId: "testexp1", dataType: "experience" },
+        }}
       >
-          <Button> Load Test Experience</Button>
+        <Button> Load Test Experience</Button>
       </Link>
       <Button onClick={logOut}>Log Out</Button>
-  </main>
-  ):(<Loading/>);
+    </main>
+  ) : (
+    <Loading />
+  );
 }
-
 
 export default Home;
