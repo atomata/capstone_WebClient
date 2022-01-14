@@ -28,25 +28,14 @@ function getUserName(){
 
 // Logs user in with given param username
 function logIn(username){
-
     cookies.set('user', username, {domain: window.location.hostname, path: '/', secure: true, sameSite: 'none'});
-
-    console.log(document.location.host);
-    console.log(window.location.hostname);
-    console.log(document.location);
-    console.log(process.env);
-    console.log(process.env.NODE_ENV);
 
     redirectToIndex();
 }
 
 // Logs user out by removing their cookie
 function logOut(){
-    // We're testing on localhost
-    if(document.location.host === "localhost:3000")
-        cookies.remove('user', {domain: 'localhost', path: '/', secure: true, sameSite: 'none'});
-    else
-        cookies.remove('user', {domain: 'azurestaticapps.net', path: '/', secure: true, sameSite: 'none'});
+    cookies.remove('user', {domain: window.location.hostname, path: '/', secure: true, sameSite: 'none'});
         
     redirectToLogIn();
 }
