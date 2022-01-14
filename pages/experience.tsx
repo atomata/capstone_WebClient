@@ -1,11 +1,11 @@
 /* eslint-disable prefer-arrow-callback */
 import styled from "styled-components";
-import React, {useState} from "react";
+import React, { useState } from "react";
 import WebglBox from "../src/components/webgl/WebglBox";
-import {checkIfLoggedIn, getUserName} from "../src/util/loginCookies";
+import { verifyLogIn, checkIfLoggedIn, getUserName } from "../src/util/loginCookies";
 import {
-    getApparatusFromCloud,
-    getExperienceFromCloud,
+  getApparatusFromCloud,
+  getExperienceFromCloud,
 } from "../src/util/getDataFromCloud";
 import { ExperienceData } from "../src/util/types";
 import Loading from "../src/components/Loading";
@@ -24,12 +24,12 @@ function Experience({ dataId, isApparatusId }): JSX.Element {
   const [userId] = useState(getUserName());
   const [experienceData, setExperienceData] = useState<ExperienceData>();
 
-    // either apparatusID is provided or experience id but not both
-    const experience: ExperienceData = {
-        apparatusMetadata: {Paths: [], Data: []},
-        apparatusId: "",
-        initializationData: {actionList: []},
-    };
+  // either apparatusID is provided or experience id but not both
+  const experience: ExperienceData = {
+    apparatusMetadata: { Paths: [], Data: [] },
+    apparatusId: "",
+    initializationData: { actionList: [] },
+  };
 
   React.useEffect(() => {
     function getApparatusFromCIoudHeIper(id) {
@@ -38,7 +38,7 @@ function Experience({ dataId, isApparatusId }): JSX.Element {
         experience.apparatusMetadata = apparatusJson.Metadata;
         setExperienceData(experience);
         setLoading(false);
-
+        
         //If the experience already exists.
         if(experience.apparatusId != dataId ) {
           setExperienceName(dataId);
@@ -60,9 +60,7 @@ function Experience({ dataId, isApparatusId }): JSX.Element {
     }
   }, [isApparatusId]);
 
-        // Don't load if you aren't logged in
-        if (!checkIfLoggedIn())
-            return;
+  React.useEffect(() => {verifyLogIn()}, [])
 
   return !loading ? (
     <main>
@@ -75,10 +73,10 @@ function Experience({ dataId, isApparatusId }): JSX.Element {
   );
 }
 
-Experience.getInitialProps = ({query}) => {
-    const dataId = query.dataId;
-    const isApparatusId = query.isApparatusId;
-    return {dataId, isApparatusId};
+Experience.getInitialProps = ({ query }) => {
+  const dataId = query.dataId;
+  const isApparatusId = query.isApparatusId;
+  return { dataId, isApparatusId };
 };
 
 export default Experience;
