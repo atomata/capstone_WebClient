@@ -32,11 +32,10 @@ function logIn(username){
     if(document.location.host === "localhost:3000")
         cookies.set('user', username, {domain: 'localhost', path: '/', secure: true, sameSite: 'none'});
     else
-        cookies.set('user', username, {domain: '.azurestaticapps', path: '/', secure: true, sameSite: 'none'});
+        cookies.set('user', username, {domain: 'black-desert-06819cf0f-46.eastus2.azurestaticapps', path: '/', secure: true, sameSite: 'none'});
 
     console.log(document.location.host);
     console.log(document.location);
-    console.log(process.env.SUB_DOMAIN);
 
     redirectToIndex();
 }
