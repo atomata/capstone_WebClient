@@ -5,24 +5,24 @@ const cookies = new Cookies();
 
 // Verify that the user is not logged in
 // If so and on the Login Page, redirect to Index page
-function verifyNotLogIn(){
-    if(cookies.get('user') !== undefined)
+function verifyNotLogIn(): void {
+    if (cookies.get('user') !== undefined)
         redirectToIndex();
 }
 
 // Verify that the user is logged in
 // If not and on anything but the Login Page, redirect to Login page
-function verifyLogIn(){
-    if(cookies.get('user') === undefined)
-        redirectToLogIn();      
+function verifyLogIn(): void {
+    if (cookies.get('user') === undefined)
+        redirectToLogIn();
 }
 
 // Checks cookies to see if user is logged in
-function checkIfLoggedIn(){
+function checkIfLoggedIn(): boolean {
     return cookies.get('user') !== undefined;
 }
 
-function getUserName(){
+function getUserName(): string {
     return cookies.get('user');
 }
 
@@ -41,7 +41,7 @@ function logOut(){
 }
 
 // After user logs in
-function redirectToIndex(){
+function redirectToIndex() {
     Router.push('/');
 }
 
@@ -51,4 +51,4 @@ function redirectToLogIn(){
 }
 
 
-export {checkIfLoggedIn, logIn, logOut, verifyLogIn, verifyNotLogIn, getUserName}
+export { checkIfLoggedIn, logIn, logOut, verifyLogIn, verifyNotLogIn, getUserName }

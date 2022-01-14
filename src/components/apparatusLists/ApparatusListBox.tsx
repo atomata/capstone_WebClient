@@ -2,6 +2,7 @@ import React from "react";
 import Button from "@mui/material/Button";
 import styled from "styled-components";
 import { getAssetBundles, checkIfParent } from "../../util/JsonParsing";
+import { Metadata } from "../../util/types";
 
 const Box = styled.div`
   background: #fffaf0;
@@ -40,13 +41,21 @@ const ListButton = styled.div`
   margin: 5px;
 `;
 
-const ApparatusListBox = ({ metadata, handleAssetBundleChange }) => {
-  if (metadata !== undefined) {
-    const assetbundles = React.useMemo(
-      () => getAssetBundles(metadata),
-      [metadata]
-    );
+type ApparatusListProps = {
+  metadata: Metadata;
+  handleAssetBundleChange: (data) => void;
+};
 
+// TODO what if metadata is not defined or assetbundles list is empty?
+const ApparatusListBox = ({
+  metadata,
+  handleAssetBundleChange,
+}: ApparatusListProps): JSX.Element => {
+  const assetbundles = React.useMemo(
+    () => getAssetBundles(metadata),
+    [metadata]
+  );
+  if (metadata !== undefined) {
     return (
       <Box>
         <ListHeading>Apparatus</ListHeading>

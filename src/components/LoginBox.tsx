@@ -20,8 +20,8 @@ const LoginContainer = styled.div`
 `;
 
 const LoginFields = styled.div`
-    margin-top: 65px;
-    padding: 15px;
+  margin-top: 65px;
+  padding: 15px;
 `;
 
 const LoginButton = styled(Button)`
@@ -69,10 +69,14 @@ function LoginBox(): JSX.Element {
         else
             setPassErr("");
 
-        // No errors, go and log in
-        if(!loginError)
-            logIn(name);
-    }
+    if (pass === "") {
+      setPassErr("Password field cannot be empty");
+      loginError = true;
+    } else setPassErr("");
+
+    // No errors, go and log in
+    if (!loginError) logIn(name);
+  }
 
     const handleSubmit = (event) => {
         event.preventDefault();

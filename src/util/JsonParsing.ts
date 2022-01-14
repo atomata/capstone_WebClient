@@ -1,12 +1,7 @@
-import {Metadata} from "./types";
-
-type PathData = {
-  Path: string;
-  Data: {};
-};
+import { AssetBundle, Metadata, PathData, Tree } from "./types";
 
 // Creates a list of path-data objects
-function linkPathsToData(metadata: Metadata) {
+function linkPathsToData(metadata: Metadata): PathData[] {
   const pathDataList = [] as PathData[];
 
   // make an empty object for each path
@@ -36,22 +31,20 @@ function linkPathsToData(metadata: Metadata) {
 
 // takes a string[] path and makes sure it's in the tree
 // returns the node at that path
-function addPathToTreeAndReturnNode(items: string[], tree) {
+function addPathToTreeAndReturnNode(items: string[], tree: Tree) {
   let node = tree;
-
   items.forEach((item) => {
     if (!(item in node.Children)) {
-      node.Children[item] = { Children: [] };
+      node.Children[item] = { Children: [], Path: "" };
     }
     node = node.Children[item];
   });
-
   return node;
 }
 
 // converts the pathdata object created with linkPathsToData into a tree structure
-function convertPathDataToTree(metadata: Metadata) {
-  const tree = { Children: [] };
+function convertPathDataToTree(metadata: Metadata): Tree {
+  const tree = { Children: [], Path: "" };
   const pathDataList = linkPathsToData(metadata);
   pathDataList.forEach((pathData) => {
     const node = addPathToTreeAndReturnNode(pathData.Path.split("/"), tree);
@@ -79,7 +72,10 @@ function traverseNodeDepthFirst(node, assetBundleList) {
 }
 
 // returns the list of assetnbundle nodes in the tree
-function getAssetBundles(metadata: Metadata) {
+function getAssetBundles(metadata: Metadata): AssetBundle[] {
+  if (metadata === undefined) {
+    return [];
+  }
   const assetTree = convertPathDataToTree(metadata);
   const assetBundleList = [];
   traverseNodeDepthFirst(assetTree, assetBundleList);
@@ -87,23 +83,35 @@ function getAssetBundles(metadata: Metadata) {
 }
 
 // returns the list of actions of the given node
-function getActions(node) {
-  for (let child in node.Children) {
+function getActions(node: AssetBundle): any[] {
+  if (node === undefined) {
+    return undefined;
+  }
+  for (const child in node.Children) {
     if (node.Children[child].type[0] === "Event") {
       return [node.Children[child].input, node.Children[child].Path];
     }
   }
+  return undefined;
 }
 
 // Checks if a given node is a parent node or not by recursively checking if it has any direct/indirect children of type 'AssetBundle'
-function checkIfParent(node) {
+function checkIfParent(node: AssetBundle): boolean {
   if (node.Children !== undefined) {
-    for (let child in node.Children) {
-      if (node.Children[child].type[0] === "AssetBundle"||checkIfParent(node.Children[child])){
-          return true;
-        }
+    for (const child in node.Children) {
+      if (
+        node.Children[child].type[0] === "AssetBundle" ||
+        checkIfParent(node.Children[child])
+      ) {
+        return true;
+      }
     }
   }
   return false;
 }
-export { getAssetBundles, getActions, checkIfParent };
+export {
+  getAssetBundles,
+  getActions,
+  checkIfParent,
+  linkPathsToData
+};
