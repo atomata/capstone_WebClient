@@ -34,7 +34,7 @@ function linkPathsToData(metadata: Metadata): PathData[] {
 function addPathToTreeAndReturnNode(items: string[], tree: Tree) {
   let node = tree;
   items.forEach((item) => {
-    if (!node.Children.includes(item)) {
+    if (!(item in node.Children)) {
       node.Children[item] = { Children: [], Path: "" };
     }
     node = node.Children[item];
