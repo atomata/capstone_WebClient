@@ -112,5 +112,6 @@ function checkIfParent(node: AssetBundle): boolean {
 export {
   getAssetBundles,
   getActions,
-  checkIfParent
+  checkIfParent,
+  linkPathsToData
 };
