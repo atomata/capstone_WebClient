@@ -2,6 +2,7 @@ import Link from "next/link";
 import {Button} from "@material-ui/core";
 import { useEffect } from "react";
 import { verifyLogIn, logOut, checkIfLoggedIn, getUserName } from "../src/util/loginCookies";
+import Loading from "../src/components/Loading";
 
 function Home(): JSX.Element {
   useEffect(() => {verifyLogIn()}, [])
@@ -28,7 +29,7 @@ function Home(): JSX.Element {
       </Link>
       <Button onClick={logOut}>Log Out</Button>
   </main>
-  ):(<main/>);
+  ):(<Loading/>);
 }
 
 
