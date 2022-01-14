@@ -45,7 +45,6 @@ function logOut(){
     else
         cookies.remove('user', {domain: 'azurestaticapps.net', path: '/', secure: true, sameSite: 'none'});
         
-    console.log(getUserName());
     redirectToLogIn();
 }
 
@@ -56,7 +55,6 @@ function redirectToIndex(){
 
 // After user logs out
 function redirectToLogIn(){
-    console.log("to login");
     Router.push('/login');
 }
 
