@@ -1,11 +1,18 @@
 import {Button} from "@material-ui/core";
 import { useEffect } from "react";
-import { verifyLogIn, logOut, checkIfLoggedIn, getUserName } from "../src/util/loginCookies";
+import {
+  verifyLogIn,
+  logOut,
+  checkIfLoggedIn,
+  getUserName,
+} from "../src/util/loginCookies";
 import Loading from "../src/components/Loading";
 import {OuterBox, ListHeading, LoadExperience, CreateExperience } from "../src/components/SupportingComponents/Workbench";
 
 function Home(): JSX.Element {
-  useEffect(() => {verifyLogIn()}, [])
+  useEffect(() => {
+    verifyLogIn();
+  }, []);
 
   return checkIfLoggedIn() ? (
     <main>
@@ -16,9 +23,10 @@ function Home(): JSX.Element {
         <CreateExperience />
       </OuterBox>
       <Button onClick={logOut}>Log Out</Button>
-  </main>
-  ):(<Loading/>);
+    </main>
+  ) : (
+    <Loading />
+  );
 }
-
 
 export default Home;

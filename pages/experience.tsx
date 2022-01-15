@@ -1,8 +1,13 @@
 /* eslint-disable prefer-arrow-callback */
 import styled from "styled-components";
 import React, { useState } from "react";
+import { Alert, AlertTitle } from "@mui/material";
 import WebglBox from "../src/components/webgl/WebglBox";
-import { verifyLogIn, checkIfLoggedIn, getUserName } from "../src/util/loginCookies";
+import {
+  verifyLogIn,
+  checkIfLoggedIn,
+  getUserName,
+} from "../src/util/loginCookies";
 import {
   getApparatusFromCloud,
   getExperienceFromCloud,
@@ -19,8 +24,14 @@ const Content = styled.div`
   display: flex;
 `;
 
-function Experience({ dataId, isApparatusId }): JSX.Element {
+type ExperienceProps = {
+  dataId: string;
+  dataType: string;
+};
+
+function Experience({ dataId, dataType }: ExperienceProps): JSX.Element {
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
   const [userId] = useState(getUserName());
   const [experienceData, setExperienceData] = useState<ExperienceData>();
 
@@ -32,51 +43,68 @@ function Experience({ dataId, isApparatusId }): JSX.Element {
   };
 
   React.useEffect(() => {
-    function getApparatusFromCIoudHeIper(id) {
-      getApparatusFromCloud(id).then((apparatusJson) => {
-        experience.apparatusId = apparatusJson.Id.Identifier;
-        experience.apparatusMetadata = apparatusJson.Metadata;
-        setExperienceData(experience);
-        setLoading(false);
-        
+    function getApparatusFromCloudHelper(id) {
+      getApparatusFromCloud(id)
+        .then((apparatusJson) => {
+          experience.apparatusId = apparatusJson.Id.Identifier;
+          experience.apparatusMetadata = apparatusJson.Metadata;
+          setExperienceData(experience);
+          setLoading(false);
+        })
+        .catch(() => setError("apparatus not found"));
         //If the experience already exists.
         if(experience.apparatusId != dataId ) {
           setExperienceName(dataId);
         }
       });
     }
-	
+
     // Don't load if you aren't logged in
-    if(!checkIfLoggedIn())
-      return;
-	
-    if (isApparatusId === "true") {
-      getApparatusFromCIoudHeIper(dataId);
-    } else {
-      getExperienceFromCloud(userId, dataId).then((experienceJson) => {
-        experience.initializationData.actionList = experienceJson.actionList;
-        getApparatusFromCIoudHeIper(experienceJson.apparatusId);
-      });
+    // TODO test to see if this is  working properly
+    if (!checkIfLoggedIn()) return;
+
+
+    if (dataType === "apparatus") {
+      getApparatusFromCloudHelper(dataId);
+    } else if (dataType === "experience") {
+      getExperienceFromCloud(userId, dataId)
+        .then((experienceJson) => {
+          experience.initializationData.actionList = experienceJson.actionList;
+          getApparatusFromCloudHelper(experienceJson.apparatusId);
+        })
+        .catch(() => setError("experience file not found"));
     }
-  }, [isApparatusId]);
+  }, [dataId, experience, dataType, userId]);
 
-  React.useEffect(() => {verifyLogIn()}, [])
+  React.useEffect(() => {
+    verifyLogIn();
+  }, []);
 
-  return !loading ? (
-    <main>
-      <Content>
-        <WebglBox userId={userId} experienceData={experienceData} />
-      </Content>
-    </main>
-  ) : (
-    <Loading />
+  // Todo what if the experienceData and userID are undefined? we should show an error message
+  if (error === "") {
+    if (!loading) {
+      return (
+        <main>
+          <Content>
+            <WebglBox userId={userId} experienceData={experienceData} />
+          </Content>
+        </main>
+      );
+    }
+    return <Loading />;
+  }
+  return (
+    <Alert severity="error">
+      <AlertTitle>Error</AlertTitle>
+      {error}
+    </Alert>
   );
 }
 
 Experience.getInitialProps = ({ query }) => {
-  const dataId = query.dataId;
-  const isApparatusId = query.isApparatusId;
-  return { dataId, isApparatusId };
+  const { dataId } = query;
+  const { dataType } = query;
+  return { dataId, dataType };
 };
 
 export default Experience;

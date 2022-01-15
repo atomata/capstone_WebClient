@@ -7,11 +7,13 @@ import {
   addActionToList,
   removeActionFromList,
 } from "../../util/overlayfunc/overlayfunc";
+import { useOverlay, useActionList } from "../../util/overlayfunc/overlayfunc";
 import saveExperienceToCloud from "../../util/saveExperienceToCloud";
 import Navbar from "../Navbar";
 import PreviewOverlay from "../previewOverlay/PreviewOverlay";
 import styles from "../../styles/NavbarStyle.module.css";
 import { getExperienceName } from "../../util/getExperienceFromCloud";
+import { ExperienceData, Metadata } from "../../util/types";
 
 const OverlayRoot = styled.div`
   display: absolute;
@@ -71,29 +73,28 @@ const NavbarDiv = styled.div`
   z-index: 3;
 `;
 
-function Overlay({ userId, experienceData }): JSX.Element {
-  const [assetbundle, setAssetbundle] = useState({ identifier: [] });
-  const [showOverlay, setOverlay] = useState(true);
-  const [actionList, setActionList] = useState(
-    experienceData !== undefined
-      ? experienceData.initializationData.actionList
-      : []
-  );
+type OverlayProps = {
+  userId: string;
+  experienceData: ExperienceData;
+};
 
-  const toggleOverlay = () => {
-    setOverlay((show) => !show);
-  };
+// TODO can we assume that experincedata and userID are defined properly at this stage?
+function Overlay({ userId, experienceData }: OverlayProps): JSX.Element {
+  const [assetbundle, setAssetbundle] = useState({
+    Children: [],
+    Path: "",
+    identifier: [],
+  });
+  const { showOverlay, toggleOverlay } = useOverlay();
+  const {
+    actionList,
+    setActionList,
+    addActionToList,
+    removeActionFromList,
+    handleOnDragEnd,
+  } = useActionList(experienceData);
 
-  // Setting the postion of the item dragged and dropped.
-  function handleOnDragEnd(result) {
-    // dropped outside the list
-    if (!result.destination) {
-      return;
-    }
-    const [reorderItem] = actionList.splice(result.source.index, 1);
-    actionList.splice(result.destination.index, 0, reorderItem);
-  }
-  return (
+  return experienceData !== undefined ? (
     <OverlayRoot>
       <NavbarDiv>
         <Navbar
@@ -110,22 +111,18 @@ function Overlay({ userId, experienceData }): JSX.Element {
         />
       </NavbarDiv>
       {showOverlay ? (
-        <OverlayShown
-          className={swapOverlayStyles()}
-        >
+        <OverlayShown className={swapOverlayStyles()}>
           <OverlayGrid>
             <OverlayGridItem1>
               <ApparatusListBox
-                metadata={
-                  checkIfMetaExists()
-                }
+                metadata={checkIfMetaExists()}
                 handleAssetBundleChange={(data) => setAssetbundle(data)}
               />
             </OverlayGridItem1>
             <OverlayGridItem2>
               <ActionSequenceBox
                 actionList={actionList}
-                removeAction={(index) =>
+                removeAction={(index: number) =>
                   removeActionFromList(index, actionList, setActionList)
                 }
                 handleOnDragEnd={handleOnDragEnd}
@@ -147,13 +144,15 @@ function Overlay({ userId, experienceData }): JSX.Element {
         </OverlayShown>
       ) : (
         <OverlayShown>
-          <PreviewOverlay actionList = {actionList} />
+          <PreviewOverlay actionList={actionList} />
         </OverlayShown>
       )}
     </OverlayRoot>
+  ) : (
+    <div>Error: corrupted experience data</div>
   );
 
-  function checkIfMetaExists(): any {
+  function checkIfMetaExists(): Metadata {
     return experienceData !== undefined
       ? experienceData.apparatusMetadata
       : undefined;
