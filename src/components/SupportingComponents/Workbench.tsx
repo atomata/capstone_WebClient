@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { getUserName } from "../../util/loginCookies";
-import { getBlobsInContainer } from "../../util/getExperienceFromCloud";
+import { getBlobsInContainer } from "../../util/getDataFromCloud";
 
 const OuterBox = styled.div`
   margin-top: 5%;
