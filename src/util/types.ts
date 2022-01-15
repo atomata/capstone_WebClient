@@ -7,6 +7,7 @@ type InitializationData = {
 };
 type ExperienceData = {
   apparatusId: string;
+  experienceId: string;
   apparatusMetadata: Metadata;
   initializationData: InitializationData;
 };

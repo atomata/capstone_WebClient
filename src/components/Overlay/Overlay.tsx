@@ -3,16 +3,11 @@ import React, { useState } from "react";
 import ActionSequenceBox from "../apparatusLists/ActionSequenceBox";
 import ActionBox from "../apparatusLists/ActionBox";
 import ApparatusListBox from "../apparatusLists/ApparatusListBox";
-import {
-  addActionToList,
-  removeActionFromList,
-} from "../../util/overlayfunc/overlayfunc";
 import { useOverlay, useActionList } from "../../util/overlayfunc/overlayfunc";
 import saveExperienceToCloud from "../../util/saveExperienceToCloud";
 import Navbar from "../Navbar";
 import PreviewOverlay from "../previewOverlay/PreviewOverlay";
 import styles from "../../styles/NavbarStyle.module.css";
-import { getExperienceName } from "../../util/getExperienceFromCloud";
 import { ExperienceData, Metadata } from "../../util/types";
 
 const OverlayRoot = styled.div`
@@ -99,10 +94,9 @@ function Overlay({ userId, experienceData }: OverlayProps): JSX.Element {
       <NavbarDiv>
         <Navbar
           save={() => {
-            const experienceId = getExperienceName();
             saveExperienceToCloud(
               userId,
-              experienceId,
+              experienceData.experienceId,
               experienceData.apparatusId,
               actionList
             );

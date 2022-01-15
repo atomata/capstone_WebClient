@@ -3,7 +3,7 @@ import ChevronLeftSharpIcon from "@mui/icons-material/ChevronLeftSharp";
 import ChevronRightSharpIcon from "@mui/icons-material/ChevronRightSharp";
 import { Button, IconButton } from "@material-ui/core";
 import { callToWebGL } from "../../util/unityContextActions";
-import { useState } from "react";
+import {useSelected} from "../../util/previewOverlayFun/previewOverlayfunc";
 
 const PreviewRoot = styled.div`
   display: absolute;
@@ -77,9 +77,6 @@ type PreviewOverlayProps = {
 function PreviewOverlay({ actionList }: PreviewOverlayProps): JSX.Element {
   const { selected, setCount, cyclePreviewLeft, cyclePreviewRight } =
     useSelected({ actionList });
-
-
-
 
   return (
     <PreviewRoot>

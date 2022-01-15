@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { getUserName } from "../../util/loginCookies";
-import { setExperienceName, getBlobsInContainer } from "../../util/getExperienceFromCloud";
+import { getBlobsInContainer } from "../../util/getExperienceFromCloud";
 
 const OuterBox = styled.div`
   margin-top: 5%;
@@ -72,6 +72,7 @@ const CreateInnerBox = styled.div`
 `;
 
 const CreateExperience = () => {
+  const [expName, setExpName] = useState("Experience");
   return (
     <CreateInnerBox>
       <Box sx={{ display: "flex", alignItems: "center" }}>
@@ -81,10 +82,16 @@ const CreateExperience = () => {
           defaultValue="Experience"
           fullWidth
           helperText="Enter a name for your new experience"
-          onChange={(e) => setExperienceName(e.target.value)}
+          onChange={(e) => setExpName(e.target.value)}
           variant="standard"
         />
-        <Link key="selectionPage" href={{ pathname: "/selection" }}>
+        <Link
+          key="selectionPage"
+          href={{
+            pathname: "/selection",
+            query: { experienceId: expName },
+          }}
+        >
           <CreateButton> Create New Experience </CreateButton>
         </Link>
       </Box>
@@ -100,7 +107,7 @@ const LoadExperience = () => {
         const res = await getBlobsInContainer(getUserName());
         setexpList(res);
       } catch (err) {
-        console.log(err);
+        console.log("test", err);
       }
     }
     fetchData();
@@ -113,7 +120,11 @@ const LoadExperience = () => {
           key="experiencePage"
           href={{
             pathname: "/experience",
-            query: { dataId: expName, isApparatusId: false },
+            query: {
+              experienceId: expName,
+              apparatusId: "",
+              dataType: "experience",
+            },
           }}
         >
           <LoadButton> {expName} </LoadButton>
@@ -123,4 +134,4 @@ const LoadExperience = () => {
   );
 };
 
-export  { OuterBox, ListHeading, LoadExperience, CreateExperience }
+export { OuterBox, ListHeading, LoadExperience, CreateExperience };
