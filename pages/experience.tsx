@@ -24,11 +24,16 @@ const Content = styled.div`
 `;
 
 type ExperienceProps = {
-  dataId: string;
+  apparatusId: string;
+  experienceId: string;
   dataType: string;
 };
 
-function Experience({ dataId, dataType }: ExperienceProps): JSX.Element {
+function Experience({
+  apparatusId,
+  experienceId,
+  dataType,
+}: ExperienceProps): JSX.Element {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [userId] = useState(getUserName());
@@ -38,6 +43,7 @@ function Experience({ dataId, dataType }: ExperienceProps): JSX.Element {
   const experience: ExperienceData = {
     apparatusMetadata: { Paths: [], Data: [] },
     apparatusId: "",
+    experienceId,
     initializationData: { actionList: [] },
   };
 
@@ -57,18 +63,17 @@ function Experience({ dataId, dataType }: ExperienceProps): JSX.Element {
     // TODO test to see if this is  working properly
     if (!checkIfLoggedIn()) return;
 
-
     if (dataType === "apparatus") {
-      getApparatusFromCloudHelper(dataId);
+      getApparatusFromCloudHelper(apparatusId);
     } else if (dataType === "experience") {
-      getExperienceFromCloud(userId, dataId)
+      getExperienceFromCloud(userId, experienceId)
         .then((experienceJson) => {
           experience.initializationData.actionList = experienceJson.actionList;
           getApparatusFromCloudHelper(experienceJson.apparatusId);
         })
         .catch(() => setError("experience file not found"));
     }
-  }, [dataId, experience, dataType, userId]);
+  }, [apparatusId, experienceId, experience, dataType, userId]);
 
   React.useEffect(() => {
     verifyLogIn();
@@ -96,9 +101,10 @@ function Experience({ dataId, dataType }: ExperienceProps): JSX.Element {
 }
 
 Experience.getInitialProps = ({ query }) => {
-  const { dataId } = query;
+  const { apparatusId } = query;
+  const { experienceId } = query;
   const { dataType } = query;
-  return { dataId, dataType };
+  return { apparatusId, experienceId, dataType };
 };
 
 export default Experience;

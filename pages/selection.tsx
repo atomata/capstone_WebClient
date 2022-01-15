@@ -12,7 +12,8 @@ const Content = styled.div`
   display: flex;
 `;
 
-const SelectionList = () => {
+
+const SelectionList = ({experienceId}) => {
   // need to change this to get the name of appratus files from a json file in cloud
   const apparatusIDList = ["evil-cylinder", "wobble-sphere"];
 
@@ -23,7 +24,7 @@ const SelectionList = () => {
           key={index}
           href={{
             pathname: "/experience",
-            query: { dataId: apparatusId, dataType: "apparatus" },
+            query: { experienceId, apparatusId, dataType: "apparatus" },
           }}
         >
           <Button>{apparatusId}</Button>
@@ -33,18 +34,23 @@ const SelectionList = () => {
   );
 };
 
-function Selection(): JSX.Element {
+function Selection({experienceId}): JSX.Element {
    useEffect(() => {verifyLogIn()}, [])
 
   return checkIfLoggedIn() ? (
     <main>
       <h1>SELECT AN APPARATUS</h1>
-      <SelectionList />
+      <SelectionList experienceId = {experienceId} />
     </main>
   ) :
   (
     <Loading/>
   );
 }
+
+Selection.getInitialProps = ({query}) => {
+    const {experienceId} = query;
+    return {experienceId};
+};
 
 export default Selection;

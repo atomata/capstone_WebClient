@@ -94,10 +94,9 @@ function Overlay({ userId, experienceData }: OverlayProps): JSX.Element {
       <NavbarDiv>
         <Navbar
           save={() => {
-            const experienceId = "testexp1";
             saveExperienceToCloud(
               userId,
-              experienceId,
+              experienceData.experienceId,
               experienceData.apparatusId,
               actionList
             );

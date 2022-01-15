@@ -1,5 +1,4 @@
-import Link from "next/link";
-import { Button } from "@material-ui/core";
+import {Button} from "@material-ui/core";
 import { useEffect } from "react";
 import {
   verifyLogIn,
@@ -8,6 +7,7 @@ import {
   getUserName,
 } from "../src/util/loginCookies";
 import Loading from "../src/components/Loading";
+import {OuterBox, ListHeading, LoadExperience, CreateExperience } from "../src/components/SupportingComponents/Workbench";
 
 function Home(): JSX.Element {
   useEffect(() => {
@@ -17,23 +17,11 @@ function Home(): JSX.Element {
   return checkIfLoggedIn() ? (
     <main>
       <h1>Welcome {getUserName()}!</h1>
-      <Link
-        key="selectionPage"
-        href={{
-          pathname: "/selection",
-        }}
-      >
-        <Button> Create New Experience</Button>
-      </Link>
-      <Link
-        key="experiencePage"
-        href={{
-          pathname: "/experience",
-          query: { dataId: "testexp1", dataType: "experience" },
-        }}
-      >
-        <Button> Load Test Experience</Button>
-      </Link>
+      <OuterBox>
+        <ListHeading>Load an Experience</ListHeading>
+        <LoadExperience />
+        <CreateExperience />
+      </OuterBox>
       <Button onClick={logOut}>Log Out</Button>
     </main>
   ) : (

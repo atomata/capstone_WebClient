@@ -3,7 +3,7 @@ import ChevronLeftSharpIcon from "@mui/icons-material/ChevronLeftSharp";
 import ChevronRightSharpIcon from "@mui/icons-material/ChevronRightSharp";
 import { Button, IconButton } from "@material-ui/core";
 import { callToWebGL } from "../../util/unityContextActions";
-import { useSelected } from "../../util/previewOverlayFun/previewOverlayfunc";
+import {useSelected} from "../../util/previewOverlayFun/previewOverlayfunc";
 
 const PreviewRoot = styled.div`
   display: absolute;
