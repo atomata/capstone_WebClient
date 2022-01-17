@@ -27,14 +27,16 @@ function getUserName(): string {
 }
 
 // Logs user in with given param username
-function logIn(username: string): void {
-    cookies.set('user', username, { domain: 'localhost', path: '/', secure: true, sameSite: 'none' });
+function logIn(username){
+    cookies.set('user', username, {domain: window.location.hostname, path: '/', secure: true, sameSite: 'none'});
+
     redirectToIndex();
 }
 
 // Logs user out by removing their cookie
-function logOut(): void {
-    cookies.remove('user', { domain: 'localhost', path: '/', secure: true, sameSite: 'none' });
+function logOut(){
+    cookies.remove('user', {domain: window.location.hostname, path: '/', secure: true, sameSite: 'none'});
+        
     redirectToLogIn();
 }
 
@@ -44,7 +46,7 @@ function redirectToIndex() {
 }
 
 // After user logs out
-function redirectToLogIn() {
+function redirectToLogIn(){
     Router.push('/login');
 }
 
