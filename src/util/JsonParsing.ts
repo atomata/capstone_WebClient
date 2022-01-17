@@ -88,7 +88,7 @@ function getActions(node: AssetBundle): any[] {
     return undefined;
   }
   for (const child in node.Children) {
-    if (node.Children[child].type[0] === "Event") {
+    if (node.Children[child].type[0] === "Event" || node.Children[child].type[0] === "CameraFocus") {
       return [node.Children[child].input, node.Children[child].Path];
     }
   }

@@ -51,8 +51,10 @@ function Experience({
     function getApparatusFromCloudHelper(id) {
       getApparatusFromCloud(id)
         .then((apparatusJson) => {
-          experience.apparatusId = apparatusJson.Id.Identifier;
-          experience.apparatusMetadata = apparatusJson.Metadata;
+          // TODO apparatusJson.Id.Identifier not valid any more
+          experience.apparatusId = apparatusJson.Paths[0];
+          experience.apparatusMetadata.Paths = apparatusJson.Paths;
+          experience.apparatusMetadata.Data = apparatusJson.Data;
           setExperienceData(experience);
           setLoading(false);
         })

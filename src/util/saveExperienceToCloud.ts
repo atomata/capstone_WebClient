@@ -1,5 +1,5 @@
 import { BlobServiceClient, ContainerClient } from "@azure/storage-blob";
-import {sasToken} from "./Constants";
+import {experienceURL, sasToken} from "./Constants";
 
 
 const saveExperienceToCloud = async (
@@ -14,7 +14,7 @@ const saveExperienceToCloud = async (
 
   // get BlobService = notice `?` is pulled out of sasToken - if created in Azure portal
   const blobService = new BlobServiceClient(
-    `https://addressabletest1.blob.core.windows.net/?${sasToken}`
+    `${experienceURL}/?${sasToken}`
   );
 
   // get Container - full public read access

@@ -1,10 +1,10 @@
 // TODO change the link to cloud
 import {BlobServiceClient, ContainerClient} from "@azure/storage-blob";
-import {fileNamePostfix, sasToken} from "./Constants";
+import {apparatusURL, experienceURL, fileNamePostfix, sasToken} from "./Constants";
 
 function getApparatusFromCloud(id: string): Promise<any> {
   return fetch(
-    `https://capstonewebclient.blob.core.windows.net/apparatus/${id}.json`,
+    `${apparatusURL}/${id}.json`,
     { mode: "cors" }
   )
     .then((response) => response.json())
@@ -17,7 +17,7 @@ function getExperienceFromCloud(
   experienceId: string
 ): Promise<any> {
   return fetch(
-    `https://addressabletest1.blob.core.windows.net/${userId}/${experienceId}.json`,
+    `${experienceURL}/${userId}/${experienceId}.json`,
     { mode: "cors" }
   )
       .then((response) => response.json())
@@ -30,7 +30,7 @@ const getBlobsInContainer = async (userId) => {
 
   // get BlobService = notice `?` is pulled out of sasToken - if created in Azure portal
   const blobService = new BlobServiceClient(
-      `https://addressabletest1.blob.core.windows.net/?${sasToken}`
+      `${experienceURL}/?${sasToken}`
   );
 
   // get Container - full public read access
