@@ -39,7 +39,7 @@ const ListHeading = styled.h1`
   font-weight: bold;
   color: black;
 `;
-
+// TODO need to change the action item to be just path
 type ActionBoxProps = {
   assetbundle: AssetBundle;
   addAction: ([path, input]: [string, string]) => void;
@@ -54,30 +54,31 @@ const ActionBox = ({ assetbundle, addAction }: ActionBoxProps): JSX.Element => {
   );
 
   // everytime metadata is rendered we reparse metadata using useMemo hook
-  return actionData !== undefined ? (
+  return (actionData !== [] && actionData !== undefined) ? (
     <Box>
       <ListHeading>Actions</ListHeading>
       <ListBoxScroller>
-        {actionData[0].map((data) => (
-          <List key={data}>
-            <ListItem>
-              <Button
-                key={data}
-                variant="contained"
-                color="secondary"
-                onClick={() => callToWebGL(actionData[1], data)}
-                id={data}
-              >
-                {data}
-              </Button>
-            </ListItem>
-            <ListItemSecondaryAction>
-              <IconButton onClick={() => addAction([actionData[1], data])}>
-                <AddOutlinedIcon />
-              </IconButton>
-            </ListItemSecondaryAction>
-          </List>
-        ))}
+        {actionData.map((data :[inputs: [], path:string]) => (
+                data[0].map((input) => (
+                    <List key={input}>
+                        <ListItem>
+                            <Button
+                                key={input}
+                                variant="contained"
+                                color="secondary"
+                                onClick={() => callToWebGL(data[1],input)}
+                                id={input}
+                            >
+                                {input}
+                            </Button>
+                        </ListItem>
+                        <ListItemSecondaryAction>
+                            <IconButton onClick={() => addAction([data[1], input])}>
+                                <AddOutlinedIcon/>
+                            </IconButton>
+                        </ListItemSecondaryAction>
+                    </List>
+                ))))}
       </ListBoxScroller>
     </Box>
   ) : (

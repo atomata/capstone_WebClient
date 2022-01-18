@@ -24,8 +24,10 @@ function WebglBox({ userId, experienceData }: WebglProps): JSX.Element {
     unityContext.on("loaded", () => {
       // For some reason the unityContext.send("Container", "LoadApparatus", arg) in load() cannot be called at this point
       // Having a timeout bypasses this
-      setLoading(false);
-      load(experienceData.apparatusId);
+      setTimeout(() => {
+        setLoading(false);
+        load(experienceData.apparatusId);
+      }, 3000);
     });
   }, [experienceData.apparatusId]);
 
