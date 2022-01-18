@@ -53,7 +53,6 @@ function convertPathDataToTree(metadata: Metadata): Tree {
       node[data] = pathData.Data[data];
     }
   });
-
   return tree;
 }
 
@@ -83,16 +82,20 @@ function getAssetBundles(metadata: Metadata): AssetBundle[] {
 }
 
 // returns the list of actions of the given node
-function getActions(node: AssetBundle): any[] {
+function getActions(node: AssetBundle): [] {
+  const actionList = [];
   if (node === undefined) {
     return undefined;
   }
   for (const child in node.Children) {
-    if (node.Children[child].type[0] === "Event" || node.Children[child].type[0] === "CameraFocus") {
-      return [node.Children[child].input, node.Children[child].Path];
+    if (
+        node.Children[child].type[0] === "Event" ||
+        node.Children[child].type[0] === "CameraFocus"
+    ) {
+      actionList.push([node.Children[child].input, node.Children[child].Path]);
     }
   }
-  return undefined;
+  return actionList;
 }
 
 // Checks if a given node is a parent node or not by recursively checking if it has any direct/indirect children of type 'AssetBundle'
@@ -109,9 +112,4 @@ function checkIfParent(node: AssetBundle): boolean {
   }
   return false;
 }
-export {
-  getAssetBundles,
-  getActions,
-  checkIfParent,
-  linkPathsToData
-};
+export { getAssetBundles, getActions, checkIfParent, linkPathsToData };
