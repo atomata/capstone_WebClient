@@ -16,8 +16,8 @@ describe("test checkinloggedin() with no login cookie", () => {
   });
 });
 
-function renderForm(name, pass, result) {
-  return (<form className="loginForm" autoComplete="off" onSubmit={result.current.handleSubmit}>
+function renderForm(name, pass, r) {
+  return (<form className="loginForm" autoComplete="off" onSubmit={r.current.handleSubmit}>
           <TextField
             id="username-input"
             inputProps={{ "data-testid": "username-input" }}
@@ -35,44 +35,46 @@ function renderForm(name, pass, result) {
 }
 
 describe("test useLoginSubmit", () => {
+  let r;
+
+  beforeEach(() => {
+    const { result } = renderHook(useLoginSubmit);
+    r = result;
+  });
 
   it("empty name and password fields", () => {   
-    const { result } = renderHook(useLoginSubmit);
-    const { getByTestId } = render(renderForm('', '', result));
+    const { getByTestId } = render(renderForm('', '', r));
     const buttonNode = getByTestId("login-button");
     fireEvent.click(buttonNode);
 
-    expect(result.current.nameErr).toBe("Name field cannot be empty");
-    expect(result.current.passErr).toBe("Password field cannot be empty");
+    expect(r.current.nameErr).toBe("Name field cannot be empty");
+    expect(r.current.passErr).toBe("Password field cannot be empty");
   });
 
   it("name field is too small", () => {
-    const { result } = renderHook(useLoginSubmit);
-    const { getByTestId } = render(renderForm('ab', '', result));
+    const { getByTestId } = render(renderForm('ab', '', r));
     const buttonNode = getByTestId("login-button");
     fireEvent.click(buttonNode);
 
-    expect(result.current.nameErr).toBe("Name field cannot be under 3 characters long");
+    expect(r.current.nameErr).toBe("Name field cannot be under 3 characters long");
   });
 
   it("name and password fields are invalid", () => {
-    const { result } = renderHook(useLoginSubmit);
-    const { getByTestId } = render(renderForm(" ahd!jdka//", "           ", result));
+    const { getByTestId } = render(renderForm(" ahd!jdka//", "           ", r));
     const buttonNode = getByTestId("login-button");
     fireEvent.click(buttonNode);
 
-    expect(result.current.nameErr).toBe("Name field cannot contain special characters");
-    expect(result.current.passErr).toBe("Password field cannot contain blank spaces");
+    expect(r.current.nameErr).toBe("Name field cannot contain special characters");
+    expect(r.current.passErr).toBe("Password field cannot contain blank spaces");
   });
 
   it("name and password are perfect", () => {
-    const { result } = renderHook(useLoginSubmit);
-    const { getByTestId } = render(renderForm("its", "me", result));
+    const { getByTestId } = render(renderForm("its", "me", r));
     const buttonNode = getByTestId("login-button");
     fireEvent.click(buttonNode);
 
-    expect(result.current.nameErr).toBe("");
-    expect(result.current.passErr).toBe("");
+    expect(r.current.nameErr).toBe("");
+    expect(r.current.passErr).toBe("");
   });
 });
 
