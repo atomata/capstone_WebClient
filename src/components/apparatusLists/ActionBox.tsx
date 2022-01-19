@@ -41,47 +41,53 @@ const ListHeading = styled.h1`
 `;
 // TODO need to change the action item to be just path
 type ActionBoxProps = {
-  assetbundle: AssetBundle;
+  assetBundle: AssetBundle;
   addAction: ([path, input]: [string, string]) => void;
 };
 
 // TODO what if assetbundle is undefined or the actiondata is undefined or empty
-const ActionBox = ({ assetbundle, addAction }: ActionBoxProps): JSX.Element => {
-
-  const actionData = React.useMemo(
-    () => getActions(assetbundle),
-    [assetbundle]
+const ActionBox = ({ assetBundle, addAction }: ActionBoxProps): JSX.Element => {
+  const actionDataList = React.useMemo(
+    () => getActions(assetBundle),
+    [assetBundle]
   );
 
   // everytime metadata is rendered we reparse metadata using useMemo hook
-  return (actionData !== [] && actionData !== undefined) ? (
-    <Box>
-      <ListHeading>Actions</ListHeading>
-      <ListBoxScroller>
-        {actionData.map((data :[inputs: [], path:string]) => (
-                data[0].map((input) => (
-                    <List key={input}>
-                        <ListItem>
-                            <Button
-                                key={input}
-                                variant="contained"
-                                color="secondary"
-                                onClick={() => callToWebGL(data[1],input)}
-                                id={input}
-                            >
-                                {input}
-                            </Button>
-                        </ListItem>
-                        <ListItemSecondaryAction>
-                            <IconButton onClick={() => addAction([data[1], input])}>
-                                <AddOutlinedIcon/>
-                            </IconButton>
-                        </ListItemSecondaryAction>
-                    </List>
-                ))))}
-      </ListBoxScroller>
-    </Box>
-  ) : (
+  if (actionDataList !== undefined && actionDataList[0] !== undefined) {
+    console.log("actiondata :", actionDataList);
+    return (
+      <Box>
+        <ListHeading>Actions</ListHeading>
+        <ListBoxScroller>
+          {actionDataList.map((actionData) =>
+            actionData.inputs.map((input) => (
+              <List key={input}>
+                <ListItem>
+                  <Button
+                    key={input}
+                    variant="contained"
+                    color="secondary"
+                    onClick={() => callToWebGL(actionData.path, input)}
+                    id={input}
+                  >
+                    {input}
+                  </Button>
+                </ListItem>
+                <ListItemSecondaryAction>
+                  <IconButton
+                    onClick={() => addAction([actionData.path, input])}
+                  >
+                    <AddOutlinedIcon />
+                  </IconButton>
+                </ListItemSecondaryAction>
+              </List>
+            ))
+          )}
+        </ListBoxScroller>
+      </Box>
+    );
+  }
+  return (
     <Box>
       <ListHeading>Actions</ListHeading>
       <Button disabled />

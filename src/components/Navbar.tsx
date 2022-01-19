@@ -26,7 +26,7 @@ const Navbar = ({ save, toggle }) => {
               {" "}
               <Link
                 href={{
-                  pathname: "/selection",
+                  pathname: "/",
                 }}
               >
                 Return
