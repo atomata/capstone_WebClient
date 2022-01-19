@@ -12,6 +12,11 @@ type ExperienceData = {
   initializationData: InitializationData;
 };
 
+type ActionData = {
+  inputs: string[];
+  path: string;
+};
+
 type PathData = {
   Path: string;
   Data: Record<string, any[]>;
@@ -28,4 +33,5 @@ export type {
   AssetBundle,
   Tree,
   PathData,
+  ActionData,
 };

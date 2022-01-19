@@ -1,4 +1,4 @@
-import { AssetBundle, Metadata, PathData, Tree } from "./types";
+import { ActionData, AssetBundle, Metadata, PathData, Tree } from "./types";
 
 // Creates a list of path-data objects
 function linkPathsToData(metadata: Metadata): PathData[] {
@@ -82,17 +82,21 @@ function getAssetBundles(metadata: Metadata): AssetBundle[] {
 }
 
 // returns the list of actions of the given node
-function getActions(node: AssetBundle): [] {
-  const actionList = [];
+function getActions(node: AssetBundle): ActionData[] {
+  const actionList: ActionData[] = [];
   if (node === undefined) {
     return undefined;
   }
   for (const child in node.Children) {
     if (
-        node.Children[child].type[0] === "Event" ||
-        node.Children[child].type[0] === "CameraFocus"
+      node.Children[child].type[0] === "Event" ||
+      node.Children[child].type[0] === "CameraFocus"
     ) {
-      actionList.push([node.Children[child].input, node.Children[child].Path]);
+      const actionData = {
+        inputs: node.Children[child].input,
+        path: node.Children[child].Path,
+      };
+      actionList.push(actionData);
     }
   }
   return actionList;
