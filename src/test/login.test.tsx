@@ -36,43 +36,35 @@ function renderForm(name, pass, r) {
 
 describe("test useLoginSubmit", () => {
   let r;
+  let count = 0;
+  const errInputs = [["", ""],["ab","abb"],[" ahd!jdka//", "           "],["its", "me"]];
 
   beforeEach(() => {
     const { result } = renderHook(useLoginSubmit);
     r = result;
-  });
 
-  it("empty name and password fields", () => {   
-    const { getByTestId } = render(renderForm('', '', r));
+    const { getByTestId } = render(renderForm(errInputs[count][0], errInputs[count][1], r));
     const buttonNode = getByTestId("login-button");
     fireEvent.click(buttonNode);
 
+    count += 1;
+  });
+
+  it("empty name and password fields", () => {   
     expect(r.current.nameErr).toBe("Name field cannot be empty");
     expect(r.current.passErr).toBe("Password field cannot be empty");
   });
 
   it("name field is too small", () => {
-    const { getByTestId } = render(renderForm('ab', '', r));
-    const buttonNode = getByTestId("login-button");
-    fireEvent.click(buttonNode);
-
     expect(r.current.nameErr).toBe("Name field cannot be under 3 characters long");
   });
 
   it("name and password fields are invalid", () => {
-    const { getByTestId } = render(renderForm(" ahd!jdka//", "           ", r));
-    const buttonNode = getByTestId("login-button");
-    fireEvent.click(buttonNode);
-
     expect(r.current.nameErr).toBe("Name field cannot contain special characters");
     expect(r.current.passErr).toBe("Password field cannot contain blank spaces");
   });
 
   it("name and password are perfect", () => {
-    const { getByTestId } = render(renderForm("its", "me", r));
-    const buttonNode = getByTestId("login-button");
-    fireEvent.click(buttonNode);
-
     expect(r.current.nameErr).toBe("");
     expect(r.current.passErr).toBe("");
   });
