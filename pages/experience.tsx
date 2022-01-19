@@ -39,15 +39,13 @@ function Experience({
   const [userId] = useState(getUserName());
   const [experienceData, setExperienceData] = useState<ExperienceData>();
 
-  // either apparatusID is provided or experience id but not both
-  const experience: ExperienceData = {
-    apparatusMetadata: { Paths: [], Data: [] },
-    apparatusId: "",
-    experienceId,
-    initializationData: { actionList: [] },
-  };
-
   React.useEffect(() => {
+    const experience: ExperienceData = {
+      apparatusMetadata: { Paths: [], Data: [] },
+      apparatusId: "",
+      experienceId,
+      initializationData: { actionList: [] },
+    };
     function getApparatusFromCloudHelper(id) {
       getApparatusFromCloud(id)
         .then((apparatusJson) => {
@@ -75,7 +73,7 @@ function Experience({
         })
         .catch(() => setError("experience file not found"));
     }
-  }, [apparatusId, experienceId, experience, dataType, userId]);
+  }, [apparatusId, experienceId, dataType, userId]);
 
   React.useEffect(() => {
     verifyLogIn();

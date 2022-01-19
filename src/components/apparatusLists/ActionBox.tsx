@@ -54,7 +54,6 @@ const ActionBox = ({ assetBundle, addAction }: ActionBoxProps): JSX.Element => {
 
   // everytime metadata is rendered we reparse metadata using useMemo hook
   if (actionDataList !== undefined && actionDataList[0] !== undefined) {
-    console.log("actiondata :", actionDataList);
     return (
       <Box>
         <ListHeading>Actions</ListHeading>

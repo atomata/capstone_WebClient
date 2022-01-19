@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React, { useEffect, useState } from "react";
+import React, {useState } from "react";
 import ActionSequenceBox from "../apparatusLists/ActionSequenceBox";
 import ActionBox from "../apparatusLists/ActionBox";
 import ApparatusListBox from "../apparatusLists/ApparatusListBox";
@@ -9,7 +9,6 @@ import Navbar from "../Navbar";
 import PreviewOverlay from "../previewOverlay/PreviewOverlay";
 import styles from "../../styles/NavbarStyle.module.css";
 import { ExperienceData, Metadata } from "../../util/types";
-import { load, unityContext } from "../../util/unityContextActions";
 
 const OverlayRoot = styled.div`
   display: absolute;
@@ -76,7 +75,7 @@ type OverlayProps = {
 
 // TODO can we assume that experincedata and userID are defined properly at this stage?
 function Overlay({ userId, experienceData }: OverlayProps): JSX.Element {
-  const [assetbundle, setAssetbundle] = useState({
+  const [assetBundle, setAssetBundle] = useState({
     Children: [],
     Path: "",
     identifier: [],
@@ -111,7 +110,7 @@ function Overlay({ userId, experienceData }: OverlayProps): JSX.Element {
             <OverlayGridItem1>
               <ApparatusListBox
                 metadata={checkIfMetaExists()}
-                handleAssetBundleChange={(data) => setAssetbundle(data)}
+                handleAssetBundleChange={(data) => setAssetBundle(data)}
               />
             </OverlayGridItem1>
             <OverlayGridItem2>
@@ -125,10 +124,10 @@ function Overlay({ userId, experienceData }: OverlayProps): JSX.Element {
             </OverlayGridItem2>
             <OverlayGridItem3>
               <ActionBox
-                assetBundle={assetbundle}
+                assetBundle={assetBundle}
                 addAction={([path, input]) =>
                   addActionToList(
-                    [path, input, assetbundle.identifier[0]],
+                    [path, input, assetBundle.identifier[0]],
                     actionList,
                     setActionList
                   )
