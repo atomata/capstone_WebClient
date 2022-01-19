@@ -49,7 +49,6 @@ type ActionSequenceBoxProps = {
   }) => void;
 };
 
-
 // TODO what if the actionlist is empty?
 const ActionSequenceBox = ({
   actionList,
@@ -58,7 +57,7 @@ const ActionSequenceBox = ({
 }: ActionSequenceBoxProps): JSX.Element => {
   // Ensuring the array from parameter is not empty.
 
-  if (actionList !== undefined) {
+  if (actionList !== undefined && actionList[0] !== undefined) {
     return (
       <Box>
         <ListHeading>Action Sequence</ListHeading>
@@ -88,8 +87,8 @@ const ActionSequenceBox = ({
                             </Button>
                           </ListItem>
                           <ListItemSecondaryAction>
-                            <IconButton>
-                              <DeleteIcon onClick={() => removeAction(index)} />
+                            <IconButton onClick={() => removeAction(index)}>
+                              <DeleteIcon />
                             </IconButton>
                           </ListItemSecondaryAction>
                         </List>
