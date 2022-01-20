@@ -2,33 +2,30 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 
 import { Dispatch, SetStateAction, useState } from "react";
+import { ActionData, ExperienceData } from "../types";
 
 /*
  *custom hook for overlay, action list
  */
 
-const useActionList = (experienceData: {
-  initializationData: { actionList: Array<[string, string, string]> };
-}) => {
+const useActionList = (experienceData: ExperienceData) => {
   const [actionList, setActionList] = useState(
-    experienceData !== undefined
-      ? experienceData.initializationData.actionList
-      : []
+    experienceData !== undefined ? experienceData.experience.actionList : []
   );
 
   const addActionToList = (
-    [path, input, assetID]: [string, string, string],
-    hookinput: Array<[string, string, string]>,
-    functioninput: Dispatch<SetStateAction<Array<[string, string, string]>>>
+    actionData: ActionData,
+    hookinput: ActionData[],
+    functioninput: Dispatch<SetStateAction<ActionData[]>>
   ) => {
-    hookinput.push([path, input, assetID]);
+    hookinput.push(actionData);
     functioninput([...actionList]);
   };
 
   const removeActionFromList = (
     index: number,
-    hookinput: Array<[string, string, string]>,
-    functioninput: Dispatch<SetStateAction<Array<[string, string, string]>>>
+    hookinput: ActionData[],
+    functioninput: Dispatch<SetStateAction<ActionData[]>>
   ) => {
     hookinput.splice(index, 1);
     functioninput([...hookinput]);

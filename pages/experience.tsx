@@ -39,21 +39,19 @@ function Experience({
   const [userId] = useState(getUserName());
   const [experienceData, setExperienceData] = useState<ExperienceData>();
 
-  // either apparatusID is provided or experience id but not both
-  const experience: ExperienceData = {
+  const experienceDataTemp: ExperienceData = {
     apparatusMetadata: { Paths: [], Data: [] },
-    apparatusId: "",
-    experienceId,
-    initializationData: { actionList: [] },
+    experience: { experienceId, apparatusId: "", actionList: [] },
   };
-
   React.useEffect(() => {
+    // either apparatusID is provided or experience id but not both
     function getApparatusFromCloudHelper(id) {
       getApparatusFromCloud(id)
         .then((apparatusJson) => {
-          experience.apparatusId = apparatusJson.Id.Identifier;
-          experience.apparatusMetadata = apparatusJson.Metadata;
-          setExperienceData(experience);
+          experienceDataTemp.apparatusMetadata = apparatusJson.Metadata;
+          experienceDataTemp.experience.apparatusId =
+            apparatusJson.Id.Identifier;
+          setExperienceData(experienceDataTemp);
           setLoading(false);
         })
         .catch(() => setError("apparatus not found"));
@@ -68,12 +66,12 @@ function Experience({
     } else if (dataType === "experience") {
       getExperienceFromCloud(userId, experienceId)
         .then((experienceJson) => {
-          experience.initializationData.actionList = experienceJson.actionList;
+          experienceDataTemp.experience = experienceJson;
           getApparatusFromCloudHelper(experienceJson.apparatusId);
         })
         .catch(() => setError("experience file not found"));
     }
-  }, [apparatusId, experienceId, experience, dataType, userId]);
+  }, [apparatusId, experienceId, dataType, userId]);
 
   React.useEffect(() => {
     verifyLogIn();

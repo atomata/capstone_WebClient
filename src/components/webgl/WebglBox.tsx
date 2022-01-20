@@ -27,10 +27,10 @@ function WebglBox({ userId, experienceData }: WebglProps): JSX.Element {
 
       setTimeout(() => {
         setLoading(false);
-        loadApparatus(experienceData.apparatusId);
+        loadApparatus(experienceData.experience.apparatusId);
       }, 100);
     });
-  }, [experienceData.apparatusId]);
+  }, [experienceData.experience.apparatusId]);
 
   return !loading ? (
     <WebglRoot>
