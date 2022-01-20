@@ -4,7 +4,7 @@ import ActionSequenceBox from "../apparatusLists/ActionSequenceBox";
 import ActionBox from "../apparatusLists/ActionBox";
 import ApparatusListBox from "../apparatusLists/ApparatusListBox";
 import { useOverlay, useActionList } from "../../util/overlayfunc/overlayfunc";
-import saveExperienceToCloud from "../../util/saveExperienceToCloud";
+import writeToCloud from "../../util/cloudOperations/writeToCloud";
 import Navbar from "../Navbar";
 import PreviewOverlay from "../previewOverlay/PreviewOverlay";
 import styles from "../../styles/NavbarStyle.module.css";
@@ -94,7 +94,7 @@ function Overlay({ userId, experienceData }: OverlayProps): JSX.Element {
       <NavbarDiv>
         <Navbar
           save={() => {
-            saveExperienceToCloud(
+            writeToCloud(
               userId,
               experienceData.experienceId,
               experienceData.apparatusId,

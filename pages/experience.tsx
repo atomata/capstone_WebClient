@@ -11,7 +11,7 @@ import {
 import {
   getApparatusFromCloud,
   getExperienceFromCloud,
-} from "../src/util/getDataFromCloud";
+} from "../src/util/cloudOperations/readFromCloud";
 import { ExperienceData } from "../src/util/types";
 import Loading from "../src/components/Loading";
 

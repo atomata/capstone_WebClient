@@ -12,6 +12,15 @@ type ExperienceData = {
   initializationData: InitializationData;
 };
 
+type SerializedExperience = {
+  apparatusId: string;
+  actionList: [];
+};
+
+type SerializedApparatus = {
+  Id: { Identifier : string };
+  Metadata : Metadata;
+};
 type PathData = {
   Path: string;
   Data: Record<string, any[]>;
@@ -28,4 +37,6 @@ export type {
   AssetBundle,
   Tree,
   PathData,
+  SerializedApparatus,
+  SerializedExperience
 };
