@@ -8,19 +8,15 @@ const unityContext = new UnityContext({
 });
 
 // TODO what if args string is empty?
-function load(arg: string) {
-  unityContext.send("Container", "LoadApparatus", arg);
+function loadApparatus(apparatus: string) {
+  unityContext.send("Container", "LoadApparatus", apparatus);
 }
 
 // TODO what if args string is empty?
-function voidTrigger(arg: string) {
+function requestTrigger(path: string, input: string) {
+  const arg = `${path}@${input}`;
   unityContext.send("Container", "VoidTrigger", arg);
 }
 
-// TODO what if args string is empty?
-function callToWebGL(path: string, input: string) {
-  const arg = `${path}@${input}`;
-  voidTrigger(arg);
-}
 
-export { callToWebGL, load, voidTrigger, unityContext };
+export {loadApparatus, requestTrigger, unityContext };

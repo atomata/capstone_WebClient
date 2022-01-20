@@ -3,7 +3,7 @@ import Unity from "react-unity-webgl";
 import { useEffect, useState } from "react";
 import Overlay from "../Overlay/Overlay";
 import Loading from "../Loading";
-import { unityContext, load } from "../../util/unityContextActions";
+import { unityContext, loadApparatus } from "../../util/unityContextActions";
 import { ExperienceData } from "../../util/types";
 
 const WebglRoot = styled.div`
@@ -27,7 +27,7 @@ function WebglBox({ userId, experienceData }: WebglProps): JSX.Element {
 
       setTimeout(() => {
         setLoading(false);
-        load(experienceData.apparatusId);
+        loadApparatus(experienceData.apparatusId);
       }, 100);
     });
   }, [experienceData.apparatusId]);

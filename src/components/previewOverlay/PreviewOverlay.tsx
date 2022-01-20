@@ -2,7 +2,7 @@ import styled from "styled-components";
 import ChevronLeftSharpIcon from "@mui/icons-material/ChevronLeftSharp";
 import ChevronRightSharpIcon from "@mui/icons-material/ChevronRightSharp";
 import { Button, IconButton } from "@material-ui/core";
-import { callToWebGL } from "../../util/unityContextActions";
+import {requestTrigger} from "../../util/unityContextActions";
 import {useSelected} from "../../util/previewOverlayFun/previewOverlayfunc";
 
 const PreviewRoot = styled.div`
@@ -104,7 +104,7 @@ function PreviewOverlay({ actionList }: PreviewOverlayProps): JSX.Element {
                     <ActionTabSelectedListItem>
                       <Button
                         onClick={() => {
-                          callToWebGL(data[0], data[1]);
+                          requestTrigger(data[0], data[1]);
                           setCount(index);
                         }}
                       >

@@ -8,7 +8,7 @@ import {
   ListItemSecondaryAction,
 } from "@material-ui/core";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
-import { callToWebGL } from "../../util/unityContextActions";
+import { requestTrigger } from "../../util/unityContextActions";
 import { getActions } from "../../util/JsonParsing";
 import { AssetBundle } from "../../util/types";
 
@@ -47,7 +47,6 @@ type ActionBoxProps = {
 
 // TODO what if assetbundle is undefined or the actiondata is undefined or empty
 const ActionBox = ({ assetbundle, addAction }: ActionBoxProps): JSX.Element => {
-
   const actionData = React.useMemo(
     () => getActions(assetbundle),
     [assetbundle]
@@ -65,7 +64,7 @@ const ActionBox = ({ assetbundle, addAction }: ActionBoxProps): JSX.Element => {
                 key={data}
                 variant="contained"
                 color="secondary"
-                onClick={() => callToWebGL(actionData[1], data)}
+                onClick={() => requestTrigger(actionData[1], data)}
                 id={data}
               >
                 {data}
