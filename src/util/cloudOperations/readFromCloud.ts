@@ -5,7 +5,7 @@ import {
   sasToken,
   experienceStorage,
 } from "../Constants";
-import {ExperienceData, SerializedApparatus} from "../types";
+import { SerializedApparatus, SerializedExperience } from "../types";
 
 function getApparatusFromCloud(id: string): Promise<SerializedApparatus> {
   return fetch(`${apparatusContainer}/${id}.json`, { mode: "cors" })
@@ -16,7 +16,7 @@ function getApparatusFromCloud(id: string): Promise<SerializedApparatus> {
 function getExperienceFromCloud(
   userId: string,
   experienceId: string
-): Promise<ExperienceData> {
+): Promise<SerializedExperience> {
   return fetch(`${experienceStorage}/${userId}/${experienceId}.json`, {
     mode: "cors",
   })
