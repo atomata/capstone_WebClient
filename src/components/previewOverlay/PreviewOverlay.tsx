@@ -2,8 +2,9 @@ import styled from "styled-components";
 import ChevronLeftSharpIcon from "@mui/icons-material/ChevronLeftSharp";
 import ChevronRightSharpIcon from "@mui/icons-material/ChevronRightSharp";
 import { Button, IconButton } from "@material-ui/core";
-import {requestTrigger} from "../../util/unityContextActions";
-import {useSelected} from "../../util/previewOverlayFun/previewOverlayfunc";
+import { requestTrigger } from "../../util/unityContextActions";
+import { useSelected } from "../../util/previewOverlayFun/previewOverlayfunc";
+import { ActionData } from "../../util/types";
 
 const PreviewRoot = styled.div`
   display: absolute;
@@ -22,7 +23,7 @@ const PreviewGrid = styled.div`
 
 const PreviewGridLeft = styled.div`
   grid-column: 5 / span 1;
-  grid-row: 14 / span 1;
+  grid-row: 12 / span 1;
   z-index: 2;
   pointer-events: auto;
   margin: 5%;
@@ -32,7 +33,7 @@ const PreviewGridLeft = styled.div`
 
 const PreviewGridCenter = styled.div`
   grid-column: 7 / span 7;
-  grid-row: 13 / span 1;
+  grid-row: 12 / span 1;
   z-index: 2;
   pointer-events: auto;
   margin: 5%;
@@ -44,7 +45,7 @@ const PreviewGridCenter = styled.div`
 
 const PreviewGridRight = styled.div`
   grid-column: 15 / span 1;
-  grid-row: 14 / span 1;
+  grid-row: 12 / span 1;
   z-index: 2;
   pointer-events: auto;
   margin: 5%;
@@ -71,13 +72,12 @@ const ActionTabSelectedListItem = styled.div`
 `;
 
 type PreviewOverlayProps = {
-  actionList: Array<[string, string, string]>;
+  actionList: ActionData[];
 };
 
 function PreviewOverlay({ actionList }: PreviewOverlayProps): JSX.Element {
-  const { selected, setCount, cyclePreviewLeft, cyclePreviewRight } =
-    useSelected({ actionList });
-
+  const { selected, setSelected, cyclePreviewLeft, cyclePreviewRight } =
+    useSelected(actionList);
   return (
     <PreviewRoot>
       {actionList[0] !== undefined ? (
@@ -98,14 +98,14 @@ function PreviewOverlay({ actionList }: PreviewOverlayProps): JSX.Element {
           </PreviewGridLeft>
           <PreviewGridCenter>
             <ActionTabList>
-              {actionList.map((data, index) => (
+              {actionList.map((actionData, index) => (
                 <ActionTabListItem key={index}>
                   {selected === index ? (
+                    // TODO change styling instead of defining a new component
                     <ActionTabSelectedListItem>
                       <Button
                         onClick={() => {
-                          requestTrigger(data[0], data[1]);
-                          setCount(index);
+                          setSelected(index);
                         }}
                       >
                         {index}
@@ -114,8 +114,7 @@ function PreviewOverlay({ actionList }: PreviewOverlayProps): JSX.Element {
                   ) : (
                     <Button
                       onClick={() => {
-                        callToWebGL(data[0], data[1]);
-                        setCount(index);
+                        setSelected(index);
                       }}
                     >
                       {index}

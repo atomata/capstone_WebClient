@@ -51,7 +51,7 @@ describe("test use selected", () => {
     });
 
     act(() => {
-      result.current.setCount(0);
+      result.current.setSelected(0);
       result.current.cyclePreviewRight();
     });
 
@@ -69,7 +69,7 @@ describe("test use selected", () => {
     });
 
     act(() => {
-      result.current.setCount(0);
+      result.current.setSelected(0);
       result.current.cyclePreviewLeft();
     });
     expect(result.current.selected).toBe(0);
@@ -86,7 +86,7 @@ describe("test use selected", () => {
     });
 
     act(() => {
-      result.current.setCount(1);
+      result.current.setSelected(1);
       result.current.cyclePreviewLeft();
     });
     expect(result.current.cyclePreviewLeft().setCount(0)).toBe(0);

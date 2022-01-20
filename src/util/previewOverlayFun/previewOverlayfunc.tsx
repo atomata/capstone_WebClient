@@ -1,25 +1,22 @@
 import { Dispatch, SetStateAction, useState } from "react";
-import { callToWebGL } from "../unityContextActions";
+import { requestTrigger } from "../unityContextActions";
+import { ActionData } from "../types";
 
-type ActionListType = {
-  actionList: Array<[string, string, string]>;
-};
-
-const useSelected = ({
-  actionList,
-}: ActionListType): {
+const useSelected = (
+  actionList: ActionData[]
+): {
   selected: number;
-  setCount: Dispatch<SetStateAction<number>>;
+  setSelected: Dispatch<SetStateAction<number>>;
   cyclePreviewLeft: () => () => void;
   cyclePreviewRight: () => () => void;
 } => {
-  const [selected, setCount] = useState(0);
+  const [selected, setSelected] = useState(0);
 
   function cyclePreviewRight() {
     return selected < actionList.length - 1
       ? () => {
-          setCount(selected + 1);
-          callToWebGL(actionList[selected + 1][0], actionList[selected + 1][1]);
+          setSelected(selected + 1);
+          requestTrigger(actionList[selected+1].path, actionList[selected+1].input);
         }
       : null;
     // same logic with the cyclePreviewLeft, but check if seleteced is the end of the actionList
@@ -28,20 +25,17 @@ const useSelected = ({
   function cyclePreviewLeft() {
     if (selected > 0) {
       return () => {
-        setCount(selected - 1);
-        callToWebGL(actionList[selected - 1][0], actionList[selected - 1][1]);
+        setSelected(selected - 1);
+        requestTrigger(actionList[selected-1].path, actionList[selected-1].input);
       };
     }
     return () => {
-      setCount(selected);
-      callToWebGL(actionList[selected][0], actionList[selected][1]);
+      setSelected(selected);
+      requestTrigger(actionList[selected].path, actionList[selected].input);
     };
-    // return selected > 0 ? () => { setCount(selected - 1); callToWebGL(actionList[selected - 1][0], actionList[selected - 1][1]); }:() => {};
-    // returns a callback
   }
 
-  return { selected, setCount, cyclePreviewLeft, cyclePreviewRight };
+  return { selected, setSelected, cyclePreviewLeft, cyclePreviewRight };
 };
 
 export { useSelected };
-export type { ActionListType };
