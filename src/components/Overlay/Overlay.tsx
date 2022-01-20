@@ -4,7 +4,7 @@ import ActionSequenceBox from "../apparatusLists/ActionSequenceBox";
 import ActionBox from "../apparatusLists/ActionBox";
 import ApparatusListBox from "../apparatusLists/ApparatusListBox";
 import { useOverlay, useActionList } from "../../util/overlayfunc/overlayfunc";
-import writeToCloud from "../../util/cloudOperations/writeToCloud";
+import saveExperienceToCloud from "../../util/cloudOperations/writeToCloud";
 import Navbar from "../Navbar";
 import PreviewOverlay from "../previewOverlay/PreviewOverlay";
 import styles from "../../styles/NavbarStyle.module.css";
@@ -75,12 +75,14 @@ type OverlayProps = {
 
 // TODO can we assume that experincedata and userID are defined properly at this stage?
 function Overlay({ userId, experienceData }: OverlayProps): JSX.Element {
-  const [assetbundle, setAssetbundle] = useState({
+  const [assetBundle, setAssetBundle] = useState({
     Children: [],
     Path: "",
     identifier: [],
   });
   const { showOverlay, toggleOverlay } = useOverlay();
+
+  // TODO does changing experienceData in useActionList changes the experienceData in
   const {
     actionList,
     setActionList,
@@ -94,12 +96,8 @@ function Overlay({ userId, experienceData }: OverlayProps): JSX.Element {
       <NavbarDiv>
         <Navbar
           save={() => {
-            writeToCloud(
-              userId,
-              experienceData.experienceId,
-              experienceData.apparatusId,
-              actionList
-            );
+            experienceData.experience.actionList = [...actionList];
+            saveExperienceToCloud(userId, experienceData.experience);
           }}
           toggle={toggleOverlay}
         />
@@ -110,7 +108,7 @@ function Overlay({ userId, experienceData }: OverlayProps): JSX.Element {
             <OverlayGridItem1>
               <ApparatusListBox
                 metadata={checkIfMetaExists()}
-                handleAssetBundleChange={(data) => setAssetbundle(data)}
+                handleAssetBundleChange={(data) => setAssetBundle(data)}
               />
             </OverlayGridItem1>
             <OverlayGridItem2>
@@ -124,10 +122,10 @@ function Overlay({ userId, experienceData }: OverlayProps): JSX.Element {
             </OverlayGridItem2>
             <OverlayGridItem3>
               <ActionBox
-                assetbundle={assetbundle}
+                assetbundle={assetBundle}
                 addAction={([path, input]) =>
                   addActionToList(
-                    [path, input, assetbundle.identifier[0]],
+                    { path, input, assetID: assetBundle.identifier[0] },
                     actionList,
                     setActionList
                   )

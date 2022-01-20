@@ -10,6 +10,7 @@ import {
 } from "@material-ui/core";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import {ActionData} from "../../util/types";
 
 const Box = styled.div`
   background: #fffaf0;
@@ -41,7 +42,7 @@ const ListBoxScroller = styled.div`
   }
 `;
 type ActionSequenceBoxProps = {
-  actionList: Array<[string, string, string]>;
+  actionList: ActionData[];
   removeAction: (index: number) => void;
   handleOnDragEnd: (result: {
     destination: { index: number };
@@ -84,7 +85,7 @@ const ActionSequenceBox = ({
                         <List>
                           <ListItem>
                             <Button variant="contained" color="secondary">
-                              {data[2]}:{data[1]}
+                              {data.assetID}:{data.input}
                             </Button>
                           </ListItem>
                           <ListItemSecondaryAction>

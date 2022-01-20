@@ -2,24 +2,26 @@ type Metadata = {
   Paths: string[];
   Data: string[];
 };
-type InitializationData = {
-  actionList: [];
+
+type ActionData = {
+  path: string;
+  input: string;
+  assetID: string;
 };
 type ExperienceData = {
-  apparatusId: string;
-  experienceId: string;
   apparatusMetadata: Metadata;
-  initializationData: InitializationData;
+  experience : SerializedExperience
 };
 
 type SerializedExperience = {
+  experienceId: string;
   apparatusId: string;
-  actionList: [];
+  actionList: ActionData[];
 };
 
 type SerializedApparatus = {
-  Id: { Identifier : string };
-  Metadata : Metadata;
+  Id: { Identifier: string };
+  Metadata: Metadata;
 };
 type PathData = {
   Path: string;
@@ -32,11 +34,11 @@ type Tree = { Children: any[]; Path: string };
 
 export type {
   Metadata,
-  InitializationData,
   ExperienceData,
   AssetBundle,
   Tree,
+  ActionData,
   PathData,
   SerializedApparatus,
-  SerializedExperience
+  SerializedExperience,
 };
