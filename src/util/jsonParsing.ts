@@ -1,4 +1,4 @@
-import { AssetBundle, Metadata, PathData, Tree } from "./types";
+import { ActionData, AssetBundle, Metadata, PathData, Tree } from "./types";
 
 // Creates a list of path-data objects
 function linkPathsToData(metadata: Metadata): PathData[] {
@@ -82,17 +82,26 @@ function getAssetBundles(metadata: Metadata): AssetBundle[] {
   return assetBundleList;
 }
 
+//TODO input to one event can be mutil valued . currently adding them separatly in the list
 // returns the list of actions of the given node
-function getActions(node: AssetBundle): any[] {
+function getActions(node: AssetBundle): ActionData[] {
+  const actionList = [];
   if (node === undefined) {
     return undefined;
   }
   for (const child in node.Children) {
     if (node.Children[child].type[0] === "Event") {
-      return [node.Children[child].input, node.Children[child].Path];
+      for (const index in node.Children[child].input) {
+        const actionData = {
+          input: node.Children[child].input[index],
+          path: node.Children[child].Path,
+          assetID: node.identifier,
+        };
+        actionList.push(actionData);
+      }
     }
   }
-  return undefined;
+  return actionList;
 }
 
 // Checks if a given node is a parent node or not by recursively checking if it has any direct/indirect children of type 'AssetBundle'
@@ -109,9 +118,4 @@ function checkIfParent(node: AssetBundle): boolean {
   }
   return false;
 }
-export {
-  getAssetBundles,
-  getActions,
-  checkIfParent,
-  linkPathsToData
-};
+export { getAssetBundles, getActions, checkIfParent, linkPathsToData };
