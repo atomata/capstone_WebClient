@@ -10,7 +10,7 @@ import {
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import { requestTrigger } from "../../util/unityContextActions";
 import { getActions } from "../../util/jsonParsing";
-import { AssetBundle } from "../../util/types";
+import { ActionData, AssetBundle } from "../../util/types";
 
 const Box = styled.div`
   background: #fffaf0;
@@ -42,36 +42,38 @@ const ListHeading = styled.h1`
 
 type ActionBoxProps = {
   assetBundle: AssetBundle;
-  addAction: ([path, input]: [string, string]) => void;
+  addAction: (actionData: ActionData) => void;
 };
 
 // TODO what if assetbundle is undefined or the actiondata is undefined or empty
 const ActionBox = ({ assetBundle, addAction }: ActionBoxProps): JSX.Element => {
-  const actionData = React.useMemo(
+  const actionList = React.useMemo(
     () => getActions(assetBundle),
     [assetBundle]
   );
 
   // everytime metadata is rendered we reparse metadata using useMemo hook
-  return actionData !== undefined ? (
+  return actionList !== undefined ? (
     <Box>
       <ListHeading>Actions</ListHeading>
       <ListBoxScroller>
-        {actionData[0].map((data) => (
-          <List key={data}>
+        {actionList.map((actionData) => (
+          <List key={actionData.input}>
             <ListItem>
               <Button
-                key={data}
+                key={actionData.input}
                 variant="contained"
                 color="secondary"
-                onClick={() => requestTrigger(actionData[1], data)}
-                id={data}
+                onClick={() =>
+                  requestTrigger(actionData.path, actionData.input)
+                }
+                id={actionData.input}
               >
-                {data}
+                {actionData.input}
               </Button>
             </ListItem>
             <ListItemSecondaryAction>
-              <IconButton onClick={() => addAction([actionData[1], data])}>
+              <IconButton onClick={() => addAction(actionData)}>
                 <AddOutlinedIcon />
               </IconButton>
             </ListItemSecondaryAction>

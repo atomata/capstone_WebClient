@@ -123,12 +123,8 @@ function Overlay({ userId, experienceData }: OverlayProps): JSX.Element {
             <OverlayGridItem3>
               <ActionBox
                 assetBundle={assetBundle}
-                addAction={([path, input]) =>
-                  addActionToList(
-                    { path, input, assetID: assetBundle.identifier[0] },
-                    actionList,
-                    setActionList
-                  )
+                addAction={(actionData) =>
+                  addActionToList(actionData, actionList, setActionList)
                 }
               />
             </OverlayGridItem3>
