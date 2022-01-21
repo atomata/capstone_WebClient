@@ -58,7 +58,7 @@ const ActionSequenceBox = ({
 }: ActionSequenceBoxProps): JSX.Element => {
   // Ensuring the array from parameter is not empty.
 
-  if (actionList !== undefined) {
+  if (actionList !== undefined && actionList[0] !== undefined) {
     return (
       <Box>
         <ListHeading>Action Sequence</ListHeading>

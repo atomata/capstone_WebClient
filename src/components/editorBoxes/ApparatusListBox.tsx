@@ -2,7 +2,7 @@ import React from "react";
 import Button from "@mui/material/Button";
 import styled from "styled-components";
 import { getAssetBundles, checkIfParent } from "../../util/jsonParsing";
-import { Metadata } from "../../util/types";
+import { SerializedApparatus } from "../../util/types";
 
 const Box = styled.div`
   background: #fffaf0;
@@ -42,7 +42,7 @@ const ListButton = styled.div`
 `;
 
 type ApparatusListProps = {
-  metadata: Metadata;
+  metadata: SerializedApparatus;
   handleAssetBundleChange: (data) => void;
 };
 
@@ -69,7 +69,7 @@ const ApparatusListBox = ({
                   handleAssetBundleChange(data);
                 }}
               >
-                {data.identifier[0]}
+                {data.identifier}
               </Button>
             </ListButton>
           ))}

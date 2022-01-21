@@ -53,35 +53,37 @@ const ActionBox = ({ assetBundle, addAction }: ActionBoxProps): JSX.Element => {
   );
 
   // everytime metadata is rendered we reparse metadata using useMemo hook
-  return actionList !== undefined ? (
-    <Box>
-      <ListHeading>Actions</ListHeading>
-      <ListBoxScroller>
-        {actionList.map((actionData) => (
-          <List key={actionData.input}>
-            <ListItem>
-              <Button
-                key={actionData.input}
-                variant="contained"
-                color="secondary"
-                onClick={() =>
-                  requestTrigger(actionData.path, actionData.input)
-                }
-                id={actionData.input}
-              >
-                {actionData.input}
-              </Button>
-            </ListItem>
-            <ListItemSecondaryAction>
-              <IconButton onClick={() => addAction(actionData)}>
-                <AddOutlinedIcon />
-              </IconButton>
-            </ListItemSecondaryAction>
-          </List>
-        ))}
-      </ListBoxScroller>
-    </Box>
-  ) : (
+  if (actionList !== undefined && actionList[0] !== undefined)
+    return (
+      <Box>
+        <ListHeading>Actions</ListHeading>
+        <ListBoxScroller>
+          {actionList.map((actionData) => (
+            <List key={actionData.input}>
+              <ListItem>
+                <Button
+                  key={actionData.input}
+                  variant="contained"
+                  color="secondary"
+                  onClick={() =>
+                    requestTrigger(actionData.path, actionData.input)
+                  }
+                  id={actionData.input}
+                >
+                  {actionData.input}
+                </Button>
+              </ListItem>
+              <ListItemSecondaryAction>
+                <IconButton onClick={() => addAction(actionData)}>
+                  <AddOutlinedIcon />
+                </IconButton>
+              </ListItemSecondaryAction>
+            </List>
+          ))}
+        </ListBoxScroller>
+      </Box>
+    );
+  return (
     <Box>
       <ListHeading>Actions</ListHeading>
       <Button disabled />

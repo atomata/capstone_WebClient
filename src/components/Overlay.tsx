@@ -8,7 +8,7 @@ import saveExperienceToCloud from "../util/cloudOperations/writeToCloud";
 import Navbar from "./Navbar";
 import PreviewOverlay from "./PreviewOverlay";
 import styles from "../styles/NavbarStyle.module.css";
-import { ExperienceData, Metadata } from "../util/types";
+import { ExperienceData, SerializedApparatus } from "../util/types";
 
 const OverlayRoot = styled.div`
   display: absolute;
@@ -76,9 +76,9 @@ type OverlayProps = {
 // TODO can we assume that experincedata and userID are defined properly at this stage?
 function Overlay({ userId, experienceData }: OverlayProps): JSX.Element {
   const [assetBundle, setAssetBundle] = useState({
-    Children: [],
-    Path: "",
-    identifier: [],
+    children: [],
+    path: "",
+    identifier: "",
   });
   const { showOverlay, toggleOverlay } = useOverlay();
 
@@ -140,7 +140,7 @@ function Overlay({ userId, experienceData }: OverlayProps): JSX.Element {
     <div>Error: corrupted experience data</div>
   );
 
-  function checkIfMetaExists(): Metadata {
+  function checkIfMetaExists(): SerializedApparatus {
     return experienceData !== undefined
       ? experienceData.apparatusMetadata
       : undefined;

@@ -1,16 +1,11 @@
-type Metadata = {
-  paths: string[];
-  data: string[];
-};
-
 type ActionData = {
   path: string;
   input: string;
   assetId: string;
 };
 type ExperienceData = {
-  apparatusMetadata: Metadata;
-  experience : SerializedExperience
+  apparatusMetadata: SerializedApparatus;
+  experience: SerializedExperience;
 };
 
 type SerializedExperience = {
@@ -19,21 +14,22 @@ type SerializedExperience = {
   actionList: ActionData[];
 };
 
+// TODO change to lower case
 type SerializedApparatus = {
-  id: { Identifier: string };
-  metadata: Metadata;
+  Id : string
+  Paths: string[];
+  Data: string[];
 };
 type PathData = {
   path: string;
   data: Record<string, any[]>;
 };
 
-type AssetBundle = { children: any[]; path: string; identifier: string[] };
+type AssetBundle = { children: any[]; path: string; identifier: string};
 
 type Tree = { children: any[]; path: string };
 
 export type {
-  Metadata,
   ExperienceData,
   AssetBundle,
   Tree,
