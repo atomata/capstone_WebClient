@@ -75,6 +75,7 @@ type PreviewOverlayProps = {
   actionList: ActionData[];
 };
 
+// TODO change styling instead of defining a new component
 function PreviewOverlay({ actionList }: PreviewOverlayProps): JSX.Element {
   const { selected, setSelected, cyclePreviewLeft, cyclePreviewRight } =
     useSelected(actionList);
@@ -101,8 +102,9 @@ function PreviewOverlay({ actionList }: PreviewOverlayProps): JSX.Element {
               {actionList.map((actionData, index) => (
                 <ActionTabListItem key={index}>
                   {selected === index ? (
-                    // TODO change styling instead of defining a new component
                     <ActionTabSelectedListItem>
+                      {(() =>
+                        requestTrigger(actionData.path, actionData.input))()}
                       <Button
                         onClick={() => {
                           setSelected(index);
