@@ -1,5 +1,5 @@
 import { BlobServiceClient, ContainerClient } from "@azure/storage-blob";
-import { experienceStorage, sasToken } from "../Constants";
+import { experienceStorage, sasToken } from "../constants";
 import { SerializedExperience } from "../types";
 
 async function saveExperienceToCloud(

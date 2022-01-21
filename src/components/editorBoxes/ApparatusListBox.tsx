@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "@mui/material/Button";
 import styled from "styled-components";
-import { getAssetBundles, checkIfParent } from "../../util/JsonParsing";
+import { getAssetBundles, checkIfParent } from "../../util/jsonParsing";
 import { Metadata } from "../../util/types";
 
 const Box = styled.div`

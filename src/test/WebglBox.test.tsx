@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
 import React from "react";
-import WebglBox from "../components/webgl/WebglBox";
+import WebglBox from "../components/WebglBox";
 
 const metadata = {
   Paths: [

@@ -1,14 +1,14 @@
 import styled from "styled-components";
 import React, { useState } from "react";
-import ActionSequenceBox from "../apparatusLists/ActionSequenceBox";
-import ActionBox from "../apparatusLists/ActionBox";
-import ApparatusListBox from "../apparatusLists/ApparatusListBox";
-import { useOverlay, useActionList } from "../../util/overlayfunc/overlayfunc";
-import saveExperienceToCloud from "../../util/cloudOperations/writeToCloud";
-import Navbar from "../Navbar";
-import PreviewOverlay from "../previewOverlay/PreviewOverlay";
-import styles from "../../styles/NavbarStyle.module.css";
-import { ExperienceData, Metadata } from "../../util/types";
+import ActionSequenceBox from "./editorBoxes/ActionSequenceBox";
+import ActionBox from "./editorBoxes/ActionBox";
+import ApparatusListBox from "./editorBoxes/ApparatusListBox";
+import { useOverlay, useActionList } from "../util/customHooks/overlayfunc";
+import saveExperienceToCloud from "../util/cloudOperations/writeToCloud";
+import Navbar from "./Navbar";
+import PreviewOverlay from "./PreviewOverlay";
+import styles from "../styles/NavbarStyle.module.css";
+import { ExperienceData, Metadata } from "../util/types";
 
 const OverlayRoot = styled.div`
   display: absolute;

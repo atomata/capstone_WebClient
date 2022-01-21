@@ -9,7 +9,7 @@ import {
 } from "@material-ui/core";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import { requestTrigger } from "../../util/unityContextActions";
-import { getActions } from "../../util/JsonParsing";
+import { getActions } from "../../util/jsonParsing";
 import { AssetBundle } from "../../util/types";
 
 const Box = styled.div`

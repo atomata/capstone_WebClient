@@ -1,4 +1,4 @@
-import { getAssetBundles, linkPathsToData } from "../util/JsonParsing";
+import { getAssetBundles, linkPathsToData } from "../util/jsonParsing";
 
 const testmetadata = {
   Paths: [

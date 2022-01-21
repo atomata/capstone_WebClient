@@ -2,7 +2,7 @@
 import styled from "styled-components";
 import React, { useState } from "react";
 import { Alert, AlertTitle } from "@mui/material";
-import WebglBox from "../src/components/webgl/WebglBox";
+import WebglBox from "../src/components/WebglBox";
 import {
   verifyLogIn,
   checkIfLoggedIn,

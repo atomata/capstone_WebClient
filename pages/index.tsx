@@ -7,7 +7,7 @@ import {
   getUserName,
 } from "../src/util/loginCookies";
 import Loading from "../src/components/Loading";
-import {OuterBox, ListHeading, LoadExperience, CreateExperience } from "../src/components/SupportingComponents/Workbench";
+import {OuterBox, ListHeading, LoadExperience, CreateExperience } from "../src/components/Workbench";
 
 function Home(): JSX.Element {
   useEffect(() => {

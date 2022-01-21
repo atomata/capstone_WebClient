@@ -3,10 +3,10 @@ import { renderHook } from "@testing-library/react-hooks";
 import { act } from "react-dom/test-utils";
 import {
   useSelected,
-} from "../util/previewOverlayFun/previewOverlayfunc";
+} from "../util/customHooks/previewOverlayfunc";
 
-import PreviewOverlay from "../components/previewOverlay/PreviewOverlay";
-import { useActionList } from "../util/overlayfunc/overlayfunc";
+import PreviewOverlay from "../components/PreviewOverlay";
+import { useActionList } from "../util/customHooks/overlayfunc";
 
 test("previewOverlay renders without crashing", () => {
   const { result } = renderHook(useActionList);

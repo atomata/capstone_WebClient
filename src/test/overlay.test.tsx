@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { render } from "@testing-library/react";
 import { act, renderHook } from "@testing-library/react-hooks";
-import Overlay from "../components/Overlay/Overlay";
-import { useActionList, useOverlay } from "../util/overlayfunc/overlayfunc";
+import Overlay from "../components/Overlay";
+import { useActionList, useOverlay } from "../util/customHooks/overlayfunc";
 
 test("Overlay renders without crashing", () => {
   render(<Overlay userId="testuser1" experienceData={undefined} />);

@@ -4,7 +4,7 @@ import {
   fileNamePostfix,
   sasToken,
   experienceStorage,
-} from "../Constants";
+} from "../constants";
 import { SerializedApparatus, SerializedExperience } from "../types";
 
 function getApparatusFromCloud(id: string): Promise<SerializedApparatus> {
