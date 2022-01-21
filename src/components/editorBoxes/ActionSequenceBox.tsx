@@ -50,7 +50,6 @@ type ActionSequenceBoxProps = {
   }) => void;
 };
 
-// TODO what if the actionlist is empty?
 const ActionSequenceBox = ({
   actionList,
   removeAction,

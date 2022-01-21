@@ -77,10 +77,10 @@ function traverseNodeDepthFirst(node, assetBundleList) {
   }
 }
 
-// returns the list of assetnbundle nodes in the tree
+// returns the list of assetbundle nodes in the tree
 function getAssetBundles(metadata: SerializedApparatus): AssetBundle[] {
   if (metadata === undefined) {
-    return [];
+    return undefined;
   }
   console.log("get assets ");
   const assetTree = convertPathDataToTree(metadata);

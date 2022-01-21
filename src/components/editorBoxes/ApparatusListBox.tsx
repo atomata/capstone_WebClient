@@ -46,7 +46,6 @@ type ApparatusListProps = {
   handleAssetBundleChange: (data) => void;
 };
 
-// TODO what if metadata is not defined or assetbundles list is empty?
 const ApparatusListBox = ({
   metadata,
   handleAssetBundleChange,
@@ -55,7 +54,7 @@ const ApparatusListBox = ({
     () => getAssetBundles(metadata),
     [metadata]
   );
-  if (metadata !== undefined) {
+  if (assetBundleList !== undefined && assetBundleList[0] !== undefined) {
     return (
       <Box>
         <ListHeading>Apparatus</ListHeading>

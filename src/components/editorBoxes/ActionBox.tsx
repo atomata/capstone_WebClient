@@ -45,7 +45,6 @@ type ActionBoxProps = {
   addAction: (actionData: ActionData) => void;
 };
 
-// TODO what if assetbundle is undefined or the actiondata is undefined or empty
 const ActionBox = ({ assetBundle, addAction }: ActionBoxProps): JSX.Element => {
   const actionList = React.useMemo(
     () => getActions(assetBundle),
