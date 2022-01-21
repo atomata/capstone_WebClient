@@ -117,7 +117,7 @@ const LoadExperience = () => {
     <InnerBox>
       {expList.map((expName) => (
         <Link
-          key="experiencePage"
+          key={expName}
           href={{
             pathname: "/experience",
             query: {

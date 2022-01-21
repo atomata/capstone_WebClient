@@ -10,7 +10,7 @@ import {
 } from "@material-ui/core";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import {ActionData} from "../../util/types";
+import { ActionData } from "../../util/types";
 
 const Box = styled.div`
   background: #fffaf0;
@@ -50,7 +50,6 @@ type ActionSequenceBoxProps = {
   }) => void;
 };
 
-
 // TODO what if the actionlist is empty?
 const ActionSequenceBox = ({
   actionList,
@@ -89,8 +88,8 @@ const ActionSequenceBox = ({
                             </Button>
                           </ListItem>
                           <ListItemSecondaryAction>
-                            <IconButton>
-                              <DeleteIcon onClick={() => removeAction(index)} />
+                            <IconButton onClick={() => removeAction(index)}>
+                              <DeleteIcon />
                             </IconButton>
                           </ListItemSecondaryAction>
                         </List>
