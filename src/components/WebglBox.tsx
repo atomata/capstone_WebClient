@@ -30,6 +30,9 @@ function WebglBox({ userId, experienceData }: WebglProps): JSX.Element {
         loadApparatus(experienceData.experience.apparatusId);
       }, 100);
     });
+    return function () {
+      unityContext.removeEventListener("loaded");
+    };
   }, [experienceData.experience.apparatusId]);
 
   return !loading ? (
