@@ -41,15 +41,15 @@ const ListHeading = styled.h1`
 `;
 
 type ActionBoxProps = {
-  assetbundle: AssetBundle;
+  assetBundle: AssetBundle;
   addAction: ([path, input]: [string, string]) => void;
 };
 
 // TODO what if assetbundle is undefined or the actiondata is undefined or empty
-const ActionBox = ({ assetbundle, addAction }: ActionBoxProps): JSX.Element => {
+const ActionBox = ({ assetBundle, addAction }: ActionBoxProps): JSX.Element => {
   const actionData = React.useMemo(
-    () => getActions(assetbundle),
-    [assetbundle]
+    () => getActions(assetBundle),
+    [assetBundle]
   );
 
   // everytime metadata is rendered we reparse metadata using useMemo hook

@@ -51,7 +51,7 @@ const ApparatusListBox = ({
   metadata,
   handleAssetBundleChange,
 }: ApparatusListProps): JSX.Element => {
-  const assetbundles = React.useMemo(
+  const assetBundleList = React.useMemo(
     () => getAssetBundles(metadata),
     [metadata]
   );
@@ -60,7 +60,7 @@ const ApparatusListBox = ({
       <Box>
         <ListHeading>Apparatus</ListHeading>
         <ListBoxScroller>
-          {assetbundles.map((data, index) => (
+          {assetBundleList.map((data, index) => (
             <ListButton key={index}>
               <Button
                 variant="contained"
