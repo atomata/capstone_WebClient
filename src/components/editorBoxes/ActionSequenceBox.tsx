@@ -84,7 +84,7 @@ const ActionSequenceBox = ({
                         <List>
                           <ListItem>
                             <Button variant="contained" color="secondary">
-                              {data.assetID}:{data.input}
+                              {data.assetId}:{data.input}
                             </Button>
                           </ListItem>
                           <ListItemSecondaryAction>

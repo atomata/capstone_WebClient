@@ -5,24 +5,24 @@ function linkPathsToData(metadata: Metadata): PathData[] {
   const pathDataList = [] as PathData[];
 
   // make an empty object for each path
-  metadata.Paths.forEach((path) => {
-    const datum: PathData = { Path: path, Data: {} };
+  metadata.paths.forEach((path) => {
+    const datum: PathData = { path: path, data: {} };
     pathDataList.push(datum);
   });
 
   // add data to the correct path
-  metadata.Data.forEach((data) => {
+  metadata.data.forEach((data) => {
     const unpack = data.split("@");
     const index = Number(unpack[0]);
 
     const dataSplit = unpack[1].split(":");
-    if (pathDataList[index].Data[dataSplit[0]] === undefined) {
-      pathDataList[index].Data[dataSplit[0]] = [];
+    if (pathDataList[index].data[dataSplit[0]] === undefined) {
+      pathDataList[index].data[dataSplit[0]] = [];
     }
     if (dataSplit[0] === "input") {
-      pathDataList[index].Data[dataSplit[0]].push(dataSplit[1].split("/")[1]);
+      pathDataList[index].data[dataSplit[0]].push(dataSplit[1].split("/")[1]);
     } else {
-      pathDataList[index].Data[dataSplit[0]].push(dataSplit[1]);
+      pathDataList[index].data[dataSplit[0]].push(dataSplit[1]);
     }
   });
   // return the created object
@@ -34,10 +34,10 @@ function linkPathsToData(metadata: Metadata): PathData[] {
 function addPathToTreeAndReturnNode(items: string[], tree: Tree) {
   let node = tree;
   items.forEach((item) => {
-    if (!(item in node.Children)) {
-      node.Children[item] = { Children: [], Path: "" };
+    if (!(item in node.children)) {
+      node.children[item] = { Children: [], Path: "" };
     }
-    node = node.Children[item];
+    node = node.children[item];
   });
   return node;
 }
@@ -47,10 +47,10 @@ function convertPathDataToTree(metadata: Metadata): Tree {
   const tree = { Children: [], Path: "" };
   const pathDataList = linkPathsToData(metadata);
   pathDataList.forEach((pathData) => {
-    const node = addPathToTreeAndReturnNode(pathData.Path.split("/"), tree);
-    node.Path = pathData.Path;
-    for (const data in pathData.Data) {
-      node[data] = pathData.Data[data];
+    const node = addPathToTreeAndReturnNode(pathData.path.split("/"), tree);
+    node.path = pathData.path;
+    for (const data in pathData.data) {
+      node[data] = pathData.data[data];
     }
   });
 
@@ -89,12 +89,12 @@ function getActions(node: AssetBundle): ActionData[] {
   if (node === undefined) {
     return undefined;
   }
-  for (const child in node.Children) {
-    if (node.Children[child].type[0] === "Event") {
-      for (const index in node.Children[child].input) {
+  for (const child in node.children) {
+    if (node.children[child].type[0] === "Event") {
+      for (const index in node.children[child].input) {
         const actionData = {
-          input: node.Children[child].input[index],
-          path: node.Children[child].Path,
+          input: node.children[child].input[index],
+          path: node.children[child].Path,
           assetID: node.identifier,
         };
         actionList.push(actionData);
@@ -106,11 +106,11 @@ function getActions(node: AssetBundle): ActionData[] {
 
 // Checks if a given node is a parent node or not by recursively checking if it has any direct/indirect children of type 'AssetBundle'
 function checkIfParent(node: AssetBundle): boolean {
-  if (node.Children !== undefined) {
-    for (const child in node.Children) {
+  if (node.children !== undefined) {
+    for (const child in node.children) {
       if (
-        node.Children[child].type[0] === "AssetBundle" ||
-        checkIfParent(node.Children[child])
+        node.children[child].type[0] === "AssetBundle" ||
+        checkIfParent(node.children[child])
       ) {
         return true;
       }

@@ -1,12 +1,12 @@
 type Metadata = {
-  Paths: string[];
-  Data: string[];
+  paths: string[];
+  data: string[];
 };
 
 type ActionData = {
   path: string;
   input: string;
-  assetID: string;
+  assetId: string;
 };
 type ExperienceData = {
   apparatusMetadata: Metadata;
@@ -20,17 +20,17 @@ type SerializedExperience = {
 };
 
 type SerializedApparatus = {
-  Id: { Identifier: string };
-  Metadata: Metadata;
+  id: { Identifier: string };
+  metadata: Metadata;
 };
 type PathData = {
-  Path: string;
-  Data: Record<string, any[]>;
+  path: string;
+  data: Record<string, any[]>;
 };
 
-type AssetBundle = { Children: any[]; Path: string; identifier: string[] };
+type AssetBundle = { children: any[]; path: string; identifier: string[] };
 
-type Tree = { Children: any[]; Path: string };
+type Tree = { children: any[]; path: string };
 
 export type {
   Metadata,

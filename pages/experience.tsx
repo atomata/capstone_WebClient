@@ -40,7 +40,7 @@ function Experience({
   const [experienceData, setExperienceData] = useState<ExperienceData>();
 
   const experienceDataTemp: ExperienceData = {
-    apparatusMetadata: { Paths: [], Data: [] },
+    apparatusMetadata: { paths: [], data: [] },
     experience: { experienceId, apparatusId: "", actionList: [] },
   };
   React.useEffect(() => {
@@ -48,9 +48,9 @@ function Experience({
     function getApparatusFromCloudHelper(id) {
       getApparatusFromCloud(id)
         .then((apparatusJson) => {
-          experienceDataTemp.apparatusMetadata = apparatusJson.Metadata;
+          experienceDataTemp.apparatusMetadata = apparatusJson.metadata;
           experienceDataTemp.experience.apparatusId =
-            apparatusJson.Id.Identifier;
+            apparatusJson.id.Identifier;
           setExperienceData(experienceDataTemp);
           setLoading(false);
         })
