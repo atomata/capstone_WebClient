@@ -99,6 +99,7 @@ const CreateExperience = () => {
   );
 };
 
+// TODO show proper error message when data cannot be fetched
 const LoadExperience = () => {
   const [expList, setexpList] = useState([]);
   useEffect(() => {

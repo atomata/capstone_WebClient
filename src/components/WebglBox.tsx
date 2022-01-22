@@ -17,7 +17,6 @@ type WebglProps = {
   experienceData: ExperienceData;
 };
 
-// TODO we assume when Webglbox is called, the userId and experienceData are defined ?
 function WebglBox({ userId, experienceData }: WebglProps): JSX.Element {
   const [loading, setLoading] = useState(true);
   useEffect(() => {

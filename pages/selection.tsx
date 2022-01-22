@@ -14,7 +14,7 @@ const Content = styled.div`
 
 
 const SelectionList = ({experienceId}) => {
-  // need to change this to get the name of appratus files from a json file in cloud
+  // TODO need to change this to get the name of appratus files from a json file in cloud
   const apparatusIDList = ["evil-cylinder", "wobble-sphere"];
 
   return (

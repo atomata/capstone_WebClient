@@ -73,7 +73,6 @@ type OverlayProps = {
   experienceData: ExperienceData;
 };
 
-// TODO can we assume that experincedata and userID are defined properly at this stage?
 function Overlay({ userId, experienceData }: OverlayProps): JSX.Element {
   const [assetBundle, setAssetBundle] = useState({
     children: [],
@@ -82,7 +81,6 @@ function Overlay({ userId, experienceData }: OverlayProps): JSX.Element {
   });
   const { showOverlay, toggleOverlay } = useOverlay();
 
-  // TODO does changing experienceData in useActionList changes the experienceData in
   const {
     actionList,
     setActionList,

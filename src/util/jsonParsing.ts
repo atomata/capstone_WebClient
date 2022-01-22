@@ -89,7 +89,7 @@ function getAssetBundles(metadata: SerializedApparatus): AssetBundle[] {
   return assetBundleList;
 }
 
-// TODO input to one event can be mutil valued . currently adding them separatly in the list
+// input to one event can be multi valued . currently adding them separately in the list
 // returns the list of actions of the given node
 function getActions(node: AssetBundle): ActionData[] {
   const actionList = [];
