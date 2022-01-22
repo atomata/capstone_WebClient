@@ -43,12 +43,7 @@ const useLoginSubmit = () => {
         }
         else
             setPassErr("");
-
-        if (pass === "") {
-            setPassErr("Password field cannot be empty");
-            loginError = true;
-        } else setPassErr("");
-
+            
         // No errors, go and log in
         if (!loginError) logIn(name);
     };
