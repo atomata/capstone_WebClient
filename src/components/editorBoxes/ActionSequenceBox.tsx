@@ -63,10 +63,10 @@ const ActionSequenceBox = ({
         <ListHeading>Action Sequence</ListHeading>
         <DragDropContext onDragEnd={handleOnDragEnd}>
           <Droppable droppableId="droppable">
-            {(provided) => (
+            {(dropProvided) => (
               <ListBoxScroller
-                {...provided.droppableProps}
-                ref={provided.innerRef}
+                {...dropProvided.droppableProps}
+                ref={dropProvided.innerRef}
               >
                 {actionList.map((data, index) => (
                   <Draggable
@@ -74,11 +74,11 @@ const ActionSequenceBox = ({
                     index={index}
                     draggableId={index.toString()}
                   >
-                    {(provided) => (
+                    {(dragProvided) => (
                       <DragContainer
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        ref={provided.innerRef}
+                        {...dragProvided.draggableProps}
+                        {...dragProvided.dragHandleProps}
+                        ref={dragProvided.innerRef}
                       >
                         <List>
                           <ListItem>
@@ -96,7 +96,7 @@ const ActionSequenceBox = ({
                     )}
                   </Draggable>
                 ))}
-                {provided.placeholder}
+                {dropProvided.placeholder}
               </ListBoxScroller>
             )}
           </Droppable>
