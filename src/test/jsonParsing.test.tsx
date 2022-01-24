@@ -1,6 +1,7 @@
 import { getAssetBundles, linkPathsToData } from "../util/jsonParsing";
 
 const testmetadata = {
+  Id : "evil-cylinder",
   Paths: [
     "evil-cylinder",
     "evil-cylinder/evil-cylinder",
@@ -40,23 +41,23 @@ const testmetadata = {
 
 const testpathDataList = [
   {
-    Path: "evil-cylinder",
-    Data: {
+    path: "evil-cylinder",
+    data: {
       identifier: ["evil-cylinder"],
       type: ["Serialization"],
     },
   },
   {
-    Path: "evil-cylinder/evil-cylinder",
-    Data: {
+    path: "evil-cylinder/evil-cylinder",
+    data: {
       identifier: ["evil-cylinder"],
       type: ["AssetBundle"],
       key: ["evil-cylinder"],
     },
   },
   {
-    Path: "evil-cylinder/evil-cylinder/delta",
-    Data: {
+    path: "evil-cylinder/evil-cylinder/delta",
+    data: {
       identifier: ["delta"],
       type: ["DeltaTransform"],
       input: [
@@ -71,23 +72,23 @@ const testpathDataList = [
     },
   },
   {
-    Path: "evil-cylinder/evil-cylinder/delta/wobble-sphere",
-    Data: {
+    path: "evil-cylinder/evil-cylinder/delta/wobble-sphere",
+    data: {
       identifier: ["wobble-sphere"],
       type: ["Serialization"],
     },
   },
   {
-    Path: "evil-cylinder/evil-cylinder/delta/wobble-sphere/wobble-sphere",
-    Data: {
+    path: "evil-cylinder/evil-cylinder/delta/wobble-sphere/wobble-sphere",
+    data: {
       identifier: ["wobble-sphere"],
       type: ["AssetBundle"],
       key: ["wobble-sphere"],
     },
   },
   {
-    Path: "evil-cylinder/evil-cylinder/delta/wobble-sphere/wobble-sphere/animations",
-    Data: {
+    path: "evil-cylinder/evil-cylinder/delta/wobble-sphere/wobble-sphere/animations",
+    data: {
       identifier: ["animations"],
       type: ["Event"],
       associatedNode: ["wobble-sphere"],
