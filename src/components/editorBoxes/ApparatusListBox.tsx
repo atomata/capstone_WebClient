@@ -1,8 +1,8 @@
 import React from "react";
 import Button from "@mui/material/Button";
 import styled from "styled-components";
-import { getAssetBundles, checkIfParent } from "../../util/JsonParsing";
-import { Metadata } from "../../util/types";
+import { getAssetBundles, checkIfParent } from "../../util/jsonParsing";
+import { SerializedApparatus } from "../../util/types";
 
 const Box = styled.div`
   background: #fffaf0;
@@ -42,25 +42,24 @@ const ListButton = styled.div`
 `;
 
 type ApparatusListProps = {
-  metadata: Metadata;
+  metadata: SerializedApparatus;
   handleAssetBundleChange: (data) => void;
 };
 
-// TODO what if metadata is not defined or assetbundles list is empty?
 const ApparatusListBox = ({
   metadata,
   handleAssetBundleChange,
 }: ApparatusListProps): JSX.Element => {
-  const assetbundles = React.useMemo(
+  const assetBundleList = React.useMemo(
     () => getAssetBundles(metadata),
     [metadata]
   );
-  if (metadata !== undefined) {
+  if (assetBundleList !== undefined && assetBundleList[0] !== undefined) {
     return (
       <Box>
         <ListHeading>Apparatus</ListHeading>
         <ListBoxScroller>
-          {assetbundles.map((data, index) => (
+          {assetBundleList.map((data, index) => (
             <ListButton key={index}>
               <Button
                 variant="contained"
@@ -69,7 +68,7 @@ const ApparatusListBox = ({
                   handleAssetBundleChange(data);
                 }}
               >
-                {data.identifier[0]}
+                {data.identifier}
               </Button>
             </ListButton>
           ))}

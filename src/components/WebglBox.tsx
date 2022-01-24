@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import Unity from "react-unity-webgl";
 import { useEffect, useState } from "react";
-import Overlay from "../Overlay/Overlay";
-import Loading from "../Loading";
-import { unityContext, load } from "../../util/unityContextActions";
-import { ExperienceData } from "../../util/types";
+import Overlay from "./Overlay";
+import Loading from "./Loading";
+import { unityContext, loadApparatus } from "../util/unityContextActions";
+import { ExperienceData } from "../util/types";
 
 const WebglRoot = styled.div`
   display: relative;
@@ -17,7 +17,6 @@ type WebglProps = {
   experienceData: ExperienceData;
 };
 
-// TODO we assume when Webglbox is called, the userId and experienceData are defined ?
 function WebglBox({ userId, experienceData }: WebglProps): JSX.Element {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
@@ -27,10 +26,13 @@ function WebglBox({ userId, experienceData }: WebglProps): JSX.Element {
 
       setTimeout(() => {
         setLoading(false);
-        load(experienceData.apparatusId);
+        loadApparatus(experienceData.experience.apparatusId);
       }, 100);
     });
-  }, [experienceData.apparatusId]);
+    return function () {
+      unityContext.removeEventListener("loaded");
+    };
+  }, [experienceData.experience.apparatusId]);
 
   return !loading ? (
     <WebglRoot>

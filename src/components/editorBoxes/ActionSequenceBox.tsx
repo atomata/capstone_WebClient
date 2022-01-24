@@ -10,6 +10,7 @@ import {
 } from "@material-ui/core";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { ActionData } from "../../util/types";
 
 const Box = styled.div`
   background: #fffaf0;
@@ -41,7 +42,7 @@ const ListBoxScroller = styled.div`
   }
 `;
 type ActionSequenceBoxProps = {
-  actionList: Array<[string, string, string]>;
+  actionList: ActionData[];
   removeAction: (index: number) => void;
   handleOnDragEnd: (result: {
     destination: { index: number };
@@ -49,8 +50,6 @@ type ActionSequenceBoxProps = {
   }) => void;
 };
 
-
-// TODO what if the actionlist is empty?
 const ActionSequenceBox = ({
   actionList,
   removeAction,
@@ -58,16 +57,16 @@ const ActionSequenceBox = ({
 }: ActionSequenceBoxProps): JSX.Element => {
   // Ensuring the array from parameter is not empty.
 
-  if (actionList !== undefined) {
+  if (actionList !== undefined && actionList[0] !== undefined) {
     return (
       <Box>
         <ListHeading>Action Sequence</ListHeading>
         <DragDropContext onDragEnd={handleOnDragEnd}>
           <Droppable droppableId="droppable">
-            {(provided) => (
+            {(dropProvided) => (
               <ListBoxScroller
-                {...provided.droppableProps}
-                ref={provided.innerRef}
+                {...dropProvided.droppableProps}
+                ref={dropProvided.innerRef}
               >
                 {actionList.map((data, index) => (
                   <Draggable
@@ -75,21 +74,21 @@ const ActionSequenceBox = ({
                     index={index}
                     draggableId={index.toString()}
                   >
-                    {(provided) => (
+                    {(dragProvided) => (
                       <DragContainer
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        ref={provided.innerRef}
+                        {...dragProvided.draggableProps}
+                        {...dragProvided.dragHandleProps}
+                        ref={dragProvided.innerRef}
                       >
                         <List>
                           <ListItem>
                             <Button variant="contained" color="secondary">
-                              {data[2]}:{data[1]}
+                              {data.assetId}:{data.input}
                             </Button>
                           </ListItem>
                           <ListItemSecondaryAction>
-                            <IconButton>
-                              <DeleteIcon onClick={() => removeAction(index)} />
+                            <IconButton onClick={() => removeAction(index)}>
+                              <DeleteIcon />
                             </IconButton>
                           </ListItemSecondaryAction>
                         </List>
@@ -97,7 +96,7 @@ const ActionSequenceBox = ({
                     )}
                   </Draggable>
                 ))}
-                {provided.placeholder}
+                {dropProvided.placeholder}
               </ListBoxScroller>
             )}
           </Droppable>

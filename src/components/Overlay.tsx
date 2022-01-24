@@ -1,14 +1,14 @@
 import styled from "styled-components";
 import React, { useState } from "react";
-import ActionSequenceBox from "../apparatusLists/ActionSequenceBox";
-import ActionBox from "../apparatusLists/ActionBox";
-import ApparatusListBox from "../apparatusLists/ApparatusListBox";
-import { useOverlay, useActionList } from "../../util/overlayfunc/overlayfunc";
-import saveExperienceToCloud from "../../util/saveExperienceToCloud";
-import Navbar from "../Navbar";
-import PreviewOverlay from "../previewOverlay/PreviewOverlay";
-import styles from "../../styles/NavbarStyle.module.css";
-import { ExperienceData, Metadata } from "../../util/types";
+import ActionSequenceBox from "./editorBoxes/ActionSequenceBox";
+import ActionBox from "./editorBoxes/ActionBox";
+import ApparatusListBox from "./editorBoxes/ApparatusListBox";
+import { useOverlay, useActionList } from "../util/customHooks/overlayfunc";
+import saveExperienceToCloud from "../util/cloudOperations/writeToCloud";
+import Navbar from "./Navbar";
+import PreviewOverlay from "./PreviewOverlay";
+import styles from "../styles/NavbarStyle.module.css";
+import { ExperienceData, SerializedApparatus } from "../util/types";
 
 const OverlayRoot = styled.div`
   display: absolute;
@@ -73,14 +73,14 @@ type OverlayProps = {
   experienceData: ExperienceData;
 };
 
-// TODO can we assume that experincedata and userID are defined properly at this stage?
 function Overlay({ userId, experienceData }: OverlayProps): JSX.Element {
-  const [assetbundle, setAssetbundle] = useState({
-    Children: [],
-    Path: "",
-    identifier: [],
+  const [assetBundle, setAssetBundle] = useState({
+    children: [],
+    path: "",
+    identifier: "",
   });
   const { showOverlay, toggleOverlay } = useOverlay();
+
   const {
     actionList,
     setActionList,
@@ -94,12 +94,8 @@ function Overlay({ userId, experienceData }: OverlayProps): JSX.Element {
       <NavbarDiv>
         <Navbar
           save={() => {
-            saveExperienceToCloud(
-              userId,
-              experienceData.experienceId,
-              experienceData.apparatusId,
-              actionList
-            );
+            experienceData.experience.actionList = [...actionList];
+            saveExperienceToCloud(userId, experienceData.experience);
           }}
           toggle={toggleOverlay}
         />
@@ -110,7 +106,7 @@ function Overlay({ userId, experienceData }: OverlayProps): JSX.Element {
             <OverlayGridItem1>
               <ApparatusListBox
                 metadata={checkIfMetaExists()}
-                handleAssetBundleChange={(data) => setAssetbundle(data)}
+                handleAssetBundleChange={(data) => setAssetBundle(data)}
               />
             </OverlayGridItem1>
             <OverlayGridItem2>
@@ -124,13 +120,9 @@ function Overlay({ userId, experienceData }: OverlayProps): JSX.Element {
             </OverlayGridItem2>
             <OverlayGridItem3>
               <ActionBox
-                assetbundle={assetbundle}
-                addAction={([path, input]) =>
-                  addActionToList(
-                    [path, input, assetbundle.identifier[0]],
-                    actionList,
-                    setActionList
-                  )
+                assetBundle={assetBundle}
+                addAction={(actionData) =>
+                  addActionToList(actionData, actionList, setActionList)
                 }
               />
             </OverlayGridItem3>
@@ -146,7 +138,7 @@ function Overlay({ userId, experienceData }: OverlayProps): JSX.Element {
     <div>Error: corrupted experience data</div>
   );
 
-  function checkIfMetaExists(): Metadata {
+  function checkIfMetaExists(): SerializedApparatus {
     return experienceData !== undefined
       ? experienceData.apparatusMetadata
       : undefined;

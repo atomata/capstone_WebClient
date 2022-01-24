@@ -4,7 +4,7 @@ import { renderHook } from "@testing-library/react-hooks";
 import {
   checkIfLoggedIn,
 } from "../util/loginCookies";
-import { useLoginSubmit } from "../util/loginfunc/loginBoxFunc";
+import { useLoginSubmit } from "../util/customHooks/loginBoxfunc";
 
 jest.mock("universal-cookie");
 jest.mock("next/router");

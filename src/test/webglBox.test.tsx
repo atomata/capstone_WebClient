@@ -1,8 +1,9 @@
 import { render } from "@testing-library/react";
 import React from "react";
-import WebglBox from "../components/webgl/WebglBox";
+import WebglBox from "../components/WebglBox";
 
 const metadata = {
+  Id: "evil-cylinder",
   Paths: [
     "evil-cylinder",
     "evil-cylinder/evil-cylinder",
@@ -45,9 +46,8 @@ test("ApparatusSelectedListBox renders without crashing", () => {
     <WebglBox
       userId="testuser1"
       experienceData={{
-        apparatusId: "evil-cylinder",
         apparatusMetadata: metadata,
-        initializationData: { actionList: [] },
+        experience: { experienceId: "", apparatusId: "", actionList: [] },
       }}
     />
   );

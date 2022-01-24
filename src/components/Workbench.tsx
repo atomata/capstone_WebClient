@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import { getUserName } from "../../util/loginCookies";
-import { getBlobsInContainer } from "../../util/getDataFromCloud";
+import { getUserName } from "../util/loginCookies";
+import { getBlobsInContainer } from "../util/cloudOperations/readFromCloud";
 
 const OuterBox = styled.div`
   margin-top: 5%;
@@ -99,6 +99,7 @@ const CreateExperience = () => {
   );
 };
 
+// TODO show proper error message when data cannot be fetched
 const LoadExperience = () => {
   const [expList, setexpList] = useState([]);
   useEffect(() => {
@@ -117,7 +118,7 @@ const LoadExperience = () => {
     <InnerBox>
       {expList.map((expName) => (
         <Link
-          key="experiencePage"
+          key={expName}
           href={{
             pathname: "/experience",
             query: {

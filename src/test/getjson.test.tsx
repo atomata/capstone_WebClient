@@ -1,7 +1,7 @@
 import {
   getApparatusFromCloud,
   getExperienceFromCloud,
-} from "../util/getDataFromCloud";
+} from "../util/cloudOperations/readFromCloud";
 
 global.fetch = jest.fn(() =>
   Promise.resolve({

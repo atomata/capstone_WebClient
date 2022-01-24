@@ -1,20 +1,18 @@
 import { BlobServiceClient, ContainerClient } from "@azure/storage-blob";
-import {sasToken} from "./Constants";
+import { experienceStorage, sasToken } from "../constants";
+import { SerializedExperience } from "../types";
 
-
-const saveExperienceToCloud = async (
+async function saveExperienceToCloud(
   userId: string,
-  experienceId: string,
-  apparatusId: string,
-  actionList: any[]
-): Promise<any> => {
-  const experience = { apparatusId, actionList };
-
-  const file = new File([JSON.stringify(experience)], `${experienceId}.json`);
-
+  experience: SerializedExperience
+): Promise<void> {
+  const file = new File(
+    [JSON.stringify(experience)],
+    `${experience.experienceId}.json`
+  );
   // get BlobService = notice `?` is pulled out of sasToken - if created in Azure portal
   const blobService = new BlobServiceClient(
-    `https://addressabletest1.blob.core.windows.net/?${sasToken}`
+    `${experienceStorage}/?${sasToken}`
   );
 
   // get Container - full public read access
@@ -32,7 +30,7 @@ const saveExperienceToCloud = async (
   const options = { blobHTTPHeaders: { blobContentType: file.type } };
   // upload file
   await blobClient.uploadData(file, options);
-};
+}
 // </snippet_uploadFileToBlob>
 
 export default saveExperienceToCloud;

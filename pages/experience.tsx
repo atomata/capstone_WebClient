@@ -2,7 +2,7 @@
 import styled from "styled-components";
 import React, { useState } from "react";
 import { Alert, AlertTitle } from "@mui/material";
-import WebglBox from "../src/components/webgl/WebglBox";
+import WebglBox from "../src/components/WebglBox";
 import {
   verifyLogIn,
   checkIfLoggedIn,
@@ -11,7 +11,7 @@ import {
 import {
   getApparatusFromCloud,
   getExperienceFromCloud,
-} from "../src/util/getDataFromCloud";
+} from "../src/util/cloudOperations/readFromCloud";
 import { ExperienceData } from "../src/util/types";
 import Loading from "../src/components/Loading";
 
@@ -39,21 +39,18 @@ function Experience({
   const [userId] = useState(getUserName());
   const [experienceData, setExperienceData] = useState<ExperienceData>();
 
-  // either apparatusID is provided or experience id but not both
-  const experience: ExperienceData = {
-    apparatusMetadata: { Paths: [], Data: [] },
-    apparatusId: "",
-    experienceId,
-    initializationData: { actionList: [] },
+  const experienceDataTemp: ExperienceData = {
+    apparatusMetadata: { Id: "", Paths: [], Data: [] },
+    experience: { experienceId, apparatusId: "", actionList: [] },
   };
-
   React.useEffect(() => {
+    // either apparatusID is provided or experience id but not both
     function getApparatusFromCloudHelper(id) {
       getApparatusFromCloud(id)
         .then((apparatusJson) => {
-          experience.apparatusId = apparatusJson.Id.Identifier;
-          experience.apparatusMetadata = apparatusJson.Metadata;
-          setExperienceData(experience);
+          experienceDataTemp.apparatusMetadata = apparatusJson;
+          experienceDataTemp.experience.apparatusId = apparatusJson.Id;
+          setExperienceData(experienceDataTemp);
           setLoading(false);
         })
         .catch(() => setError("apparatus not found"));
@@ -68,12 +65,12 @@ function Experience({
     } else if (dataType === "experience") {
       getExperienceFromCloud(userId, experienceId)
         .then((experienceJson) => {
-          experience.initializationData.actionList = experienceJson.actionList;
+          experienceDataTemp.experience = experienceJson;
           getApparatusFromCloudHelper(experienceJson.apparatusId);
         })
         .catch(() => setError("experience file not found"));
     }
-  }, [apparatusId, experienceId, experience, dataType, userId]);
+  }, [apparatusId, experienceId, dataType, userId]);
 
   React.useEffect(() => {
     verifyLogIn();

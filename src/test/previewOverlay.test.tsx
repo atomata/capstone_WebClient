@@ -1,34 +1,33 @@
 import { render } from "@testing-library/react";
 import { renderHook } from "@testing-library/react-hooks";
 import { act } from "react-dom/test-utils";
-import {
-  useSelected,
-} from "../util/previewOverlayFun/previewOverlayfunc";
+import { useSelected } from "../util/customHooks/previewOverlayfunc";
 
-import PreviewOverlay from "../components/previewOverlay/PreviewOverlay";
-import { useActionList } from "../util/overlayfunc/overlayfunc";
+import PreviewOverlay from "../components/PreviewOverlay";
+import { useActionList } from "../util/customHooks/overlayfunc";
+import { ActionData } from "../util/types";
 
 test("previewOverlay renders without crashing", () => {
   const { result } = renderHook(useActionList);
 
-  const testTuple: [string, string, string] = [
-    "test1",
-    "testinput2",
-    "testasset3",
-  ];
-  const testTuple2: [string, string, string] = [
-    "test4",
-    "testinput5",
-    "testasset6",
-  ];
+  const actionData1: ActionData = {
+    path: "test1",
+    input: "testinput1",
+    assetId: "testasset1",
+  };
+  const actionData2: ActionData = {
+    path: "test2",
+    input: "testinput2",
+    assetId: "testasset2",
+  };
   act(() => {
     result.current.addActionToList(
-      testTuple,
+      actionData1,
       result.current.actionList,
       result.current.setActionList
     );
     result.current.addActionToList(
-      testTuple2,
+      actionData2,
       result.current.actionList,
       result.current.setActionList
     );
@@ -39,19 +38,24 @@ test("previewOverlay renders without crashing", () => {
 });
 
 describe("test use selected", () => {
+  const actionData1: ActionData = {
+    path: "test1",
+    input: "testinput1",
+    assetId: "testasset1",
+  };
+  const actionData2: ActionData = {
+    path: "test2",
+    input: "testinput2",
+    assetId: "testasset2",
+  };
 
   it("cyclePreviewRight", () => {
     const { result } = renderHook(useSelected, {
-      initialProps: {
-        actionList: [
-          ["test1", "testinput2", "testasset3"],
-          ["test4", "testinput5", "testasset6"],
-        ],
-      },
+      initialProps: [actionData1, actionData2],
     });
 
     act(() => {
-      result.current.setCount(0);
+      result.current.setSelected(1);
       result.current.cyclePreviewRight();
     });
 
@@ -60,16 +64,11 @@ describe("test use selected", () => {
 
   it("cyclePreviewLeft if selected = 0", () => {
     const { result } = renderHook(useSelected, {
-      initialProps: {
-        actionList: [
-          ["test1", "testinput2", "testasset3"],
-          ["test4", "testinput5", "testasset6"],
-        ],
-      },
+      initialProps: [actionData1, actionData2],
     });
 
     act(() => {
-      result.current.setCount(0);
+      result.current.setSelected(0);
       result.current.cyclePreviewLeft();
     });
     expect(result.current.selected).toBe(0);
@@ -77,18 +76,13 @@ describe("test use selected", () => {
 
   it("cyclePreviewLeft if selected > 0", () => {
     const { result } = renderHook(useSelected, {
-      initialProps: {
-        actionList: [
-          ["test1", "testinput2", "testasset3"],
-          ["test4", "testinput5", "testasset6"],
-        ],
-      },
+      initialProps: [actionData1, actionData2],
     });
 
     act(() => {
-      result.current.setCount(1);
+      result.current.setSelected(1);
       result.current.cyclePreviewLeft();
     });
-    expect(result.current.cyclePreviewLeft().setCount(0)).toBe(0);
+    expect(result.current.selected).toBe(0);
   });
 });
