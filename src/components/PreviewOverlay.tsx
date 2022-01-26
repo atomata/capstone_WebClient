@@ -1,15 +1,41 @@
 import styled from "styled-components";
-import ChevronLeftSharpIcon from "@mui/icons-material/ChevronLeftSharp";
-import ChevronRightSharpIcon from "@mui/icons-material/ChevronRightSharp";
+import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
+import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import { Button, IconButton } from "@material-ui/core";
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
 import { requestTrigger } from "../util/unityContextActions";
 import { useSelected } from "../util/customHooks/previewOverlayfunc";
 import { ActionData } from "../util/types";
 
+const useStyles = makeStyles((theme) => ({
+  removeHoverEffect: {
+    "&:hover": {
+      backgroundColor: "transparent",
+      cursor: "default",
+    },
+  },
+}));
+const sideScroll = (
+  element: HTMLDivElement,
+  speed: number,
+  distance: number,
+  step: number
+) => {
+  let scrollAmount = 0;
+  const slideTimer = setInterval(() => {
+    element.scrollLeft += step;
+    scrollAmount += Math.abs(step);
+    if (scrollAmount >= distance) {
+      clearInterval(slideTimer);
+    }
+  }, speed);
+};
 const PreviewRoot = styled.div`
   display: absolute;
   width: inherit;
-  height: 900px;
+  height: 750px;
+  z-index: 0;
   opacity: 1;
   pointer-events: auto;
 `;
@@ -17,45 +43,47 @@ const PreviewGrid = styled.div`
   display: grid;
   width: inherit;
   height: inherit;
-  grid-template-columns: repeat(19, 1fr);
-  grid-template-rows: repeat(15, 1fr);
+  grid-template-columns: repeat(11, 1fr);
+  grid-template-rows: repeat(11, 1fr);
 `;
 
 const PreviewGridLeft = styled.div`
-  grid-column: 5 / span 1;
-  grid-row: 12 / span 1;
+  grid-column: 4 / span 1;
+  grid-row: 9 / span 1;
   z-index: 2;
   pointer-events: auto;
-  margin: 5%;
-  min-height: 2em;
-  min-width: 2em;
+  padding: 0;
+  min-height: 1em;
+  max-height: 1em;
+  min-width: 1em;
+  max-width: 1em;
 `;
 
 const PreviewGridCenter = styled.div`
-  grid-column: 7 / span 7;
-  grid-row: 12 / span 1;
+  grid-column: 5 / span 3;
+  grid-row: 10 / span 1;
   z-index: 2;
   pointer-events: auto;
-  margin: 5%;
   min-height: 1em;
   min-width: inherit;
-  padding-left: 10%;
-  padding-right: 10%;
+  padding-left: 5%;
+  padding-right: 5%;
 `;
 
 const PreviewGridRight = styled.div`
-  grid-column: 15 / span 1;
-  grid-row: 12 / span 1;
+  grid-column: 8 / span 1;
+  grid-row: 9 / span 1;
   z-index: 2;
   pointer-events: auto;
-  margin: 5%;
-  min-height: 2em;
-  min-width: 2em;
+  min-height: 1em;
+  max-height: 1em;
+  min-width: 1em;
+  max-width: 1em;
 `;
 
 const ActionTabList = styled.div`
   display: flex;
-  overflow-x: scroll;
+  overflow-x: hidden;
   align-items: center;
 `;
 const ActionTabListItem = styled.div`
@@ -63,7 +91,7 @@ const ActionTabListItem = styled.div`
   outline-style: solid;
   outline-width: 0.1em;
   outline-color: black;
-  margin: 1em;
+  margin: 0.5em;
   align-self: center;
 `;
 
@@ -77,6 +105,8 @@ type PreviewOverlayProps = {
 
 // TODO change styling instead of defining a new component
 function PreviewOverlay({ actionList }: PreviewOverlayProps): JSX.Element {
+  const classes = useStyles();
+  const contentWrapper = React.useRef(null);
   const { selected, setSelected, cyclePreviewLeft, cyclePreviewRight } =
     useSelected(actionList);
   return (
@@ -85,20 +115,22 @@ function PreviewOverlay({ actionList }: PreviewOverlayProps): JSX.Element {
         <PreviewGrid>
           <PreviewGridLeft>
             <IconButton
-              style={{
-                minWidth: "100%",
-                minHeight: "100%",
-                outlineStyle: "solid",
-                outlineWidth: "0.1em",
-                outlineColor: "black",
+              disableRipple
+              className={classes.removeHoverEffect}
+              onClick={() => {
+                sideScroll(contentWrapper.current, 25, 50, -5);
+                cyclePreviewLeft();
               }}
-              onClick={cyclePreviewLeft()}
             >
-              <ChevronLeftSharpIcon />
+              <ArrowLeftIcon
+                sx={{
+                  fontSize: 150,
+                }}
+              />
             </IconButton>
           </PreviewGridLeft>
           <PreviewGridCenter>
-            <ActionTabList>
+            <ActionTabList ref={contentWrapper}>
               {actionList.map((actionData, index) => (
                 <ActionTabListItem key={index}>
                   {selected === index ? (
@@ -128,16 +160,18 @@ function PreviewOverlay({ actionList }: PreviewOverlayProps): JSX.Element {
           </PreviewGridCenter>
           <PreviewGridRight>
             <IconButton
-              style={{
-                minWidth: "100%",
-                minHeight: "100%",
-                outlineStyle: "solid",
-                outlineWidth: "0.1em",
-                outlineColor: "black",
+              disableRipple
+              className={classes.removeHoverEffect}
+              onClick={() => {
+                sideScroll(contentWrapper.current, 25, 50, 5);
+                cyclePreviewRight();
               }}
-              onClick={cyclePreviewRight()}
             >
-              <ChevronRightSharpIcon />
+              <ArrowRightIcon
+                sx={{
+                  fontSize: 150,
+                }}
+              />
             </IconButton>
           </PreviewGridRight>
         </PreviewGrid>
