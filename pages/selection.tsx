@@ -1,9 +1,11 @@
 import styled from "styled-components";
 import Link from "next/link";
 import { Button } from "@material-ui/core";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { verifyLogIn, checkIfLoggedIn } from "../src/util/loginCookies";
 import Loading from "../src/components/Loading";
+import { getBlobsInContainer } from "../src/util/cloudOperations/readFromCloud";
+import { apparatusBlob, defaultStorage } from "../src/util/constants";
 
 const Content = styled.div`
   justify-content: center;
@@ -12,14 +14,22 @@ const Content = styled.div`
   display: flex;
 `;
 
-
-const SelectionList = ({experienceId}) => {
-  // TODO need to change this to get the name of appratus files from a json file in cloud
-  const apparatusIDList = ["evil-cylinder", "wobble-sphere"];
-
+const SelectionList = ({ experienceId }) => {
+  const [apparatusList, setApparatusList] = useState([]);
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const res = await getBlobsInContainer(apparatusBlob, defaultStorage);
+        setApparatusList(res);
+      } catch (err) {
+        console.log("test", err);
+      }
+    }
+    fetchData();
+  }, []);
   return (
     <Content>
-      {apparatusIDList.map((apparatusId, index) => (
+      {apparatusList.map((apparatusId, index) => (
         <Link
           key={index}
           href={{
@@ -34,23 +44,24 @@ const SelectionList = ({experienceId}) => {
   );
 };
 
-function Selection({experienceId}): JSX.Element {
-   useEffect(() => {verifyLogIn()}, [])
+function Selection({ experienceId }): JSX.Element {
+  useEffect(() => {
+    verifyLogIn();
+  }, []);
 
   return checkIfLoggedIn() ? (
     <main>
       <h1>SELECT AN APPARATUS</h1>
-      <SelectionList experienceId = {experienceId} />
+      <SelectionList experienceId={experienceId} />
     </main>
-  ) :
-  (
-    <Loading/>
+  ) : (
+    <Loading />
   );
 }
 
-Selection.getInitialProps = ({query}) => {
-    const {experienceId} = query;
-    return {experienceId};
+Selection.getInitialProps = ({ query }) => {
+  const { experienceId } = query;
+  return { experienceId };
 };
 
 export default Selection;
