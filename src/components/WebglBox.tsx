@@ -27,7 +27,7 @@ function WebglBox({ userId, experienceData }: WebglProps): JSX.Element {
       setTimeout(() => {
         setLoading(false);
         loadApparatus(experienceData.experience.apparatusId);
-      }, 100);
+      }, 3000);
     });
     return function () {
       unityContext.removeEventListener("loaded");
