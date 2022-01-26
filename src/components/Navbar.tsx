@@ -6,6 +6,7 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import styled from "styled-components";
 import Link from "next/link";
+import { defaultCameraView } from "../util/unityContextActions";
 
 const NavButton = styled(Button)`
   && {
@@ -33,6 +34,9 @@ const Navbar = ({ save, toggle }) => (
           </NavButton>
           <NavButton key="save" onClick={save}>
             Save
+          </NavButton>
+          <NavButton key="cam_view" onClick={() => defaultCameraView()}>
+            Default View
           </NavButton>
         </Box>
       </Toolbar>
