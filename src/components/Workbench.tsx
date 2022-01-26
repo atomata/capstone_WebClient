@@ -101,12 +101,12 @@ const CreateExperience = () => {
 
 // TODO show proper error message when data cannot be fetched
 const LoadExperience = () => {
-  const [expList, setexpList] = useState([]);
+  const [expList, setExpList] = useState([]);
   useEffect(() => {
     async function fetchData() {
       try {
         const res = await getBlobsInContainer(getUserName());
-        setexpList(res);
+        setExpList(res);
       } catch (err) {
         console.log("test", err);
       }
