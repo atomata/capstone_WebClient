@@ -15,10 +15,13 @@ const assetBundleContainer =
   "https://vclassroommspedex.blob.core.windows.net/assetbundles";
 const skyboxContainer =
   "https://vclassroommspedex.blob.core.windows.net/skyboxes";
-const experienceStorage = "https://addressabletest1.blob.core.windows.net";
+
+const defaultStorage = "https://addressabletest1.blob.core.windows.net";
+const apparatusBlob = "apparatus";
 
 export {
-  experienceStorage,
+  apparatusBlob,
+  defaultStorage,
   apparatusContainer,
   sasToken,
   fileNamePostfix,

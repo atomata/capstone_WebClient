@@ -3,7 +3,7 @@ import {
   apparatusContainer,
   fileNamePostfix,
   sasToken,
-  experienceStorage,
+  defaultStorage,
 } from "../constants";
 import { SerializedApparatus, SerializedExperience } from "../types";
 
@@ -17,7 +17,7 @@ function getExperienceFromCloud(
   userId: string,
   experienceId: string
 ): Promise<SerializedExperience> {
-  return fetch(`${experienceStorage}/${userId}/${experienceId}.json`, {
+  return fetch(`${defaultStorage}/${userId}/${experienceId}.json`, {
     mode: "cors",
   })
     .then((response) => response.json())
@@ -29,7 +29,7 @@ function getExperienceFromCloud(
 
 async function getBlobsInContainer(
   blobName: string,
-  storage = experienceStorage
+  storage = defaultStorage
 ): Promise<string[]> {
   const returnedBlobUrls: string[] = [];
 
