@@ -97,7 +97,7 @@ function getActions(node: AssetBundle): ActionData[] {
     return undefined;
   }
   for (const child in node.children) {
-    if (node.children[child].type[0] === "Event") {
+    if (node.children[child].type[0] === "Event"  || node.children[child].type[0] === "CameraFocus") {
       for (const index in node.children[child].input) {
         const actionData = {
           input: node.children[child].input[index],
