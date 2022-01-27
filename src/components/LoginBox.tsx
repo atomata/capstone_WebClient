@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Button, TextField } from "@material-ui/core";
+import { Button, TextField } from "@mui/material";
 import { useLoginSubmit } from "../util/customHooks/loginBoxfunc";
 
 const LoginRoot = styled.div`

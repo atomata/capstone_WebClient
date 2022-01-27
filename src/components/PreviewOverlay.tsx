@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
-import { Button, IconButton } from "@material-ui/core";
+import { Button, IconButton} from "@mui/material";
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import {makeStyles} from "@mui/styles";
 import { requestTrigger } from "../util/unityContextActions";
 import { useSelected } from "../util/customHooks/previewOverlayfunc";
 import { ActionData } from "../util/types";

@@ -7,7 +7,7 @@ import {
   List,
   ListItem,
   ListItemSecondaryAction,
-} from "@material-ui/core";
+} from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { ActionData } from "../../util/types";
@@ -83,7 +83,7 @@ const ActionSequenceBox = ({
                         <List>
                           <ListItem>
                             <Button variant="contained" color="secondary">
-                              {data.assetId}:{data.input}
+                              {data.assetId}:{data.name}
                             </Button>
                           </ListItem>
                           <ListItemSecondaryAction>
