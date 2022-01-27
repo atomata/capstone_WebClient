@@ -1,13 +1,15 @@
 import * as React from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import Container from "@mui/material/Container";
-import Button from "@mui/material/Button";
 import styled from "styled-components";
 import Link from "next/link";
-import { IconButton } from "@material-ui/core";
-import { Menu, MenuItem } from "@mui/material";
+import {
+  Button,
+  Container,
+  Toolbar,
+  Box,
+  AppBar,
+  Menu,
+  MenuItem,
+} from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { changeSkybox, defaultCameraView } from "../util/unityContextActions";
 
@@ -38,7 +40,6 @@ const Navbar = ({ save, toggle }) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -63,45 +64,43 @@ const Navbar = ({ save, toggle }) => {
             <NavButton key="cam_view" onClick={() => defaultCameraView()}>
               Default View
             </NavButton>
-            <NavButton key="skybox">
-              <IconButton
-                aria-label="more"
-                id="long-button"
-                aria-controls={open ? "long-menu" : undefined}
-                aria-expanded={open ? "true" : undefined}
-                aria-haspopup="true"
-                onClick={handleClick}
-              >
-                <MoreVertIcon />
-              </IconButton>
-              <Menu
-                id="long-menu"
-                MenuListProps={{
-                  "aria-labelledby": "long-button",
-                }}
-                anchorEl={anchorEl}
-                open={open}
-                onClose={handleClose}
-                PaperProps={{
-                  style: {
-                    maxHeight: ITEM_HEIGHT * 4.5,
-                    width: "20ch",
-                  },
-                }}
-              >
-                {skyboxList.map((skybox) => (
-                  <MenuItem
-                    key={skybox}
-                    onClick={() => {
-                      handleClose();
-                      changeSkybox(skybox);
-                    }}
-                  >
-                    {skybox}
-                  </MenuItem>
-                ))}
-              </Menu>
+            <NavButton
+              aria-label="more"
+              id="long-button"
+              aria-controls={open ? "long-menu" : undefined}
+              aria-expanded={open ? "true" : undefined}
+              aria-haspopup="true"
+              onClick={handleClick}
+            >
+              <MoreVertIcon />
             </NavButton>
+            <Menu
+              id="long-menu"
+              MenuListProps={{
+                "aria-labelledby": "long-button",
+              }}
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+              PaperProps={{
+                style: {
+                  maxHeight: ITEM_HEIGHT * 4.5,
+                  width: "20ch",
+                },
+              }}
+            >
+              {skyboxList.map((skybox) => (
+                <MenuItem
+                  key={skybox}
+                  onClick={() => {
+                    handleClose();
+                    changeSkybox(skybox);
+                  }}
+                >
+                  {skybox}
+                </MenuItem>
+              ))}
+            </Menu>
           </Box>
         </Toolbar>
       </Container>
