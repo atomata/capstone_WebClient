@@ -73,6 +73,7 @@ type OverlayProps = {
   experienceData: ExperienceData;
 };
 
+// TODO parsing once and giving overlay only the info it needs
 function Overlay({ userId, experienceData }: OverlayProps): JSX.Element {
   const [assetBundle, setAssetBundle] = useState({
     children: [],
