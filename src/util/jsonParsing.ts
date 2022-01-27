@@ -103,6 +103,7 @@ function getActions(node: AssetBundle): ActionData[] {
           input: node.children[child].input[index],
           path: node.children[child].path,
           assetId: node.identifier,
+          name: node.children[child].type[0] === "Event"? node.children[child].input[index]: node.children[child].name[0]
         };
         actionList.push(actionData);
       }
