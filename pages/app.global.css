@@ -62,10 +62,8 @@ h2,
 h3,
 h4,
 h5,
-h6,
-h7,
-h8,
-h9 {
+h6
+{
   margin-bottom: 1em;
   font-family: "Open Sans", "DejaVu Sans", "Sans", sans-serif;
   font-weight: 500;
