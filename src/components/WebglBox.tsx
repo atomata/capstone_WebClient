@@ -19,31 +19,18 @@ type WebglProps = {
 
 function WebglBox({ userId, experienceData }: WebglProps): JSX.Element {
   const [loading, setLoading] = useState(true);
-
   useEffect(() => {
-    if (window["onAtomataSceneInitialize"] === undefined) {
-      window["onAtomataSceneInitialize"] = () => {
+    if (window["onAtomataSceneInitalize"] === undefined) {
+      window["onAtomataSceneInitalize"] = () => {
         setTimeout(() => {
           setLoading(false);
           loadApparatus(experienceData.experience.apparatusId);
-        }, 3000);
+        }, 100);
       };
     }
     return function () {
-      window["onAtomataSceneInitialize"] = undefined;
+      window["onAtomataSceneInitalize"] = undefined;
     };
-    // unityContext.on("loaded", () => {
-    //   // For some reason the unityContext.send("Container", "LoadApparatus", arg) in load() cannot be called at this point
-    //   // Having a timeout bypasses this
-    //
-    //   setTimeout(() => {
-    //     setLoading(false);
-    //     loadApparatus(experienceData.experience.apparatusId);
-    //   }, 3000);
-    // });
-    // return function () {
-    //   unityContext.removeEventListener("loaded");
-    // };
   }, [experienceData.experience.apparatusId]);
 
   return !loading ? (
