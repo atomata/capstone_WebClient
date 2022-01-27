@@ -1,5 +1,5 @@
 import { BlobServiceClient, ContainerClient } from "@azure/storage-blob";
-import { experienceStorage, sasToken } from "../constants";
+import { defaultStorage, sasToken } from "../constants";
 import { SerializedExperience } from "../types";
 
 async function saveExperienceToCloud(
@@ -12,7 +12,7 @@ async function saveExperienceToCloud(
   );
   // get BlobService = notice `?` is pulled out of sasToken - if created in Azure portal
   const blobService = new BlobServiceClient(
-    `${experienceStorage}/?${sasToken}`
+    `${defaultStorage}/?${sasToken}`
   );
 
   // get Container - full public read access

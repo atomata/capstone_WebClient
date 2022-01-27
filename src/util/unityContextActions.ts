@@ -1,22 +1,41 @@
 import { UnityContext } from "react-unity-webgl";
+import {
+  defaultCamera,
+  loadTrigger,
+  skyboxTrigger,
+  unityScene,
+  voidTrigger,
+} from "./constants";
 
 const unityContext = new UnityContext({
-  loaderUrl: "build/Build.loader.js",
-  dataUrl: "build/Build.data",
-  frameworkUrl: "build/Build.framework.js",
-  codeUrl: "build/Build.wasm",
+  loaderUrl: "build/0_0_2.loader.js",
+  dataUrl: "build/0_0_2.data",
+  frameworkUrl: "build/0_0_2.framework.js",
+  codeUrl: "build/0_0_2.wasm",
 });
 
 // TODO what if args string is empty?
 function loadApparatus(apparatus: string): void {
-  console.log("loading ", apparatus);
-  unityContext.send("Container", "LoadApparatus", apparatus);
+  unityContext.send(unityScene, loadTrigger, apparatus);
 }
 
 // TODO what if args string is empty?
 function requestTrigger(path: string, input: string): void {
-  const arg = `${path}@${input}`;
-  unityContext.send("Container", "VoidTrigger", arg);
+  const arg = `${path}/${input}`;
+  unityContext.send(unityScene, voidTrigger, arg);
 }
 
-export { loadApparatus, requestTrigger, unityContext };
+function changeSkybox(skybox: string): void {
+  unityContext.send(unityScene, skyboxTrigger, skybox);
+}
+
+function defaultCameraView(): void {
+  unityContext.send(unityScene, defaultCamera);
+}
+export {
+  loadApparatus,
+  requestTrigger,
+  changeSkybox,
+  defaultCameraView,
+  unityContext,
+};

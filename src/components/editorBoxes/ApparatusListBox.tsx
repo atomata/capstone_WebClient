@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "@mui/material/Button";
 import styled from "styled-components";
-import { getAssetBundles, checkIfParent } from "../../util/jsonParsing";
+import { getAssetBundles} from "../../util/jsonParsing";
 import { SerializedApparatus } from "../../util/types";
 
 const Box = styled.div`
@@ -63,7 +63,7 @@ const ApparatusListBox = ({
             <ListButton key={index}>
               <Button
                 variant="contained"
-                color={checkIfParent(data) ? "primary" : "secondary"} // checks if node is a parent
+                color="primary"
                 onClick={() => {
                   handleAssetBundleChange(data);
                 }}
@@ -72,11 +72,6 @@ const ApparatusListBox = ({
               </Button>
             </ListButton>
           ))}
-          <ListButton>
-            <Button variant="contained" color="secondary">
-              Some Asset
-            </Button>
-          </ListButton>
         </ListBoxScroller>
       </Box>
     );
