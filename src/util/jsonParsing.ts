@@ -82,7 +82,6 @@ function getAssetBundles(metadata: SerializedApparatus): AssetBundle[] {
   if (metadata === undefined) {
     return undefined;
   }
-  console.log("get assets ");
   const assetTree = convertPathDataToTree(metadata);
   const assetBundleList = [];
   traverseNodeDepthFirst(assetTree, assetBundleList);
