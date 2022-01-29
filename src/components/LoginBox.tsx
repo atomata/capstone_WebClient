@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Button, TextField } from "@mui/material";
 import { useLoginSubmit } from "../util/customHooks/loginBoxfunc";
 import { urlFor } from "../util/utils";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@mui/styles";
 
 const LoginRoot = styled.div`
   position: relative;
@@ -70,10 +70,10 @@ const ImgLogo = styled.img.attrs({
   `
 ;
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   textField: {
-      color: "#FFFFFF"
-  }
+    color: "#FFFFFF"
+  },
 }));
 
 
