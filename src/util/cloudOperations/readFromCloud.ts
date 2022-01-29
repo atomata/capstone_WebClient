@@ -21,10 +21,7 @@ function getExperienceFromCloud(
     mode: "cors",
   })
     .then((response) => response.json())
-    .catch((error) => {
-      console.log("error ", error);
-      return null;
-    });
+    .catch((error) => null);
 }
 
 async function getBlobsInContainer(

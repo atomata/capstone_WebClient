@@ -1,7 +1,7 @@
 import { render } from "@testing-library/react";
 import React from "react";
 import ActionBox from "../components/editorBoxes/ActionBox";
-import {getAssetBundles} from "../util/jsonParsing";
+import { getAssetBundles } from "../util/jsonParsing";
 
 const metadata = {
   Id: "evil-cylinder",
@@ -45,17 +45,12 @@ const metadata = {
 test("ActionBox renders without crashing", () => {
   render(
     <ActionBox
-      assetBundle= {getAssetBundles(metadata)[0]}
-      addAction={()=>{console.log("hello")}}
+      assetBundle={getAssetBundles(metadata)[0]}
+      addAction={() => undefined}
     />
   );
 });
 
 test("ActionBox renders without crashing with undefined assetbundle", () => {
-  render(
-      <ActionBox
-          assetBundle= {undefined}
-          addAction={()=>{console.log("hello")}}
-      />
-  );
+  render(<ActionBox assetBundle={undefined} addAction={() => undefined} />);
 });

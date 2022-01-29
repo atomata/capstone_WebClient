@@ -69,7 +69,7 @@ test("based on the user id and exp id, it should return the experience json but 
   const userId = "testuser1";
   const expId = "testexp1";
   return getExperienceFromCloud(userId, expId).then((testoutput) => {
-    expect(testoutput).toEqual(undefined);
+    expect(testoutput).toEqual(null);
   });
 });
 

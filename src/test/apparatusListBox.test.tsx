@@ -44,8 +44,8 @@ const metadata = {
 test("ApparatusListBox renders without crashing", () => {
   render(
     <ApparatusListBox
-      metadata = {metadata}
-      handleAssetBundleChange={(index)=>{console.log("hello",index)}}
+      metadata={metadata}
+      handleAssetBundleChange={(index) => undefined}
     />
   );
 });

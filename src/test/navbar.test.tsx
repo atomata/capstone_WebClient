@@ -3,14 +3,5 @@ import React from "react";
 import Navbar from "../components/Navbar";
 
 test("Navbar renders without crashing", () => {
-  render(
-    <Navbar
-      save={() => {
-        console.log("test");
-      }}
-      toggle={() => {
-        console.log("test");
-      }}
-    />
-  );
+  render(<Navbar save={() => undefined} toggle={() => undefined} />);
 });

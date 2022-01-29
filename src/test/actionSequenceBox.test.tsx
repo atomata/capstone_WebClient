@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
 import React from "react";
-import {getActions, getAssetBundles} from "../util/jsonParsing";
+import { getActions, getAssetBundles } from "../util/jsonParsing";
 import ActionSequenceBox from "../components/editorBoxes/ActionSequenceBox";
 
 const metadata = {
@@ -45,8 +45,8 @@ const metadata = {
 test("ActionSequenceBox renders without crashing", () => {
   render(
     <ActionSequenceBox
-      actionList = {getActions(getAssetBundles(metadata)[0])}
-      removeAction={(index)=>{console.log("hello",index)}}
+      actionList={getActions(getAssetBundles(metadata)[0])}
+      removeAction={(index) => undefined}
       handleOnDragEnd={undefined}
     />
   );
