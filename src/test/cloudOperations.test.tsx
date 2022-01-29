@@ -1,10 +1,9 @@
-import { getBlobsInContainer } from "../util/cloudOperations/readFromCloud";
-import saveExperienceToCloud from "../util/cloudOperations/writeToCloud";
-
 import {
   getApparatusFromCloud,
   getExperienceFromCloud,
+  getBlobsInContainer,
 } from "../util/cloudOperations/readFromCloud";
+import saveExperienceToCloud from "../util/cloudOperations/writeToCloud";
 
 const metadata = {
   Id: "evil-cylinder",
@@ -45,16 +44,12 @@ const metadata = {
   ],
 };
 
-
 test("based on the apparatus id it should return the apparatus json, but can reject", () => {
-  global.fetch = jest.fn(() =>
-      Promise.reject()
-  ) as jest.Mock;
+  global.fetch = jest.fn(() => Promise.reject()) as jest.Mock;
   const apparatusId = "wobble-sphere";
-  return getApparatusFromCloud(apparatusId)
-      .then((testoutput) => {
-        expect(testoutput).toEqual(undefined);
-      })
+  return getApparatusFromCloud(apparatusId).then((testoutput) => {
+    expect(testoutput).toEqual(undefined);
+  });
 });
 
 test("based on the apparatus id it should return the apparatus json", () => {
@@ -64,25 +59,19 @@ test("based on the apparatus id it should return the apparatus json", () => {
     })
   ) as jest.Mock;
   const apparatusId = "wobble-sphere";
-  return getApparatusFromCloud(apparatusId)
-    .then((testoutput) => {
-      expect(testoutput).toEqual(metadata);
-    })
+  return getApparatusFromCloud(apparatusId).then((testoutput) => {
+    expect(testoutput).toEqual(metadata);
+  });
 });
 
-
 test("based on the user id and exp id, it should return the experience json but can reject", () => {
-  global.fetch = jest.fn(() =>
-      Promise.reject()
-  ) as jest.Mock;
+  global.fetch = jest.fn(() => Promise.reject()) as jest.Mock;
   const userId = "testuser1";
   const expId = "testexp1";
   return getExperienceFromCloud(userId, expId).then((testoutput) => {
     expect(testoutput).toEqual(undefined);
   });
 });
-
-
 
 test("based on the user id and exp id, it should return the experience json", () => {
   global.fetch = jest.fn(() =>
