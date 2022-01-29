@@ -3,6 +3,21 @@ import { render } from "@testing-library/react";
 import { act, renderHook } from "@testing-library/react-hooks";
 import Overlay from "../components/Overlay";
 import { useActionList, useOverlay } from "../util/customHooks/overlayfunc";
+import { ActionData } from "../util/types";
+
+
+const actionData1: ActionData = {
+  path: "test1",
+  input: "testinput1",
+  assetId: "testasset1",
+  name: "test1",
+};
+const actionData2: ActionData = {
+  path: "test2",
+  input: "testinput2",
+  assetId: "testasset2",
+  name: "test2",
+};
 
 test("Overlay renders without crashing", () => {
   render(<Overlay userId="testuser1" experienceData={undefined} />);
@@ -23,22 +38,15 @@ describe("showOverlay", () => {
 describe("ActionList", () => {
   it("addActionTolist", () => {
     const { result } = renderHook(useActionList);
-
-    const testTuple: [string, string, string] = [
-      "testpath",
-      "testinput",
-      "testasset",
-    ];
-
     act(() => {
       result.current.addActionToList(
-        testTuple,
+        actionData1,
         result.current.actionList,
         result.current.setActionList
       );
     });
     expect(result.current.actionList).toEqual(
-      expect.arrayContaining([testTuple])
+      expect.arrayContaining([actionData1])
     );
   });
 
@@ -46,24 +54,14 @@ describe("ActionList", () => {
     const { result } = renderHook(useActionList);
 
     const testValue = 1;
-    const testTuple: [string, string, string] = [
-      "test1",
-      "testinput2",
-      "testasset3",
-    ];
-    const testTuple2: [string, string, string] = [
-      "test4",
-      "testinput5",
-      "testasset6",
-    ];
     act(() => {
       result.current.addActionToList(
-        testTuple,
+        actionData1,
         result.current.actionList,
         result.current.setActionList
       );
       result.current.addActionToList(
-        testTuple2,
+        actionData2,
         result.current.actionList,
         result.current.setActionList
       );
@@ -74,43 +72,55 @@ describe("ActionList", () => {
       );
     });
     expect(result.current.actionList).toEqual(
-      expect.arrayContaining([["test1", "testinput2", "testasset3"]])
+      expect.arrayContaining([actionData1])
     );
   });
 
-  it("handleOnDragEnd", () => {
+  it("handleOnDragEnd destination 0", () => {
     const { result } = renderHook(useActionList);
-
     act(() => {
       const testresult1 = {
         destination: { index: 0 },
         source: { index: 1 },
       };
-
-      const testTuple: [string, string, string] = [
-        "test1",
-        "testinput2",
-        "testasset3",
-      ];
-      const testTuple2: [string, string, string] = [
-        "test4",
-        "testinput5",
-        "testasset6",
-      ];
       result.current.addActionToList(
-        testTuple,
+        actionData1,
         result.current.actionList,
         result.current.setActionList
       );
       result.current.addActionToList(
-        testTuple2,
+        actionData2,
         result.current.actionList,
         result.current.setActionList
       );
       result.current.handleOnDragEnd(testresult1);
     });
     expect(result.current.actionList).toEqual(
-      expect.arrayContaining([["test1", "testinput2", "testasset3"]])
+      expect.arrayContaining([actionData1])
+    );
+  });
+
+  it("handleOnDragEnd destination undefined", () => {
+    const { result } = renderHook(useActionList);
+    act(() => {
+      const testresult1 = {
+        destination: undefined,
+        source: { index: 1 },
+      };
+      result.current.addActionToList(
+          actionData1,
+          result.current.actionList,
+          result.current.setActionList
+      );
+      result.current.addActionToList(
+          actionData2,
+          result.current.actionList,
+          result.current.setActionList
+      );
+      result.current.handleOnDragEnd(testresult1);
+    });
+    expect(result.current.actionList).toEqual(
+        expect.arrayContaining([actionData1])
     );
   });
 });
