@@ -6,7 +6,7 @@ import {
   List,
   ListItem,
   ListItemSecondaryAction,
-} from "@material-ui/core";
+} from "@mui/material";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import { requestTrigger } from "../../util/unityContextActions";
 import { getActions } from "../../util/jsonParsing";
@@ -58,10 +58,10 @@ const ActionBox = ({ assetBundle, addAction }: ActionBoxProps): JSX.Element => {
         <ListHeading>Actions</ListHeading>
         <ListBoxScroller>
           {actionList.map((actionData) => (
-            <List key={actionData.input}>
+            <List key={actionData.name}>
               <ListItem>
                 <Button
-                  key={actionData.input}
+                  key={actionData.name}
                   variant="contained"
                   color="secondary"
                   onClick={() =>
@@ -69,7 +69,7 @@ const ActionBox = ({ assetBundle, addAction }: ActionBoxProps): JSX.Element => {
                   }
                   id={actionData.input}
                 >
-                  {actionData.input}
+                  {actionData.name}
                 </Button>
               </ListItem>
               <ListItemSecondaryAction>

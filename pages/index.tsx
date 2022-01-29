@@ -1,4 +1,4 @@
-import {Button} from "@material-ui/core";
+import { Button } from "@mui/material";
 import { useEffect } from "react";
 import {
   verifyLogIn,
@@ -7,7 +7,12 @@ import {
   getUserName,
 } from "../src/util/loginCookies";
 import Loading from "../src/components/Loading";
-import {OuterBox, ListHeading, LoadExperience, CreateExperience } from "../src/components/Workbench";
+import {
+  OuterBox,
+  ListHeading,
+  LoadExperience,
+  CreateExperience,
+} from "../src/components/Workbench";
 
 function Home(): JSX.Element {
   useEffect(() => {

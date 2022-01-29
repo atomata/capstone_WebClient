@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Link from "next/link";
-import { Button } from "@material-ui/core";
+import { Button } from "@mui/material";
 import { useEffect, useState } from "react";
 import { verifyLogIn, checkIfLoggedIn } from "../src/util/loginCookies";
 import Loading from "../src/components/Loading";

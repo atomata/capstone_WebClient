@@ -10,18 +10,20 @@ const defaultCamera = "ReturnCamera";
 const fileNamePostfix = 5;
 
 const apparatusContainer =
-  "https://addressabletest1.blob.core.windows.net/apparatus";
-const assetBundleContainer =
-  "https://vclassroommspedex.blob.core.windows.net/assetbundles";
-const skyboxContainer =
-  "https://vclassroommspedex.blob.core.windows.net/skyboxes";
+  "https://addressabletest1.blob.core.windows.net/apparatus2";
+const developerStorage =
+  "https://vclassroommspedex.blob.core.windows.net";
 
 const defaultStorage = "https://addressabletest1.blob.core.windows.net";
-const apparatusBlob = "apparatus";
+
+const apparatusBlob = "apparatus2";
+const skyboxBlob = "skyboxes";
 
 export {
   apparatusBlob,
+  skyboxBlob,
   defaultStorage,
+  developerStorage,
   apparatusContainer,
   sasToken,
   fileNamePostfix,

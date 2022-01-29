@@ -2,6 +2,7 @@ type ActionData = {
   path: string;
   input: string;
   assetId: string;
+  name: string;
 };
 type ExperienceData = {
   apparatusMetadata: SerializedApparatus;
@@ -16,7 +17,7 @@ type SerializedExperience = {
 
 // TODO change to lower case
 type SerializedApparatus = {
-  Id : string
+  Id: string;
   Paths: string[];
   Data: string[];
 };
@@ -25,7 +26,7 @@ type PathData = {
   data: Record<string, any[]>;
 };
 
-type AssetBundle = { children: any[]; path: string; identifier: string};
+type AssetBundle = { children: any[]; path: string; identifier: string };
 
 type Tree = { children: any[]; path: string };
 
