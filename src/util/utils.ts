@@ -1,10 +1,12 @@
 import { CSSProperties } from "react";
 
-const weAreInProduction = !process?.env || process.env.NODE_ENV === "production";
-const assetPrefix = weAreInProduction ? "" : "http://localhost:7071/";
+//const weAreInProduction = !process?.env || process.env.NODE_ENV === "production";
+//const assetPrefix = weAreInProduction ? "" : "http://localhost:7071/";
+// const urlFor = (path = "/"): string => `${assetPrefix}${path}`;
 
-
-const urlFor = (path = "/"): string => `${assetPrefix}${path}`;
+//For adding images.
+const assetPrefix = process.env.NODE_ENV === "production" ? "/client/" : "/";
+const urlFor = (path = ""): string =>`${assetPrefix}${path.replace(/^\//, "")}`;
 
 const redirect = (path = "/"): void =>
   window?.location?.replace(`${assetPrefix}${path}`);
