@@ -13,15 +13,14 @@ const OuterBox = styled.div`
   margin-right: 20%;
   padding: 20px;
   weight: 100%;
-  height: 100%;
-  background: #d0d0d0;
-  border: 2px solid black;
+  height: 80%;
+  background: #3F3D56;
+  border-radius: 15px;
 `;
 
 const InnerBox = styled.div`
   font-family: Trebuchet MS;
   font-weight: bold;
-  border: 2px solid black;
   background: white;
   flex-direction: column;
   justify-items: center;
@@ -55,8 +54,7 @@ const LoadButton = styled.button`
 `;
 
 const CreateButton = styled.button`
-  background-color: #555555;
-  border: 2px solid black;
+  background-color: #F75D77;
   color: white;
   font-weight: bold;
   padding: 15px 36px;
@@ -65,6 +63,7 @@ const CreateButton = styled.button`
   margin-left: 1%;
   cursor: pointer;
   font-family: Trebuchet MS;
+  border-radius: 10px;
 `;
 
 const CreateInnerBox = styled.div`
