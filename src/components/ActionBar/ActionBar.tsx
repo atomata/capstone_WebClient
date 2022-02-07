@@ -21,7 +21,7 @@ const ActionBarRoot = styled.div`
 
 const ActionBarList = styled.div`
   display: flex;
-  backgroud-color: #00ffbf;
+  background-color: #00ffbf;
   width: inherit;
   height: inherit;
   pointer-events: auto;
@@ -36,7 +36,7 @@ const ActionBarItems = styled.div`
 
 const SideBarList = styled.div`
   display: flex;
-  backgroud-color: #00ffbf;
+  background-color: #00ffbf;
   width: inherit;
   height: inherit;
   pointer-events: auto;
@@ -48,6 +48,25 @@ const SideBarItems = styled.div`
   width: inherit;
   background-color: grey;
 `;
+
+const ActionSequenceBoxWrapper = styled.div`
+  display: flex;
+  z-index: 2;
+  height: 7em;
+  width: inherit;
+  background-color: #7e3333;
+`;
+
+const ActionSequenceBox = styled.div`
+ display: flex;
+  z-index: 2;
+  height: 7em;
+  width: inherit;
+  background-color: #503a3a;
+`
+
+
+
 function ActionBar(): JSX.Element {
   const { toggleSideBar, toggleActionList, sideBar,actionList } = useActionBar();
 
@@ -79,6 +98,9 @@ function ActionBar(): JSX.Element {
         ) : (
           <div />
         )}
+        <ActionSequenceBoxWrapper>
+          <ActionSequenceBox/>
+        </ActionSequenceBoxWrapper>
       </ActionBarRoot>
     </div>
   );
