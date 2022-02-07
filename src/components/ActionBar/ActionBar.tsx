@@ -8,8 +8,9 @@ const ActionBarRoot = styled.div`
 `;
 
 function ActionBar(): JSX.Element {
+
   return <ActionBarRoot>
-      Action Bar elements here
+      Action Bar Contents
   </ActionBarRoot>;
 }
 

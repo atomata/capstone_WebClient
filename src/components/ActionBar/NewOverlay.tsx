@@ -47,14 +47,15 @@ const TextEditorGrid = styled.div`
   z-index: 2;
   background-color: #0c0475;
 `
+
 function NewOverlay(): JSX.Element {
-  const {actionList } =
+  const {toggleSideBar, toggleActionList, sideBar, actionList} =
     useActionBar(); // ruochen double check this pls - Justin
   return (
     <Overlay>
       <OverlayGrid>
         <SideBarGrid>
-           <SideBar/>
+           <SideBar toggleSideBar = {toggleSideBar} toggleActionList={toggleActionList}/>
         </SideBarGrid>
         {actionList ? <ActionBarGrid>
           <ActionBar/>
