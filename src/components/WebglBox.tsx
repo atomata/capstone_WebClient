@@ -5,7 +5,6 @@ import Overlay from "./Overlay";
 import Loading from "./Loading";
 import { unityContext, loadApparatus } from "../util/unityContextActions";
 import { ExperienceData } from "../util/types";
-import ActionBar from "./ActionBar/ActionBar";
 import NewOverlay from "./ActionBar/NewOverlay";
 
 const WebglRoot = styled.div`
