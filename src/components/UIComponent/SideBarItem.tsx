@@ -11,14 +11,7 @@ function SideBarItem(): JSX.Element {
     toggleActionList,
     toggleSideBar,
   } = useContext(SideBarContext);
-  return (
-      <div>
-      {actionList? (<ActionList />):<div/> }
-
-
-      </div>
-
-  );
+  return <div>{actionList ? <ActionList /> : <div />}</div>;
 }
 
 export default SideBarItem;
