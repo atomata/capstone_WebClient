@@ -6,10 +6,6 @@ import TextEditor from "./TextEditor";
 import { SideBarContext } from "../../util/customHooks/SideBarContext";
 import SideBarItem from "./SideBarItem";
 
-/**
- *  Plan for the action
- *
- *  */
 
 // the side bar box
 

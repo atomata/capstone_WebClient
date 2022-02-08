@@ -13,10 +13,6 @@ const ActionBarItemBox = styled.div`
 
 function ActionBarItem(): JSX.Element {
   const {
-    sideBar,
-    setSideBar,
-    actionList,
-    setActionList,
     toggleActionList,
     toggleSideBar
   } = useContext(SideBarContext);
