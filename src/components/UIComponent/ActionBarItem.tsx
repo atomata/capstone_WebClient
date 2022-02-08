@@ -1,5 +1,7 @@
-import {Dispatch, SetStateAction} from "react";
+import { createContext, Dispatch, SetStateAction, useContext } from "react";
 import styled from "styled-components";
+import { useActionBar } from "../../util/customHooks/ActionBarFunc";
+import { SideBarContext } from "../../util/customHooks/SideBarContext";
 
 const ActionBarItemBox = styled.div`
   display: flex;
@@ -9,25 +11,30 @@ const ActionBarItemBox = styled.div`
   background-color: #518b4c;
 `;
 
-type SideBarProperties = {
-    toggleActionList: Dispatch<SetStateAction<boolean>>
-    toggleSideBar: Dispatch<SetStateAction<boolean>>
-}
-function ActionBarItem({toggleActionList,toggleSideBar}: SideBarProperties): JSX.Element {
+function ActionBarItem(): JSX.Element {
+  const {
+    sideBar,
+    setSideBar,
+    actionList,
+    setActionList,
+    toggleActionList,
+    toggleSideBar
+  } = useContext(SideBarContext);
 
   return (
     <ActionBarItemBox>
       <p>I am the ActionBar Item Box</p>
-      <button type="button" onClick={() => toggleSideBar}>
+      <button type="button" onClick={toggleSideBar}>
         Toggle Side Bar
       </button>
-      <button type="button" onClick={() => toggleActionList}>
+      <button type="button" onClick={toggleActionList}>
         Toggle Actionlist
       </button>
+      {/* <button type="button" onClick={changesValue}>
+        Change value test
+      </button> */}
     </ActionBarItemBox>
   );
 }
-
-
 
 export default ActionBarItem;

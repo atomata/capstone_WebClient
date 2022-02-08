@@ -1,11 +1,10 @@
-import React, { useState } from "react";
-import Button from "@mui/material";
 import styled from "styled-components";
-import { useActionBar } from "../../util/customHooks/ActionBar";
-import ActionList from "./ActionList";
+import { useActionBar } from "../../util/customHooks/ActionBarFunc";
 import ActionBarItem from "./ActionBarItem";
 import ActionSequence from "./ActionSequence";
 import TextEditor from "./TextEditor";
+import { SideBarContext } from "../../util/customHooks/SideBarContext";
+import SideBarItem from "./SideBarItem";
 
 /**
  *  Plan for the action
@@ -64,28 +63,39 @@ const TextEditorGrid = styled.div`
 `;
 
 function ActionBar(): JSX.Element {
-  const { toggleSideBar, toggleActionList, sideBar, actionList } =
-    useActionBar();
-
+  const {
+    sideBar,
+    setSideBar,
+    actionList,
+    setActionList,
+    toggleActionList,
+    toggleSideBar,
+  } = useActionBar();
   return (
     <UIComponentRoot>
       <UIComponentGrid>
-        <ActionBarGrid>
-          <p>I am the Action Bar Grid</p>
-          <ActionBarItem
-            toggleSideBar={toggleSideBar}
-            toggleActionList={toggleActionList}
-          />
-        </ActionBarGrid>
-        {sideBar ? (
-          <SideBarGrid>
-            <p>I am the side bar grid</p>
-            {actionList ? <ActionList /> : <div />}
-          </SideBarGrid>
-        ) : (
-          <div />
-        )}
-
+        <SideBarContext.Provider
+          value={{
+            sideBar,
+            setSideBar,
+            actionList,
+            setActionList,
+            toggleActionList,
+            toggleSideBar,
+          }}
+        >
+          <ActionBarGrid>
+            <p>I am the Action Bar Grid</p>
+            <ActionBarItem />
+          </ActionBarGrid>
+          {sideBar ? (
+            <SideBarGrid>
+              <SideBarItem />
+            </SideBarGrid>
+          ) : (
+            <div />
+          )}
+        </SideBarContext.Provider>
         <ActionSequenceBarGrid>
           <ActionSequence />
         </ActionSequenceBarGrid>
