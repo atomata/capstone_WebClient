@@ -25,7 +25,7 @@ const Content = styled.div`
 
 const LeftIndex = styled.div`
   float: left;
-  width: 50%;
+  width: 45%;
 `;
 
 const RightIndex = styled.div`
@@ -37,20 +37,12 @@ const ImgIllustration = styled.img.attrs({
   alt: "Image Placeholder",
 })
   `
-  @media only screen and (max-width: 1130px) {
-    width: 52%;
-  }
-
-  @media only screen and (max-width: 700px) {
-    width: 48%;
-  }
-
-  width: 82%;
+  width: 99%;
   display:block;
   height: 600px;
   margin-top: 25%;
   margin-bottom: 5%;
-  float:right;
+  margin-left: 120px;
   `
 ;
 
@@ -82,8 +74,6 @@ function Home(): JSX.Element {
         </LeftIndex>
         <RightIndex>
           <OuterBox>
-            <ListHeading>Experience Name</ListHeading>
-            <ListHeading>Description</ListHeading>
             <LoadExperience />
             <CreateExperience />
           </OuterBox>
