@@ -136,7 +136,7 @@ function PreviewOverlay({ actionList }: PreviewOverlayProps): JSX.Element {
                   {selected === index ? (
                     <ActionTabSelectedListItem>
                       {(() =>
-                        requestTrigger(actionData.path, actionData.input))()}
+                        requestTrigger(actionData.path, actionData.input.command))()}
                       <Button
                         onClick={() => {
                           setSelected(index);
