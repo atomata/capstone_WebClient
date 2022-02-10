@@ -1,9 +1,14 @@
 type ActionData = {
   path: string;
-  input: string;
+  input: Input;
   assetId: string;
-  name: string;
 };
+
+type Input = {
+  command: string,
+  name: string,
+  desc:string
+}
 type ExperienceData = {
   apparatusMetadata: SerializedApparatus;
   experience: SerializedExperience;
