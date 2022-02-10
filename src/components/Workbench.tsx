@@ -16,8 +16,8 @@ import { getBlobsInContainer } from "../util/cloudOperations/readFromCloud";
 const OuterBox = styled.div`
   margin-top: 5%;
   margin-bottom: 5%;
-  margin-left: 20%;
-  margin-right: 20%;
+  margin-left: 10%;
+  margin-right: 10%;
   padding: 20px;
   weight: 100%;
   height: 80%;
@@ -36,6 +36,7 @@ const InnerBox = styled.div`
   background: #3F3D56;
   min-height: 12em;
   overflow: scroll;
+  overflow-x: hidden;
   overflow-y: hidden;
 
   ::-webkit-scrollbar {
@@ -68,6 +69,9 @@ const ExperienceHeader = styled.tr`
   color: white;
   text-align: center;
   font-family: Trebuchet MS;
+  th {
+    padding-bottom: 15px;
+  }
 `;
 
 const ExperienceRow = styled.tr`
@@ -80,10 +84,21 @@ const ExperienceRow = styled.tr`
   margin: 2px 2px;
   cursor: pointer;
   font-family: Trebuchet MS;
+  td {
+    padding-top:10px;
+    padding-bottom:10px;
+  }
+`;
+
+const ExperienceMisc = styled.th`
+  float: right;
+  padding-right: 20px;
 `;
 
 const ExperienceButtons = styled.td`
   color: #A5A4EA;
+  float: right;
+  padding-right: 20px;
 `;
 
 const LoadButton = styled.button`
@@ -141,8 +156,7 @@ const CreateExperience = () => {
           helperText=" "
           onChange={(e) => setDescName(e.target.value)}
           variant="outlined" 
-        />
-        
+        />       
         <Link
           key="selectionPage"
           href={{
@@ -180,7 +194,7 @@ const LoadExperience = () => {
           <ExperienceHeader>
             <th>EXPERIENCE NAME</th>
             <th>DESCRIPTION</th>
-            <th align="right"><MoreHorizIcon/></th>
+            <ExperienceMisc><MoreHorizIcon/></ExperienceMisc>
           </ExperienceHeader>
         </thead>       
         <tbody>
@@ -188,7 +202,7 @@ const LoadExperience = () => {
             <ExperienceRow> 
               <td>{expName}</td>
               <td>DESCRIPTION GOES HERE</td>
-              <ExperienceButtons align="right">
+              <ExperienceButtons>
                 <PlayArrowIcon/>
                 <Link
                   key={expName}
@@ -206,9 +220,6 @@ const LoadExperience = () => {
                 <DeleteIcon/>
                 <MoreHorizIcon/>
               </ExperienceButtons>
-            
-              
-            
             </ExperienceRow>
             
           ))}

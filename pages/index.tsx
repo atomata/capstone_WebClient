@@ -25,7 +25,10 @@ const Content = styled.div`
 
 const LeftIndex = styled.div`
   float: left;
-  width: 45%;
+  width: 50%;
+  margin-top: 100px;
+  margin-bottom: 5%;
+  margin-left: 140px;
 `;
 
 const RightIndex = styled.div`
@@ -35,28 +38,20 @@ const RightIndex = styled.div`
 
 const ImgIllustration = styled.img.attrs({
   alt: "Image Placeholder",
-})
-  `
+})`
   width: 99%;
-  display:block;
-  height: 600px;
-  margin-top: 25%;
-  margin-bottom: 5%;
-  margin-left: 120px;
+  height: 650px;
   `
 ;
 
 const LogOutButton = styled(Button)`
   && {
-    background-color: #FFFFFF;
     display: block-inline;
     color: #1710A1;
-    margin-top: 30px;
-    padding: 15px;
-    padding-left: 85px;
-    padding-right: 85px;
+    font-size: 15px;
     font-weight: bold;
-    border-radius: 4px;
+    float: right;
+    margin-top: -100px;
   }
 `;
 
@@ -70,7 +65,7 @@ function Home(): JSX.Element {
       <Content>
         <LeftIndex>
           <ImgIllustration src={urlFor("assets/teaching.svg")} />
-          <LogOutButton onClick={logOut}>Log Out</LogOutButton>
+          <LogOutButton onClick={logOut}>DO YOU WISH TO LOGOUT?</LogOutButton>
         </LeftIndex>
         <RightIndex>
           <OuterBox>
