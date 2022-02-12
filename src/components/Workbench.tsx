@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { makeStyles } from "@mui/styles";
 import styled from "styled-components";
 import Box from "@mui/material/Box";
 import Icon  from "@mui/material/Icon";
@@ -10,8 +11,6 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import TextField from "@mui/material/TextField";
 import { getUserName } from "../util/loginCookies";
 import { getBlobsInContainer } from "../util/cloudOperations/readFromCloud";
-
-
 
 const OuterBox = styled.div`
   margin-top: 5%;
@@ -137,21 +136,44 @@ const ExperienceField = styled(TextField)`
   margin-right: 20px;
 `;
 
+const useStyles = makeStyles((theme) => ({
+  textField: {
+    background: "#FFFFFF"
+  },
+  helper: {
+    color: "#FFFFFF"
+  }
+}));
+
 const CreateExperience = () => {
   const [expName, setExpName] = useState("Experience");
   const [descName, setDescName] = useState("Description");
+
+  const classes = useStyles();
 
   return (
     <CreateInnerBox>
       <Box sx={{ display: "flex", alignItems: "center" }}>
         <ExperienceField
           required
+          InputProps={{
+            className: classes.textField
+          }}
+          FormHelperTextProps={{
+            className: classes.helper
+          }}
           label="New Experience Name"
           helperText="*Required"
           onChange={(e) => setExpName(e.target.value)}
           variant="outlined" 
         />
         <ExperienceField
+          InputProps={{
+            className: classes.textField
+          }}
+          FormHelperTextProps={{
+            className: classes.helper
+          }}
           label="Description"
           helperText=" "
           onChange={(e) => setDescName(e.target.value)}
