@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { makeStyles } from "@mui/styles";
 import styled from "styled-components";
 import Box from "@mui/material/Box";
-import Icon  from "@mui/material/Icon";
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -54,14 +53,6 @@ const InnerBox = styled.div`
     top: 0;
     z-index: 1; 
   }
-`;
-
-const ListHeading = styled.h1`
-  font-size: 20px;
-  text-align: center;
-  font-family: Trebuchet MS;
-  font-weight: bold;
-  color: black;
 `;
 
 const ExperienceHeader = styled.tr`
@@ -254,4 +245,4 @@ const LoadExperience = () => {
   );
 };
 
-export { OuterBox, ListHeading, LoadExperience, CreateExperience };
+export { OuterBox, LoadExperience, CreateExperience };
