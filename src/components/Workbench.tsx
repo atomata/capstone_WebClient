@@ -81,7 +81,6 @@ const ExperienceRow = styled.tr`
   padding: 15px 32px;
   font-size: 16px;
   margin: 2px 2px;
-  cursor: pointer;
   font-family: Trebuchet MS;
   td {
     padding-top:10px;
@@ -92,12 +91,14 @@ const ExperienceRow = styled.tr`
 const ExperienceMisc = styled.th`
   float: right;
   padding-right: 20px;
+  cursor: pointer;
 `;
 
 const ExperienceButtons = styled.td`
   color: #A5A4EA;
   float: right;
   padding-right: 20px;
+  cursor: pointer;
 `;
 
 const LoadButton = styled.button`
