@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import Link from "next/link";
 import { Button } from "@mui/material";
 import { useEffect, useState } from "react";
@@ -6,13 +5,7 @@ import { verifyLogIn, checkIfLoggedIn } from "../src/util/loginCookies";
 import Loading from "../src/components/Loading";
 import { getBlobsInContainer } from "../src/util/cloudOperations/readFromCloud";
 import { apparatusBlob, defaultStorage } from "../src/util/constants";
-
-const Content = styled.div`
-  justify-content: center;
-  flex-direction: column;
-  justify-items: center;
-  display: flex;
-`;
+import { OuterBox, SelectionContainer, SelectionHeading, SelectionContent, PreviewContainer, SelectionButton, SelectionOption} from "../src/components/SelectionBox";
 
 const SelectionList = ({ experienceId }) => {
   const [apparatusList, setApparatusList] = useState([]);
@@ -28,19 +21,33 @@ const SelectionList = ({ experienceId }) => {
     fetchData();
   }, []);
   return (
-    <Content>
-      {apparatusList.map((apparatusId, index) => (
-        <Link
-          key={index}
-          href={{
-            pathname: "/experience",
-            query: { experienceId, apparatusId, dataType: "apparatus" },
-          }}
-        >
-          <Button>{apparatusId}</Button>
-        </Link>
-      ))}
-    </Content>
+    <OuterBox>
+      <SelectionContainer>
+          <SelectionHeading>APPARATUS LIST</SelectionHeading>
+          <SelectionContent>
+            <table>
+              {apparatusList.map((apparatusId, index) => (
+                <tr>
+                  <td><SelectionOption>{apparatusId}</SelectionOption></td>
+                  <td><SelectionButton>PREVIEW</SelectionButton></td>
+                  <td>
+                    <Link
+                      key={index}
+                      href={{
+                        pathname: "/experience",
+                        query: { experienceId, apparatusId, dataType: "apparatus" },
+                      }}
+                    >
+                      <Button><SelectionButton>SELECT</SelectionButton></Button>
+                    </Link>
+                  </td>
+                </tr>
+              ))}
+            </table>
+          </SelectionContent>
+      </SelectionContainer>
+      <PreviewContainer>GIF FOR PREVIEW</PreviewContainer>
+    </OuterBox>
   );
 };
 
@@ -51,7 +58,6 @@ function Selection({ experienceId }): JSX.Element {
 
   return checkIfLoggedIn() ? (
     <main>
-      <h1>SELECT AN APPARATUS</h1>
       <SelectionList experienceId={experienceId} />
     </main>
   ) : (
