@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { makeStyles } from "@mui/styles";
 import styled from "styled-components";
 import Box from "@mui/material/Box";
-import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+import PlayArrowOutlinedIcon from '@mui/icons-material/PlayArrowOutlined';
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
@@ -35,7 +35,6 @@ const InnerBox = styled.div`
   overflow: scroll;
 
   table {
-    text-align: center;
     border-collapse: separate;
     border-spacing: 0 0.5em;
   }
@@ -49,15 +48,16 @@ const InnerBox = styled.div`
 
 const ExperienceHeader = styled.tr`
   color: white;
-  text-align: center;
   font-family: Trebuchet MS;
+  text-align: left;
   th {
     background: #3F3D56;
-    padding-bottom: 15px;
+    padding-bottom: 12px;
     position: sticky;
     position: -webkit-sticky;
     top: 0;
-    z-index: 1; 
+    z-index: 1;
+    padding-left: 30px; 
   } 
 `;
 
@@ -66,22 +66,23 @@ const ExperienceRow = styled.tr`
   background-color: white;
   color: #3f3d56;
   font-weight: bold;
-  padding: 15px 32px;
+  height: 60px;
   font-size: 16px;
-  margin: 2px 2px;
   font-family: Trebuchet MS;
+  
   td {
     padding-top: 10px;
     padding-bottom: 10px;
+    padding-left: 30px;
   }
 `;
 
 const ExperienceName = styled.th`
-  width: 40%;
+  width: 35%;
 `;
 
 const ExperienceDesc = styled.th`
-  width: 40%;
+  width: 35%;
 `;
 
 const ExperienceMisc = styled.th`
@@ -94,10 +95,12 @@ const ExperienceButtons = styled.td`
   color: #a5a4ea;
   float: right;
   padding-right: 20px;
+  padding-top: 10px;
   cursor: pointer;
 
   * {
     margin-left: 6px;
+    fontSize: 50px;
   }
 `;
 
@@ -217,7 +220,7 @@ const LoadExperience = () => {
           <ExperienceHeader>
             <ExperienceName>EXPERIENCE NAME</ExperienceName>
             <ExperienceDesc>DESCRIPTION</ExperienceDesc>
-            <ExperienceMisc><MoreHorizIcon/></ExperienceMisc>
+            <ExperienceMisc><MoreHorizIcon style={{fontSize: '36px'}}/></ExperienceMisc>
           </ExperienceHeader>
         </thead>
         <tbody>
@@ -226,7 +229,7 @@ const LoadExperience = () => {
               <td>{expName}</td>
               <td>DESCRIPTION GOES HERE</td>
               <ExperienceButtons>
-                <PlayArrowIcon />
+                <PlayArrowOutlinedIcon style={{fontSize: '40px'}} />
                 <Link
                   key={expName}
                   href={{
@@ -238,10 +241,10 @@ const LoadExperience = () => {
                     },
                   }}
                 >
-                  <EditIcon />
+                  <EditIcon style={{fontSize: '36px'}} />
                 </Link>
-                <DeleteIcon />
-                <MoreHorizIcon />
+                <DeleteIcon style={{fontSize: '36px'}} />
+                <MoreHorizIcon style={{fontSize: '36px'}} />
               </ExperienceButtons>
             </ExperienceRow>
           ))}
