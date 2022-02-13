@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
 import { useEffect } from "react";
-import { urlFor } from "../src/util/utils";
 import styled from "styled-components";
+import { urlFor } from "../src/util/utils";
 import {
   verifyLogIn,
   logOut,
