@@ -1,10 +1,7 @@
-import { Expand } from "@mui/icons-material";
 import { useState } from "react";
 
 const useWorkbench = () => {
     const [expErr, setExpErr] = useState('');
-
-    const expFormat = /^\s+$/;
 
     const handleExperienceCreate = (event, expName) => {
         let createError = false;

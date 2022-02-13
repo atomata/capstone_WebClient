@@ -141,8 +141,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const CreateExperience = () => {
-  const [expName, setExpName] = useState();
-  const [descName, setDescName] = useState();
+  const [expName, setExpName] = useState("");
+  const [descName, setDescName] = useState("");
 
   const {
     expErr,
