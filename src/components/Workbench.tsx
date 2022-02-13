@@ -95,17 +95,10 @@ const ExperienceButtons = styled.td`
   float: right;
   padding-right: 20px;
   cursor: pointer;
-`;
 
-const LoadButton = styled.button`
-  border: 1px solid black;
-  color: #3f3d56;
-  font-weight: bold;
-  padding: 15px 32px;
-  font-size: 16px;
-  margin: 2px 2px;
-  cursor: pointer;
-  font-family: Trebuchet MS;
+  * {
+    margin-left: 6px;
+  }
 `;
 
 const CreateButton = styled.button`
