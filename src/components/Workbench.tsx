@@ -3,10 +3,10 @@ import { useEffect, useState } from "react";
 import { makeStyles } from "@mui/styles";
 import styled from "styled-components";
 import Box from "@mui/material/Box";
-import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import TextField from "@mui/material/TextField";
 import { getUserName } from "../util/loginCookies";
 import { getBlobsInContainer } from "../util/cloudOperations/readFromCloud";
@@ -19,7 +19,7 @@ const OuterBox = styled.div`
   padding: 20px;
   weight: 100%;
   height: 80%;
-  background: #3F3D56;
+  background: #3f3d56;
   border-radius: 15px;
 `;
 
@@ -31,7 +31,7 @@ const InnerBox = styled.div`
   justify-items: center;
   display: flex;
   height: 85%;
-  background: #3F3D56;
+  background: #3f3d56;
   min-height: 12em;
   overflow: scroll;
   overflow-x: hidden;
@@ -43,7 +43,7 @@ const InnerBox = styled.div`
 
   table {
     text-align: center;
-    border-collapse:separate; 
+    border-collapse: separate;
     border-spacing: 0 0.5em;
   }
 
@@ -51,7 +51,7 @@ const InnerBox = styled.div`
     position: -webkit-sticky;
     position: sticky;
     top: 0;
-    z-index: 1; 
+    z-index: 1;
   }
 `;
 
@@ -66,16 +66,16 @@ const ExperienceHeader = styled.tr`
 
 const ExperienceRow = styled.tr`
   border: 1px solid black;
-  background-color:white;
-  color: #3F3D56;
+  background-color: white;
+  color: #3f3d56;
   font-weight: bold;
   padding: 15px 32px;
   font-size: 16px;
   margin: 2px 2px;
   font-family: Trebuchet MS;
   td {
-    padding-top:10px;
-    padding-bottom:10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
   }
 `;
 
@@ -86,7 +86,7 @@ const ExperienceMisc = styled.th`
 `;
 
 const ExperienceButtons = styled.td`
-  color: #A5A4EA;
+  color: #a5a4ea;
   float: right;
   padding-right: 20px;
   cursor: pointer;
@@ -94,7 +94,7 @@ const ExperienceButtons = styled.td`
 
 const LoadButton = styled.button`
   border: 1px solid black;
-  color: #3F3D56;
+  color: #3f3d56;
   font-weight: bold;
   padding: 15px 32px;
   font-size: 16px;
@@ -104,7 +104,7 @@ const LoadButton = styled.button`
 `;
 
 const CreateButton = styled.button`
-  background-color: #F75D77;
+  background-color: #f75d77;
   border: 0px;
   color: white;
   font-weight: bold;
@@ -130,11 +130,11 @@ const ExperienceField = styled(TextField)`
 
 const useStyles = makeStyles((theme) => ({
   textField: {
-    background: "#FFFFFF"
+    background: "#FFFFFF",
   },
   helper: {
-    color: "#FFFFFF"
-  }
+    color: "#FFFFFF",
+  },
 }));
 
 const CreateExperience = () => {
@@ -149,28 +149,28 @@ const CreateExperience = () => {
         <ExperienceField
           required
           InputProps={{
-            className: classes.textField
+            className: classes.textField,
           }}
           FormHelperTextProps={{
-            className: classes.helper
+            className: classes.helper,
           }}
           label="New Experience Name"
           helperText="*Required"
           onChange={(e) => setExpName(e.target.value)}
-          variant="outlined" 
+          variant="outlined"
         />
         <ExperienceField
           InputProps={{
-            className: classes.textField
+            className: classes.textField,
           }}
           FormHelperTextProps={{
-            className: classes.helper
+            className: classes.helper,
           }}
           label="Description"
           helperText=" "
           onChange={(e) => setDescName(e.target.value)}
-          variant="outlined" 
-        />       
+          variant="outlined"
+        />
         <Link
           key="selectionPage"
           href={{
@@ -184,7 +184,6 @@ const CreateExperience = () => {
     </CreateInnerBox>
   );
 };
-
 
 // TODO show proper error message when data cannot be fetched
 const LoadExperience = () => {
@@ -208,16 +207,18 @@ const LoadExperience = () => {
           <ExperienceHeader>
             <th>EXPERIENCE NAME</th>
             <th>DESCRIPTION</th>
-            <ExperienceMisc><MoreHorizIcon/></ExperienceMisc>
+            <ExperienceMisc>
+              <MoreHorizIcon />
+            </ExperienceMisc>
           </ExperienceHeader>
-        </thead>       
+        </thead>
         <tbody>
           {expList.map((expName) => (
-            <ExperienceRow> 
+            <ExperienceRow>
               <td>{expName}</td>
               <td>DESCRIPTION GOES HERE</td>
               <ExperienceButtons>
-                <PlayArrowIcon/>
+                <PlayArrowIcon />
                 <Link
                   key={expName}
                   href={{
@@ -229,18 +230,15 @@ const LoadExperience = () => {
                     },
                   }}
                 >
-                  <EditIcon/>
+                  <EditIcon />
                 </Link>
-                <DeleteIcon/>
-                <MoreHorizIcon/>
+                <DeleteIcon />
+                <MoreHorizIcon />
               </ExperienceButtons>
             </ExperienceRow>
-            
           ))}
         </tbody>
       </table>
-
-      
     </InnerBox>
   );
 };
