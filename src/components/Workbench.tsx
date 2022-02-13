@@ -8,6 +8,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import TextField from "@mui/material/TextField";
+import { useWorkbench } from "../util/customHooks/workbenchFunc";
 import { getUserName } from "../util/loginCookies";
 import { getBlobsInContainer } from "../util/cloudOperations/readFromCloud";
 
@@ -44,7 +45,6 @@ const InnerBox = styled.div`
   ::-webkit-scrollbar { 
       display: none;  /* Safari and Chrome */
   }
-
 `;
 
 const ExperienceHeader = styled.tr`
@@ -126,6 +126,11 @@ const ExperienceField = styled(TextField)`
   margin-right: 20px;
 `;
 
+const ErrorMsg = styled.label`
+  font-family: Trebuchet MS;
+  color: red;
+`;
+
 const useStyles = makeStyles((theme) => ({
   textField: {
     background: "#FFFFFF",
@@ -136,8 +141,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const CreateExperience = () => {
-  const [expName, setExpName] = useState("Experience");
-  const [descName, setDescName] = useState("Description");
+  const [expName, setExpName] = useState();
+  const [descName, setDescName] = useState();
+
+  const {
+    expErr,
+    handleExperienceCreate
+  } = useWorkbench();
 
   const classes = useStyles();
 
@@ -152,6 +162,7 @@ const CreateExperience = () => {
           FormHelperTextProps={{
             className: classes.helper,
           }}
+          id="name-input"
           label="New Experience Name"
           helperText="*Required"
           onChange={(e) => setExpName(e.target.value)}
@@ -176,9 +187,10 @@ const CreateExperience = () => {
             query: { experienceId: expName },
           }}
         >
-          <CreateButton> CREATE NEW EXPERIENCE </CreateButton>
+          <CreateButton onClick={(e) => handleExperienceCreate(e, expName)}> CREATE NEW EXPERIENCE </CreateButton>
         </Link>
       </Box>
+      <ErrorMsg>{expErr}</ErrorMsg>
     </CreateInnerBox>
   );
 };
