@@ -4,64 +4,23 @@ import {
   getAssetBundles,
   linkPathsToData,
 } from "../util/jsonParsing";
-
-const testmetadata1 = {
-  Id: "evil-cylinder",
-  Paths: [
-    "evil-cylinder",
-    "evil-cylinder/evil-cylinder",
-    "evil-cylinder/evil-cylinder/delta",
-    "evil-cylinder/evil-cylinder/delta/wobble-sphere",
-    "evil-cylinder/evil-cylinder/delta/wobble-sphere/wobble-sphere",
-    "evil-cylinder/evil-cylinder/delta/wobble-sphere/wobble-sphere/animations",
-  ],
-  Data: [
-    "0@identifier:evil-cylinder",
-    "0@type:Serialization",
-    "1@identifier:evil-cylinder",
-    "1@type:AssetBundle",
-    "1@key:evil-cylinder",
-    "2@identifier:delta",
-    "2@type:DeltaTransform",
-    "2@input:vec3:position",
-    "2@input:vec3/rotation",
-    "2@input:vec3/scale",
-    "2@input:vec3/position_delta",
-    "2@input:vec3/rotation_delta",
-    "2@input:vec3/scale_delta",
-    "2@input:bool/isLocal",
-    "3@identifier:wobble-sphere",
-    "3@type:Serialization",
-    "4@identifier:wobble-sphere",
-    "4@type:AssetBundle",
-    "4@key:wobble-sphere",
-    "5@identifier:animations",
-    "5@type:Event",
-    "5@associatedNode:wobble-sphere",
-    "5@input:void/Still",
-    "5@input:void/Wobble",
-    "5@input:void/Bounce",
-  ],
-};
+import {testmetadata1} from "../util/testConstants";
 
 const testActionList = [
   {
     path: "evil-cylinder/evil-cylinder/delta/wobble-sphere/wobble-sphere/animations",
-    input: "Still",
+    input: { command: "still", name: undefined, desc: undefined },
     assetId: ["wobble-sphere"],
-    name: "Still",
   },
   {
     path: "evil-cylinder/evil-cylinder/delta/wobble-sphere/wobble-sphere/animations",
-    input: "Wobble",
+    input: { command: "wobble", name: undefined, desc: undefined },
     assetId: ["wobble-sphere"],
-    name: "Wobble",
   },
   {
     path: "evil-cylinder/evil-cylinder/delta/wobble-sphere/wobble-sphere/animations",
-    input: "Bounce",
+    input: { command: "bounce", name: undefined, desc: undefined },
     assetId: ["wobble-sphere"],
-    name: "Bounce",
   },
 ];
 
@@ -78,7 +37,6 @@ const testpathDataList = [
     data: {
       identifier: ["evil-cylinder"],
       type: ["AssetBundle"],
-      key: ["evil-cylinder"],
     },
   },
   {
@@ -87,13 +45,41 @@ const testpathDataList = [
       identifier: ["delta"],
       type: ["DeltaTransform"],
       input: [
-        undefined,
-        "rotation",
-        "scale",
-        "position_delta",
-        "rotation_delta",
-        "scale_delta",
-        "isLocal",
+        {
+          command: "position",
+          desc: undefined,
+          name: undefined,
+        },
+        {
+          command: "rotation",
+          desc: undefined,
+          name: undefined,
+        },
+        {
+          command: "scale",
+          desc: undefined,
+          name: undefined,
+        },
+        {
+          command: "position_delta",
+          desc: undefined,
+          name: undefined,
+        },
+        {
+          command: "rotation_delta",
+          desc: undefined,
+          name: undefined,
+        },
+        {
+          command: "scale_delta",
+          desc: undefined,
+          name: undefined,
+        },
+        {
+          command: "isLocal",
+          desc: undefined,
+          name: undefined,
+        },
       ],
     },
   },
@@ -109,7 +95,6 @@ const testpathDataList = [
     data: {
       identifier: ["wobble-sphere"],
       type: ["AssetBundle"],
-      key: ["wobble-sphere"],
     },
   },
   {
@@ -117,8 +102,24 @@ const testpathDataList = [
     data: {
       identifier: ["animations"],
       type: ["Event"],
-      associatedNode: ["wobble-sphere"],
-      input: ["Still", "Wobble", "Bounce"],
+      associatedNode: ["evil-cylinder/evil-cylinder/delta/wobble-sphere/wobble-sphere"],
+      input: [
+        {
+          command: "still",
+          desc: undefined,
+          name: undefined,
+        },
+        {
+          command: "wobble",
+          desc: undefined,
+          name: undefined,
+        },
+        {
+          command: "bounce",
+          desc: undefined,
+          name: undefined,
+        },
+      ],
     },
   },
 ];

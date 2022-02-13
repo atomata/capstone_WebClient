@@ -9,15 +9,13 @@ import { ActionData } from "../util/types";
 
 const actionData1: ActionData = {
   path: "test1",
-  input: "testinput1",
+  input: { command: "testinput1", name: undefined, desc: undefined },
   assetId: "testasset1",
-  name: "test1",
 };
 const actionData2: ActionData = {
   path: "test2",
-  input: "testinput2",
+  input: { command: "testinput2", name: undefined, desc: undefined },
   assetId: "testasset2",
-  name: "test2",
 };
 
 const testList = [actionData1, actionData2];

@@ -58,18 +58,18 @@ const ActionBox = ({ assetBundle, addAction }: ActionBoxProps): JSX.Element => {
         <ListHeading>Actions</ListHeading>
         <ListBoxScroller>
           {actionList.map((actionData) => (
-            <List key={actionData.name}>
+            <List key={actionData.input.name}>
               <ListItem>
                 <Button
-                  key={actionData.name}
+                  key={actionData.input.name !== undefined ? actionData.input.name: actionData.input.command}
                   variant="contained"
                   color="secondary"
                   onClick={() =>
-                    requestTrigger(actionData.path, actionData.input)
+                    requestTrigger(actionData.path, actionData.input.command)
                   }
-                  id={actionData.input}
+                  id={actionData.input.name !== undefined ? actionData.input.name: actionData.input.command}
                 >
-                  {actionData.name}
+                  {actionData.input.name !== undefined ? actionData.input.name: actionData.input.command}
                 </Button>
               </ListItem>
               <ListItemSecondaryAction>

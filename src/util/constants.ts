@@ -10,7 +10,7 @@ const defaultCamera = "ReturnCamera";
 const fileNamePostfix = 5;
 
 const apparatusContainer =
-  "https://addressabletest1.blob.core.windows.net/apparatus2";
+  "https://addressabletest1.blob.core.windows.net/apparatus3";
 const developerStorage =
   "https://vclassroommspedex.blob.core.windows.net";
 

@@ -16,7 +16,7 @@ const useSelected = (
     if (selected < actionList.length - 1) {
       requestTrigger(
         actionList[selected + 1].path,
-        actionList[selected + 1].input
+        actionList[selected + 1].input.command
       );
       setSelected((prevVal) => prevVal + 1);
     }
@@ -27,7 +27,7 @@ const useSelected = (
     if (selected > 0) {
       requestTrigger(
         actionList[selected - 1].path,
-        actionList[selected - 1].input
+        actionList[selected - 1].input.command
       );
       setSelected((prevVal) => prevVal - 1);
     }
