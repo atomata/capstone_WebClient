@@ -12,13 +12,12 @@ import { getUserName } from "../util/loginCookies";
 import { getBlobsInContainer } from "../util/cloudOperations/readFromCloud";
 
 const OuterBox = styled.div`
-  margin-top: 5%;
-  margin-bottom: 5%;
+  margin-top: 2%;
   margin-left: 10%;
   margin-right: 10%;
   padding: 20px;
   weight: 100%;
-  height: 80%;
+  height: 92%;
   background: #3F3D56;
   border-radius: 15px;
 `;
@@ -32,14 +31,7 @@ const InnerBox = styled.div`
   display: flex;
   height: 85%;
   background: #3F3D56;
-  min-height: 12em;
   overflow: scroll;
-  overflow-x: hidden;
-  overflow-y: hidden;
-
-  ::-webkit-scrollbar {
-    display: none;
-  }
 
   table {
     text-align: center;
@@ -47,12 +39,12 @@ const InnerBox = styled.div`
     border-spacing: 0 0.5em;
   }
 
-  table th {
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0;
-    z-index: 1; 
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+  ::-webkit-scrollbar { 
+      display: none;  /* Safari and Chrome */
   }
+
 `;
 
 const ExperienceHeader = styled.tr`
@@ -60,8 +52,13 @@ const ExperienceHeader = styled.tr`
   text-align: center;
   font-family: Trebuchet MS;
   th {
+    background: #3F3D56;
     padding-bottom: 15px;
-  }
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0;
+    z-index: 1; 
+  } 
 `;
 
 const ExperienceRow = styled.tr`
@@ -79,9 +76,17 @@ const ExperienceRow = styled.tr`
   }
 `;
 
+const ExperienceName = styled.th`
+  width: 40%;
+`;
+
+const ExperienceDesc = styled.th`
+  width: 40%;
+`;
+
 const ExperienceMisc = styled.th`
-  float: right;
   padding-right: 20px;
+  text-align: right;
   cursor: pointer;
 `;
 
@@ -206,8 +211,8 @@ const LoadExperience = () => {
       <table cellSpacing="0" cellPadding="0">
         <thead>
           <ExperienceHeader>
-            <th>EXPERIENCE NAME</th>
-            <th>DESCRIPTION</th>
+            <ExperienceName>EXPERIENCE NAME</ExperienceName>
+            <ExperienceDesc>DESCRIPTION</ExperienceDesc>
             <ExperienceMisc><MoreHorizIcon/></ExperienceMisc>
           </ExperienceHeader>
         </thead>       
@@ -239,8 +244,6 @@ const LoadExperience = () => {
           ))}
         </tbody>
       </table>
-
-      
     </InnerBox>
   );
 };

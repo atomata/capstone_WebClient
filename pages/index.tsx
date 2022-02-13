@@ -17,16 +17,16 @@ import {
 const Content = styled.div`
   display: flex;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   background-color: #A5A4EA;
 `;
 
 const LeftIndex = styled.div`
   float: left;
   width: 50%;
-  margin-top: 100px;
-  margin-bottom: 5%;
-  margin-left: 140px;
+  padding-top: 100px;
+  padding-bottom: 5%;
+  padding-left: 140px;
 `;
 
 const RightIndex = styled.div`
