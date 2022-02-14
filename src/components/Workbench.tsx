@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { makeStyles } from "@mui/styles";
 import styled from "styled-components";
 import Box from "@mui/material/Box";
-import PlayArrowOutlinedIcon from '@mui/icons-material/PlayArrowOutlined';
+import PlayArrowOutlinedIcon from "@mui/icons-material/PlayArrowOutlined";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
@@ -11,6 +11,7 @@ import TextField from "@mui/material/TextField";
 import { useWorkbench } from "../util/customHooks/workbenchFunc";
 import { getUserName } from "../util/loginCookies";
 import { getBlobsInContainer } from "../util/cloudOperations/readFromCloud";
+import { deleteExp } from "../util/cloudOperations/writeToCloud";
 
 const OuterBox = styled.div`
   margin-top: 2%;
@@ -19,7 +20,7 @@ const OuterBox = styled.div`
   padding: 20px;
   weight: 100%;
   height: 92%;
-  background: #3F3D56;
+  background: #3f3d56;
   border-radius: 15px;
 `;
 
@@ -31,7 +32,7 @@ const InnerBox = styled.div`
   justify-items: center;
   display: flex;
   height: 85%;
-  background: #3F3D56;
+  background: #3f3d56;
   overflow: scroll;
 
   table {
@@ -39,10 +40,10 @@ const InnerBox = styled.div`
     border-spacing: 0 0.5em;
   }
 
-  -ms-overflow-style: none;  /* Internet Explorer 10+ */
-  scrollbar-width: none;  /* Firefox */
-  ::-webkit-scrollbar { 
-      display: none;  /* Safari and Chrome */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
+  ::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
   }
 `;
 
@@ -51,14 +52,14 @@ const ExperienceHeader = styled.tr`
   font-family: Trebuchet MS;
   text-align: left;
   th {
-    background: #3F3D56;
+    background: #3f3d56;
     padding-bottom: 12px;
     position: sticky;
     position: -webkit-sticky;
     top: 0;
     z-index: 1;
-    padding-left: 30px; 
-  } 
+    padding-left: 30px;
+  }
 `;
 
 const ExperienceRow = styled.tr`
@@ -69,7 +70,7 @@ const ExperienceRow = styled.tr`
   height: 60px;
   font-size: 16px;
   font-family: Trebuchet MS;
-  
+
   td {
     padding-top: 10px;
     padding-bottom: 10px;
@@ -100,7 +101,7 @@ const ExperienceButtons = styled.td`
 
   * {
     margin-left: 6px;
-    fontSize: 50px;
+    fontsize: 50px;
   }
 `;
 
@@ -147,10 +148,7 @@ const CreateExperience = () => {
   const [expName, setExpName] = useState("");
   const [descName, setDescName] = useState("");
 
-  const {
-    expErr,
-    handleExperienceCreate
-  } = useWorkbench();
+  const { expErr, handleExperienceCreate } = useWorkbench();
 
   const classes = useStyles();
 
@@ -200,12 +198,12 @@ const CreateExperience = () => {
 
 // TODO show proper error message when data cannot be fetched
 const LoadExperience = () => {
-  const [expList, setexpList] = useState([]);
+  const [expList, setExpList] = useState([]);
   useEffect(() => {
     async function fetchData() {
       try {
         const res = await getBlobsInContainer(getUserName());
-        setexpList(res);
+        setExpList(res);
       } catch (err) {
         console.log("test", err);
       }
@@ -220,16 +218,18 @@ const LoadExperience = () => {
           <ExperienceHeader>
             <ExperienceName>EXPERIENCE NAME</ExperienceName>
             <ExperienceDesc>DESCRIPTION</ExperienceDesc>
-            <ExperienceMisc><MoreHorizIcon style={{fontSize: '36px'}}/></ExperienceMisc>
+            <ExperienceMisc>
+              <MoreHorizIcon style={{ fontSize: "36px" }} />
+            </ExperienceMisc>
           </ExperienceHeader>
         </thead>
         <tbody>
-          {expList.map((expName) => (
+          {expList.map((expName, index) => (
             <ExperienceRow>
               <td>{expName}</td>
               <td>DESCRIPTION GOES HERE</td>
               <ExperienceButtons>
-                <PlayArrowOutlinedIcon style={{fontSize: '40px'}} />
+                <PlayArrowOutlinedIcon style={{ fontSize: "40px" }} />
                 <Link
                   key={expName}
                   href={{
@@ -241,10 +241,17 @@ const LoadExperience = () => {
                     },
                   }}
                 >
-                  <EditIcon style={{fontSize: '36px'}} />
+                  <EditIcon style={{ fontSize: "36px" }} />
                 </Link>
-                <DeleteIcon style={{fontSize: '36px'}} />
-                <MoreHorizIcon style={{fontSize: '36px'}} />
+                <DeleteIcon
+                  style={{ fontSize: "36px" }}
+                  onClick={() => {
+                    expList.splice(index, 1);
+                    setExpList([...expList]);
+                    deleteExp(getUserName(), expName);
+                  }}
+                />
+                <MoreHorizIcon style={{ fontSize: "36px" }} />
               </ExperienceButtons>
             </ExperienceRow>
           ))}
