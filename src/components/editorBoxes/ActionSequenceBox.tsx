@@ -44,6 +44,7 @@ const ListBoxScroller = styled.div`
 type ActionSequenceBoxProps = {
   actionList: ActionData[];
   removeAction: (index: number) => void;
+  selectAction:(index: number) => void;
   handleOnDragEnd: (result: {
     destination: { index: number };
     source: { index: number };
@@ -53,6 +54,7 @@ type ActionSequenceBoxProps = {
 const ActionSequenceBox = ({
   actionList,
   removeAction,
+  selectAction,
   handleOnDragEnd,
 }: ActionSequenceBoxProps): JSX.Element => {
   // Ensuring the array from parameter is not empty.
@@ -82,7 +84,11 @@ const ActionSequenceBox = ({
                       >
                         <List>
                           <ListItem>
-                            <Button variant="contained" color="secondary">
+                            <Button
+                              variant="contained"
+                              color="secondary"
+                              onClick={() => {selectAction(index); console.log("action selected", index)}}
+                            >
                               {data.assetId}:
                               {data.input.name !== undefined
                                 ? data.input.name

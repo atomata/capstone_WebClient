@@ -11,6 +11,8 @@ import Navbar from "./Navbar";
 import PreviewOverlay from "./PreviewOverlay";
 import styles from "../styles/NavbarStyle.module.css";
 import { ExperienceData, SerializedApparatus } from "../util/types";
+import SaveIcon from "@mui/icons-material/Save";
+import { IconButton } from "@mui/material";
 
 const OverlayRoot = styled.div`
   display: absolute;
@@ -103,10 +105,13 @@ function Overlay({ userId, experienceData }: OverlayProps): JSX.Element {
     path: "",
     identifier: "",
   });
+
+  const [currDesc, setCurrDesc] = useState("");
   const { showOverlay, toggleOverlay } = useOverlay();
-  const [actionDesc, setActionDesc] = useState("");
   const classes = useStyles();
   const {
+    selectedAction,
+    setSelectedAction,
     actionList,
     setActionList,
     addActionToList,
@@ -140,6 +145,12 @@ function Overlay({ userId, experienceData }: OverlayProps): JSX.Element {
                 removeAction={(index: number) =>
                   removeActionFromList(index, actionList, setActionList)
                 }
+                selectAction={(index: number) => {
+                  setSelectedAction(index);
+                  setCurrDesc(
+                    actionList[index].desc ? actionList[index].desc : ""
+                  );
+                }}
                 handleOnDragEnd={handleOnDragEnd}
               />
             </OverlayGridItem2>
@@ -153,13 +164,20 @@ function Overlay({ userId, experienceData }: OverlayProps): JSX.Element {
             </OverlayGridItem3>
 
             <OverlayGridItem4>
+              <IconButton
+                key="actionDesc"
+                onClick={() => {
+                  actionList[selectedAction].desc = currDesc;
+                }}
+              >
+                <SaveIcon />
+              </IconButton>
               <TextBox
                 InputProps={{
                   className: classes.textField,
                 }}
-                // helperText="*Required"
-                value={actionDesc}
-                onChange={(e) => setActionDesc(e.target.value)}
+                value={currDesc}
+                onChange={(e) => setCurrDesc(e.target.value)}
                 variant="outlined"
               />
             </OverlayGridItem4>
