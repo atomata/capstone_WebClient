@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { useActionBar } from "../../util/customHooks/ActionBar";
 import ActionList from "./ActionList";
 import ActionBarItem from "./ActionBarItem";
-import ActionSequence from "./ActionSequence";
+import ActionSequence from "./Action Sequence 2.0/ActionSequence";
 import TextEditor from "./TextEditor";
 
 /**
