@@ -67,6 +67,7 @@ const OverlayGridItem4 = styled.div`
   position: relative;
   grid-column: 4 / span 3;
   grid-row: 8 / span 2;
+  pointer-events: auto;
 `;
 const NavbarDiv = styled.div`
   position: absolute;
@@ -87,7 +88,6 @@ const TextBox = styled(TextField)`
   top: 50%;
   left: 15%;
   margin: -25px 0 0 -25px;
-   z-index: 1;
 `;
 
 const useStyles = makeStyles((theme) => ({
