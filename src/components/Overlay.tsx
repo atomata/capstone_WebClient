@@ -1,7 +1,5 @@
 import styled from "styled-components";
 import React, { useState } from "react";
-import TextField from "@mui/material/TextField";
-import { makeStyles } from "@mui/styles";
 import ActionSequenceBox from "./editorBoxes/ActionSequenceBox";
 import ActionBox from "./editorBoxes/ActionBox";
 import ApparatusListBox from "./editorBoxes/ApparatusListBox";
@@ -11,8 +9,7 @@ import Navbar from "./Navbar";
 import PreviewOverlay from "./PreviewOverlay";
 import styles from "../styles/NavbarStyle.module.css";
 import { ExperienceData, SerializedApparatus } from "../util/types";
-import SaveIcon from "@mui/icons-material/Save";
-import { IconButton } from "@mui/material";
+import { TextEditor } from "./TextEditor";
 
 const OverlayRoot = styled.div`
   display: absolute;
@@ -83,32 +80,17 @@ type OverlayProps = {
   experienceData: ExperienceData;
 };
 
-const TextBox = styled(TextField)`
-  position: absolute;
-  width: 80%;
-  height: 80%;
-  top: 50%;
-  left: 15%;
-  margin: -25px 0 0 -25px;
-`;
-
-const useStyles = makeStyles((theme) => ({
-  textField: {
-    background: "#FFFFFF",
-  },
-}));
-
 // TODO parsing once and giving overlay only the info it needs
 function Overlay({ userId, experienceData }: OverlayProps): JSX.Element {
+  const [currDesc, setCurrDesc] = useState("");
   const [assetBundle, setAssetBundle] = useState({
     children: [],
     path: "",
     identifier: "",
   });
 
-  const [currDesc, setCurrDesc] = useState("");
   const { showOverlay, toggleOverlay } = useOverlay();
-  const classes = useStyles();
+
   const {
     selectedAction,
     setSelectedAction,
@@ -164,21 +146,11 @@ function Overlay({ userId, experienceData }: OverlayProps): JSX.Element {
             </OverlayGridItem3>
 
             <OverlayGridItem4>
-              <IconButton
-                key="actionDesc"
-                onClick={() => {
-                  actionList[selectedAction].desc = currDesc;
-                }}
-              >
-                <SaveIcon />
-              </IconButton>
-              <TextBox
-                InputProps={{
-                  className: classes.textField,
-                }}
-                value={currDesc}
-                onChange={(e) => setCurrDesc(e.target.value)}
-                variant="outlined"
+              <TextEditor
+                actionList={actionList}
+                selectedAction={selectedAction}
+                currDesc={currDesc}
+                handleChange={(val) => setCurrDesc(val)}
               />
             </OverlayGridItem4>
           </OverlayGrid>
