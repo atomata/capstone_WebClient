@@ -13,6 +13,8 @@ const useActionList = (experienceData: ExperienceData) => {
     experienceData !== undefined ? experienceData.experience.actionList : []
   );
 
+  const [selectedAction, setSelectedAction] = useState(0);
+
   const addActionToList = (
     actionData: ActionData,
     hookinput: ActionData[],
@@ -43,6 +45,8 @@ const useActionList = (experienceData: ExperienceData) => {
   };
 
   return {
+    selectedAction,
+    setSelectedAction,
     actionList,
     setActionList,
     removeActionFromList,
