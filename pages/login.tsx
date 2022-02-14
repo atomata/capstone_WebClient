@@ -6,10 +6,8 @@ import { verifyNotLogIn, checkIfLoggedIn } from "../src/util/loginCookies";
 import Loading from "../src/components/Loading";
 
 const Content = styled.div`
-  justify-content: center;
-  flex-direction: column;
-  justify-items: center;
   display: flex;
+  width: 100%;
 `;
 
 function Login(): JSX.Element {

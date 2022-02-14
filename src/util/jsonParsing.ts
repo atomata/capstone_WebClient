@@ -26,7 +26,24 @@ function linkPathsToData(metadata: SerializedApparatus): PathData[] {
       pathDataList[index].data[dataSplit[0]] = [];
     }
     if (dataSplit[0] === "input") {
-      pathDataList[index].data[dataSplit[0]].push(dataSplit[1].split("/")[1]);
+      const commandSplit = dataSplit[1].split("/")[1].split("?");
+      let infoSplit;
+      if (commandSplit[1] !== undefined) {
+        infoSplit = commandSplit[1].split("&");
+      }
+
+      const inputObject = {
+        command: commandSplit[0],
+        name:
+          infoSplit !== undefined
+            ? infoSplit[0].split("uiname=")[1]
+            : undefined,
+        desc:
+          infoSplit !== undefined
+            ? infoSplit[1].split("uidesc=")[1]
+            : undefined,
+      };
+      pathDataList[index].data[dataSplit[0]].push(inputObject);
     } else {
       pathDataList[index].data[dataSplit[0]].push(dataSplit[1]);
     }
@@ -96,13 +113,15 @@ function getActions(node: AssetBundle): ActionData[] {
     return undefined;
   }
   for (const child in node.children) {
-    if (node.children[child].type[0] === "Event"  || node.children[child].type[0] === "CameraFocus") {
+    if (
+      node.children[child].type[0] === "Event" ||
+      node.children[child].type[0] === "CameraFocus"
+    ) {
       for (const index in node.children[child].input) {
         const actionData = {
           input: node.children[child].input[index],
           path: node.children[child].path,
           assetId: node.identifier,
-          name: node.children[child].type[0] === "Event"? node.children[child].input[index]: node.children[child].name[0]
         };
         actionList.push(actionData);
       }
