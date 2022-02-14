@@ -157,8 +157,6 @@ function Overlay({ userId, experienceData }: OverlayProps): JSX.Element {
                 InputProps={{
                   className: classes.textField,
                 }}
-                id="name-input"
-                label="New Experience Name"
                 // helperText="*Required"
                 value={actionDesc}
                 onChange={(e) => setActionDesc(e.target.value)}
