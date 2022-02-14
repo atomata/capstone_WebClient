@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import React, { useState } from "react";
+import TextField from "@mui/material/TextField";
+import { makeStyles } from "@mui/styles";
 import ActionSequenceBox from "./editorBoxes/ActionSequenceBox";
 import ActionBox from "./editorBoxes/ActionBox";
 import ApparatusListBox from "./editorBoxes/ApparatusListBox";
@@ -44,7 +46,6 @@ const OverlayGridItem1 = styled.div`
 `;
 
 const OverlayGridItem2 = styled.div`
-  background-color: #00ffbf;
   grid-column: 8 / span 2;
   grid-row: 2 / span 7;
   padding: none;
@@ -61,6 +62,12 @@ const OverlayGridItem3 = styled.div`
   margin: 5%;
 `;
 
+const OverlayGridItem4 = styled.div`
+  background-color: #fffaf0;
+  position: relative;
+  grid-column: 4 / span 3;
+  grid-row: 8 / span 2;
+`;
 const NavbarDiv = styled.div`
   position: absolute;
   width: 100%;
@@ -73,6 +80,22 @@ type OverlayProps = {
   experienceData: ExperienceData;
 };
 
+const TextBox = styled(TextField)`
+  position: absolute;
+  width: 80%;
+  height: 80%;
+  top: 50%;
+  left: 15%;
+  margin: -25px 0 0 -25px;
+   z-index: 1;
+`;
+
+const useStyles = makeStyles((theme) => ({
+  textField: {
+    background: "#FFFFFF",
+  },
+}));
+
 // TODO parsing once and giving overlay only the info it needs
 function Overlay({ userId, experienceData }: OverlayProps): JSX.Element {
   const [assetBundle, setAssetBundle] = useState({
@@ -81,7 +104,8 @@ function Overlay({ userId, experienceData }: OverlayProps): JSX.Element {
     identifier: "",
   });
   const { showOverlay, toggleOverlay } = useOverlay();
-
+  const [actionDesc, setActionDesc] = useState("");
+  const classes = useStyles();
   const {
     actionList,
     setActionList,
@@ -127,6 +151,20 @@ function Overlay({ userId, experienceData }: OverlayProps): JSX.Element {
                 }
               />
             </OverlayGridItem3>
+
+            <OverlayGridItem4>
+              <TextBox
+                InputProps={{
+                  className: classes.textField,
+                }}
+                id="name-input"
+                label="New Experience Name"
+                // helperText="*Required"
+                value={actionDesc}
+                onChange={(e) => setActionDesc(e.target.value)}
+                variant="outlined"
+              />
+            </OverlayGridItem4>
           </OverlayGrid>
         </OverlayShown>
       ) : (
