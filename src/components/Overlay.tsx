@@ -4,7 +4,7 @@ import ActionSequenceBox from "./editorBoxes/ActionSequenceBox";
 import ActionBox from "./editorBoxes/ActionBox";
 import ApparatusListBox from "./editorBoxes/ApparatusListBox";
 import { useOverlay, useActionList } from "../util/customHooks/overlayfunc";
-import saveExperienceToCloud from "../util/cloudOperations/writeToCloud";
+import {saveExp} from "../util/cloudOperations/writeToCloud";
 import Navbar from "./Navbar";
 import PreviewOverlay from "./PreviewOverlay";
 import styles from "../styles/NavbarStyle.module.css";
@@ -96,7 +96,7 @@ function Overlay({ userId, experienceData }: OverlayProps): JSX.Element {
         <Navbar
           save={() => {
             experienceData.experience.actionList = [...actionList];
-            saveExperienceToCloud(userId, experienceData.experience);
+            saveExp(userId, experienceData.experience);
           }}
           toggle={toggleOverlay}
         />
