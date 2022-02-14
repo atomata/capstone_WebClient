@@ -83,7 +83,6 @@ const SelectionOption = styled.div`
 `;
 
 const SelectionContent = styled.div`
-    justify-content: center;
     flex-direction: column;
     justify-items: center;
     display: flex;
@@ -94,6 +93,28 @@ const SelectionContent = styled.div`
     }
 `;
 
+const ImgIllustration1 = styled.img.attrs({
+    alt: "Image Placeholder",
+  })
+    `
+    position:absolute;
+    margin-top: 33%;
+    height: 220px;
+    margin-left: 1%;
+    `
+  ;
 
-export {OuterBox, SelectionContainer, SelectionHeading,SelectionContent, PreviewContainer, SelectionButton, SelectionOption};
+  const ImgIllustration2 = styled.img.attrs({
+    alt: "Image Placeholder",
+  })
+    `
+    position:absolute;
+    margin-top: 33%;
+    height: 220px;    
+    margin-left: 83%;
+    margin-right: 1%;
+    `
+  ;
+
+export {OuterBox, SelectionContainer, SelectionHeading,SelectionContent, PreviewContainer, SelectionButton, SelectionOption, ImgIllustration1, ImgIllustration2};
   

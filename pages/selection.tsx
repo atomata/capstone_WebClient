@@ -5,7 +5,8 @@ import { verifyLogIn, checkIfLoggedIn } from "../src/util/loginCookies";
 import Loading from "../src/components/Loading";
 import { getBlobsInContainer } from "../src/util/cloudOperations/readFromCloud";
 import { apparatusBlob, defaultStorage } from "../src/util/constants";
-import { OuterBox, SelectionContainer, SelectionHeading, SelectionContent, PreviewContainer, SelectionButton, SelectionOption} from "../src/components/SelectionBox";
+import { OuterBox, SelectionContainer, SelectionHeading, SelectionContent, PreviewContainer, SelectionButton, SelectionOption, ImgIllustration1, ImgIllustration2} from "../src/components/SelectionBox";
+import { urlFor } from "../src/util/utils";
 
 const SelectionList = ({ experienceId }) => {
   const [apparatusList, setApparatusList] = useState([]);
@@ -46,7 +47,9 @@ const SelectionList = ({ experienceId }) => {
             </table>
           </SelectionContent>
       </SelectionContainer>
+      <ImgIllustration1 src={urlFor("assets/selectionillustration1.svg")} />
       <PreviewContainer>GIF FOR PREVIEW</PreviewContainer>
+      <ImgIllustration2 src={urlFor("assets/selectionillustration2.svg")} />
     </OuterBox>
   );
 };
