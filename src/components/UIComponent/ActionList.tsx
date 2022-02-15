@@ -1,18 +1,16 @@
 import { useContext, useState } from "react";
 import { experienceContext } from "../../util/customHooks/experienceContext";
-import { ExperienceData, SerializedApparatus } from "../../util/types";
+import { SerializedApparatus } from "../../util/types";
 import ApparatusListBox from "../editorBoxes/ApparatusListBox";
 import {useActionList} from "../../util/customHooks/overlayfunc"
 import ActionBox from "../editorBoxes/ActionBox"
 
 function ActionList(): JSX.Element {
-  const { userId, experienceData } = useContext(experienceContext);
+  const { experienceData } = useContext(experienceContext);
   const {
     actionList,
     setActionList,
     addActionToList,
-    removeActionFromList,
-    handleOnDragEnd,
   } = useActionList(experienceData);
   const [assetBundle, setAssetBundle] = useState({
     children: [],
