@@ -19,7 +19,7 @@ const ActionSequenceHeader = styled.div.attrs({
 
 const ActionSequenceList = styled.div`
   display: flex;
-  min-height: stretch;
+  min-height: 90%;
   min-width: stretch;
   background-color: #778b87;
   justify-content: center;
@@ -28,6 +28,7 @@ const ActionSequenceList = styled.div`
 function ActionSequence(): JSX.Element {
   return (
     <ActionSequenceRoot>
+      <ActionSequenceHeader/>
       <ActionSequenceList>
         <ActionSequenceItem />
         <ActionSequenceItem />
