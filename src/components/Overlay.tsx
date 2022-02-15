@@ -32,21 +32,21 @@ const OverlayGrid = styled.div`
   display: grid;
   width: inherit;
   height: inherit;
-  grid-template-columns: repeat(9, 1fr);
-  grid-template-rows: repeat(9, 1fr);
+  grid-template-columns: repeat(15, 1fr);
+  grid-template-rows: repeat(15, 1fr);
 `;
 
 const OverlayGridItem1 = styled.div`
-  grid-column: 1 / span 2;
-  grid-row: 2 / span 4;
+  grid-column: 1 / span 3;
+  grid-row: 3 / span 6;
   z-index: 2;
   pointer-events: auto;
   margin: 5%;
 `;
 
 const OverlayGridItem2 = styled.div`
-  grid-column: 8 / span 2;
-  grid-row: 2 / span 7;
+  grid-column: 13 / span 4;
+  grid-row: 3 / span 8;
   padding: none;
   z-index: 2;
   pointer-events: auto;
@@ -54,8 +54,8 @@ const OverlayGridItem2 = styled.div`
 `;
 
 const OverlayGridItem3 = styled.div`
-  grid-column: 1 / span 2;
-  grid-row: 6 / span 5;
+  grid-column: 1 / span 3;
+  grid-row: 9 / span 6;
   z-index: 2;
   pointer-events: auto;
   margin: 5%;
@@ -63,10 +63,9 @@ const OverlayGridItem3 = styled.div`
 
 const OverlayGridItem4 = styled.div`
   display: flex;
-  align-items: center;
   position: relative;
-  grid-column: 4 / span 3;
-  grid-row: 8 / span 2;
+  grid-column: 6 / span 5;
+  grid-row: 12 / span 4;
   pointer-events: auto;
 `;
 const NavbarDiv = styled.div`

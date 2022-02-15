@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import TextField from "@mui/material/TextField";
-import React from "react";
+import React, { useState } from "react";
 import { IconButton } from "@mui/material";
 import SaveIcon from "@mui/icons-material/Save";
 import ExpandIcon from "@mui/icons-material/Expand";
@@ -24,14 +24,29 @@ const Header = styled.tr`
 
 const TextDiv = styled.div`
   background: #3f3d56;
-  width: 80%;
-  height: 90%;
+  width: 90%;
+  height: 80%;
   display: flex;
   flex-direction: column;
   border-radius: 15px;
+  padding: 5px;
+  position: relative;
 `;
 
+const DefaultButton = styled.div`
+  padding-top: 15px;
+  text-align: center;
+  font-family: Trebuchet MS;
+  letter-spacing: 1.5px;
+  font-size: 22px;
+  color: white;
+  background: #3f3d56;
+  width: 90%;
+  height: 25%;
+  border-radius: 15px;
+`;
 const SlideName = styled.label`
+  letter-spacing: 1.5px;
   padding-top: 15px;
   padding-left: 20px;
 `;
@@ -49,47 +64,59 @@ const TextEditor = ({
   selectedAction,
   currDesc,
   handleChange,
-}): JSX.Element => (
-  <TextDiv>
-    <table cellSpacing="0" cellPadding="0">
-      <thead>
-        <Header>
-          <SlideName>APPARATUS {selectedAction}</SlideName>
-          <TestDiv>
-            <IconButton
-              style={{ color: "white" }}
-              onClick={() => {
-                actionList[selectedAction].desc = currDesc;
-              }}
-            >
-              <SaveIcon sx={{ fontSize: 25 }} />
-            </IconButton>
-            <IconButton style={{ color: "white" }}>
-              <ExpandIcon sx={{ fontSize: 25 }} />
-            </IconButton>
-          </TestDiv>
-        </Header>
-      </thead>
-      <tbody>
-        <Box>
-          <td>
-            <TextField
-              style={{
-                background: "white",
-                width: "100%",
-                borderRadius: "5px",
-              }}
-              value={currDesc}
-              multiline
-              rows={2}
-              onChange={(e) => handleChange(e.target.value)}
-              variant="outlined"
-            />
-          </td>
-        </Box>
-      </tbody>
-    </table>
-  </TextDiv>
-);
+}): JSX.Element => {
+  const [isExpanded, setExpanded] = useState(false);
+  return isExpanded ? (
+    <TextDiv>
+      <table cellSpacing="0" cellPadding="0">
+        <thead>
+          <Header>
+            <SlideName>APPARATUS {selectedAction}</SlideName>
+            <TestDiv>
+              <IconButton
+                style={{ color: "white" }}
+                onClick={() => {
+                  actionList[selectedAction].desc = currDesc;
+                }}
+              >
+                <SaveIcon sx={{ fontSize: 25 }} />
+              </IconButton>
+              <IconButton
+                style={{ color: "white" }}
+                onClick={() => {
+                  setExpanded((value) => !value);
+                }}
+              >
+                <ExpandIcon sx={{ fontSize: 25 }} />
+              </IconButton>
+            </TestDiv>
+          </Header>
+        </thead>
+        <tbody>
+          <Box>
+            <td>
+              <TextField
+                style={{
+                  background: "white",
+                  width: "100%",
+                  borderRadius: "5px",
+                }}
+                value={currDesc}
+                multiline
+                rows={2}
+                onChange={(e) => handleChange(e.target.value)}
+                variant="outlined"
+              />
+            </td>
+          </Box>
+        </tbody>
+      </table>
+    </TextDiv>
+  ) : (
+    <DefaultButton onClick={() => setExpanded((value) => !value)}>
+      ADD/EDIT DESCRIPTION
+    </DefaultButton>
+  );
+};
 
 export default TextEditor;
