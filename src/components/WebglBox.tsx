@@ -44,7 +44,7 @@ function WebglBox({ userId, experienceData }: WebglProps): JSX.Element {
           zIndex: 0,
         }}
       />
-      <Overlay userId={userId} experienceData={experienceData} />
+      <Overlay userId={userId} experienceData={experienceData} tabIndex={1} />
     </WebglRoot>
   ) : (
     <WebglRoot>
