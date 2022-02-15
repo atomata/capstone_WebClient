@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import { useEffect } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import theme from "../src/util/theme";
-import { assetPrefix } from "../src/util/utils";
 import "./app.global.css";
 
 const Footer = styled.footer`
@@ -23,7 +22,7 @@ export default function App({ Component, pageProps }: AppProps) {
       {/* prettier-ignore */}
       <Head>
         <title>Project Edex Prototype</title>
-        <link rel="icon"       href={`${assetPrefix}/favicon.ico`} />
+        <link rel="icon"       href="assets/epistaLogo.png" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=B612:wght@700&display=swap" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@300&display=swap" />

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useActionBar } from "../../util/customHooks/ActionBarFunc";
 import ActionBarItem from "./ActionBarItem";
-import ActionSequence from "./ActionSequence";
+import ActionSequence from "./Action Sequence 2.0/ActionSequence";
 import TextEditor from "./TextEditor";
 import { SideBarContext } from "../../util/customHooks/SideBarContext";
 import SideBarItem from "./SideBarItem";
