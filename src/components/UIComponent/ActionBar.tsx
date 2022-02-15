@@ -5,7 +5,8 @@ import ActionSequence from "./ActionSequence";
 import TextEditor from "./TextEditor";
 import { SideBarContext } from "../../util/customHooks/SideBarContext";
 import SideBarItem from "./SideBarItem";
-
+import { ExperienceData } from "../../util/types";
+import { experienceContext } from "../../util/customHooks/experienceContext";
 
 // the side bar box
 
@@ -58,7 +59,12 @@ const TextEditorGrid = styled.div`
   background-color: #0c0475;
 `;
 
-function ActionBar(): JSX.Element {
+type OverlayProps = {
+  userId: string;
+  experienceData: ExperienceData;
+};
+
+function ActionBar({ userId, experienceData }: OverlayProps): JSX.Element {
   const {
     sideBar,
     setSideBar,
@@ -80,17 +86,20 @@ function ActionBar(): JSX.Element {
             toggleSideBar,
           }}
         >
-          <ActionBarGrid>
-            <p>I am the Action Bar Grid</p>
-            <ActionBarItem />
-          </ActionBarGrid>
-          {sideBar ? (
-            <SideBarGrid>
-              <SideBarItem />
-            </SideBarGrid>
-          ) : (
-            <div />
-          )}
+          <experienceContext.Provider value={{ userId, experienceData }}>
+            {" "}
+            <ActionBarGrid>
+              <p>I am the Action Bar Grid</p>
+              <ActionBarItem />
+            </ActionBarGrid>
+            {sideBar ? (
+              <SideBarGrid>
+                <SideBarItem />
+              </SideBarGrid>
+            ) : (
+              <div />
+            )}
+          </experienceContext.Provider>
         </SideBarContext.Provider>
         <ActionSequenceBarGrid>
           <ActionSequence />
