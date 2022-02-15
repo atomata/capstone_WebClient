@@ -3,23 +3,45 @@ import TextField from "@mui/material/TextField";
 import React from "react";
 import { IconButton } from "@mui/material";
 import SaveIcon from "@mui/icons-material/Save";
+import ExpandIcon from "@mui/icons-material/Expand";
 
-const TextBox = styled(TextField)`
-  position: absolute;
-  width: 80%;
-  height: 80%;
-  top: 50%;
-  left: 15%;
-  margin: -25px 0 0 -25px;
+const Box = styled.tr`
+  background: #3f3d56;
+  width: 100%;
+  height: 100%;
+  td {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+`;
+const Header = styled.tr`
+  color: white;
+  font-family: Trebuchet MS;
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
 `;
 
 const TextDiv = styled.div`
-  background: #fffaf0;
-  border: 1px solid black;
-  min-width: 100%;
-  min-height: 100%;
-  max-height: 100%;
-  max-width: 100%;
+  background: #3f3d56;
+  width: 80%;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 15px;
+`;
+
+const SlideName = styled.label`
+  padding-top: 15px;
+  padding-left: 20px;
+`;
+
+const TestDiv = styled.div`
+  margin-left: auto;
+  cursor: pointer;
+  padding-top: 5px;
+  padding-right: 15px;
+  color: white;
 `;
 
 const TextEditor = ({
@@ -29,19 +51,44 @@ const TextEditor = ({
   handleChange,
 }): JSX.Element => (
   <TextDiv>
-    <IconButton
-      key="actionDesc"
-      onClick={() => {
-        actionList[selectedAction].desc = currDesc;
-      }}
-    >
-      <SaveIcon />
-    </IconButton>
-    <TextBox
-      value={currDesc}
-      onChange={(e) => handleChange(e.target.value)}
-      variant="outlined"
-    />
+    <table cellSpacing="0" cellPadding="0">
+      <thead>
+        <Header>
+          <SlideName>APPARATUS {selectedAction}</SlideName>
+          <TestDiv>
+            <IconButton
+              style={{ color: "white" }}
+              onClick={() => {
+                actionList[selectedAction].desc = currDesc;
+              }}
+            >
+              <SaveIcon sx={{ fontSize: 25 }} />
+            </IconButton>
+            <IconButton style={{ color: "white" }}>
+              <ExpandIcon sx={{ fontSize: 25 }} />
+            </IconButton>
+          </TestDiv>
+        </Header>
+      </thead>
+      <tbody>
+        <Box>
+          <td>
+            <TextField
+              style={{
+                background: "white",
+                width: "100%",
+                borderRadius: "5px",
+              }}
+              value={currDesc}
+              multiline
+              rows={2}
+              onChange={(e) => handleChange(e.target.value)}
+              variant="outlined"
+            />
+          </td>
+        </Box>
+      </tbody>
+    </table>
   </TextDiv>
 );
 

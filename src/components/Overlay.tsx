@@ -9,7 +9,7 @@ import Navbar from "./Navbar";
 import PreviewOverlay from "./PreviewOverlay";
 import styles from "../styles/NavbarStyle.module.css";
 import { ExperienceData, SerializedApparatus } from "../util/types";
-import { TextEditor } from "./TextEditor";
+import TextEditor from "./TextEditor";
 
 const OverlayRoot = styled.div`
   display: absolute;
@@ -62,7 +62,8 @@ const OverlayGridItem3 = styled.div`
 `;
 
 const OverlayGridItem4 = styled.div`
-  background-color: #fffaf0;
+  display: flex;
+  align-items: center;
   position: relative;
   grid-column: 4 / span 3;
   grid-row: 8 / span 2;
@@ -124,6 +125,7 @@ function Overlay({ userId, experienceData }: OverlayProps): JSX.Element {
             <OverlayGridItem2>
               <ActionSequenceBox
                 actionList={actionList}
+                selectedAction = {selectedAction}
                 removeAction={(index: number) =>
                   removeActionFromList(index, actionList, setActionList)
                 }
