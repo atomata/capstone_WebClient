@@ -2,28 +2,37 @@ import styled from "styled-components";
 import ActionSequenceItem from "./ActionSequenceItem";
 
 const ActionSequenceRoot = styled.div`
-  display: absolute;
-  width: inherit;
-  height: inherit;
+  display: relative;
+  height: stretch;
+  width: stretch;
   background-color: #00ffbf;
-  padding: 1em 1em  1em 1em  ;
+`;
+
+const ActionSequenceHeader = styled.div.attrs({
+  children: "Action Sequence List",
+})`
+  display: flex;
+  justify-content: center;
+  width: stretch;
+  background-color: gold;
 `;
 
 const ActionSequenceList = styled.div`
-    width: 100%;
-    height: 100%;
-    display: flex;
-    background-color: #778b87;
+  display: flex;
+  min-height: stretch;
+  min-width: stretch;
+  background-color: #778b87;
+  justify-content: center;
 `;
 
 function ActionSequence(): JSX.Element {
   return (
     <ActionSequenceRoot>
       <ActionSequenceList>
-          <ActionSequenceItem/>
-          <ActionSequenceItem/>
-          <ActionSequenceItem/>
-          <ActionSequenceItem/>
+        <ActionSequenceItem />
+        <ActionSequenceItem />
+        <ActionSequenceItem />
+        <ActionSequenceItem />
       </ActionSequenceList>
     </ActionSequenceRoot>
   );
