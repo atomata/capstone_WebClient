@@ -35,14 +35,15 @@ const TextDiv = styled.div`
 
 const DefaultButton = styled.div`
   padding-top: 15px;
+  cursor: pointer;
   text-align: center;
   font-family: Trebuchet MS;
   letter-spacing: 1.5px;
-  font-size: 22px;
+  font-size: 20px;
   color: white;
   background: #3f3d56;
   width: 90%;
-  height: 25%;
+  height: 22%;
   border-radius: 15px;
 `;
 const SlideName = styled.label`
