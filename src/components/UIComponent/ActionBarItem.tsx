@@ -1,9 +1,7 @@
-import { createContext, Dispatch, SetStateAction, useContext } from "react";
+import { useContext } from "react";
 import styled from "styled-components";
-import { useActionBar } from "../../util/customHooks/ActionBarFunc";
 import { SideBarContext } from "../../util/customHooks/SideBarContext";
 import saveExperienceToCloud from "../../util/cloudOperations/writeToCloud";
-import { ExperienceData, SerializedApparatus } from "../../util/types";
 import { useActionList } from "../../util/customHooks/overlayfunc";
 import { experienceContext } from "../../util/customHooks/experienceContext";
 
@@ -30,10 +28,6 @@ function ActionBarItem(): JSX.Element {
   const {userId, experienceData} = useContext(experienceContext)
   const {
     actionList,
-    setActionList,
-    addActionToList,
-    removeActionFromList,
-    handleOnDragEnd,
   } = useActionList(experienceData);
   return (
     <>
