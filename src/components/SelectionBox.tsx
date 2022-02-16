@@ -87,9 +87,11 @@ const SelectionContent = styled.div`
     justify-items: center;
     display: flex;
     max-height: 400px;
-    overflow-y: scroll;
+    overflow: scroll;
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+    scrollbar-width: none; /* Firefox */
     ::-webkit-scrollbar {
-      display: none;
+      display: none; /* Safari and Chrome */
     }
 `;
 
