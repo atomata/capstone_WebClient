@@ -29,29 +29,24 @@ const useWorkbench = () => {
     return { handleExperienceCreate, expErr };
 };
 
-const slideTransition = forwardRef(function Transition(
-    props: TransitionProps & {
-      children: React.ReactElement<any, any>;
-    },
-    ref: React.Ref<unknown>,
-  ) {
-    return <Slide direction="up" ref={ref} {...props} />;
-  });
+
 
 const useDeleteDialog = () => {
     const [delOpen, setDelOpen] = useState(false);
     const [delIndex, setDelIndex] = useState(0);
     const [delExpName, setDelExpName] = useState("");
 
-    const handleDeleteDialogOpen = () => {
+    const handleDeleteDialogOpen = (index, expName) => {
+        setDelIndex(index);
+        setDelExpName(expName);
         setDelOpen(true);
     };
     
     const handleDeleteDialogClose = () => {
-        setDelOpen(false);
+        setDelOpen(false);   
     };
 
-    return { delIndex, delExpName, setDelIndex, setDelExpName, handleDeleteDialogOpen, handleDeleteDialogClose };
+    return { delOpen, delIndex, delExpName, handleDeleteDialogOpen, handleDeleteDialogClose };
 };
 
 export { useWorkbench, useDeleteDialog };

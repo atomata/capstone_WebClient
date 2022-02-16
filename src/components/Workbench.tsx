@@ -2,25 +2,16 @@ import Link from "next/link";
 import { useEffect, useState, forwardRef } from "react";
 import { makeStyles } from "@mui/styles";
 import styled from "styled-components";
-import Box from "@mui/material/Box";
 import PlayArrowOutlinedIcon from "@mui/icons-material/PlayArrowOutlined";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-import TextField from "@mui/material/TextField";
+import { Box, TextField, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Slide } from '@mui/material';
+import { TransitionProps } from '@mui/material/transitions';
 import { useWorkbench, useDeleteDialog } from "../util/customHooks/workbenchFunc";
-import { getUserName } from "../util/loginCookies";
 import { getBlobsInContainer } from "../util/cloudOperations/readFromCloud";
 import { deleteExp } from "../util/cloudOperations/writeToCloud";
-
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import Slide from '@mui/material/Slide';
-import { TransitionProps } from '@mui/material/transitions';
+import { getUserName } from "../util/loginCookies";
 
 const OuterBox = styled.div`
   margin-top: 2%;
@@ -150,7 +141,7 @@ const useStyles = makeStyles((theme) => ({
   },
   helper: {
     color: "#FFFFFF",
-  },
+  }
 }));
 
 const CreateExperience = () => {
@@ -205,7 +196,7 @@ const CreateExperience = () => {
   );
 };
 
-const Transition = forwardRef(function Transition(
+const slideTransition = forwardRef(function Transition(
   props: TransitionProps & {
     children: React.ReactElement<any, any>;
   },
@@ -217,9 +208,7 @@ const Transition = forwardRef(function Transition(
 // TODO show proper error message when data cannot be fetched
 const LoadExperience = () => {
   const [expList, setExpList] = useState([]);
-  const [open, setOpen] = useState(false);
-
-  const { delIndex, delExpName, setDelIndex, setDelExpName, handleDeleteDialogOpen, handleDeleteDialogClose } = useDeleteDialog();
+  const { delOpen, delIndex, delExpName, handleDeleteDialogOpen, handleDeleteDialogClose } = useDeleteDialog();
 
   useEffect(() => {
     async function fetchData() {
@@ -236,16 +225,16 @@ const LoadExperience = () => {
   return (
     <InnerBox>
       <Dialog
-        open={open}
-        TransitionComponent={Transition}
+        open={delOpen}
+        TransitionComponent={slideTransition}
         keepMounted
         onClose={handleDeleteDialogClose}
         aria-describedby="alert-dialog-slide-description"
       >
         <DialogTitle>Are you sure you want to delete this experience?</DialogTitle>
-        <DialogContent>
+        <DialogContent color="primary">
           <DialogContentText id="alert-dialog-slide-description">
-            Are you sure you want to delete this experience?
+            Once deleted, this experience cannot be returned and will be lost forever. Do you wish to continue?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -292,9 +281,7 @@ const LoadExperience = () => {
                 <DeleteIcon
                   style={{ fontSize: "36px" }}
                   onClick={() => {
-                    setDelIndex(index);
-                    setDelExpName(expName);
-                    handleDeleteDialogOpen();
+                    handleDeleteDialogOpen(index, expName);       
                   }}
                 />
                 <MoreHorizIcon style={{ fontSize: "36px" }} />
