@@ -21,4 +21,24 @@ const useWorkbench = () => {
     return { handleExperienceCreate, expErr };
 };
 
-export { useWorkbench };
+
+
+const useDeleteDialog = () => {
+    const [delOpen, setDelOpen] = useState(false);
+    const [delIndex, setDelIndex] = useState(0);
+    const [delExpName, setDelExpName] = useState("");
+
+    const handleDeleteDialogOpen = (index, expName) => {
+        setDelIndex(index);
+        setDelExpName(expName);
+        setDelOpen(true);
+    };
+    
+    const handleDeleteDialogClose = () => {
+        setDelOpen(false);   
+    };
+
+    return { delOpen, delIndex, delExpName, handleDeleteDialogOpen, handleDeleteDialogClose };
+};
+
+export { useWorkbench, useDeleteDialog };
