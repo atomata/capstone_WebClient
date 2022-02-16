@@ -116,5 +116,17 @@ const ImgIllustration1 = styled.img.attrs({
     `
   ;
 
-export {OuterBox, SelectionContainer, SelectionHeading,SelectionContent, PreviewContainer, SelectionButton, SelectionOption, ImgIllustration1, ImgIllustration2};
+  const GifIllustration = styled.img.attrs({
+    alt: "Image Placeholder",
+  })
+    `
+    margin-top: 20px;
+    height: 400px;
+    width: 400px;
+    border: 3px solid #3F3D56;
+    
+    `
+  ;
+
+export {OuterBox, SelectionContainer, SelectionHeading,SelectionContent, PreviewContainer, SelectionButton, SelectionOption, ImgIllustration1, ImgIllustration2, GifIllustration};
   
