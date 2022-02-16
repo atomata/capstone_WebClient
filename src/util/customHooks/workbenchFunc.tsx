@@ -1,4 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState, forwardRef } from "react";
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import Slide from '@mui/material/Slide';
+import { TransitionProps } from '@mui/material/transitions';
 
 const useWorkbench = () => {
     const [expErr, setExpErr] = useState('');
@@ -21,4 +29,24 @@ const useWorkbench = () => {
     return { handleExperienceCreate, expErr };
 };
 
-export { useWorkbench };
+
+
+const useDeleteDialog = () => {
+    const [delOpen, setDelOpen] = useState(false);
+    const [delIndex, setDelIndex] = useState(0);
+    const [delExpName, setDelExpName] = useState("");
+
+    const handleDeleteDialogOpen = (index, expName) => {
+        setDelIndex(index);
+        setDelExpName(expName);
+        setDelOpen(true);
+    };
+    
+    const handleDeleteDialogClose = () => {
+        setDelOpen(false);   
+    };
+
+    return { delOpen, delIndex, delExpName, handleDeleteDialogOpen, handleDeleteDialogClose };
+};
+
+export { useWorkbench, useDeleteDialog };

@@ -1,17 +1,17 @@
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useState, forwardRef } from "react";
 import { makeStyles } from "@mui/styles";
 import styled from "styled-components";
-import Box from "@mui/material/Box";
 import PlayArrowOutlinedIcon from "@mui/icons-material/PlayArrowOutlined";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-import TextField from "@mui/material/TextField";
-import { useWorkbench } from "../util/customHooks/workbenchFunc";
-import { getUserName } from "../util/loginCookies";
+import { Box, TextField, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Slide } from '@mui/material';
+import { TransitionProps } from '@mui/material/transitions';
+import { useWorkbench, useDeleteDialog } from "../util/customHooks/workbenchFunc";
 import { getBlobsInContainer } from "../util/cloudOperations/readFromCloud";
 import { deleteExp } from "../util/cloudOperations/writeToCloud";
+import { getUserName } from "../util/loginCookies";
 
 const OuterBox = styled.div`
   margin-top: 2%;
@@ -141,7 +141,7 @@ const useStyles = makeStyles((theme) => ({
   },
   helper: {
     color: "#FFFFFF",
-  },
+  }
 }));
 
 const CreateExperience = () => {
@@ -196,9 +196,20 @@ const CreateExperience = () => {
   );
 };
 
+const slideTransition = forwardRef(function Transition(
+  props: TransitionProps & {
+    children: React.ReactElement<any, any>;
+  },
+  ref: React.Ref<unknown>,
+) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
+
 // TODO show proper error message when data cannot be fetched
 const LoadExperience = () => {
   const [expList, setExpList] = useState([]);
+  const { delOpen, delIndex, delExpName, handleDeleteDialogOpen, handleDeleteDialogClose } = useDeleteDialog();
+
   useEffect(() => {
     async function fetchData() {
       try {
@@ -213,6 +224,29 @@ const LoadExperience = () => {
 
   return (
     <InnerBox>
+      <Dialog
+        open={delOpen}
+        TransitionComponent={slideTransition}
+        keepMounted
+        onClose={handleDeleteDialogClose}
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogTitle>Are you sure you want to delete this experience?</DialogTitle>
+        <DialogContent color="primary">
+          <DialogContentText id="alert-dialog-slide-description">
+            Once deleted, this experience cannot be returned and will be lost forever. Do you wish to continue?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => {
+                    expList.splice(delIndex, 1);
+                    setExpList([...expList]);
+                    deleteExp(getUserName(), delExpName);
+                    handleDeleteDialogClose();
+                  }}>YES</Button>
+          <Button onClick={handleDeleteDialogClose}>NO</Button>
+        </DialogActions>
+      </Dialog>
       <table cellSpacing="0" cellPadding="0">
         <thead>
           <ExperienceHeader>
@@ -225,6 +259,7 @@ const LoadExperience = () => {
         </thead>
         <tbody>
           {expList.map((expName, index) => (
+            // eslint-disable-next-line react/jsx-key
             <ExperienceRow>
               <td>{expName}</td>
               <td>DESCRIPTION GOES HERE</td>
@@ -246,9 +281,7 @@ const LoadExperience = () => {
                 <DeleteIcon
                   style={{ fontSize: "36px" }}
                   onClick={() => {
-                    expList.splice(index, 1);
-                    setExpList([...expList]);
-                    deleteExp(getUserName(), expName);
+                    handleDeleteDialogOpen(index, expName);       
                   }}
                 />
                 <MoreHorizIcon style={{ fontSize: "36px" }} />
