@@ -23,7 +23,7 @@ const SelectionList = ({ experienceId }) => {
   }, []);
 
   const [visible, setVisible] = useState(false);  // visibility state for  preview
-  const [apparatusName, setapparatusName] = useState("apparatus"); // apparatus selected for preview state
+  const [apparatusName, setapparatusName] = useState("wobble-sphere"); // apparatus selected for preview state
   function displayGif(apparatusID: React.SetStateAction<string>): void {
     setapparatusName(apparatusID)
     setVisible(true)    
