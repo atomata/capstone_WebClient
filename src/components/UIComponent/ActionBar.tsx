@@ -1,16 +1,12 @@
-import React, { useState } from "react";
-import Button from "@mui/material";
 import styled from "styled-components";
-import { useActionBar } from "../../util/customHooks/ActionBar";
-import ActionList from "./ActionList";
+import { useActionBar } from "../../util/customHooks/ActionBarFunc";
 import ActionBarItem from "./ActionBarItem";
 import ActionSequence from "./Action Sequence 2.0/ActionSequence";
 import TextEditor from "./TextEditor";
-
-/**
- *  Plan for the action
- *
- *  */
+import { SideBarContext } from "../../util/customHooks/SideBarContext";
+import SideBarItem from "./SideBarItem";
+import { ExperienceData } from "../../util/types";
+import { experienceContext } from "../../util/customHooks/experienceContext";
 
 // the side bar box
 
@@ -63,29 +59,48 @@ const TextEditorGrid = styled.div`
   background-color: #0c0475;
 `;
 
-function ActionBar(): JSX.Element {
-  const { toggleSideBar, toggleActionList, sideBar, actionList } =
-    useActionBar();
+type OverlayProps = {
+  userId: string;
+  experienceData: ExperienceData;
+};
 
+function ActionBar({ userId, experienceData }: OverlayProps): JSX.Element {
+  const {
+    sideBar,
+    setSideBar,
+    actionList,
+    setActionList,
+    toggleActionList,
+    toggleSideBar,
+  } = useActionBar();
   return (
     <UIComponentRoot>
       <UIComponentGrid>
-        <ActionBarGrid>
-          <p>I am the Action Bar Grid</p>
-          <ActionBarItem
-            toggleSideBar={toggleSideBar}
-            toggleActionList={toggleActionList}
-          />
-        </ActionBarGrid>
-        {sideBar ? (
-          <SideBarGrid>
-            <p>I am the side bar grid</p>
-            {actionList ? <ActionList /> : <div />}
-          </SideBarGrid>
-        ) : (
-          <div />
-        )}
-
+        <SideBarContext.Provider
+          value={{
+            sideBar,
+            setSideBar,
+            actionList,
+            setActionList,
+            toggleActionList,
+            toggleSideBar,
+          }}
+        >
+          <experienceContext.Provider value={{ userId, experienceData }}>
+            {" "}
+            <ActionBarGrid>
+              <p>I am the Action Bar Grid</p>
+              <ActionBarItem />
+            </ActionBarGrid>
+            {sideBar ? (
+              <SideBarGrid>
+                <SideBarItem />
+              </SideBarGrid>
+            ) : (
+              <div />
+            )}
+          </experienceContext.Provider>
+        </SideBarContext.Provider>
         <ActionSequenceBarGrid>
           <ActionSequence />
         </ActionSequenceBarGrid>
