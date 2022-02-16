@@ -7,7 +7,6 @@ import { getBlobsInContainer } from "../src/util/cloudOperations/readFromCloud";
 import { apparatusBlob, defaultStorage } from "../src/util/constants";
 import { OuterBox, SelectionContainer, SelectionHeading, SelectionContent, PreviewContainer, SelectionButton, SelectionOption, ImgIllustration1, ImgIllustration2, GifIllustration} from "../src/components/SelectionBox";
 import { urlFor } from "../src/util/utils";
-import React from "react";
 
 const SelectionList = ({ experienceId }) => {
   const [apparatusList, setApparatusList] = useState([]);
