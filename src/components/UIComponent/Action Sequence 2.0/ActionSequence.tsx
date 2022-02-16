@@ -1,3 +1,4 @@
+import { Paper } from "@mui/material";
 import styled from "styled-components";
 import ActionSequenceItem from "./ActionSequenceItem";
 
@@ -9,7 +10,7 @@ const ActionSequenceRoot = styled.div`
 `;
 
 const ActionSequenceHeader = styled.div.attrs({
-  children: "I am not pushing to main",
+  children: "Action Sequence List",
 })`
   display: flex;
   justify-content: center;
@@ -19,23 +20,37 @@ const ActionSequenceHeader = styled.div.attrs({
 
 const ActionSequenceList = styled.div`
   display: flex;
-  min-height: 90%;
+  min-height: 91%;
   min-width: stretch;
   background-color: #778b87;
-  justify-content: center;
+  justify-content: left;
+  overflow-x: scroll;
 `;
 
 function ActionSequence(): JSX.Element {
+
   return (
-    <ActionSequenceRoot>
-      <ActionSequenceHeader/>
-      <ActionSequenceList>
-        <ActionSequenceItem />
-        <ActionSequenceItem />
-        <ActionSequenceItem />
-        <ActionSequenceItem />
-      </ActionSequenceList>
-    </ActionSequenceRoot>
+      <ActionSequenceRoot>
+        <ActionSequenceHeader />
+        <ActionSequenceList>
+          <ActionSequenceItem />
+          <ActionSequenceItem />
+          <ActionSequenceItem />
+          <ActionSequenceItem />
+          <ActionSequenceItem />
+          <ActionSequenceItem />
+          <ActionSequenceItem />
+          <ActionSequenceItem />
+          <ActionSequenceItem />
+          <ActionSequenceItem />
+          <ActionSequenceItem />
+          <ActionSequenceItem />
+          <ActionSequenceItem />
+          <ActionSequenceItem />
+          <ActionSequenceItem />
+          <ActionSequenceItem />
+        </ActionSequenceList>
+      </ActionSequenceRoot>
   );
 }
 
