@@ -28,11 +28,16 @@ const ActionSequenceItemAction = styled.div`
   margin: 0.5em;
 `;
 
-function ActionSequenceItem(): JSX.Element {
+type ActionSequenceItemProps = {
+  name:string
+  action:string
+}
+
+function ActionSequenceItem({name,action}:ActionSequenceItemProps): JSX.Element {
   return (
     <ActionSequenceItemRoot>
-      <ActionSequenceItemApparatus>Item 1</ActionSequenceItemApparatus>
-      <ActionSequenceItemAction> Action 1</ActionSequenceItemAction>
+      <ActionSequenceItemApparatus>{name}</ActionSequenceItemApparatus>
+      <ActionSequenceItemAction>{action}</ActionSequenceItemAction>
     </ActionSequenceItemRoot>
   );
 }

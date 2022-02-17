@@ -1,5 +1,6 @@
-import { Paper } from "@mui/material";
 import styled from "styled-components";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { ActionData } from "../../../util/types";
 import ActionSequenceItem from "./ActionSequenceItem";
 
 const ActionSequenceRoot = styled.div`
@@ -27,30 +28,80 @@ const ActionSequenceList = styled.div`
   overflow-x: scroll;
 `;
 
-function ActionSequence(): JSX.Element {
+type ActionSequenceProps = {
+  actionList: ActionData[];
+  removeAction: (index: number) => void;
+  handleOnDragEnd: (result: {
+    destination: { index: number };
+    source: { index: number };
+  }) => void;
+};
 
+function ActionSequence({
+  actionList,
+  removeAction,
+  handleOnDragEnd,
+}: ActionSequenceProps): JSX.Element {
   return (
-      <ActionSequenceRoot>
-        <ActionSequenceHeader />
-        <ActionSequenceList>
-          <ActionSequenceItem />
-          <ActionSequenceItem />
-          <ActionSequenceItem />
-          <ActionSequenceItem />
-          <ActionSequenceItem />
-          <ActionSequenceItem />
-          <ActionSequenceItem />
-          <ActionSequenceItem />
-          <ActionSequenceItem />
-          <ActionSequenceItem />
-          <ActionSequenceItem />
-          <ActionSequenceItem />
-          <ActionSequenceItem />
-          <ActionSequenceItem />
-          <ActionSequenceItem />
-          <ActionSequenceItem />
-        </ActionSequenceList>
-      </ActionSequenceRoot>
+    <ActionSequenceRoot>
+      <ActionSequenceHeader />
+      <ActionSequenceList>
+      {/* <DragDropContext onDragEnd={handleOnDragEnd}>
+          <Droppable droppableId="droppable">
+            {(dropProvided) => (
+              <ListBoxScroller
+                {...dropProvided.droppableProps}
+                ref={dropProvided.innerRef}
+              >
+                {actionList.map((data, index) => (
+                  <Draggable
+                    key={index}
+                    index={index}
+                    draggableId={index.toString()}
+                  >
+                    {(dragProvided) => (
+                      <DragContainer
+                        {...dragProvided.draggableProps}
+                        {...dragProvided.dragHandleProps}
+                        ref={dragProvided.innerRef}
+                      >
+                        <List>
+                          <ListItem>
+                            <Button variant="contained" color="secondary">
+                              {data.assetId}:
+                              {data.input.name !== undefined
+                                ? data.input.name
+                                : data.input.command}
+                            </Button>
+                          </ListItem>
+                          <ListItemSecondaryAction>
+                            <IconButton onClick={() => removeAction(index)}>
+                              <DeleteIcon />
+                            </IconButton>
+                          </ListItemSecondaryAction>
+                        </List>
+                      </DragContainer>
+                    )}
+                  </Draggable>
+                ))}
+                {dropProvided.placeholder}
+              </ListBoxScroller>
+            )}
+          </Droppable>
+        </DragDropContext> */}
+        <ActionSequenceItem name = "Item 1" action = "Item 1 Action" />
+        <ActionSequenceItem name = "Item 1" action = "Item 1 Action" />
+        <ActionSequenceItem name = "Item 1" action = "Item 1 Action" />
+        <ActionSequenceItem name = "Item 1" action = "Item 1 Action" />
+        <ActionSequenceItem name = "Item 1" action = "Item 1 Action" />
+        <ActionSequenceItem name = "Item 1" action = "Item 1 Action" />
+        <ActionSequenceItem name = "Item 1" action = "Item 1 Action" />
+        <ActionSequenceItem name = "Item 1" action = "Item 1 Action" />
+        <ActionSequenceItem name = "Item 1" action = "Item 1 Action" />
+        <ActionSequenceItem name = "Item 1" action = "Item 1 Action" />
+        <ActionSequenceItem name = "Item 1" action = "Item 1 Action" />
+      </ActionSequenceList>
+    </ActionSequenceRoot>
   );
 }
 

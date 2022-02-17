@@ -7,6 +7,7 @@ import { SideBarContext } from "../../util/customHooks/SideBarContext";
 import SideBarItem from "./SideBarItem";
 import { ExperienceData } from "../../util/types";
 import { experienceContext } from "../../util/customHooks/experienceContext";
+import { useActionList } from "../../util/customHooks/overlayfunc";
 
 // the side bar box
 
@@ -73,6 +74,16 @@ function ActionBar({ userId, experienceData }: OverlayProps): JSX.Element {
     toggleActionList,
     toggleSideBar,
   } = useActionBar();
+
+  // Things Justin needs to use in action sequence, fix the variable names so I can use them please
+  // const {
+  //   actionList,
+  //   setActionList,
+  //   addActionToList,
+  //   removeActionFromList,
+  //   handleOnDragEnd,
+  // } = useActionList(experienceData);
+
   return (
     <UIComponentRoot>
       <UIComponentGrid>
@@ -102,7 +113,13 @@ function ActionBar({ userId, experienceData }: OverlayProps): JSX.Element {
           </experienceContext.Provider>
         </SideBarContext.Provider>
         <ActionSequenceBarGrid>
-          <ActionSequence />
+          {/* <ActionSequence
+            // actionList={actionList}
+            // removeAction={(index: number) =>
+            //   removeActionFromList(index, actionList, setActionList)
+            // }
+            // handleOnDragEnd={handleOnDragEnd}
+          /> */}
         </ActionSequenceBarGrid>
         <TextEditorGrid>
           <TextEditor />
