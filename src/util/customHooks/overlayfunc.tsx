@@ -1,7 +1,4 @@
-/* eslint-disable @typescript-eslint/ban-types */
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-
-import { Dispatch, SetStateAction, useState } from "react";
+import { useState } from "react";
 import { ActionData, ExperienceData } from "../types";
 
 /*
@@ -15,33 +12,21 @@ const useActionList = (experienceData: ExperienceData) => {
 
   const [selectedAction, setSelectedAction] = useState(0);
 
-  const addActionToList = (
-    actionData: ActionData,
-    hookinput: ActionData[],
-    functioninput: Dispatch<SetStateAction<ActionData[]>>
-  ) => {
-    hookinput.push(actionData);
-    functioninput([...actionList]);
+  const addActionToList = (actionData: ActionData) => {
+    actionList.push(actionData);
+    setActionList([...actionList]);
   };
 
-  const setDescription = (
-    desc: string,
-    hookinput: ActionData[],
-    functioninput: Dispatch<SetStateAction<ActionData[]>>
-  ) => {
-    if (hookinput[selectedAction] !== undefined) {
-      hookinput[selectedAction].desc = desc;
-      functioninput([...actionList]);
+  const setDescription = (desc: string) => {
+    if (actionList[selectedAction] !== undefined) {
+      actionList[selectedAction].desc = desc;
+      setActionList([...actionList]);
     }
   };
 
-  const removeActionFromList = (
-    index: number,
-    hookinput: ActionData[],
-    functioninput: Dispatch<SetStateAction<ActionData[]>>
-  ) => {
-    hookinput.splice(index, 1);
-    functioninput([...hookinput]);
+  const removeActionFromList = (index: number) => {
+    actionList.splice(index, 1);
+    setActionList([...actionList]);
   };
 
   const handleOnDragEnd = (result: {
