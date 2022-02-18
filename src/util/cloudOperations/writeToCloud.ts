@@ -2,7 +2,7 @@ import { BlobServiceClient, ContainerClient } from "@azure/storage-blob";
 import { defaultStorage, sasToken } from "../constants";
 import { SerializedExperience } from "../types";
 
-async function saveExperienceToCloud(
+async function saveExp(
   userId: string,
   experience: SerializedExperience
 ): Promise<void> {
@@ -11,9 +11,7 @@ async function saveExperienceToCloud(
     `${experience.experienceId}.json`
   );
   // get BlobService = notice `?` is pulled out of sasToken - if created in Azure portal
-  const blobService = new BlobServiceClient(
-    `${defaultStorage}/?${sasToken}`
-  );
+  const blobService = new BlobServiceClient(`${defaultStorage}/?${sasToken}`);
 
   // get Container - full public read access
   const containerClient: ContainerClient =
@@ -31,6 +29,12 @@ async function saveExperienceToCloud(
   // upload file
   await blobClient.uploadData(file, options);
 }
-// </snippet_uploadFileToBlob>
 
-export default saveExperienceToCloud;
+async function deleteExp(userId: string, expName: string): Promise<void> {
+  const blobService = new BlobServiceClient(`${defaultStorage}/?${sasToken}`);
+  const containerClient: ContainerClient =
+    blobService.getContainerClient(userId);
+  await containerClient.deleteBlob(expName.concat(".json"));
+}
+
+export { saveExp, deleteExp };
