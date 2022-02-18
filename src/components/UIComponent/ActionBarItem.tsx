@@ -5,7 +5,7 @@ import saveExperienceToCloud from "../../util/cloudOperations/writeToCloud";
 import { useActionList } from "../../util/customHooks/overlayfunc";
 import { experienceContext } from "../../util/customHooks/experienceContext";
 
-const ActionBarItemBox = styled.div`
+const SideBarItemBox = styled.div`
   position: flex;
   display: flex;
   flex-direction: column;
@@ -14,7 +14,7 @@ const ActionBarItemBox = styled.div`
   background-color: #518b4c;
 `;
 
-const ActionBarItemBottomBox = styled.div`
+const SideBarItemBottomBox = styled.div`
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -24,30 +24,30 @@ const ActionBarItemBottomBox = styled.div`
 
 
 function ActionBarItem(): JSX.Element {
-  const { toggleActionList, toggleSideBar } = useContext(SideBarContext);
+  const { toggleApparatusInfo, toggleToolDoc } = useContext(SideBarContext);
   const {userId, experienceData} = useContext(experienceContext)
   const {
     actionList,
   } = useActionList(experienceData);
   return (
     <>
-      <ActionBarItemBox>
+      <SideBarItemBox>
         <p>I am the ActionBar Item Box</p>
-        <button type="button" onClick={toggleSideBar}>
+        <button type="button" onClick={toggleToolDoc}>
           Toggle Side Bar
         </button>
-        <button type="button" onClick={toggleActionList}>
+        <button type="button" onClick={toggleApparatusInfo}>
           Toggle Actionlist
         </button>
         <button type="button" >Setting for skybox</button>
-      </ActionBarItemBox>
-      <ActionBarItemBottomBox>
+      </SideBarItemBox>
+      <SideBarItemBottomBox>
         <button type="button" onClick={() => {
             experienceData.experience.actionList = [...actionList];
             saveExperienceToCloud(userId, experienceData.experience);
           }}>Save</button>
         <button type="button">Return</button>
-      </ActionBarItemBottomBox>
+      </SideBarItemBottomBox>
     </>
   );
 }

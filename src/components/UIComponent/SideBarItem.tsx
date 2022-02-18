@@ -1,12 +1,12 @@
 import { useContext } from "react";
 import { SideBarContext } from "../../util/customHooks/SideBarContext";
-import ActionList from "./ActionList";
+import ApparatusInfo from "./ApparatuInfo";
 
-function SideBarItem(): JSX.Element {
+function ToolDocItem(): JSX.Element {
   const {
-    actionList,
+    apparatusInfo,
   } = useContext(SideBarContext);
-  return <div>{actionList ? <ActionList /> : <div />}</div>;
+  return <div>{apparatusInfo ? <ApparatusInfo /> : <div />}</div>;
 }
 
-export default SideBarItem;
+export default ToolDocItem;

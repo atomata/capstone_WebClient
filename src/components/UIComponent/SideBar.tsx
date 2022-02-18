@@ -28,7 +28,7 @@ const UIComponentGrid = styled.div`
 `;
 
 // css and placement for the action bar (the action bar is the bar on the side which have the button)
-const ActionBarGrid = styled.div`
+const SideBarGrid= styled.div`
   grid-column: 1 / span 3;
   grid-row: 1 / span50;
   background-color: aliceblue;
@@ -36,7 +36,7 @@ const ActionBarGrid = styled.div`
 `;
 
 // css and placement for the side bar (the side bar is the area where we can toggle on or off)
-const SideBarGrid = styled.div`
+const ToolDocGrid = styled.div`
   grid-column: 4 / span 7;
   grid-row: 1 / span 39;
   background-color: #21415e;
@@ -65,14 +65,14 @@ type OverlayProps = {
   experienceData: ExperienceData;
 };
 
-function ActionBar({ userId, experienceData }: OverlayProps): JSX.Element {
+function SideBar({ userId, experienceData }: OverlayProps): JSX.Element {
   const {
-    sideBar,
-    setSideBar,
-    actionList,
-    setActionList,
-    toggleActionList,
-    toggleSideBar,
+    toggleToolDoc,
+    toggleApparatusInfo,
+    tooDoc,
+    apparatusInfo,
+    setToolDoc,
+    setApparatusInfo,
   } = useActionBar();
 
   // Things Justin needs to use in action sequence, fix the variable names so I can use them please
@@ -89,24 +89,24 @@ function ActionBar({ userId, experienceData }: OverlayProps): JSX.Element {
       <UIComponentGrid>
         <SideBarContext.Provider
           value={{
-            sideBar,
-            setSideBar,
-            actionList,
-            setActionList,
-            toggleActionList,
-            toggleSideBar,
+            toggleToolDoc,
+            toggleApparatusInfo,
+            tooDoc,
+            apparatusInfo,
+            setToolDoc,
+            setApparatusInfo,
           }}
         >
           <experienceContext.Provider value={{ userId, experienceData }}>
             {" "}
-            <ActionBarGrid>
+            <SideBarGrid>
               <p>I am the Action Bar Grid</p>
               <ActionBarItem />
-            </ActionBarGrid>
-            {sideBar ? (
-              <SideBarGrid>
+            </SideBarGrid>
+            {tooDoc ? (
+              <ToolDocGrid>
                 <SideBarItem />
-              </SideBarGrid>
+              </ToolDocGrid>
             ) : (
               <div />
             )}
@@ -129,4 +129,4 @@ function ActionBar({ userId, experienceData }: OverlayProps): JSX.Element {
   );
 }
 
-export default ActionBar;
+export default SideBar;
