@@ -24,6 +24,18 @@ const useActionList = (experienceData: ExperienceData) => {
     functioninput([...actionList]);
   };
 
+  const setDescription = (
+    desc: string,
+    hookinput: ActionData[],
+    functioninput: Dispatch<SetStateAction<ActionData[]>>
+  ) => {
+    if (hookinput[selectedAction] !== undefined) {
+      console.log(selectedAction, " ,", desc);
+      hookinput[selectedAction].desc = desc;
+      functioninput([...actionList]);
+    }
+  };
+
   const removeActionFromList = (
     index: number,
     hookinput: ActionData[],
@@ -47,6 +59,7 @@ const useActionList = (experienceData: ExperienceData) => {
   return {
     selectedAction,
     setSelectedAction,
+    setDescription,
     actionList,
     setActionList,
     removeActionFromList,

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import TextField from "@mui/material/TextField";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IconButton } from "@mui/material";
 import SaveIcon from "@mui/icons-material/Save";
 import ExpandIcon from "@mui/icons-material/Expand";
@@ -64,16 +64,25 @@ const TestDiv = styled.div`
 type TextEditorProps = {
   actionList: ActionData[];
   selectedAction: number;
-  currDesc: string;
-  handleChange: (desc) => void;
+  setDescription: (desc) => void;
 };
 const TextEditor = ({
   actionList,
   selectedAction,
-  currDesc,
-  handleChange,
+  setDescription,
 }: TextEditorProps): JSX.Element => {
   const [isExpanded, setExpanded] = useState(false);
+  const [currDesc, setCurrDesc] = useState("");
+  useEffect(() => {
+    if (
+      actionList[selectedAction] !== undefined &&
+      actionList[selectedAction].desc !== undefined
+    ) {
+      setCurrDesc(actionList[selectedAction].desc);
+    } else {
+      setCurrDesc("");
+    }
+  }, [selectedAction, actionList]);
   return isExpanded ? (
     <TextDiv>
       <table cellSpacing="0" cellPadding="0">
@@ -83,10 +92,7 @@ const TextEditor = ({
             <TestDiv>
               <IconButton
                 style={{ color: "white" }}
-                onClick={() => {
-                  if (actionList[selectedAction] !== undefined)
-                    actionList[selectedAction].desc = currDesc;
-                }}
+                onClick={() => setDescription(currDesc)}
               >
                 <SaveIcon sx={{ fontSize: 25 }} />
               </IconButton>
@@ -113,7 +119,7 @@ const TextEditor = ({
                 value={currDesc}
                 multiline
                 rows={2}
-                onChange={(e) => handleChange(e.target.value)}
+                onChange={(e) => setCurrDesc(e.target.value)}
                 variant="outlined"
               />
             </td>

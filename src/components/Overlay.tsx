@@ -4,7 +4,7 @@ import ActionSequenceBox from "./editorBoxes/ActionSequenceBox";
 import ActionBox from "./editorBoxes/ActionBox";
 import ApparatusListBox from "./editorBoxes/ApparatusListBox";
 import { useOverlay, useActionList } from "../util/customHooks/overlayfunc";
-import {saveExp} from "../util/cloudOperations/writeToCloud";
+import { saveExp } from "../util/cloudOperations/writeToCloud";
 import Navbar from "./Navbar";
 import PreviewOverlay from "./PreviewOverlay";
 import styles from "../styles/NavbarStyle.module.css";
@@ -82,7 +82,6 @@ type OverlayProps = {
 
 // TODO parsing once and giving overlay only the info it needs
 function Overlay({ userId, experienceData }: OverlayProps): JSX.Element {
-  const [currDesc, setCurrDesc] = useState("");
   const [assetBundle, setAssetBundle] = useState({
     children: [],
     path: "",
@@ -94,6 +93,7 @@ function Overlay({ userId, experienceData }: OverlayProps): JSX.Element {
   const {
     selectedAction,
     setSelectedAction,
+    setDescription,
     actionList,
     setActionList,
     addActionToList,
@@ -124,15 +124,12 @@ function Overlay({ userId, experienceData }: OverlayProps): JSX.Element {
             <OverlayGridItem2>
               <ActionSequenceBox
                 actionList={actionList}
-                selectedAction = {selectedAction}
+                selectedAction={selectedAction}
                 removeAction={(index: number) =>
                   removeActionFromList(index, actionList, setActionList)
                 }
                 selectAction={(index: number) => {
                   setSelectedAction(index);
-                  setCurrDesc(
-                    actionList[index].desc ? actionList[index].desc : ""
-                  );
                 }}
                 handleOnDragEnd={handleOnDragEnd}
               />
@@ -149,9 +146,10 @@ function Overlay({ userId, experienceData }: OverlayProps): JSX.Element {
             <OverlayGridItem4>
               <TextEditor
                 actionList={actionList}
+                setDescription={(desc) =>
+                  setDescription(desc, actionList, setActionList)
+                }
                 selectedAction={selectedAction}
-                currDesc={currDesc}
-                handleChange={(val) => setCurrDesc(val)}
               />
             </OverlayGridItem4>
           </OverlayGrid>
