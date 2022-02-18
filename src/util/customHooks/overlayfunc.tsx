@@ -30,7 +30,6 @@ const useActionList = (experienceData: ExperienceData) => {
     functioninput: Dispatch<SetStateAction<ActionData[]>>
   ) => {
     if (hookinput[selectedAction] !== undefined) {
-      console.log(selectedAction, " ,", desc);
       hookinput[selectedAction].desc = desc;
       functioninput([...actionList]);
     }
