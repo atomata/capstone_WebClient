@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { IconButton } from "@mui/material";
 import SaveIcon from "@mui/icons-material/Save";
 import ExpandIcon from "@mui/icons-material/Expand";
+import { ActionData, ExperienceData } from "../util/types";
 
 const Box = styled.tr`
   background: #3f3d56;
@@ -60,12 +61,18 @@ const TestDiv = styled.div`
   color: white;
 `;
 
+type TextEditorProps = {
+  actionList: ActionData[];
+  selectedAction: number;
+  currDesc: string;
+  handleChange: (desc) => void;
+};
 const TextEditor = ({
   actionList,
   selectedAction,
   currDesc,
   handleChange,
-}): JSX.Element => {
+}: TextEditorProps): JSX.Element => {
   const [isExpanded, setExpanded] = useState(false);
   return isExpanded ? (
     <TextDiv>
@@ -77,7 +84,8 @@ const TextEditor = ({
               <IconButton
                 style={{ color: "white" }}
                 onClick={() => {
-                  actionList[selectedAction].desc = currDesc;
+                  if (actionList[selectedAction] !== undefined)
+                    actionList[selectedAction].desc = currDesc;
                 }}
               >
                 <SaveIcon sx={{ fontSize: 25 }} />
