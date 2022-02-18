@@ -95,7 +95,6 @@ function Overlay({ userId, experienceData }: OverlayProps): JSX.Element {
     setSelectedAction,
     setDescription,
     actionList,
-    setActionList,
     addActionToList,
     removeActionFromList,
     handleOnDragEnd,
@@ -125,9 +124,7 @@ function Overlay({ userId, experienceData }: OverlayProps): JSX.Element {
               <ActionSequenceBox
                 actionList={actionList}
                 selectedAction={selectedAction}
-                removeAction={(index: number) =>
-                  removeActionFromList(index, actionList, setActionList)
-                }
+                removeAction={(index: number) => removeActionFromList(index)}
                 selectAction={(index: number) => {
                   setSelectedAction(index);
                 }}
@@ -137,18 +134,14 @@ function Overlay({ userId, experienceData }: OverlayProps): JSX.Element {
             <OverlayGridItem3>
               <ActionBox
                 assetBundle={assetBundle}
-                addAction={(actionData) =>
-                  addActionToList(actionData, actionList, setActionList)
-                }
+                addAction={(actionData) => addActionToList(actionData)}
               />
             </OverlayGridItem3>
 
             <OverlayGridItem4>
               <TextEditor
                 actionList={actionList}
-                setDescription={(desc) =>
-                  setDescription(desc, actionList, setActionList)
-                }
+                setDescription={(desc) => setDescription(desc)}
                 selectedAction={selectedAction}
               />
             </OverlayGridItem4>
