@@ -8,10 +8,10 @@ import {
 } from "./constants";
 
 const unityContext = new UnityContext({
-  loaderUrl: "build/AtomataScene0_0_4.loader.js",
-  dataUrl: "build/AtomataScene0_0_4.data",
-  frameworkUrl: "build/AtomataScene0_0_4.framework.js",
-  codeUrl: "build/AtomataScene0_0_4.wasm",
+  loaderUrl: "build/AtomataScene0_0_5.loader.js",
+  dataUrl: "build/AtomataScene0_0_5.data",
+  frameworkUrl: "build/AtomataScene0_0_5.framework.js",
+  codeUrl: "build/AtomataScene0_0_5.wasm",
 });
 
 // TODO what if args string is empty?
