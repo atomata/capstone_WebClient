@@ -5,7 +5,7 @@ import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import SaveAltIcon from "@mui/icons-material/SaveAlt";
 import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
 import { SideBarContext } from "../../util/customHooks/SideBarContext";
-import saveExperienceToCloud from "../../util/cloudOperations/writeToCloud";
+import {saveExp} from "../../util/cloudOperations/writeToCloud";
 import { useActionList } from "../../util/customHooks/overlayfunc";
 import { experienceContext } from "../../util/customHooks/experienceContext";
 
@@ -61,7 +61,7 @@ function SideBarItem(): JSX.Element {
               sx={{ "&:hover": { color: "#F75D77" } }}
               onClick={() => {
                 experienceData.experience.actionList = [...actionList];
-                saveExperienceToCloud(userId, experienceData.experience);
+                saveExp(userId, experienceData.experience);
               }}
             />
             <KeyboardReturnIcon

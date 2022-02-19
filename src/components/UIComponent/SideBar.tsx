@@ -116,7 +116,7 @@ function SideBar({ userId, experienceData }: OverlayProps): JSX.Element {
           <ActionSequence
             actionList={actionList}
             removeAction={(index: number) =>
-              removeActionFromList(index, actionList, setActionList)
+              removeActionFromList(index)
             }
             handleOnDragEnd={handleOnDragEnd}
           />
