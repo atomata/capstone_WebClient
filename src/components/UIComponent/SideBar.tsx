@@ -1,12 +1,13 @@
 import styled from "styled-components";
 import { useActionBar } from "../../util/customHooks/ActionBarFunc";
-import ActionBarItem from "./ActionBarItem";
+import SideBarItem from "./SideBarItem";
 import ActionSequence from "./Action Sequence 2.0/ActionSequence";
 import TextEditor from "./TextEditor";
 import { SideBarContext } from "../../util/customHooks/SideBarContext";
-import SideBarItem from "./SideBarItem";
+import ToolDocItem from "./ToolDocItem";
 import { ExperienceData } from "../../util/types";
 import { experienceContext } from "../../util/customHooks/experienceContext";
+import { useActionList } from "../../util/customHooks/overlayfunc";
 
 // the side bar box
 
@@ -27,16 +28,17 @@ const UIComponentGrid = styled.div`
 `;
 
 // css and placement for the action bar (the action bar is the bar on the side which have the button)
-const ActionBarGrid = styled.div`
-  grid-column: 1 / span 3;
+const SideBarGrid= styled.div`
+  grid-column: 1 / span 2;
   grid-row: 1 / span50;
-  background-color: aliceblue;
+  background-color: #3F3D56;
   z-index: 2;
+  color: white;
 `;
 
 // css and placement for the side bar (the side bar is the area where we can toggle on or off)
-const SideBarGrid = styled.div`
-  grid-column: 4 / span 7;
+const ToolDocGrid = styled.div`
+  grid-column: 3 / span 7;
   grid-row: 1 / span 39;
   background-color: #21415e;
   z-index: 2;
@@ -45,7 +47,7 @@ const SideBarGrid = styled.div`
 
 // css and placement for the action sequence
 const ActionSequenceBarGrid = styled.div`
-  grid-column: 4 / span 47;
+  grid-column: 3 / span 48;
   grid-row: 40 / span 11;
   background-color: #a8ad68;
   z-index: 2;
@@ -64,45 +66,60 @@ type OverlayProps = {
   experienceData: ExperienceData;
 };
 
-function ActionBar({ userId, experienceData }: OverlayProps): JSX.Element {
+function SideBar({ userId, experienceData }: OverlayProps): JSX.Element {
   const {
-    sideBar,
-    setSideBar,
+    toggleToolDoc,
+    toggleApparatusInfo,
+    tooDoc,
+    apparatusInfo,
+    setToolDoc,
+    setApparatusInfo,
+  } = useActionBar();
+
+  // Things Justin needs to use in action sequence, fix the variable names so I can use them please
+  const {
     actionList,
     setActionList,
-    toggleActionList,
-    toggleSideBar,
-  } = useActionBar();
+    addActionToList,
+    removeActionFromList,
+    handleOnDragEnd,
+  } = useActionList(experienceData);
+
   return (
     <UIComponentRoot>
       <UIComponentGrid>
         <SideBarContext.Provider
           value={{
-            sideBar,
-            setSideBar,
-            actionList,
-            setActionList,
-            toggleActionList,
-            toggleSideBar,
+            toggleToolDoc,
+            toggleApparatusInfo,
+            tooDoc,
+            apparatusInfo,
+            setToolDoc,
+            setApparatusInfo,
           }}
         >
           <experienceContext.Provider value={{ userId, experienceData }}>
             {" "}
-            <ActionBarGrid>
-              <p>I am the Action Bar Grid</p>
-              <ActionBarItem />
-            </ActionBarGrid>
-            {sideBar ? (
-              <SideBarGrid>
-                <SideBarItem />
-              </SideBarGrid>
+            <SideBarGrid>
+              <SideBarItem />
+            </SideBarGrid>
+            {tooDoc ? (
+              <ToolDocGrid>
+                <ToolDocItem />
+              </ToolDocGrid>
             ) : (
               <div />
             )}
           </experienceContext.Provider>
         </SideBarContext.Provider>
         <ActionSequenceBarGrid>
-          <ActionSequence />
+          <ActionSequence
+            actionList={actionList}
+            removeAction={(index: number) =>
+              removeActionFromList(index, actionList, setActionList)
+            }
+            handleOnDragEnd={handleOnDragEnd}
+          />
         </ActionSequenceBarGrid>
         <TextEditorGrid>
           <TextEditor />
@@ -112,4 +129,4 @@ function ActionBar({ userId, experienceData }: OverlayProps): JSX.Element {
   );
 }
 
-export default ActionBar;
+export default SideBar;

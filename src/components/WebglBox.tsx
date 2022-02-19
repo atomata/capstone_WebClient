@@ -5,7 +5,7 @@ import Overlay from "./Overlay";
 import Loading from "./Loading";
 import { unityContext, loadApparatus } from "../util/unityContextActions";
 import { ExperienceData } from "../util/types";
-import ActionBar from "./UIComponent/ActionBar";
+import SideBar from "./UIComponent/SideBar";
 
 const WebglRoot = styled.div`
   display: relative;
@@ -45,7 +45,7 @@ function WebglBox({ userId, experienceData }: WebglProps): JSX.Element {
           zIndex: 0,
         }}
       />
-      <ActionBar userId={userId} experienceData={experienceData} />
+      <SideBar userId={userId} experienceData={experienceData} />
       {/* <Overlay userId={userId} experienceData={experienceData} /> */}
     </WebglRoot>
   ) : (

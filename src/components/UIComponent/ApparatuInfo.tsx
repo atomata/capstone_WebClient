@@ -5,7 +5,7 @@ import ApparatusListBox from "../editorBoxes/ApparatusListBox";
 import {useActionList} from "../../util/customHooks/overlayfunc"
 import ActionBox from "../editorBoxes/ActionBox"
 
-function ActionList(): JSX.Element {
+function ApparatusInfo(): JSX.Element {
   const { experienceData } = useContext(experienceContext);
   const {
     actionList,
@@ -39,4 +39,4 @@ function ActionList(): JSX.Element {
   }
 }
 
-export default ActionList;
+export default ApparatusInfo;
