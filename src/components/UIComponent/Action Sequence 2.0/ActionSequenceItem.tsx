@@ -29,14 +29,15 @@ const ActionSequenceItemAction = styled.div`
 `;
 
 type ActionSequenceItemProps = {
+  id:string
   name:string
   action:string
 }
 
-function ActionSequenceItem({name,action}:ActionSequenceItemProps): JSX.Element {
+function ActionSequenceItem({id,name,action}:ActionSequenceItemProps): JSX.Element {
   return (
     <ActionSequenceItemRoot>
-      <ActionSequenceItemApparatus>{name}</ActionSequenceItemApparatus>
+      <ActionSequenceItemApparatus>{id}:{name}</ActionSequenceItemApparatus>
       <ActionSequenceItemAction>{action}</ActionSequenceItemAction>
     </ActionSequenceItemRoot>
   );

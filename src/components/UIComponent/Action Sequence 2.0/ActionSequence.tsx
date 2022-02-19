@@ -37,6 +37,10 @@ type ActionSequenceProps = {
   }) => void;
 };
 
+const DragContainer = styled.div`
+  border: 1px solid black;
+`;
+
 function ActionSequence({
   actionList,
   removeAction,
@@ -46,10 +50,10 @@ function ActionSequence({
     <ActionSequenceRoot>
       <ActionSequenceHeader />
       <ActionSequenceList>
-      {/* <DragDropContext onDragEnd={handleOnDragEnd}>
+      {<DragDropContext onDragEnd={handleOnDragEnd}>
           <Droppable droppableId="droppable">
             {(dropProvided) => (
-              <ListBoxScroller
+              <ActionSequenceList
                 {...dropProvided.droppableProps}
                 ref={dropProvided.innerRef}
               >
@@ -65,7 +69,10 @@ function ActionSequence({
                         {...dragProvided.dragHandleProps}
                         ref={dragProvided.innerRef}
                       >
-                        <List>
+
+
+
+                        {/* <List>
                           <ListItem>
                             <Button variant="contained" color="secondary">
                               {data.assetId}:
@@ -79,27 +86,26 @@ function ActionSequence({
                               <DeleteIcon />
                             </IconButton>
                           </ListItemSecondaryAction>
-                        </List>
+                        </List> */}
+
+
+
+                        <ActionSequenceItem id =  {data.assetId} name =  {data.input.name !== undefined
+                                ? data.input.name
+                                : data.input.command} action = "Item 1 Action" />
+
+
+
                       </DragContainer>
                     )}
                   </Draggable>
                 ))}
                 {dropProvided.placeholder}
-              </ListBoxScroller>
+              </ActionSequenceList>
             )}
           </Droppable>
-        </DragDropContext> */}
-        <ActionSequenceItem name = "Item 1" action = "Item 1 Action" />
-        <ActionSequenceItem name = "Item 1" action = "Item 1 Action" />
-        <ActionSequenceItem name = "Item 1" action = "Item 1 Action" />
-        <ActionSequenceItem name = "Item 1" action = "Item 1 Action" />
-        <ActionSequenceItem name = "Item 1" action = "Item 1 Action" />
-        <ActionSequenceItem name = "Item 1" action = "Item 1 Action" />
-        <ActionSequenceItem name = "Item 1" action = "Item 1 Action" />
-        <ActionSequenceItem name = "Item 1" action = "Item 1 Action" />
-        <ActionSequenceItem name = "Item 1" action = "Item 1 Action" />
-        <ActionSequenceItem name = "Item 1" action = "Item 1 Action" />
-        <ActionSequenceItem name = "Item 1" action = "Item 1 Action" />
+        </DragDropContext>}
+        {/* <ActionSequenceItem id = "1" name = "Item 1" action = "Item 1 Action" /> */}
       </ActionSequenceList>
     </ActionSequenceRoot>
   );
