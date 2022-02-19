@@ -2,6 +2,7 @@ type ActionData = {
   path: string;
   input: Input;
   assetId: string;
+  desc: string;
 };
 
 type Input = {
