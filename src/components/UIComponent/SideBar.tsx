@@ -70,7 +70,7 @@ function SideBar({ userId, experienceData }: OverlayProps): JSX.Element {
   const {
     toggleToolDoc,
     toggleApparatusInfo,
-    tooDoc,
+    toolDoc,
     apparatusInfo,
     setToolDoc,
     setApparatusInfo,
@@ -92,7 +92,7 @@ function SideBar({ userId, experienceData }: OverlayProps): JSX.Element {
           value={{
             toggleToolDoc,
             toggleApparatusInfo,
-            tooDoc,
+            toolDoc,
             apparatusInfo,
             setToolDoc,
             setApparatusInfo,
@@ -103,7 +103,7 @@ function SideBar({ userId, experienceData }: OverlayProps): JSX.Element {
             <SideBarGrid>
               <SideBarItem />
             </SideBarGrid>
-            {tooDoc ? (
+            {toolDoc ? (
               <ToolDocGrid>
                 <ToolDocItem />
               </ToolDocGrid>

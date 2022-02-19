@@ -2,7 +2,7 @@ import { useState } from "react";
 
 const useActionBar = () => {
   // hook for showing or not side bar
-  const [tooDoc, setToolDoc] = useState(true);
+  const [toolDoc, setToolDoc] = useState(true);
   const toggleToolDoc = () => {
     setToolDoc((v) => !v);
     setApparatusInfo(false);
@@ -11,12 +11,12 @@ const useActionBar = () => {
   // hook for showing or not action list
   const [apparatusInfo, setApparatusInfo] = useState(true);
   const toggleApparatusInfo = () => {
-    if (tooDoc === false) {
+    if (toolDoc === false) {
       toggleToolDoc();
       setApparatusInfo(true);
-    } else if (tooDoc === true && apparatusInfo === false) {
+    } else if (toolDoc === true && apparatusInfo === false) {
       setApparatusInfo(true);
-    } else if (tooDoc === true && apparatusInfo === true) {
+    } else if (toolDoc === true && apparatusInfo === true) {
       toggleToolDoc();
       setApparatusInfo(false);
     }
@@ -25,7 +25,7 @@ const useActionBar = () => {
   return {
     toggleToolDoc,
     toggleApparatusInfo,
-    tooDoc,
+    toolDoc,
     apparatusInfo,
     setToolDoc,
     setApparatusInfo,
