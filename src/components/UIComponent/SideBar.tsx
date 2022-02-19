@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { useActionBar } from "../../util/customHooks/ActionBarFunc";
 import SideBarItem from "./SideBarItem";
 import ActionSequence from "./Action Sequence 2.0/ActionSequence";
-import TextEditor from "./TextEditor";
 import { SideBarContext } from "../../util/customHooks/SideBarContext";
 import ToolDocItem from "./ToolDocItem";
 import { ExperienceData } from "../../util/types";
@@ -121,9 +120,7 @@ function SideBar({ userId, experienceData }: OverlayProps): JSX.Element {
             handleOnDragEnd={handleOnDragEnd}
           />
         </ActionSequenceBarGrid>
-        <TextEditorGrid>
-          <TextEditor />
-        </TextEditorGrid>
+        <TextEditorGrid />
       </UIComponentGrid>
     </UIComponentRoot>
   );

@@ -7,7 +7,7 @@ import ActionBox from "../editorBoxes/ActionBox";
 
 function ApparatusInfo(): JSX.Element {
   const { experienceData } = useContext(experienceContext);
-  const { actionList, setActionList, addActionToList } =
+  const { addActionToList } =
     useActionList(experienceData);
   const [assetBundle, setAssetBundle] = useState({
     children: [],
