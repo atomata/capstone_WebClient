@@ -1,5 +1,10 @@
 import { useContext } from "react";
 import styled from "styled-components";
+import {BarsOutlined} from "@ant-design/icons";
+import StyleIcon from '@mui/icons-material/Style';
+import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
+import SaveAltIcon from '@mui/icons-material/SaveAlt';
+import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 import { SideBarContext } from "../../util/customHooks/SideBarContext";
 import saveExperienceToCloud from "../../util/cloudOperations/writeToCloud";
 import { useActionList } from "../../util/customHooks/overlayfunc";
@@ -12,6 +17,7 @@ const SideBarItemBox = styled.div`
   height: inherit;
   width: inherit;
   background-color: #3F3D56;
+  vertical-align:middle;
 `;
 
 const SideBarItemBottomBox = styled.div`
@@ -32,20 +38,26 @@ function SideBarItem(): JSX.Element {
   return (
     <>
       <SideBarItemBox>
-        <p>I am the ActionBar Item Box</p>
-        <button type="button" onClick={toggleToolDoc}>
-          Toggle Side Bar
-        </button>
-        <button type="button" onClick={toggleApparatusInfo}>
+        {/* <button type="button" onClick={toggleToolDoc}> */}
+        {/* <BarsOutlined type="button" style={{fontSize:'40px'}} onClick={toggleToolDoc} /> */}
+        <FormatListBulletedIcon type="button" style={{fontSize:'40px' }} sx={{ "&:hover": { color: "#F75D77" }}} onClick={toggleApparatusInfo} />
+        {/* </button> */}
+        {/* <button type="button" onClick={toggleApparatusInfo}>
           Toggle Actionlist
-        </button>
-        <button type="button" >Setting for skybox</button>
+        </button> */}
+        {/* <button type="button" >Setting for skybox</button> */}
+        <StyleIcon type="button" style={{fontSize:'40px'}} sx={{ "&:hover": { color: "#F75D77" }}} />
         <SideBarItemBottomBox>
-        <button type="button" onClick={() => {
+        {/* <button type="button" onClick={() => {
             experienceData.experience.actionList = [...actionList];
             saveExperienceToCloud(userId, experienceData.experience);
-          }}>Save</button>
-        <button type="button">Return</button>
+          }}>Save</button> */}
+        <SaveAltIcon type="button" style={{fontSize:'40px'}} sx={{ "&:hover": { color: "#F75D77" }}} onClick={() => {
+            experienceData.experience.actionList = [...actionList];
+            saveExperienceToCloud(userId, experienceData.experience);
+          }}/>
+        <KeyboardReturnIcon type="button" style={{fontSize:'40px'}} sx={{ "&:hover": { color: "#F75D77" }}}/>
+        {/* <button type="button">Return</button> */}
       </SideBarItemBottomBox>
       </SideBarItemBox>
 

@@ -29,7 +29,7 @@ const UIComponentGrid = styled.div`
 
 // css and placement for the action bar (the action bar is the bar on the side which have the button)
 const SideBarGrid= styled.div`
-  grid-column: 1 / span 3;
+  grid-column: 1 / span 2;
   grid-row: 1 / span50;
   background-color: #3F3D56;
   z-index: 2;
@@ -38,7 +38,7 @@ const SideBarGrid= styled.div`
 
 // css and placement for the side bar (the side bar is the area where we can toggle on or off)
 const ToolDocGrid = styled.div`
-  grid-column: 4 / span 7;
+  grid-column: 3 / span 7;
   grid-row: 1 / span 39;
   background-color: #21415e;
   z-index: 2;
@@ -47,7 +47,7 @@ const ToolDocGrid = styled.div`
 
 // css and placement for the action sequence
 const ActionSequenceBarGrid = styled.div`
-  grid-column: 4 / span 47;
+  grid-column: 3 / span 48;
   grid-row: 40 / span 11;
   background-color: #a8ad68;
   z-index: 2;
@@ -101,7 +101,6 @@ function SideBar({ userId, experienceData }: OverlayProps): JSX.Element {
           <experienceContext.Provider value={{ userId, experienceData }}>
             {" "}
             <SideBarGrid>
-              <p>I am the Action Bar Grid</p>
               <SideBarItem />
             </SideBarGrid>
             {tooDoc ? (
