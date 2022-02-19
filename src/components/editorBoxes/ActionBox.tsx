@@ -61,19 +61,39 @@ const ActionBox = ({ assetBundle, addAction }: ActionBoxProps): JSX.Element => {
             <List key={actionData.input.name}>
               <ListItem>
                 <Button
-                  key={actionData.input.name !== undefined ? actionData.input.name: actionData.input.command}
+                  key={
+                    actionData.input.name !== undefined
+                      ? actionData.input.name
+                      : actionData.input.command
+                  }
                   variant="contained"
                   color="secondary"
                   onClick={() =>
                     requestTrigger(actionData.path, actionData.input.command)
                   }
-                  id={actionData.input.name !== undefined ? actionData.input.name: actionData.input.command}
+                  id={
+                    actionData.input.name !== undefined
+                      ? actionData.input.name
+                      : actionData.input.command
+                  }
                 >
-                  {actionData.input.name !== undefined ? actionData.input.name: actionData.input.command}
+                  {actionData.input.name !== undefined
+                    ? actionData.input.name
+                    : actionData.input.command}
                 </Button>
               </ListItem>
               <ListItemSecondaryAction>
-                <IconButton onClick={() => addAction(actionData)}>
+                <IconButton
+                  onClick={() => {
+                    const actionDataClone = {
+                      input: actionData.input,
+                      path: actionData.path,
+                      assetId: actionData.assetId,
+                      desc: actionData.desc,
+                    };
+                    addAction(actionDataClone);
+                  }}
+                >
                   <AddOutlinedIcon />
                 </IconButton>
               </ListItemSecondaryAction>

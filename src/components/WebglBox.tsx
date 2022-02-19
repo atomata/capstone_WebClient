@@ -44,6 +44,7 @@ function WebglBox({ userId, experienceData }: WebglProps): JSX.Element {
           position: "absolute",
           zIndex: 0,
         }}
+        tabIndex={1}
       />
       <SideBar userId={userId} experienceData={experienceData} />
       {/* <Overlay userId={userId} experienceData={experienceData} /> */}

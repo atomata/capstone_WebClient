@@ -41,9 +41,12 @@ const ListBoxScroller = styled.div`
     display: none;
   }
 `;
+
 type ActionSequenceBoxProps = {
   actionList: ActionData[];
+  selectedAction: number;
   removeAction: (index: number) => void;
+  selectAction: (index: number) => void;
   handleOnDragEnd: (result: {
     destination: { index: number };
     source: { index: number };
@@ -53,6 +56,8 @@ type ActionSequenceBoxProps = {
 const ActionSequenceBox = ({
   actionList,
   removeAction,
+  selectedAction,
+  selectAction,
   handleOnDragEnd,
 }: ActionSequenceBoxProps): JSX.Element => {
   // Ensuring the array from parameter is not empty.
@@ -82,12 +87,33 @@ const ActionSequenceBox = ({
                       >
                         <List>
                           <ListItem>
-                            <Button variant="contained" color="secondary">
-                              {data.assetId}:
-                              {data.input.name !== undefined
-                                ? data.input.name
-                                : data.input.command}
-                            </Button>
+                            {selectedAction === index ? (
+                              <Button
+                                color="secondary"
+                                variant="contained"
+                                onClick={() => {
+                                  selectAction(index);
+                                }}
+                              >
+                                {data.assetId}:
+                                {data.input.name !== undefined
+                                  ? data.input.name
+                                  : data.input.command}
+                              </Button>
+                            ) : (
+                              <Button
+                                color="primary"
+                                variant="contained"
+                                onClick={() => {
+                                  selectAction(index);
+                                }}
+                              >
+                                {data.assetId}:
+                                {data.input.name !== undefined
+                                  ? data.input.name
+                                  : data.input.command}
+                              </Button>
+                            )}
                           </ListItem>
                           <ListItemSecondaryAction>
                             <IconButton onClick={() => removeAction(index)}>

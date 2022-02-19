@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import Link from "next/link";
 import { Button } from "@mui/material";
 import { useEffect, useState } from "react";
@@ -6,13 +5,8 @@ import { verifyLogIn, checkIfLoggedIn } from "../src/util/loginCookies";
 import Loading from "../src/components/Loading";
 import { getBlobsInContainer } from "../src/util/cloudOperations/readFromCloud";
 import { apparatusBlob, defaultStorage } from "../src/util/constants";
-
-const Content = styled.div`
-  justify-content: center;
-  flex-direction: column;
-  justify-items: center;
-  display: flex;
-`;
+import { OuterBox, SelectionContainer, SelectionHeading, SelectionContent, PreviewContainer, SelectionButton, SelectionOption, ImgIllustration1, ImgIllustration2, GifIllustration} from "../src/components/SelectionBox";
+import { urlFor } from "../src/util/utils";
 
 const SelectionList = ({ experienceId }) => {
   const [apparatusList, setApparatusList] = useState([]);
@@ -27,20 +21,47 @@ const SelectionList = ({ experienceId }) => {
     }
     fetchData();
   }, []);
+
+  const [visible, setVisible] = useState(false);  // visibility state for  preview
+  const [apparatusName, setapparatusName] = useState("wobble-sphere"); // apparatus selected for preview state
+  function displayGif(apparatusID: React.SetStateAction<string>): void {
+    setapparatusName(apparatusID)
+    setVisible(true)    
+  } // To set the hooks for preview gif
+  var path = "assets/" + apparatusName + ".gif"; //To set the path of preview gif
+
   return (
-    <Content>
-      {apparatusList.map((apparatusId, index) => (
-        <Link
-          key={index}
-          href={{
-            pathname: "/experience",
-            query: { experienceId, apparatusId, dataType: "apparatus" },
-          }}
-        >
-          <Button>{apparatusId}</Button>
-        </Link>
-      ))}
-    </Content>
+    <OuterBox>
+      <SelectionContainer>
+          <SelectionHeading>APPARATUS LIST</SelectionHeading>
+          <SelectionContent>
+            <table>
+              {apparatusList.map((apparatusId, index) => (
+                <tr>
+                  <td><SelectionOption>{apparatusId}</SelectionOption></td>
+                  <td><Button onClick={() => displayGif(apparatusId)}><SelectionButton>PREVIEW</SelectionButton></Button></td>
+                  <td>
+                    <Link
+                      key={index}
+                      href={{
+                        pathname: "/experience",
+                        query: { experienceId, apparatusId, dataType: "apparatus" },
+                      }}
+                    >
+                      <Button><SelectionButton>SELECT</SelectionButton></Button>
+                    </Link>
+                  </td>
+                </tr>
+              ))}
+            </table>
+          </SelectionContent>
+      </SelectionContainer>
+      <ImgIllustration1 src={urlFor("assets/selectionillustration1.svg")} />   
+      <PreviewContainer>GIF FOR PREVIEW
+      {visible && <div><GifIllustration src={urlFor(path)} /></div>}
+      </PreviewContainer>
+      <ImgIllustration2 src={urlFor("assets/selectionillustration2.svg")} />   
+    </OuterBox>
   );
 };
 
@@ -51,7 +72,6 @@ function Selection({ experienceId }): JSX.Element {
 
   return checkIfLoggedIn() ? (
     <main>
-      <h1>SELECT AN APPARATUS</h1>
       <SelectionList experienceId={experienceId} />
     </main>
   ) : (
