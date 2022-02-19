@@ -23,7 +23,7 @@ function ApparatusInfo(): JSX.Element {
       <ActionBox
         assetBundle={assetBundle}
         addAction={(actionData) =>
-          addActionToList(actionData, actionList, setActionList)
+          addActionToList(actionData)
         }
       />
     </>
