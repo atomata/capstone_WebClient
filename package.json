@@ -15,7 +15,6 @@
     "azurite-stop": "docker container rm -f azurite"
   },
   "dependencies": {
-    "@ant-design/icons": "^4.7.0",
     "@azure/storage-blob": "^12.8.0",
     "@emotion/react": "^11.4.1",
     "@emotion/styled": "^11.3.0",

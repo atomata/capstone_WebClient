@@ -1,6 +1,5 @@
 import { useContext } from "react";
 import styled from "styled-components";
-import {BarsOutlined} from "@ant-design/icons";
 import StyleIcon from '@mui/icons-material/Style';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import SaveAltIcon from '@mui/icons-material/SaveAlt';
@@ -38,26 +37,17 @@ function SideBarItem(): JSX.Element {
   return (
     <>
       <SideBarItemBox>
-        {/* <button type="button" onClick={toggleToolDoc}> */}
-        {/* <BarsOutlined type="button" style={{fontSize:'40px'}} onClick={toggleToolDoc} /> */}
         <FormatListBulletedIcon type="button" style={{fontSize:'40px' }} sx={{ "&:hover": { color: "#F75D77" }}} onClick={toggleApparatusInfo} />
-        {/* </button> */}
-        {/* <button type="button" onClick={toggleApparatusInfo}>
-          Toggle Actionlist
-        </button> */}
-        {/* <button type="button" >Setting for skybox</button> */}
+
         <StyleIcon type="button" style={{fontSize:'40px'}} sx={{ "&:hover": { color: "#F75D77" }}} />
         <SideBarItemBottomBox>
-        {/* <button type="button" onClick={() => {
-            experienceData.experience.actionList = [...actionList];
-            saveExperienceToCloud(userId, experienceData.experience);
-          }}>Save</button> */}
+
         <SaveAltIcon type="button" style={{fontSize:'40px'}} sx={{ "&:hover": { color: "#F75D77" }}} onClick={() => {
             experienceData.experience.actionList = [...actionList];
             saveExperienceToCloud(userId, experienceData.experience);
           }}/>
         <KeyboardReturnIcon type="button" style={{fontSize:'40px'}} sx={{ "&:hover": { color: "#F75D77" }}}/>
-        {/* <button type="button">Return</button> */}
+
       </SideBarItemBottomBox>
       </SideBarItemBox>
 
