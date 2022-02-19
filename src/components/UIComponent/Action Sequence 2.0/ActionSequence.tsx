@@ -51,7 +51,7 @@ function ActionSequence({
       <ActionSequenceHeader />
       <ActionSequenceList>
       {<DragDropContext onDragEnd={handleOnDragEnd}>
-          <Droppable droppableId="droppable">
+          <Droppable droppableId="droppable" direction="horizontal">
             {(dropProvided) => (
               <ActionSequenceList
                 {...dropProvided.droppableProps}
