@@ -78,8 +78,6 @@ function SideBar({ userId, experienceData }: OverlayProps): JSX.Element {
   // Things Justin needs to use in action sequence, fix the variable names so I can use them please
   const {
     actionList,
-    setActionList,
-    addActionToList,
     removeActionFromList,
     handleOnDragEnd,
   } = useActionList(experienceData);

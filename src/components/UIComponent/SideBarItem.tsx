@@ -32,7 +32,7 @@ const SideBarItemWrapper = styled.div`
 `;
 
 function SideBarItem(): JSX.Element {
-  const { toggleApparatusInfo, toggleToolDoc } = useContext(SideBarContext);
+  const { toggleApparatusInfo } = useContext(SideBarContext);
   const { userId, experienceData } = useContext(experienceContext);
   const { actionList } = useActionList(experienceData);
   return (
