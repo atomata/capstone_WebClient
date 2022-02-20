@@ -7,7 +7,7 @@ const ActionSequenceRoot = styled.div`
   display: relative;
   height: stretch;
   width: stretch;
-  background-color: #00ffbf;
+  background-color: #F75D77;
 `;
 
 const ActionSequenceHeader = styled.div.attrs({
@@ -16,16 +16,15 @@ const ActionSequenceHeader = styled.div.attrs({
   display: flex;
   justify-content: center;
   width: stretch;
-  background-color: gold;
+  /* background-color: gold; */
 `;
 
 const ActionSequenceList = styled.div`
   display: flex;
   min-height: 91%;
   min-width: stretch;
-  background-color: #778b87;
+  /* background-color: #F75D77; */
   justify-content: left;
-  overflow-x: scroll;
 `;
 
 type ActionSequenceProps = {
@@ -39,6 +38,9 @@ type ActionSequenceProps = {
 
 const DragContainer = styled.div`
   border: 1px solid black;
+  max-height: 85%;
+  margin: 0.1em
+  
 `;
 
 function ActionSequence({
