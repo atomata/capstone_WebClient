@@ -43,14 +43,13 @@ const DragContainer = styled.div`
 
 function ActionSequence({
   actionList,
-  removeAction,
   handleOnDragEnd,
 }: ActionSequenceProps): JSX.Element {
   return (
     <ActionSequenceRoot>
       <ActionSequenceHeader />
       <ActionSequenceList>
-      {<DragDropContext onDragEnd={handleOnDragEnd}>
+        <DragDropContext onDragEnd={handleOnDragEnd}>
           <Droppable droppableId="droppable" direction="horizontal">
             {(dropProvided) => (
               <ActionSequenceList
@@ -69,33 +68,15 @@ function ActionSequence({
                         {...dragProvided.dragHandleProps}
                         ref={dragProvided.innerRef}
                       >
-
-
-
-                        {/* <List>
-                          <ListItem>
-                            <Button variant="contained" color="secondary">
-                              {data.assetId}:
-                              {data.input.name !== undefined
-                                ? data.input.name
-                                : data.input.command}
-                            </Button>
-                          </ListItem>
-                          <ListItemSecondaryAction>
-                            <IconButton onClick={() => removeAction(index)}>
-                              <DeleteIcon />
-                            </IconButton>
-                          </ListItemSecondaryAction>
-                        </List> */}
-
-
-
-                        <ActionSequenceItem id =  {data.assetId} name =  {data.input.name !== undefined
-                                ? data.input.name
-                                : data.input.command} action = "Item 1 Action" />
-
-
-
+                        <ActionSequenceItem
+                          id={data.assetId}
+                          name={
+                            data.input.name !== undefined
+                              ? data.input.name
+                              : data.input.command
+                          }
+                          action="Item 1 Action"
+                        />
                       </DragContainer>
                     )}
                   </Draggable>
@@ -104,7 +85,7 @@ function ActionSequence({
               </ActionSequenceList>
             )}
           </Droppable>
-        </DragDropContext>}
+        </DragDropContext>
         {/* <ActionSequenceItem id = "1" name = "Item 1" action = "Item 1 Action" /> */}
       </ActionSequenceList>
     </ActionSequenceRoot>

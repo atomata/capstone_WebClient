@@ -5,7 +5,6 @@ import ActionSequence from "./Action Sequence 2.0/ActionSequence";
 import { SideBarContext } from "../../util/customHooks/SideBarContext";
 import ToolDocItem from "./ToolDocItem";
 import { ExperienceData } from "../../util/types";
-import { experienceContext } from "../../util/customHooks/experienceContext";
 import { useActionList } from "../../util/customHooks/overlayfunc";
 
 // the side bar box
