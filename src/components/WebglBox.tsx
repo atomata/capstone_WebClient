@@ -5,7 +5,7 @@ import Overlay from "./Overlay";
 import Loading from "./Loading";
 import { unityContext, loadApparatus } from "../util/unityContextActions";
 import { ExperienceData } from "../util/types";
-import Overlay2 from "./UIComponent/SideBar";
+import Overlay2 from "./UIComponent/Overlay2";
 
 const WebglRoot = styled.div`
   display: relative;

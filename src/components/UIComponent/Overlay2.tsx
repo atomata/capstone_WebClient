@@ -6,6 +6,7 @@ import { SideBarContext } from "../../util/customHooks/SideBarContext";
 import ToolDocItem from "./ToolDocItem";
 import { ExperienceData } from "../../util/types";
 import { useActionList } from "../../util/customHooks/overlayfunc";
+import TextEditor from "../TextEditor";
 
 // the side bar box
 
@@ -68,7 +69,7 @@ type OverlayProps = {
  * The side bar define the area and the outline of what will be included.
  * @returns
  */
-function SideBar({ userId, experienceData }: OverlayProps): JSX.Element {
+function Overlay2({ userId, experienceData }: OverlayProps): JSX.Element {
   const {
     toggleToolDoc,
     toggleApparatusInfo,
@@ -121,10 +122,10 @@ function SideBar({ userId, experienceData }: OverlayProps): JSX.Element {
             handleOnDragEnd={handleOnDragEnd}
           />
         </ActionSequenceBarGrid>
-        <TextEditorGrid />
+        {/* <TextEditorGrid /> */}
       </UIComponentGrid>
     </UIComponentRoot>
   );
 }
 
-export default SideBar;
+export default Overlay2;
