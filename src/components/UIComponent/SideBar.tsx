@@ -69,10 +69,13 @@ function SideBar({ userId, experienceData }: OverlayProps): JSX.Element {
   const {
     toggleToolDoc,
     toggleApparatusInfo,
+    toggleSkyBoxInfo,
     toolDoc,
     apparatusInfo,
+    skyboxInfo,
     setToolDoc,
     setApparatusInfo,
+    setSkyBoxInfo,
   } = useActionBar();
 
   // Things Justin needs to use in action sequence, fix the variable names so I can use them please
@@ -89,10 +92,13 @@ function SideBar({ userId, experienceData }: OverlayProps): JSX.Element {
           value={{
             toggleToolDoc,
             toggleApparatusInfo,
+            toggleSkyBoxInfo,
             toolDoc,
             apparatusInfo,
+            skyboxInfo,
             setToolDoc,
             setApparatusInfo,
+            setSkyBoxInfo,
           }}
         >
           <experienceContext.Provider value={{ userId, experienceData }}>
