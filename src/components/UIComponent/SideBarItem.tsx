@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import Link from "@material-ui/core/Link";
+import { Link } from '@mui/material';
 import styled from "styled-components";
 import StyleIcon from "@mui/icons-material/Style";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
