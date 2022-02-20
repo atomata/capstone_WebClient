@@ -1,3 +1,4 @@
+import { Paper } from "@mui/material";
 import styled from "styled-components";
 
 const ActionSequenceItemRoot = styled.div`
@@ -37,7 +38,9 @@ type ActionSequenceItemProps = {
 function ActionSequenceItem({id,name,action}:ActionSequenceItemProps): JSX.Element {
   return (
     <ActionSequenceItemRoot>
-      <ActionSequenceItemApparatus>{id}:{name}</ActionSequenceItemApparatus>
+      <ActionSequenceItemApparatus>
+        {id}:{name}
+       </ActionSequenceItemApparatus>
       <ActionSequenceItemAction>{action}</ActionSequenceItemAction>
     </ActionSequenceItemRoot>
   );

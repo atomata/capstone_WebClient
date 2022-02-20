@@ -46,7 +46,7 @@ type OverlayProps = {
   userId: string;
   experienceData: ExperienceData;
 };
-function SideBarItem({ userId, experienceData }: OverlayProps): JSX.Element {
+function SideBarItem({userId, experienceData}: OverlayProps): JSX.Element {
   const { toggleApparatusInfo, toggleSkyBoxInfo } = useContext(SideBarContext);
   const { actionList } = useActionList(experienceData);
 

@@ -88,7 +88,9 @@ function Overlay2({ userId, experienceData }: OverlayProps): JSX.Element {
     removeActionFromList,
     setDescription,
     handleOnDragEnd,
+    addActionToList,
   } = useActionList(experienceData);
+
 
   return (
     <UIComponentRoot>
@@ -106,16 +108,18 @@ function Overlay2({ userId, experienceData }: OverlayProps): JSX.Element {
             setSkyBoxInfo,
           }}
         >
-          <SideBarGrid>
-            <SideBarItem userId={userId} experienceData={experienceData} />
-          </SideBarGrid>
-          {toolDoc ? (
-            <ToolDocGrid>
-              <ToolDocItem experienceData={experienceData} />
-            </ToolDocGrid>
-          ) : (
-            <div />
-          )}
+
+            <SideBarGrid>
+              <SideBarItem userId={userId} experienceData={experienceData} />
+            </SideBarGrid>
+            {toolDoc ? (
+              <ToolDocGrid>
+                <ToolDocItem experienceData={experienceData} addActionToList={(actionData) => addActionToList(actionData)} />
+              </ToolDocGrid>
+            ) : (
+              <div />
+            )}
+
         </SideBarContext.Provider>
         <ActionSequenceBarGrid>
           <ActionSequence
@@ -140,3 +144,4 @@ function Overlay2({ userId, experienceData }: OverlayProps): JSX.Element {
 }
 
 export default Overlay2;
+
