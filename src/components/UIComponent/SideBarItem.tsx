@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Link } from '@mui/material';
+import { Link } from "@mui/material";
 import styled from "styled-components";
 import StyleIcon from "@mui/icons-material/Style";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
@@ -9,6 +9,7 @@ import { SideBarContext } from "../../util/customHooks/SideBarContext";
 import { saveExp } from "../../util/cloudOperations/writeToCloud";
 import { useActionList } from "../../util/customHooks/overlayfunc";
 import { ExperienceData } from "../../util/types";
+import { urlFor } from "../../util/utils";
 
 const SideBarItemBox = styled.div`
   position: flex;
@@ -32,16 +33,31 @@ const SideBarItemWrapper = styled.div`
   justify-content: center;
 `;
 
+const ImgLogo = styled.img.attrs({
+  alt: "Image Placeholder",
+})`
+  display: block;
+  height: 50px;
+  width: 50px;
+  margin-left: auto;
+  margin-right: auto;
+`;
 type OverlayProps = {
   userId: string;
   experienceData: ExperienceData;
 };
-function SideBarItem({userId, experienceData}: OverlayProps): JSX.Element {
+function SideBarItem({ userId, experienceData }: OverlayProps): JSX.Element {
   const { toggleApparatusInfo, toggleSkyBoxInfo } = useContext(SideBarContext);
   const { actionList } = useActionList(experienceData);
+
   return (
     <>
       <SideBarItemBox>
+        <Link href="/">
+          {" "}
+          <ImgLogo src={urlFor("assets/epistaLogo.png")}/>
+        </Link>
+
         <SideBarItemWrapper>
           <FormatListBulletedIcon
             type="button"
