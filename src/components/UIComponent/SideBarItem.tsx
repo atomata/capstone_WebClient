@@ -8,7 +8,6 @@ import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
 import { SideBarContext } from "../../util/customHooks/SideBarContext";
 import { saveExp } from "../../util/cloudOperations/writeToCloud";
 import { useActionList } from "../../util/customHooks/overlayfunc";
-import { experienceContext } from "../../util/customHooks/experienceContext";
 import { ExperienceData } from "../../util/types";
 
 const SideBarItemBox = styled.div`
