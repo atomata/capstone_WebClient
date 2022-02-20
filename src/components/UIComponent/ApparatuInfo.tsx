@@ -14,8 +14,8 @@ type ApparatusInfoProps = {
 
 function ApparatusInfo({addActionToList}: ApparatusInfoProps ): JSX.Element {
   const { experienceData } = useContext(experienceContext);
-  const { actionList, setActionList, addActionToList } =
-    useActionList(experienceData);
+  // const { actionList, setActionList, addActionToList } =
+  //   useActionList(experienceData);
   const [assetBundle, setAssetBundle] = useState({
     children: [],
     path: "",
