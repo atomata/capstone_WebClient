@@ -9,6 +9,7 @@ import { SideBarContext } from "../../util/customHooks/SideBarContext";
 import { saveExp } from "../../util/cloudOperations/writeToCloud";
 import { useActionList } from "../../util/customHooks/overlayfunc";
 import { experienceContext } from "../../util/customHooks/experienceContext";
+import { ExperienceData } from "../../util/types";
 
 const SideBarItemBox = styled.div`
   position: flex;
@@ -32,9 +33,13 @@ const SideBarItemWrapper = styled.div`
   justify-content: center;
 `;
 
-function SideBarItem(): JSX.Element {
+type OverlayProps = {
+  userId: string;
+  experienceData: ExperienceData;
+};
+
+function SideBarItem({userId, experienceData}: OverlayProps): JSX.Element {
   const { toggleApparatusInfo, toggleSkyBoxInfo } = useContext(SideBarContext);
-  const { userId, experienceData } = useContext(experienceContext);
   const { actionList } = useActionList(experienceData);
   return (
     <>
