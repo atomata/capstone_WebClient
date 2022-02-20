@@ -1,13 +1,14 @@
 import { useContext } from "react";
+import { Link } from '@mui/material';
 import styled from "styled-components";
 import StyleIcon from "@mui/icons-material/Style";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import SaveAltIcon from "@mui/icons-material/SaveAlt";
 import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
 import { SideBarContext } from "../../util/customHooks/SideBarContext";
-import {saveExp} from "../../util/cloudOperations/writeToCloud";
+import { saveExp } from "../../util/cloudOperations/writeToCloud";
 import { useActionList } from "../../util/customHooks/overlayfunc";
-import { experienceContext } from "../../util/customHooks/experienceContext";
+import { ExperienceData } from "../../util/types";
 
 const SideBarItemBox = styled.div`
   position: flex;
@@ -31,9 +32,13 @@ const SideBarItemWrapper = styled.div`
   justify-content: center;
 `;
 
-function SideBarItem(): JSX.Element {
-  const { toggleApparatusInfo, toggleToolDoc } = useContext(SideBarContext);
-  const { userId, experienceData } = useContext(experienceContext);
+type OverlayProps = {
+  userId: string;
+  experienceData: ExperienceData;
+};
+
+function SideBarItem({userId, experienceData}: OverlayProps): JSX.Element {
+  const { toggleApparatusInfo, toggleSkyBoxInfo } = useContext(SideBarContext);
   const { actionList } = useActionList(experienceData);
   return (
     <>
@@ -51,6 +56,7 @@ function SideBarItem(): JSX.Element {
             type="button"
             style={{ fontSize: "40px" }}
             sx={{ "&:hover": { color: "#F75D77" } }}
+            onClick={toggleSkyBoxInfo}
           />
         </SideBarItemWrapper>
         <SideBarItemWrapper>
@@ -64,11 +70,18 @@ function SideBarItem(): JSX.Element {
                 saveExp(userId, experienceData.experience);
               }}
             />
-            <KeyboardReturnIcon
-              type="button"
-              style={{ fontSize: "40px" }}
-              sx={{ "&:hover": { color: "#F75D77" } }}
-            />
+            <Link href="/">
+              {" "}
+              <KeyboardReturnIcon
+                type="button"
+                style={{ fontSize: "40px" }}
+                sx={{ "&:hover": { color: "#F75D77" } }}
+                onClick={() => {
+                  experienceData.experience.actionList = [...actionList];
+                  saveExp(userId, experienceData.experience);
+                }}
+              />
+            </Link>
           </SideBarItemBottomBox>
         </SideBarItemWrapper>
       </SideBarItemBox>

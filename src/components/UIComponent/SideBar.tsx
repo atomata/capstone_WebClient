@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { useActionBar } from "../../util/customHooks/ActionBarFunc";
 import SideBarItem from "./SideBarItem";
 import ActionSequence from "./Action Sequence 2.0/ActionSequence";
-import TextEditor from "./TextEditor";
 import { SideBarContext } from "../../util/customHooks/SideBarContext";
 import ToolDocItem from "./ToolDocItem";
 import { ExperienceData } from "../../util/types";
@@ -28,10 +27,10 @@ const UIComponentGrid = styled.div`
 `;
 
 // css and placement for the action bar (the action bar is the bar on the side which have the button)
-const SideBarGrid= styled.div`
+const SideBarGrid = styled.div`
   grid-column: 1 / span 2;
   grid-row: 1 / span50;
-  background-color: #3F3D56;
+  background-color: #3f3d56;
   z-index: 2;
   color: white;
 `;
@@ -66,24 +65,26 @@ type OverlayProps = {
   experienceData: ExperienceData;
 };
 
+/**
+ * The side bar define the area and the outline of what will be included.
+ * @returns
+ */
 function SideBar({ userId, experienceData }: OverlayProps): JSX.Element {
   const {
     toggleToolDoc,
     toggleApparatusInfo,
+    toggleSkyBoxInfo,
     toolDoc,
     apparatusInfo,
+    skyboxInfo,
     setToolDoc,
     setApparatusInfo,
+    setSkyBoxInfo,
   } = useActionBar();
 
   // Things Justin needs to use in action sequence, fix the variable names so I can use them please
-  const {
-    actionList,
-    setActionList,
-    addActionToList,
-    removeActionFromList,
-    handleOnDragEnd,
-  } = useActionList(experienceData);
+  const { actionList, removeActionFromList, handleOnDragEnd } =
+    useActionList(experienceData);
 
   return (
     <UIComponentRoot>
@@ -92,38 +93,36 @@ function SideBar({ userId, experienceData }: OverlayProps): JSX.Element {
           value={{
             toggleToolDoc,
             toggleApparatusInfo,
+            toggleSkyBoxInfo,
             toolDoc,
             apparatusInfo,
+            skyboxInfo,
             setToolDoc,
             setApparatusInfo,
+            setSkyBoxInfo,
           }}
         >
-          <experienceContext.Provider value={{ userId, experienceData }}>
-            {" "}
+
             <SideBarGrid>
-              <SideBarItem />
+              <SideBarItem userId={userId} experienceData={experienceData} />
             </SideBarGrid>
             {toolDoc ? (
               <ToolDocGrid>
-                <ToolDocItem />
+                <ToolDocItem experienceData={experienceData} />
               </ToolDocGrid>
             ) : (
               <div />
             )}
-          </experienceContext.Provider>
+
         </SideBarContext.Provider>
         <ActionSequenceBarGrid>
           <ActionSequence
             actionList={actionList}
-            removeAction={(index: number) =>
-              removeActionFromList(index)
-            }
+            removeAction={(index: number) => removeActionFromList(index)}
             handleOnDragEnd={handleOnDragEnd}
           />
         </ActionSequenceBarGrid>
-        <TextEditorGrid>
-          <TextEditor />
-        </TextEditorGrid>
+        <TextEditorGrid />
       </UIComponentGrid>
     </UIComponentRoot>
   );

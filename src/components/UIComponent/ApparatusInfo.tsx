@@ -1,13 +1,17 @@
 import { useContext, useState } from "react";
 import { experienceContext } from "../../util/customHooks/experienceContext";
-import { SerializedApparatus } from "../../util/types";
+import { ExperienceData, SerializedApparatus } from "../../util/types";
 import ApparatusListBox from "../editorBoxes/ApparatusListBox";
 import { useActionList } from "../../util/customHooks/overlayfunc";
 import ActionBox from "../editorBoxes/ActionBox";
 
-function ApparatusInfo(): JSX.Element {
-  const { experienceData } = useContext(experienceContext);
-  const { actionList, setActionList, addActionToList } =
+type OverlayProps = {
+  experienceData: ExperienceData;
+};
+
+
+function ApparatusInfo({experienceData}: OverlayProps): JSX.Element {
+  const { addActionToList } =
     useActionList(experienceData);
   const [assetBundle, setAssetBundle] = useState({
     children: [],
