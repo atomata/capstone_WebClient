@@ -72,6 +72,9 @@ function SkyBoxInfo(): JSX.Element {
                 </MenuItem>
               ))}
             </Menu>
+            <button type="button" key="cam_view" onClick={() => defaultCameraView()}>
+              Default View
+            </button>
     </>
   );
 }
