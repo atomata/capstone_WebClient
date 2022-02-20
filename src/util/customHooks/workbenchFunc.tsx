@@ -15,10 +15,30 @@ const useWorkbench = () => {
             setExpErr("");
        
         // No errors, go and log in
-        if (createError) event.preventDefault();
+        // Alternatively do nothing if there's no specified event
+        if (createError && event !== undefined) event.preventDefault();
     };
 
     return { handleExperienceCreate, expErr };
 };
 
-export { useWorkbench };
+const useDeleteDialog = () => {
+    const [delOpen, setDelOpen] = useState(false);
+    const [delIndex, setDelIndex] = useState(0);
+    const [delExpName, setDelExpName] = useState("");
+
+    const handleDeleteDialogOpen = (index, expName) => {
+        setDelIndex(index);
+        setDelExpName(expName);
+        setDelOpen(true);
+    };
+    
+    const handleDeleteDialogClose = () => {
+        setDelOpen(false);   
+    };
+
+    return { delOpen, delIndex, delExpName, handleDeleteDialogOpen, handleDeleteDialogClose };
+};
+
+export { useWorkbench, useDeleteDialog };
+
