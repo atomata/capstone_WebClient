@@ -24,9 +24,9 @@ const Content = styled.div`
 const LeftIndex = styled.div`
   float: left;
   width: 50%;
-  padding-top: 100px;
+  padding-top: 8.5em;
   padding-bottom: 5%;
-  padding-left: 140px;
+  padding-left: 9em;
 `;
 
 const RightIndex = styled.div`
@@ -38,7 +38,7 @@ const ImgIllustration = styled.img.attrs({
   alt: "Image Placeholder",
 })`
   width: 99%;
-  height: 650px;
+  height: 40em;
   `
 ;
 
@@ -46,10 +46,10 @@ const LogOutButton = styled(Button)`
   && {
     display: block-inline;
     color: #1710A1;
-    font-size: 15px;
+    font-size: 0.94em;
     font-weight: bold;
     float: right;
-    margin-top: -100px;
+    margin-top: -7em;
   }
 `;
 

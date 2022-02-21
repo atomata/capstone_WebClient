@@ -16,11 +16,11 @@ const OuterBox = styled.div`
   margin-top: 2%;
   margin-left: 10%;
   margin-right: 10%;
-  padding: 20px;
+  padding: 1.2em;
   weight: 100%;
   height: 92%;
   background: #3F3D56;
-  border-radius: 15px;
+  border-radius: 1.2em;
 `;
 
 const InnerBox = styled.div`
@@ -52,12 +52,12 @@ const ExperienceHeader = styled.tr`
   text-align: left;
   th {
     background: #3F3D56;
-    padding-bottom: 12px;
+    padding-bottom: 0.4em;
     position: sticky;
     position: -webkit-sticky;
     top: 0;
     z-index: 1;
-    padding-left: 30px; 
+    padding-left: 1.6em; 
   } 
 `;
 
@@ -66,14 +66,14 @@ const ExperienceRow = styled.tr`
   background-color: white;
   color: #3f3d56;
   font-weight: bold;
-  height: 60px;
-  font-size: 16px;
+  height: 3em;
+  font-size: 1em;
   font-family: Trebuchet MS;
   
   td {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-left: 30px;
+    padding-top: 0.65em;
+    padding-bottom: 0.65em;
+    padding-left: 1.6em; 
   }
 `;
 
@@ -86,7 +86,7 @@ const ExperienceDesc = styled.th`
 `;
 
 const ExperienceMisc = styled.th`
-  padding-right: 20px;
+  padding-right: 1.3em;
   text-align: right;
   cursor: pointer;
 `;
@@ -94,29 +94,28 @@ const ExperienceMisc = styled.th`
 const ExperienceButtons = styled.td`
   color: #a5a4ea;
   float: right;
-  padding-right: 20px;
-  padding-top: 10px;
+  padding-right: 1.3em;
+  padding-top: 0.65em;
   cursor: pointer;
 
   * {
-    margin-left: 6px;
-    fontSize: 50px;
+    margin-left: 0.3em;
   }
 `;
 
 const CreateButton = styled.button`
   background-color: #f75d77;
-  border: 0px;
+  border: 0em;
   color: white;
   font-weight: bold;
-  padding: 15px 36px;
+  padding: 1.1em 2.3em;
   width: 50%;
-  font-size: 16px;
+  font-size: 1.05em;
   margin-left: 1%;
   cursor: pointer;
   font-family: Trebuchet MS;
-  border-radius: 20px;
-  margin-top: -6px;
+  border-radius: 1.3em;
+  margin-top: -0.25em;
 `;
 
 const CreateInnerBox = styled.div`
@@ -125,8 +124,8 @@ const CreateInnerBox = styled.div`
 
 const ExperienceField = styled(TextField)`
   width: 40%;
-  margin-top: 15px;
-  margin-right: 20px;
+  margin-top: 0.65em;
+  margin-right: 1.3em;
 `;
 
 const ErrorMsg = styled.label`
@@ -225,6 +224,7 @@ const LoadExperience = () => {
         </thead>
         <tbody>
           {expList.map((expName) => (
+            // eslint-disable-next-line react/jsx-key
             <ExperienceRow>
               <td>{expName}</td>
               <td>DESCRIPTION GOES HERE</td>
