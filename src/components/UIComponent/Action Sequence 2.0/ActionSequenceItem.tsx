@@ -1,5 +1,5 @@
-import { Paper } from "@mui/material";
 import styled from "styled-components";
+import Button from "@mui/material/Button";
 
 const ActionSequenceItemRoot = styled.div`
   display: flex;
@@ -22,7 +22,6 @@ const ActionSequenceItemApparatus = styled.div`
 
 const ActionSequenceItemAction = styled.div`
   display: flex;
-  background-color: #ff0015;
   min-width: stretch;
   height: 1.5em;
   justify-content: center;
@@ -30,18 +29,24 @@ const ActionSequenceItemAction = styled.div`
 `;
 
 type ActionSequenceItemProps = {
-  id:string
-  name:string
-  action:string
-}
+  id: string;
+  name: string;
+  removeAction: () => void;
+};
 
-function ActionSequenceItem({id,name,action}:ActionSequenceItemProps): JSX.Element {
+function ActionSequenceItem({
+  id,
+  name,
+  removeAction,
+}: ActionSequenceItemProps): JSX.Element {
   return (
     <ActionSequenceItemRoot>
       <ActionSequenceItemApparatus>
         {id}:{name}
-       </ActionSequenceItemApparatus>
-      <ActionSequenceItemAction>{action}</ActionSequenceItemAction>
+      </ActionSequenceItemApparatus>
+      <ActionSequenceItemAction>
+        <Button onClick={removeAction}>Delete</Button>
+      </ActionSequenceItemAction>
     </ActionSequenceItemRoot>
   );
 }

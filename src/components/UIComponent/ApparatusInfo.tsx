@@ -8,10 +8,12 @@ import ActionBox from "../editorBoxes/ActionBox";
 type OverlayProps = {
   experienceData: ExperienceData;
   addActionToList: (actionData: ActionData) => void;
+  removeActionFromList : (index: number) => void;
+
 };
 
 
-function ApparatusInfo({experienceData,addActionToList}: OverlayProps): JSX.Element {
+function ApparatusInfo({experienceData,addActionToList, removeActionFromList}: OverlayProps): JSX.Element {
   // const { addActionToList } =
   //   useActionList(experienceData);
   const [assetBundle, setAssetBundle] = useState({

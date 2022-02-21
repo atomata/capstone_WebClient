@@ -7,7 +7,7 @@ const ActionSequenceRoot = styled.div`
   display: relative;
   height: stretch;
   width: stretch;
-  background-color: #F75D77;
+  background-color: #f75d77;
 `;
 
 const ActionSequenceHeader = styled.div.attrs({
@@ -23,8 +23,11 @@ const ActionSequenceList = styled.div`
   display: flex;
   min-height: 91%;
   min-width: stretch;
-  /* background-color: #F75D77; */
   justify-content: left;
+  overflow-x: scroll;
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 type ActionSequenceProps = {
@@ -39,13 +42,13 @@ type ActionSequenceProps = {
 const DragContainer = styled.div`
   border: 1px solid black;
   max-height: 85%;
-  margin: 0.1em
-  
+  margin: 0.1em;
 `;
 
 function ActionSequence({
   actionList,
   handleOnDragEnd,
+  removeAction,
 }: ActionSequenceProps): JSX.Element {
   return (
     <ActionSequenceRoot>
@@ -77,7 +80,8 @@ function ActionSequence({
                               ? data.input.name
                               : data.input.command
                           }
-                          action="Item 1 Action"
+
+                          removeAction = {()=>removeAction(index)}
                         />
                       </DragContainer>
                     )}
@@ -88,7 +92,6 @@ function ActionSequence({
             )}
           </Droppable>
         </DragDropContext>
-        {/* <ActionSequenceItem id = "1" name = "Item 1" action = "Item 1 Action" /> */}
       </ActionSequenceList>
     </ActionSequenceRoot>
   );

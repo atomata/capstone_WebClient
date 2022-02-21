@@ -108,7 +108,7 @@ function Overlay2({ userId, experienceData }: OverlayProps): JSX.Element {
             </SideBarGrid>
             {toolDoc ? (
               <ToolDocGrid>
-                <ToolDocItem experienceData={experienceData} addActionToList={(actionData) => addActionToList(actionData)} />
+                <ToolDocItem experienceData={experienceData} addActionToList={(actionData) => addActionToList(actionData)}  removeAction={(index: number) => removeActionFromList(index)} />
               </ToolDocGrid>
             ) : (
               <div />
