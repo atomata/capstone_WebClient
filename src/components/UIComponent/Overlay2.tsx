@@ -55,9 +55,8 @@ const ActionSequenceBarGrid = styled.div`
 // css and placement for the text area
 const TextEditorGrid = styled.div`
   grid-column: 18 / span 20;
-  grid-row: 30 / span 8;
+  grid-row: 30 / span 10;
   z-index: 2;
-  background-color: #0c0475;
 `;
 
 type OverlayProps = {
@@ -83,8 +82,15 @@ function Overlay2({ userId, experienceData }: OverlayProps): JSX.Element {
   } = useActionBar();
 
   // Things Justin needs to use in action sequence, fix the variable names so I can use them please
-  const { actionList, addActionToList, removeActionFromList, handleOnDragEnd } =
-    useActionList(experienceData);
+  const {
+    selectedAction,
+    actionList,
+    removeActionFromList,
+    setDescription,
+    handleOnDragEnd,
+    addActionToList,
+  } = useActionList(experienceData);
+
 
   return (
     <UIComponentRoot>
@@ -122,6 +128,15 @@ function Overlay2({ userId, experienceData }: OverlayProps): JSX.Element {
             handleOnDragEnd={handleOnDragEnd}
           />
         </ActionSequenceBarGrid>
+        <TextEditorGrid>
+          {" "}
+          <TextEditor
+            actionList={actionList}
+            setDescription={(desc) => setDescription(desc)}
+            selectedAction={selectedAction}
+          />
+        </TextEditorGrid>
+
         {/* <TextEditorGrid /> */}
       </UIComponentGrid>
     </UIComponentRoot>
@@ -129,3 +144,4 @@ function Overlay2({ userId, experienceData }: OverlayProps): JSX.Element {
 }
 
 export default Overlay2;
+

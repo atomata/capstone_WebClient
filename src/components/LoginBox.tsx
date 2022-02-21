@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { Button, TextField } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 import { useLoginSubmit } from "../util/customHooks/loginBoxfunc";
 import { urlFor } from "../util/utils";
-import { makeStyles } from "@mui/styles";
 
 const LoginRoot = styled.div`
   position: relative;
@@ -39,8 +39,7 @@ const LoginButton = styled(Button)`
 
 const ImgIllustration = styled.img.attrs({
   alt: "Image Placeholder",
-})
-  `
+})`
   @media only screen and (max-width: 1130px) {
     width: 52%;
   }
@@ -61,8 +60,7 @@ const ImgIllustration = styled.img.attrs({
 
 const ImgLogo = styled.img.attrs({
   alt: "Image Placeholder",
-})
-  `
+})`
   display:block;
   height: 30%;
   margin-left: auto;
