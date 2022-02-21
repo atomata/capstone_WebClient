@@ -1,7 +1,6 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { ActionData, ExperienceData, SerializedApparatus } from "../../util/types";
 import ApparatusListBox from "../editorBoxes/ApparatusListBox";
-import { useActionList } from "../../util/customHooks/overlayfunc";
 import ActionBox from "../editorBoxes/ActionBox";
 
 type OverlayProps = {
