@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import Unity from "react-unity-webgl";
 import { useEffect, useState } from "react";
-import Overlay from "./Overlay";
 import Loading from "./Loading";
 import { unityContext, loadApparatus } from "../util/unityContextActions";
 import { ExperienceData } from "../util/types";

@@ -7,11 +7,12 @@ import SkyBoxInfo from "./SkyBoxInfo";
 type ToolDocItemProps = {
   experienceData: ExperienceData;
   addActionToList: (actionData: ActionData) => void;
+  removeAction: (index: number) => void;
 };
 
 function ToolDocItem({
   experienceData,
-  addActionToList,
+  addActionToList, removeAction
 }: ToolDocItemProps): JSX.Element {
   const { apparatusInfo, skyboxInfo } = useContext(SideBarContext);
   return (
@@ -20,6 +21,7 @@ function ToolDocItem({
         <ApparatusInfo
           experienceData={experienceData}
           addActionToList={addActionToList}
+          removeActionFromList = {removeAction}
         />
       ) : (
         <div />
