@@ -10,8 +10,6 @@ type OverlayProps = {
 
 
 function ApparatusInfo({experienceData,addActionToList}: OverlayProps): JSX.Element {
-  // const { addActionToList } =
-  //   useActionList(experienceData);
   const [assetBundle, setAssetBundle] = useState({
     children: [],
     path: "",
