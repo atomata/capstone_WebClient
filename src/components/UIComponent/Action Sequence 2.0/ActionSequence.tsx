@@ -16,12 +16,14 @@ const ActionSequenceHeader = styled.div.attrs({
   display: flex;
   justify-content: center;
   width: stretch;
-  /* background-color: gold; */
+  font-size: 1.2em;
+  font-weight: bold;
+  font-family: "Courier New", Courier, monospace;
 `;
 
 const ActionSequenceList = styled.div`
   display: flex;
-  min-height: 91%;
+  min-height: 89%;
   min-width: stretch;
   justify-content: left;
   overflow-x: scroll;
@@ -42,7 +44,8 @@ type ActionSequenceProps = {
 const DragContainer = styled.div`
   border: 1px solid black;
   max-height: 85%;
-  margin: 0.1em;
+  margin: 0.5em;
+  background-color: #3f3d56;
 `;
 
 function ActionSequence({
@@ -80,8 +83,7 @@ function ActionSequence({
                               ? data.input.name
                               : data.input.command
                           }
-
-                          removeAction = {()=>removeAction(index)}
+                          removeAction={() => removeAction(index)}
                         />
                       </DragContainer>
                     )}

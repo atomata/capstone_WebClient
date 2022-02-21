@@ -4,7 +4,6 @@ import Button from "@mui/material/Button";
 const ActionSequenceItemRoot = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: #ffc400;
   min-height: stretch;
   min-width: 12em;
   margin: 0.5em;
@@ -13,11 +12,14 @@ const ActionSequenceItemRoot = styled.div`
 
 const ActionSequenceItemApparatus = styled.div`
   display: flex;
-  background-color: #0066ff;
   min-width: stretch;
   height: 1.5em;
   justify-content: center;
   margin: 0.5em;
+  font-size: 1.05em;
+  font-weight: bold;
+  font-family: "Courier New", Courier, monospace;
+  color: #ffffff;
 `;
 
 const ActionSequenceItemAction = styled.div`
@@ -45,7 +47,9 @@ function ActionSequenceItem({
         {id}:{name}
       </ActionSequenceItemApparatus>
       <ActionSequenceItemAction>
-        <Button onClick={removeAction}>Delete</Button>
+        <Button variant="contained" color="error" onClick={removeAction}>
+          Delete
+        </Button>
       </ActionSequenceItemAction>
     </ActionSequenceItemRoot>
   );
