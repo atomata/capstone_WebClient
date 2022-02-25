@@ -1,6 +1,6 @@
 /* eslint-disable prefer-arrow-callback */
 import styled from "styled-components";
-import React, { useState } from "react";
+import React, { createContext, useState } from "react";
 import { Alert, AlertTitle } from "@mui/material";
 import WebglBox from "../src/components/WebglBox";
 import {
@@ -29,6 +29,8 @@ type ExperienceProps = {
   dataType: string;
 };
 
+export const TestContext = createContext(null);
+
 function Experience({
   apparatusId,
   experienceId,
@@ -38,6 +40,20 @@ function Experience({
   const [error, setError] = useState("");
   const [userId] = useState(getUserName());
   const [experienceData, setExperienceData] = useState<ExperienceData>();
+
+
+  // experience data defined here - JUSTIN
+  // const ExperienceContext = React.createContext([experienceData, setExperienceData]);
+
+  const [name, setName] = useState('INITIAL NAME');
+  const [price, setPrice] = useState(0);
+
+  const testvalue = {
+    name,
+    setName,
+    price,
+    setPrice,
+  };
 
   const experienceDataTemp: ExperienceData = {
     apparatusMetadata: { Id: "", Paths: [], Data: [] },
@@ -82,7 +98,9 @@ function Experience({
       return (
         <main>
           <Content>
+            <TestContext.Provider value={testvalue}>                                                     
             <WebglBox userId={userId} experienceData={experienceData} />
+            </TestContext.Provider>
           </Content>
         </main>
       );
@@ -105,3 +123,5 @@ Experience.getInitialProps = ({ query }) => {
 };
 
 export default Experience;
+
+

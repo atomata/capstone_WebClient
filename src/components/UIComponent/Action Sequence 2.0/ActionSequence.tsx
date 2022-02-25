@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { ActionData } from "../../../util/types";
 import ActionSequenceItem from "./ActionSequenceItem";
+import { useContext } from "react";
+import { TestContext } from "../../../../pages/experience";
 
 const ActionSequenceRoot = styled.div`
   display: relative;
@@ -53,6 +55,11 @@ function ActionSequence({
   handleOnDragEnd,
   removeAction,
 }: ActionSequenceProps): JSX.Element {
+
+
+const {name, setName}=useContext(TestContext)
+
+
   return (
     <ActionSequenceRoot>
       <ActionSequenceHeader />
@@ -89,6 +96,20 @@ function ActionSequence({
                     )}
                   </Draggable>
                 ))}
+                <ActionSequenceItem
+                          id={name}
+                          name={
+                            name
+                          }
+                          removeAction={null}
+                        />
+                <ActionSequenceItem
+                          id={name}
+                          name={
+                            name
+                          }
+                          removeAction={()=>setName("NEW NAME")}
+                        />
                 {dropProvided.placeholder}
               </ActionSequenceList>
             )}
