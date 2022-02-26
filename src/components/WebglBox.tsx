@@ -1,11 +1,10 @@
 import styled from "styled-components";
 import Unity from "react-unity-webgl";
 import { useEffect, useState } from "react";
-import Overlay from "./Overlay";
 import Loading from "./Loading";
 import { unityContext, loadApparatus } from "../util/unityContextActions";
 import { ExperienceData } from "../util/types";
-import ActionBar from "./UIComponent/ActionBar";
+import Overlay2 from "./UIComponent/Overlay2";
 
 const WebglRoot = styled.div`
   display: relative;
@@ -44,8 +43,9 @@ function WebglBox({ userId, experienceData }: WebglProps): JSX.Element {
           position: "absolute",
           zIndex: 0,
         }}
+        tabIndex={1}
       />
-      <ActionBar />
+      <Overlay2 userId={userId} experienceData={experienceData} />
       {/* <Overlay userId={userId} experienceData={experienceData} /> */}
     </WebglRoot>
   ) : (

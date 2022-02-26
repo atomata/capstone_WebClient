@@ -3,7 +3,7 @@ import {
   getExperienceFromCloud,
   getBlobsInContainer,
 } from "../util/cloudOperations/readFromCloud";
-import saveExperienceToCloud from "../util/cloudOperations/writeToCloud";
+import {saveExp} from "../util/cloudOperations/writeToCloud";
 
 const metadata = {
   Id: "evil-cylinder",
@@ -112,7 +112,7 @@ test("save an experience to the cloud", () => {
     actionList: [],
   };
   const output = ["testexp2"];
-  return saveExperienceToCloud(id, exp).then(() => {
+  return saveExp(id, exp).then(() => {
     getBlobsInContainer(id).then((testoutput) => {
       expect(testoutput).toEqual(output);
     });
