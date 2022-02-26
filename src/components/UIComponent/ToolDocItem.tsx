@@ -9,17 +9,12 @@ type ToolDocItemProps = {
   removeAction: (index: number) => void;
 };
 
-function ToolDocItem({
-  addActionToList, removeAction
-}: ToolDocItemProps): JSX.Element {
+function ToolDocItem(): JSX.Element {
   const { apparatusInfo, skyboxInfo } = useContext(SideBarContext);
   return (
     <div>
       {apparatusInfo ? (
-        <ApparatusInfo
-          addActionToList={addActionToList}
-          removeActionFromList = {removeAction}
-        />
+        <ApparatusInfo/>
       ) : (
         <div />
       )}

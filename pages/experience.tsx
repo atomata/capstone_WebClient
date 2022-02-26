@@ -12,8 +12,9 @@ import {
   getApparatusFromCloud,
   getExperienceFromCloud,
 } from "../src/util/cloudOperations/readFromCloud";
-import { ExperienceData } from "../src/util/types";
+import { ActionData, ExperienceData } from "../src/util/types";
 import Loading from "../src/components/Loading";
+import { useActionList } from "../src/util/customHooks/overlayfunc";
 
 const Content = styled.div`
   width: 100%;
@@ -29,10 +30,24 @@ type ExperienceProps = {
   dataType: string;
 };
 
-export const TestContext = createContext(null);
-
+export const TestContext = createContext(null);       // todo : delete after demo
 
 export const GlobalContext = createContext(null);
+
+ // make a type for typescript
+export type globalContextTypes = {
+  experienceData: ExperienceData;
+  setExperienceData: React.Dispatch<React.SetStateAction<ExperienceData>>;
+  selectedAction: number;
+  actionList: ActionData[];
+  removeActionFromList: (index: number) => void;
+  setDescription: (description: string) => void;
+  handleOnDragEnd: (result: {
+    destination: { index: number };
+    source: { index: number };
+  }) => void;
+  addActionToList: (actionData: ActionData) => void;
+};
 
 function Experience({
   apparatusId,
@@ -44,13 +59,18 @@ function Experience({
   const [userId] = useState(getUserName());
   const [experienceData, setExperienceData] = useState<ExperienceData>();
 
+  const {
+    selectedAction,
+    actionList,
+    removeActionFromList,
+    setDescription,
+    handleOnDragEnd,
+    addActionToList,
+  } = useActionList(experienceData);
 
   // experience data defined here - JUSTIN
-  // const ExperienceContext = React.createContext([experienceData, setExperienceData]);
-
-
   // test context
-  const [name, setName] = useState('INITIAL NAME');
+  const [name, setName] = useState("INITIAL NAME");
   const [price, setPrice] = useState(0);
 
   const testvalue = {
@@ -60,27 +80,19 @@ function Experience({
     setPrice,
   };
 
-  
-  
-
-  // make a type for typescript
-  type globalContextTypes = {
-    experienceData: ExperienceData;
-    setExperienceData: React.Dispatch<React.SetStateAction<ExperienceData>>;
-  }
+ 
 
   // All Global Context Hooks
   const globalContextValues: globalContextTypes = {
     experienceData,
     setExperienceData,
-  }
-
-
-
-
-
-
-
+    selectedAction,
+    actionList,
+    removeActionFromList,
+    setDescription,
+    handleOnDragEnd,
+    addActionToList,
+  };
 
   const experienceDataTemp: ExperienceData = {
     apparatusMetadata: { Id: "", Paths: [], Data: [] },
@@ -126,9 +138,9 @@ function Experience({
         <main>
           <Content>
             <TestContext.Provider value={testvalue}>
-            <GlobalContext.Provider value={globalContextValues}>                                                                                                          
-            <WebglBox userId={userId}  />
-            </GlobalContext.Provider>
+              <GlobalContext.Provider value={globalContextValues}>
+                <WebglBox userId={userId} />
+              </GlobalContext.Provider>
             </TestContext.Provider>
           </Content>
         </main>
@@ -152,5 +164,3 @@ Experience.getInitialProps = ({ query }) => {
 };
 
 export default Experience;
-
-

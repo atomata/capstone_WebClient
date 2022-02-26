@@ -3,7 +3,11 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { ActionData } from "../../../util/types";
 import ActionSequenceItem from "./ActionSequenceItem";
 import { useContext } from "react";
-import { TestContext } from "../../../../pages/experience";
+import {
+  GlobalContext,
+  globalContextTypes,
+  TestContext,
+} from "../../../../pages/experience";
 
 const ActionSequenceRoot = styled.div`
   display: relative;
@@ -50,15 +54,14 @@ const DragContainer = styled.div`
   background-color: #3f3d56;
 `;
 
-function ActionSequence({
-  actionList,
-  handleOnDragEnd,
-  removeAction,
-}: ActionSequenceProps): JSX.Element {
+function ActionSequence(): JSX.Element {
+  const { name, setName } = useContext(TestContext);
 
-
-const {name, setName}=useContext(TestContext)
-
+  const {
+    actionList,
+    handleOnDragEnd,
+    removeActionFromList,
+  }: globalContextTypes = useContext(GlobalContext);
 
   return (
     <ActionSequenceRoot>
@@ -90,26 +93,22 @@ const {name, setName}=useContext(TestContext)
                               ? data.input.name
                               : data.input.command
                           }
-                          removeAction={() => removeAction(index)}
+                          removeAction={() => removeActionFromList(index)}
                         />
                       </DragContainer>
                     )}
                   </Draggable>
                 ))}
                 <ActionSequenceItem
-                          id={name}
-                          name={
-                            name
-                          }
-                          removeAction={()=>setName("OLD NAME")}
-                        />
+                  id={name}
+                  name={name}
+                  removeAction={() => setName("OLD NAME")}
+                />
                 <ActionSequenceItem
-                          id={name}
-                          name={
-                            name
-                          }
-                          removeAction={()=>setName("NEW NAME")}
-                        />
+                  id={name}
+                  name={name}
+                  removeAction={() => setName("NEW NAME")}
+                />
                 {dropProvided.placeholder}
               </ActionSequenceList>
             )}

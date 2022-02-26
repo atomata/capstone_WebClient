@@ -10,9 +10,9 @@ type OverlayProps = {
 };
 
 
-function ApparatusInfo({addActionToList, removeActionFromList}: OverlayProps): JSX.Element {
+function ApparatusInfo(): JSX.Element {
 
-  const {experienceData} :globalContextTypes= useContext(GlobalContext)
+  const {experienceData,addActionToList} :globalContextTypes= useContext(GlobalContext)
 
   const [assetBundle, setAssetBundle] = useState({
     children: [],

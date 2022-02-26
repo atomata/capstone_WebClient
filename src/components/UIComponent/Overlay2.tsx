@@ -69,10 +69,8 @@ type OverlayProps = {
  * @returns
  */
 function Overlay2({ userId }: OverlayProps): JSX.Element {
-
-
   // potentially unneeded use once actionlist is made a global variable
-  const {experienceData} :globalContextTypes= useContext(GlobalContext)
+  const { experienceData }: globalContextTypes = useContext(GlobalContext);
 
   const {
     toggleToolDoc,
@@ -87,15 +85,14 @@ function Overlay2({ userId }: OverlayProps): JSX.Element {
   } = useActionBar();
 
   // Things Justin needs to use in action sequence, fix the variable names so I can use them please
-  const {
-    selectedAction,
-    actionList,
-    removeActionFromList,
-    setDescription,
-    handleOnDragEnd,
-    addActionToList,
-  } = useActionList(experienceData);
-
+  // const {
+  //   selectedAction,
+  //   actionList,
+  //   removeActionFromList,
+  //   setDescription,
+  //   handleOnDragEnd,
+  //   addActionToList,
+  // } = useActionList(experienceData);
 
   return (
     <UIComponentRoot>
@@ -113,33 +110,23 @@ function Overlay2({ userId }: OverlayProps): JSX.Element {
             setSkyBoxInfo,
           }}
         >
-
-            <SideBarGrid>
-              <SideBarItem userId={userId}/>
-            </SideBarGrid>
-            {toolDoc ? (
-              <ToolDocGrid>
-                <ToolDocItem  addActionToList={(actionData) => addActionToList(actionData)}  removeAction={(index: number) => removeActionFromList(index)} />
-              </ToolDocGrid>
-            ) : (
-              <div />
-            )}
-
+          <SideBarGrid>
+            <SideBarItem userId={userId} />
+          </SideBarGrid>
+          {toolDoc ? (
+            <ToolDocGrid>
+              <ToolDocItem />
+            </ToolDocGrid>
+          ) : (
+            <div />
+          )}
         </SideBarContext.Provider>
         <ActionSequenceBarGrid>
-          <ActionSequence
-            actionList={actionList}
-            removeAction={(index: number) => removeActionFromList(index)}
-            handleOnDragEnd={handleOnDragEnd}
-          />
+          <ActionSequence />
         </ActionSequenceBarGrid>
         <TextEditorGrid>
           {" "}
-          <TextEditor
-            actionList={actionList}
-            setDescription={(desc) => setDescription(desc)}
-            selectedAction={selectedAction}
-          />
+          <TextEditor />
         </TextEditorGrid>
 
         {/* <TextEditorGrid /> */}
@@ -149,4 +136,3 @@ function Overlay2({ userId }: OverlayProps): JSX.Element {
 }
 
 export default Overlay2;
-
