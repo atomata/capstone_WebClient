@@ -30,11 +30,11 @@ type ExperienceProps = {
   dataType: string;
 };
 
-export const TestContext = createContext(null);       // todo : delete after demo
+export const TestContext = createContext(null); // todo : delete after demo
 
 export const GlobalContext = createContext(null);
 
- // make a type for typescript
+// make a type for typescript
 export type globalContextTypes = {
   experienceData: ExperienceData;
   setExperienceData: React.Dispatch<React.SetStateAction<ExperienceData>>;
@@ -79,8 +79,6 @@ function Experience({
     price,
     setPrice,
   };
-
- 
 
   // All Global Context Hooks
   const globalContextValues: globalContextTypes = {

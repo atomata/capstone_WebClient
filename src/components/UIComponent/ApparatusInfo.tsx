@@ -1,18 +1,12 @@
 import { useContext, useState } from "react";
-import { ActionData, SerializedApparatus } from "../../util/types";
+import { SerializedApparatus } from "../../util/types";
 import ApparatusListBox from "../editorBoxes/ApparatusListBox";
 import ActionBox from "../editorBoxes/ActionBox";
 import { GlobalContext, globalContextTypes } from "../../../pages/experience";
 
-type OverlayProps = {
-  addActionToList: (actionData: ActionData) => void;
-  removeActionFromList : (index: number) => void;
-};
-
-
 function ApparatusInfo(): JSX.Element {
-
-  const {experienceData,addActionToList} :globalContextTypes= useContext(GlobalContext)
+  const { experienceData, addActionToList }: globalContextTypes =
+    useContext(GlobalContext);
 
   const [assetBundle, setAssetBundle] = useState({
     children: [],
@@ -21,21 +15,18 @@ function ApparatusInfo(): JSX.Element {
   });
   return (
     <>
-      <ApparatusListBox                                         
+      <ApparatusListBox
         metadata={checkIfMetaExists()}
         handleAssetBundleChange={(data) => setAssetBundle(data)}
       />
       <ActionBox
         assetBundle={assetBundle}
-        addAction={(actionData) =>
-          addActionToList(actionData)
-        }
+        addAction={(actionData) => addActionToList(actionData)}
       />
     </>
   );
 
   function checkIfMetaExists(): SerializedApparatus {
-
     return experienceData !== undefined
       ? experienceData.apparatusMetadata
       : undefined;

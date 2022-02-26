@@ -69,8 +69,6 @@ type OverlayProps = {
  * @returns
  */
 function Overlay2({ userId }: OverlayProps): JSX.Element {
-  // potentially unneeded use once actionlist is made a global variable
-  const { experienceData }: globalContextTypes = useContext(GlobalContext);
 
   const {
     toggleToolDoc,
@@ -83,16 +81,6 @@ function Overlay2({ userId }: OverlayProps): JSX.Element {
     setApparatusInfo,
     setSkyBoxInfo,
   } = useActionBar();
-
-  // Things Justin needs to use in action sequence, fix the variable names so I can use them please
-  // const {
-  //   selectedAction,
-  //   actionList,
-  //   removeActionFromList,
-  //   setDescription,
-  //   handleOnDragEnd,
-  //   addActionToList,
-  // } = useActionList(experienceData);
 
   return (
     <UIComponentRoot>
@@ -128,8 +116,6 @@ function Overlay2({ userId }: OverlayProps): JSX.Element {
           {" "}
           <TextEditor />
         </TextEditorGrid>
-
-        {/* <TextEditorGrid /> */}
       </UIComponentGrid>
     </UIComponentRoot>
   );

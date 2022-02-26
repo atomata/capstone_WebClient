@@ -4,7 +4,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { IconButton } from "@mui/material";
 import SaveIcon from "@mui/icons-material/Save";
 import ExpandIcon from "@mui/icons-material/Expand";
-import { ActionData } from "../util/types";
 import { GlobalContext, globalContextTypes } from "../../pages/experience";
 
 const Box = styled.tr`
@@ -62,9 +61,6 @@ const TestDiv = styled.div`
   color: white;
 `;
 
-type TextEditorProps = {
-  setDescription: (desc) => void;
-};
 const TextEditor = (): JSX.Element => {
   const [isExpanded, setExpanded] = useState(false);
   const [currDesc, setCurrDesc] = useState("");

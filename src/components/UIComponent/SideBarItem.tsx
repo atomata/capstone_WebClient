@@ -45,18 +45,17 @@ const ImgLogo = styled.img.attrs({
 type OverlayProps = {
   userId: string;
 };
-function SideBarItem({userId}: OverlayProps): JSX.Element {
+function SideBarItem({ userId }: OverlayProps): JSX.Element {
   const { toggleApparatusInfo, toggleSkyBoxInfo } = useContext(SideBarContext);
-  const {experienceData} :globalContextTypes= useContext(GlobalContext)
+  const { experienceData }: globalContextTypes = useContext(GlobalContext);
   const { actionList } = useActionList(experienceData);
-
 
   return (
     <>
       <SideBarItemBox>
         <Link href="/">
           {" "}
-          <ImgLogo src={urlFor("assets/epistaLogo.png")}/>
+          <ImgLogo src={urlFor("assets/epistaLogo.png")} />
         </Link>
 
         <SideBarItemWrapper>
