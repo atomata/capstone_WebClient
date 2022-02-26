@@ -109,7 +109,7 @@ const CreateButton = styled.button`
   color: white;
   font-weight: bold;
   padding: 1.1em 2.3em;
-  width: 50%;
+  width: 40%;
   font-size: 1.05em;
   margin-left: 1%;
   cursor: pointer;
@@ -123,7 +123,7 @@ const CreateInnerBox = styled.div`
 `;
 
 const ExperienceField = styled(TextField)`
-  width: 40%;
+  width: 60%;
   margin-top: 0.65em;
   margin-right: 1.3em;
 `;
@@ -144,7 +144,6 @@ const useStyles = makeStyles((theme) => ({
 
 const CreateExperience = () => {
   const [expName, setExpName] = useState("");
-  const [descName, setDescName] = useState("");
 
   const {
     expErr,
@@ -170,18 +169,6 @@ const CreateExperience = () => {
           onChange={(e) => setExpName(e.target.value)}
           variant="outlined"
         />
-        <ExperienceField
-          InputProps={{
-            className: classes.textField,
-          }}
-          FormHelperTextProps={{
-            className: classes.helper,
-          }}
-          label="Description"
-          helperText=" "
-          onChange={(e) => setDescName(e.target.value)}
-          variant="outlined"
-        />
         <Link
           key="selectionPage"
           href={{
@@ -199,12 +186,12 @@ const CreateExperience = () => {
 
 // TODO show proper error message when data cannot be fetched
 const LoadExperience = () => {
-  const [expList, setexpList] = useState([]);
+  const [expList, setExpList] = useState([]);
   useEffect(() => {
     async function fetchData() {
       try {
         const res = await getBlobsInContainer(getUserName());
-        setexpList(res);
+        setExpList(res);
       } catch (err) {
         console.log("test", err);
       }
@@ -218,24 +205,24 @@ const LoadExperience = () => {
         <thead>
           <ExperienceHeader>
             <ExperienceName>EXPERIENCE NAME</ExperienceName>
-            <ExperienceDesc>DESCRIPTION</ExperienceDesc>
+            <ExperienceDesc>LAST MODIFIED</ExperienceDesc>
             <ExperienceMisc><MoreHorizIcon style={{fontSize: '36px'}}/></ExperienceMisc>
           </ExperienceHeader>
         </thead>
         <tbody>
-          {expList.map((expName) => (
+          {expList.map((exp) => (
             // eslint-disable-next-line react/jsx-key
             <ExperienceRow>
-              <td>{expName}</td>
-              <td>DESCRIPTION GOES HERE</td>
+              <td>{exp[0]}</td>
+              <td>{exp[1]}</td>
               <ExperienceButtons>
                 <PlayArrowOutlinedIcon style={{fontSize: '40px'}} />
                 <Link
-                  key={expName}
+                  key={exp[0]}
                   href={{
                     pathname: "/experience",
                     query: {
-                      experienceId: expName,
+                      experienceId: exp[0],
                       apparatusId: "",
                       dataType: "experience",
                     },

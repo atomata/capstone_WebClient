@@ -27,8 +27,8 @@ function getExperienceFromCloud(
 async function getBlobsInContainer(
   blobName: string,
   storage = defaultStorage
-): Promise<string[]> {
-  const returnedBlobUrls: string[] = [];
+): Promise<string[][]> {
+  const returnedBlobs: string[][] = [];
 
   // get BlobService = notice `?` is pulled out of sasToken - if created in Azure portal
   const blobService = new BlobServiceClient(`${storage}/?${sasToken}`);
@@ -42,10 +42,12 @@ async function getBlobsInContainer(
     access: "container",
   });
   // get list of blobs in container
+  // eslint-disable-next-line no-restricted-syntax
   for await (const exp of containerClient.listBlobsFlat()) {
     const expName = exp.name.substring(0, exp.name.length - fileNamePostfix);
-    returnedBlobUrls.push(expName);
+    returnedBlobs.push([expName, exp.properties.lastModified.toUTCString()]);
   }
-  return returnedBlobUrls;
+
+  return returnedBlobs;
 }
 export { getBlobsInContainer, getApparatusFromCloud, getExperienceFromCloud };
