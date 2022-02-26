@@ -8,8 +8,8 @@ import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
 import { SideBarContext } from "../../util/customHooks/SideBarContext";
 import { saveExp } from "../../util/cloudOperations/writeToCloud";
 import { useActionList } from "../../util/customHooks/overlayfunc";
-import { ExperienceData } from "../../util/types";
 import { urlFor } from "../../util/utils";
+import { GlobalContext, globalContextTypes } from "../../../pages/experience";
 
 const SideBarItemBox = styled.div`
   position: flex;
@@ -44,11 +44,12 @@ const ImgLogo = styled.img.attrs({
 `;
 type OverlayProps = {
   userId: string;
-  experienceData: ExperienceData;
 };
-function SideBarItem({userId, experienceData}: OverlayProps): JSX.Element {
+function SideBarItem({userId}: OverlayProps): JSX.Element {
   const { toggleApparatusInfo, toggleSkyBoxInfo } = useContext(SideBarContext);
+  const {experienceData} :globalContextTypes= useContext(GlobalContext)
   const { actionList } = useActionList(experienceData);
+
 
   return (
     <>

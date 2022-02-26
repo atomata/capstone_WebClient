@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { SideBarContext } from "../../util/customHooks/SideBarContext";
-import { ActionData, ExperienceData } from "../../util/types";
+import { ActionData} from "../../util/types";
 import ApparatusInfo from "./ApparatusInfo";
 import SkyBoxInfo from "./SkyBoxInfo";
 

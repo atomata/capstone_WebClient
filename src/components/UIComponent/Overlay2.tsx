@@ -4,7 +4,6 @@ import SideBarItem from "./SideBarItem";
 import ActionSequence from "./Action Sequence 2.0/ActionSequence";
 import { SideBarContext } from "../../util/customHooks/SideBarContext";
 import ToolDocItem from "./ToolDocItem";
-import { ExperienceData } from "../../util/types";
 import { useActionList } from "../../util/customHooks/overlayfunc";
 import TextEditor from "../TextEditor";
 import { GlobalContext, globalContextTypes } from "../../../pages/experience";
@@ -116,11 +115,11 @@ function Overlay2({ userId }: OverlayProps): JSX.Element {
         >
 
             <SideBarGrid>
-              <SideBarItem userId={userId} experienceData={experienceData} />
+              <SideBarItem userId={userId}/>
             </SideBarGrid>
             {toolDoc ? (
               <ToolDocGrid>
-                <ToolDocItem addActionToList={(actionData) => addActionToList(actionData)}  removeAction={(index: number) => removeActionFromList(index)} />
+                <ToolDocItem  addActionToList={(actionData) => addActionToList(actionData)}  removeAction={(index: number) => removeActionFromList(index)} />
               </ToolDocGrid>
             ) : (
               <div />
