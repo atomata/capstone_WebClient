@@ -38,15 +38,6 @@ const ActionSequenceList = styled.div`
   }
 `;
 
-type ActionSequenceProps = {
-  actionList: ActionData[];
-  removeAction: (index: number) => void;
-  handleOnDragEnd: (result: {
-    destination: { index: number };
-    source: { index: number };
-  }) => void;
-};
-
 const DragContainer = styled.div`
   border: 1px solid black;
   max-height: 85%;
