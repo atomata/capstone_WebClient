@@ -1,10 +1,11 @@
 import styled from "styled-components";
 import Unity from "react-unity-webgl";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Loading from "./Loading";
 import { unityContext, loadApparatus } from "../util/unityContextActions";
 import { ExperienceData } from "../util/types";
 import Overlay2 from "./UIComponent/Overlay2";
+import { GlobalContext, globalContextTypes } from "../../pages/experience";
 
 const WebglRoot = styled.div`
   display: relative;
@@ -14,10 +15,13 @@ const WebglRoot = styled.div`
 
 type WebglProps = {
   userId: string;
-  experienceData: ExperienceData;
 };
 
-function WebglBox({ userId, experienceData }: WebglProps): JSX.Element {
+function WebglBox({ userId }: WebglProps): JSX.Element {
+
+
+  const {experienceData} :globalContextTypes= useContext(GlobalContext)
+
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     if (window["onAtomataSceneInitalize"] === undefined) {

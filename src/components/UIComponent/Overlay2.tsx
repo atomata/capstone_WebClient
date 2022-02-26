@@ -7,6 +7,8 @@ import ToolDocItem from "./ToolDocItem";
 import { ExperienceData } from "../../util/types";
 import { useActionList } from "../../util/customHooks/overlayfunc";
 import TextEditor from "../TextEditor";
+import { GlobalContext, globalContextTypes } from "../../../pages/experience";
+import { useContext } from "react";
 
 // the side bar box
 
@@ -61,14 +63,18 @@ const TextEditorGrid = styled.div`
 
 type OverlayProps = {
   userId: string;
-  experienceData: ExperienceData;
 };
 
 /**
  * The side bar define the area and the outline of what will be included.
  * @returns
  */
-function Overlay2({ userId, experienceData }: OverlayProps): JSX.Element {
+function Overlay2({ userId }: OverlayProps): JSX.Element {
+
+
+  // potentially unneeded use once actionlist is made a global variable
+  const {experienceData} :globalContextTypes= useContext(GlobalContext)
+
   const {
     toggleToolDoc,
     toggleApparatusInfo,
@@ -114,7 +120,7 @@ function Overlay2({ userId, experienceData }: OverlayProps): JSX.Element {
             </SideBarGrid>
             {toolDoc ? (
               <ToolDocGrid>
-                <ToolDocItem experienceData={experienceData} addActionToList={(actionData) => addActionToList(actionData)}  removeAction={(index: number) => removeActionFromList(index)} />
+                <ToolDocItem addActionToList={(actionData) => addActionToList(actionData)}  removeAction={(index: number) => removeActionFromList(index)} />
               </ToolDocGrid>
             ) : (
               <div />

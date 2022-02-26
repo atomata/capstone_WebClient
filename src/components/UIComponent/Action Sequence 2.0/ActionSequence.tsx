@@ -101,7 +101,7 @@ const {name, setName}=useContext(TestContext)
                           name={
                             name
                           }
-                          removeAction={null}
+                          removeAction={()=>setName("OLD NAME")}
                         />
                 <ActionSequenceItem
                           id={name}

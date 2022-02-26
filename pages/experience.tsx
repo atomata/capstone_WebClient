@@ -31,6 +31,9 @@ type ExperienceProps = {
 
 export const TestContext = createContext(null);
 
+
+export const GlobalContext = createContext(null);
+
 function Experience({
   apparatusId,
   experienceId,
@@ -45,6 +48,8 @@ function Experience({
   // experience data defined here - JUSTIN
   // const ExperienceContext = React.createContext([experienceData, setExperienceData]);
 
+
+  // test context
   const [name, setName] = useState('INITIAL NAME');
   const [price, setPrice] = useState(0);
 
@@ -54,6 +59,28 @@ function Experience({
     price,
     setPrice,
   };
+
+  
+  
+
+  // make a type for typescript
+  type globalContextTypes = {
+    experienceData: ExperienceData;
+    setExperienceData: React.Dispatch<React.SetStateAction<ExperienceData>>;
+  }
+
+  // All Global Context Hooks
+  const globalContextValues: globalContextTypes = {
+    experienceData,
+    setExperienceData,
+  }
+
+
+
+
+
+
+
 
   const experienceDataTemp: ExperienceData = {
     apparatusMetadata: { Id: "", Paths: [], Data: [] },
@@ -98,8 +125,10 @@ function Experience({
       return (
         <main>
           <Content>
-            <TestContext.Provider value={testvalue}>                                                     
-            <WebglBox userId={userId} experienceData={experienceData} />
+            <TestContext.Provider value={testvalue}>
+            <GlobalContext.Provider value={globalContextValues}>                                                                                                          
+            <WebglBox userId={userId}  />
+            </GlobalContext.Provider>
             </TestContext.Provider>
           </Content>
         </main>
