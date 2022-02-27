@@ -140,9 +140,6 @@ function Overlay({ userId, experienceData }: OverlayProps): JSX.Element {
 
             <OverlayGridItem4>
               <TextEditor
-                actionList={actionList}
-                setDescription={(desc) => setDescription(desc)}
-                selectedAction={selectedAction}
               />
             </OverlayGridItem4>
           </OverlayGrid>
