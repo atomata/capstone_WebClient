@@ -1,12 +1,10 @@
 import styled from "styled-components";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import { ActionData } from "../../../util/types";
 import ActionSequenceItem from "./ActionSequenceItem";
 import { useContext } from "react";
 import {
   GlobalContext,
   globalContextTypes,
-  TestContext,
 } from "../../../../pages/experience";
 
 const ActionSequenceRoot = styled.div`
@@ -46,7 +44,6 @@ const DragContainer = styled.div`
 `;
 
 function ActionSequence(): JSX.Element {
-  const { name, setName } = useContext(TestContext);
 
   const {
     actionList,
@@ -90,16 +87,6 @@ function ActionSequence(): JSX.Element {
                     )}
                   </Draggable>
                 ))}
-                <ActionSequenceItem
-                  id={name}
-                  name={name}
-                  removeAction={() => setName("OLD NAME")}
-                />
-                <ActionSequenceItem
-                  id={name}
-                  name={name}
-                  removeAction={() => setName("NEW NAME")}
-                />
                 {dropProvided.placeholder}
               </ActionSequenceList>
             )}
