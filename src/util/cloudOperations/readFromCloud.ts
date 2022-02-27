@@ -1,4 +1,5 @@
 import { BlobServiceClient, ContainerClient } from "@azure/storage-blob";
+import { format } from "util";
 import {
   apparatusContainer,
   fileNamePostfix,
@@ -45,7 +46,18 @@ async function getBlobsInContainer(
   // eslint-disable-next-line no-restricted-syntax
   for await (const exp of containerClient.listBlobsFlat()) {
     const expName = exp.name.substring(0, exp.name.length - fileNamePostfix);
-    returnedBlobs.push([expName, exp.properties.lastModified.toUTCString()]);
+    //const lastModified = exp.properties.lastModified.toLocaleString('en-GB', { timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone });
+    // const lastModified = exp.properties.lastModified.toUTCString();
+    const lastModified = new Intl.DateTimeFormat("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "2-digit",
+      hour: '2-digit', 
+      minute: '2-digit', 
+      second: '2-digit',
+      timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
+    }).format(exp.properties.lastModified);
+    returnedBlobs.push([expName, lastModified]);
   }
 
   return returnedBlobs;
