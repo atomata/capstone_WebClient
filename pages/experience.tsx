@@ -47,6 +47,7 @@ export type globalContextTypes = {
     source: { index: number };
   }) => void;
   addActionToList: (actionData: ActionData) => void;
+  userId: string
 };
 
 function Experience({
@@ -90,6 +91,7 @@ function Experience({
     setDescription,
     handleOnDragEnd,
     addActionToList,
+    userId
   };
 
   const experienceDataTemp: ExperienceData = {

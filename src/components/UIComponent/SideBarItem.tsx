@@ -42,12 +42,10 @@ const ImgLogo = styled.img.attrs({
   margin-left: auto;
   margin-right: auto;
 `;
-type OverlayProps = {
-  userId: string;
-};
-function SideBarItem({ userId }: OverlayProps): JSX.Element {
+
+function SideBarItem(): JSX.Element {
   const { toggleApparatusInfo, toggleSkyBoxInfo } = useContext(SideBarContext);
-  const { experienceData }: globalContextTypes = useContext(GlobalContext);
+  const { experienceData, userId }: globalContextTypes = useContext(GlobalContext);
   const { actionList } = useActionList(experienceData);
 
   return (

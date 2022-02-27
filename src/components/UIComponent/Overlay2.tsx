@@ -4,10 +4,7 @@ import SideBarItem from "./SideBarItem";
 import ActionSequence from "./Action Sequence 2.0/ActionSequence";
 import { SideBarContext } from "../../util/customHooks/SideBarContext";
 import ToolDocItem from "./ToolDocItem";
-import { useActionList } from "../../util/customHooks/overlayfunc";
 import TextEditor from "../TextEditor";
-import { GlobalContext, globalContextTypes } from "../../../pages/experience";
-import { useContext } from "react";
 
 // the side bar box
 
@@ -60,15 +57,11 @@ const TextEditorGrid = styled.div`
   z-index: 2;
 `;
 
-type OverlayProps = {
-  userId: string;
-};
-
 /**
  * The side bar define the area and the outline of what will be included.
  * @returns
  */
-function Overlay2({ userId }: OverlayProps): JSX.Element {
+function Overlay2(): JSX.Element {
 
   const {
     toggleToolDoc,
@@ -99,7 +92,7 @@ function Overlay2({ userId }: OverlayProps): JSX.Element {
           }}
         >
           <SideBarGrid>
-            <SideBarItem userId={userId} />
+            <SideBarItem/>
           </SideBarGrid>
           {toolDoc ? (
             <ToolDocGrid>
