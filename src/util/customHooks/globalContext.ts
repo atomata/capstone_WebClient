@@ -1,5 +1,5 @@
 import React, {createContext} from "react";
-import {ActionData, ExperienceData} from "./types";
+import {ActionData, ExperienceData} from "../types";
 
 export const GlobalContext = createContext(null);
 

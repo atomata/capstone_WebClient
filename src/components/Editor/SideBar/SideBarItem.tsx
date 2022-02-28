@@ -9,7 +9,7 @@ import { SideBarContext } from "../../../util/customHooks/SideBarContext";
 import { saveExp } from "../../../util/cloudOperations/writeToCloud";
 import { useActionList } from "../../../util/customHooks/overlayfunc";
 import { urlFor } from "../../../util/utils";
-import { GlobalContext, globalContextTypes } from "../../../util/globalContext";
+import { GlobalContext, globalContextTypes } from "../../../util/customHooks/globalContext";
 
 const SideBarItemBox = styled.div`
   position: flex;

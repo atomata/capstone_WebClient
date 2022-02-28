@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import Loading from "../Loading";
 import { unityContext, loadApparatus } from "../../util/unityContextActions";
 import Overlay from "./Overlay";
-import { GlobalContext, globalContextTypes } from "../../util/globalContext";
+import { GlobalContext, globalContextTypes } from "../../util/customHooks/globalContext";
 
 const WebglRoot = styled.div`
   display: relative;

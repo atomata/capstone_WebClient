@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { useContext } from "react";
 import ActionSequenceItem from "./ActionSequenceItem";
-import {GlobalContext, globalContextTypes} from "../../../util/globalContext";
+import {GlobalContext, globalContextTypes} from "../../../util/customHooks/globalContext";
 
 const ActionSequenceRoot = styled.div`
   display: relative;
