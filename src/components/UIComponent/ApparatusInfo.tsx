@@ -5,7 +5,7 @@ import ActionBox from "../editorBoxes/ActionBox";
 import { GlobalContext, globalContextTypes } from "../../../pages/experience";
 
 function ApparatusInfo(): JSX.Element {
-  const { experienceData, addActionToList }: globalContextTypes =
+  const { experienceData }: globalContextTypes =
     useContext(GlobalContext);
 
   const [assetBundle, setAssetBundle] = useState({
@@ -21,7 +21,6 @@ function ApparatusInfo(): JSX.Element {
       />
       <ActionBox
         assetBundle={assetBundle}
-        addAction={(actionData) => addActionToList(actionData)}
       />
     </>
   );
