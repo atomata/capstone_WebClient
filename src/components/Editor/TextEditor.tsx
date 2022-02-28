@@ -4,7 +4,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { IconButton } from "@mui/material";
 import SaveIcon from "@mui/icons-material/Save";
 import ExpandIcon from "@mui/icons-material/Expand";
-import { GlobalContext, globalContextTypes } from "../../pages/experience";
+import { GlobalContext, globalContextTypes } from "../../../pages/experience";
 
 const Box = styled.tr`
   background: #3f3d56;

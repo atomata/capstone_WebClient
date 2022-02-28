@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import { useActionBar } from "../../util/customHooks/ActionBarFunc";
-import SideBarItem from "./SideBarItem";
-import ActionSequence from "./Action Sequence 2.0/ActionSequence";
+import SideBarItem from "./SideBar/SideBarItem";
+import ActionSequence from "./ActionSequence/ActionSequence";
 import { SideBarContext } from "../../util/customHooks/SideBarContext";
-import ToolDocItem from "./ToolDocItem";
-import TextEditor from "../TextEditor";
+import ToolDocItem from "./SideBar/ToolDocItem";
+import TextEditor from "./TextEditor";
 
 // the side bar box
 
@@ -61,7 +61,7 @@ const TextEditorGrid = styled.div`
  * The side bar define the area and the outline of what will be included.
  * @returns
  */
-function Overlay2(): JSX.Element {
+function Overlay(): JSX.Element {
 
   const {
     toggleToolDoc,
@@ -114,4 +114,4 @@ function Overlay2(): JSX.Element {
   );
 }
 
-export default Overlay2;
+export default Overlay;

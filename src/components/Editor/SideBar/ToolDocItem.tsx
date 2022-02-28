@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { SideBarContext } from "../../util/customHooks/SideBarContext";
+import { SideBarContext } from "../../../util/customHooks/SideBarContext";
 import ApparatusInfo from "./ApparatusInfo";
 import SkyBoxInfo from "./SkyBoxInfo";
 

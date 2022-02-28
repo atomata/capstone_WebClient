@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
 import React from "react";
-import WebglBox from "../components/WebglBox";
+import WebglBox from "../components/Editor/WebglBox";
 
 const metadata = {
   Id: "evil-cylinder",
