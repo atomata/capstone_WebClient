@@ -9,13 +9,13 @@ import {
   getUserName,
 } from "../src/util/loginCookies";
 import {
-  getApparatusFromCloud,
-  getExperienceFromCloud,
+  setupApparatusData,
+  setupExperienceData,
 } from "../src/util/cloudOperations/readFromCloud";
 import { ExperienceData } from "../src/util/types";
 import Loading from "../src/components/Loading";
 import { useActionList } from "../src/util/customHooks/overlayfunc";
-import { globalContextTypes, GlobalContext } from "../src/util/globalContext";
+import { globalContextTypes, GlobalContext } from "../src/util/customHooks/globalContext";
 
 const Content = styled.div`
   width: 100%;
@@ -68,31 +68,21 @@ function Experience({
     experience: { experienceId, apparatusId: "", actionList: [] },
   };
   React.useEffect(() => {
-    // either apparatusID is provided or experience id but not both
-    function getApparatusFromCloudHelper(id) {
-      getApparatusFromCloud(id)
-        .then((apparatusJson) => {
-          experienceDataTemp.apparatusMetadata = apparatusJson;
-          experienceDataTemp.experience.apparatusId = apparatusJson.Id;
-          setExperienceData(experienceDataTemp);
-          setLoading(false);
-        })
-        .catch(() => setError("apparatus not found"));
-    }
-
     // Don't load if you aren't logged in
     // TODO test to see if this is  working properly
     if (!checkIfLoggedIn()) return;
 
     if (dataType === "apparatus") {
-      getApparatusFromCloudHelper(apparatusId);
-    } else if (dataType === "experience") {
-      getExperienceFromCloud(userId, experienceId)
-        .then((experienceJson) => {
-          experienceDataTemp.experience = experienceJson;
-          getApparatusFromCloudHelper(experienceJson.apparatusId);
+      setupApparatusData(apparatusId, experienceDataTemp)
+        .then(() => {
+          setExperienceData(experienceDataTemp);
+          setLoading(false);
         })
-        .catch(() => setError("experience file not found"));
+        .catch(() => setError("apparatus not found"));
+    } else if (dataType === "experience") {
+      setupExperienceData(userId, experienceId, experienceDataTemp).catch(() =>
+        setError("experience file not found")
+      );
     }
   }, [apparatusId, experienceId, dataType, userId]);
 

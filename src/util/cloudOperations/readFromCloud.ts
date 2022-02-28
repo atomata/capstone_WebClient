@@ -5,7 +5,11 @@ import {
   sasToken,
   defaultStorage,
 } from "../constants";
-import { SerializedApparatus, SerializedExperience } from "../types";
+import {
+  ExperienceData,
+  SerializedApparatus,
+  SerializedExperience,
+} from "../types";
 
 function getApparatusFromCloud(id: string): Promise<SerializedApparatus> {
   return fetch(`${apparatusContainer}/${id}.json`, { mode: "cors" })
@@ -22,6 +26,30 @@ function getExperienceFromCloud(
   })
     .then((response) => response.json())
     .catch((error) => null);
+}
+
+function setupApparatusData(
+  id: string,
+  experienceDataTemp: ExperienceData
+): Promise<any> {
+  return getApparatusFromCloud(id).then((apparatusJson) => {
+    // eslint-disable-next-line no-param-reassign
+    experienceDataTemp.apparatusMetadata = apparatusJson;
+    // eslint-disable-next-line no-param-reassign
+    experienceDataTemp.experience.apparatusId = apparatusJson.Id;
+  });
+}
+
+function setupExperienceData(
+  userId: string,
+  experienceId: string,
+  experienceDataTemp: ExperienceData
+): Promise<any> {
+  return getExperienceFromCloud(userId, experienceId).then((experienceJson) => {
+    // eslint-disable-next-line no-param-reassign
+    experienceDataTemp.experience = experienceJson;
+    setupApparatusData(experienceJson.apparatusId, experienceDataTemp);
+  });
 }
 
 async function getBlobsInContainer(
@@ -48,4 +76,10 @@ async function getBlobsInContainer(
   }
   return returnedBlobUrls;
 }
-export { getBlobsInContainer, getApparatusFromCloud, getExperienceFromCloud };
+export {
+  getBlobsInContainer,
+  getApparatusFromCloud,
+  getExperienceFromCloud,
+  setupApparatusData,
+  setupExperienceData,
+};
