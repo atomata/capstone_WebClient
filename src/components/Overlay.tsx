@@ -93,9 +93,7 @@ function Overlay({ userId, experienceData }: OverlayProps): JSX.Element {
   const {
     selectedAction,
     setSelectedAction,
-    setDescription,
     actionList,
-    addActionToList,
     removeActionFromList,
     handleOnDragEnd,
   } = useActionList(experienceData,undefined);  // set as undefined to fix ci/cd since we are not using this component anymore
