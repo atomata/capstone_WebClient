@@ -25,6 +25,31 @@ function getExperienceFromCloud(
     .catch((error) => null);
 }
 
+async function getBlobNamesInContainer(
+  blobName: string,
+  storage = defaultStorage
+): Promise<string[]> {
+  const returnedBlobUrls: string[] = [];
+
+  // get BlobService = notice `?` is pulled out of sasToken - if created in Azure portal
+  const blobService = new BlobServiceClient(`${storage}/?${sasToken}`);
+
+  // get Container - full public read access
+  const containerClient: ContainerClient =
+    blobService.getContainerClient(blobName);
+
+  // Ensures when new user can create experience
+  await containerClient.createIfNotExists({
+    access: "container",
+  });
+  // get list of blobs in container
+  for await (const exp of containerClient.listBlobsFlat()) {
+    const expName = exp.name.substring(0, exp.name.length - fileNamePostfix);
+    returnedBlobUrls.push(expName);
+  }
+  return returnedBlobUrls;
+}
+
 async function getBlobsInContainer(
   blobName: string,
   storage = defaultStorage
@@ -62,4 +87,4 @@ async function getBlobsInContainer(
 
   return returnedBlobs;
 }
-export { getBlobsInContainer, getApparatusFromCloud, getExperienceFromCloud };
+export { getBlobNamesInContainer, getBlobsInContainer, getApparatusFromCloud, getExperienceFromCloud };

@@ -1,6 +1,7 @@
 import {
   getApparatusFromCloud,
   getExperienceFromCloud,
+  getBlobNamesInContainer,
   getBlobsInContainer,
 } from "../util/cloudOperations/readFromCloud";
 import {saveExp} from "../util/cloudOperations/writeToCloud";
@@ -96,11 +97,19 @@ test("based on the user id and exp id, it should return the experience json", ()
   });
 });
 
-test("based on the url, it should return the list of blobs", () => {
+test("based on the url, it should return the list of blob names", () => {
   const id = "testuser1";
   const output = ["testexp1"];
-  return getBlobsInContainer(id).then((testoutput) => {
+  return getBlobNamesInContainer(id).then((testoutput) => {
     expect(testoutput).toEqual(output);
+  });
+});
+
+test("based on the url, it should return the list of blobs", () => {
+  const id = "testuser1";
+  const output = ["testexp1", "February 09, 2022, 09:41:49 PM"];
+  return getBlobsInContainer(id).then((testoutput) => {
+    expect(testoutput[0]).toEqual(output);
   });
 });
 
