@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import ActionSequenceItem from "./ActionSequenceItem";
 import { useContext } from "react";
+import ActionSequenceItem from "./ActionSequenceItem";
 import {
   GlobalContext,
   globalContextTypes,

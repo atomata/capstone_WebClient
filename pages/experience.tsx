@@ -65,7 +65,7 @@ function Experience({
     setDescription,
     handleOnDragEnd,
     addActionToList,
-  } = useActionList(experienceData);
+  } = useActionList(experienceData, setExperienceData);
 
   // All Global Context Hooks
   const globalContextValues: globalContextTypes = {
@@ -124,7 +124,7 @@ function Experience({
         <main>
           <Content>
             <GlobalContext.Provider value={globalContextValues}>
-              <WebglBox userId={userId} />
+              <WebglBox/>
             </GlobalContext.Provider>
           </Content>
         </main>

@@ -1,13 +1,28 @@
-import { useState } from "react";
+import { Dispatch, SetStateAction, useMemo, useState } from "react";
 import { ActionData, ExperienceData } from "../types";
 
 /*
  *custom hook for overlay, action list
  */
 
-const useActionList = (experienceData: ExperienceData) => {
-  const [actionList, setActionList] = useState(
-    experienceData !== undefined ? experienceData.experience.actionList : []
+const useActionList = (
+  experienceData: ExperienceData,
+  setExperienceData: Dispatch<SetStateAction<ExperienceData>>
+) => {
+  // const [actionList, setActionList] = useState(
+  //   experienceData !== undefined ? experienceData.experience.actionList : []
+  // );
+
+  const [actionList, setActionList] = useMemo(
+    () => [
+      experienceData?.experience?.actionList ?? [],
+      (list: ActionData[]) =>
+        setExperienceData((e) => ({
+          ...e,
+          experience: { ...e?.experience, actionList: list },
+        })),
+    ],
+    [experienceData, setExperienceData]
   );
 
   const [selectedAction, setSelectedAction] = useState(0);
