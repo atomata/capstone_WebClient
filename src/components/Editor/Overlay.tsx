@@ -5,6 +5,7 @@ import ActionSequence from "./ActionSequence/ActionSequence";
 import { SideBarContext } from "../../util/customHooks/SideBarContext";
 import ToolDocItem from "./SideBar/ToolDocItem";
 import TextEditor from "./TextEditor";
+import { useState } from "react";
 
 // the side bar box
 
@@ -63,15 +64,14 @@ const TextEditorGrid = styled.div`
  */
 function Overlay(): JSX.Element {
   const {
+    toggleTextBox,
     toggleToolDoc,
     toggleApparatusInfo,
     toggleSkyBoxInfo,
+    textBox,
     toolDoc,
     apparatusInfo,
-    skyboxInfo,
-    setToolDoc,
-    setApparatusInfo,
-    setSkyBoxInfo,
+    skyBoxInfo,
   } = useActionBar();
 
   return (
@@ -79,15 +79,13 @@ function Overlay(): JSX.Element {
       <UIComponentGrid>
         <SideBarContext.Provider
           value={{
+            toggleTextBox,
             toggleToolDoc,
             toggleApparatusInfo,
             toggleSkyBoxInfo,
             toolDoc,
             apparatusInfo,
-            skyboxInfo,
-            setToolDoc,
-            setApparatusInfo,
-            setSkyBoxInfo,
+            skyBoxInfo,
           }}
         >
           <SideBarGrid>
@@ -104,10 +102,14 @@ function Overlay(): JSX.Element {
         <ActionSequenceBarGrid>
           <ActionSequence />
         </ActionSequenceBarGrid>
-        <TextEditorGrid>
-          {" "}
-          <TextEditor />
-        </TextEditorGrid>
+        {textBox ? (
+          <TextEditorGrid>
+            {" "}
+            <TextEditor />
+          </TextEditorGrid>
+        ) : (
+          <div />
+        )}
       </UIComponentGrid>
     </UIComponentRoot>
   );
