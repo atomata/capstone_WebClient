@@ -45,8 +45,8 @@ const ImgLogo = styled.img.attrs({
 
 function SideBarItem(): JSX.Element {
   const { toggleApparatusInfo, toggleSkyBoxInfo } = useContext(SideBarContext);
-  const { experienceData, userId }: globalContextTypes = useContext(GlobalContext);
-  const { actionList } = useActionList(experienceData);
+  const { experienceData, userId , setExperienceData }: globalContextTypes = useContext(GlobalContext);
+  const { actionList } = useActionList(experienceData,setExperienceData);
 
   return (
     <>
