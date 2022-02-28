@@ -1,12 +1,9 @@
 import styled from "styled-components";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { useContext } from "react";
-import ActionSequenceItem from "./ActionSequenceItem";
-import {
-  GlobalContext,
-  globalContextTypes,
-} from "../../../util/customHooks/globalContext";
 import { makeStyles } from "@mui/styles";
+import ActionSequenceItem from "./ActionSequenceItem";
+import { ActionContext } from "../../../util/customHooks/actionContext";
 
 const ActionSequenceRoot = styled.div`
   display: relative;
@@ -59,7 +56,7 @@ function ActionSequence(): JSX.Element {
     removeActionFromList,
     setSelectedAction,
     selectedAction,
-  }: globalContextTypes = useContext(GlobalContext);
+  } = useContext(ActionContext);
 
   return (
     <ActionSequenceRoot>

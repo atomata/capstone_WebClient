@@ -13,6 +13,7 @@ import {
   GlobalContext,
   globalContextTypes,
 } from "../../../util/customHooks/globalContext";
+import { ActionContext } from "../../../util/customHooks/actionContext";
 
 const SideBarItemBox = styled.div`
   position: flex;
@@ -53,8 +54,9 @@ const ImgLogo = styled.img.attrs({
 function SideBarItem(): JSX.Element {
   const { toggleTextBox, toggleApparatusInfo, toggleSkyBoxInfo } =
     useContext(SideBarContext);
-  const { experienceData, userId, actionList }: globalContextTypes =
+  const { experienceData, userId }: globalContextTypes =
     useContext(GlobalContext);
+  const { actionList } = useContext(ActionContext);
 
   return (
     <>

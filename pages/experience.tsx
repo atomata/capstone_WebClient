@@ -41,27 +41,12 @@ function Experience({
   const [userId] = useState(getUserName());
   const [experienceData, setExperienceData] = useState<ExperienceData>();
 
-  const {
-    setSelectedAction,
-    selectedAction,
-    actionList,
-    removeActionFromList,
-    setDescription,
-    handleOnDragEnd,
-    addActionToList,
-  } = useActionList(experienceData);
+
 
   // All Global Context Hooks
   const globalContextValues: globalContextTypes = {
     experienceData,
     setExperienceData,
-    selectedAction,
-    actionList,
-    setSelectedAction,
-    removeActionFromList,
-    setDescription,
-    handleOnDragEnd,
-    addActionToList,
     userId,
   };
 

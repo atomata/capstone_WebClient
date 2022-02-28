@@ -4,7 +4,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { IconButton } from "@mui/material";
 import SaveIcon from "@mui/icons-material/Save";
 import ExpandIcon from "@mui/icons-material/Expand";
-import { GlobalContext, globalContextTypes } from "../../util/customHooks/globalContext";
+import { ActionContext } from "../../util/customHooks/actionContext";
 
 const Box = styled.tr`
   background: #3f3d56;
@@ -64,8 +64,8 @@ const TestDiv = styled.div`
 const TextEditor = (): JSX.Element => {
   const [isExpanded, setExpanded] = useState(false);
   const [currDesc, setCurrDesc] = useState("");
-  const { actionList, selectedAction, setDescription }: globalContextTypes =
-    useContext(GlobalContext);
+  const { actionList, selectedAction, setDescription } =
+    useContext(ActionContext);
   useEffect(() => {
     if (
       actionList[selectedAction] !== undefined &&

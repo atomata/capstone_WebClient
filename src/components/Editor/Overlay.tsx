@@ -1,11 +1,17 @@
 import styled from "styled-components";
+import { useContext } from "react";
 import { useActionBar } from "../../util/customHooks/ActionBarFunc";
 import SideBarItem from "./SideBar/SideBarItem";
 import ActionSequence from "./ActionSequence/ActionSequence";
 import { SideBarContext } from "../../util/customHooks/SideBarContext";
+import { ActionContext } from "../../util/customHooks/actionContext";
 import ToolDocItem from "./SideBar/ToolDocItem";
 import TextEditor from "./TextEditor";
-import { useState } from "react";
+import { useActionList } from "../../util/customHooks/overlayfunc";
+import {
+  GlobalContext,
+  globalContextTypes,
+} from "../../util/customHooks/globalContext";
 
 // the side bar box
 
@@ -74,42 +80,65 @@ function Overlay(): JSX.Element {
     skyBoxInfo,
   } = useActionBar();
 
+  const { experienceData }: globalContextTypes = useContext(GlobalContext);
+  const {
+    setSelectedAction,
+    selectedAction,
+    actionList,
+    removeActionFromList,
+    setDescription,
+    handleOnDragEnd,
+    addActionToList,
+  } = useActionList(experienceData);
+
   return (
     <UIComponentRoot>
       <UIComponentGrid>
-        <SideBarContext.Provider
+        <ActionContext.Provider
           value={{
-            toggleTextBox,
-            toggleToolDoc,
-            toggleApparatusInfo,
-            toggleSkyBoxInfo,
-            toolDoc,
-            apparatusInfo,
-            skyBoxInfo,
+            setSelectedAction,
+            selectedAction,
+            actionList,
+            removeActionFromList,
+            setDescription,
+            handleOnDragEnd,
+            addActionToList,
           }}
         >
-          <SideBarGrid>
-            <SideBarItem />
-          </SideBarGrid>
-          {toolDoc ? (
-            <ToolDocGrid>
-              <ToolDocItem />
-            </ToolDocGrid>
+          <SideBarContext.Provider
+            value={{
+              toggleTextBox,
+              toggleToolDoc,
+              toggleApparatusInfo,
+              toggleSkyBoxInfo,
+              toolDoc,
+              apparatusInfo,
+              skyBoxInfo,
+            }}
+          >
+            <SideBarGrid>
+              <SideBarItem />
+            </SideBarGrid>
+            {toolDoc ? (
+              <ToolDocGrid>
+                <ToolDocItem />
+              </ToolDocGrid>
+            ) : (
+              <div />
+            )}
+          </SideBarContext.Provider>
+          <ActionSequenceBarGrid>
+            <ActionSequence />
+          </ActionSequenceBarGrid>
+          {textBox ? (
+            <TextEditorGrid>
+              {" "}
+              <TextEditor />
+            </TextEditorGrid>
           ) : (
             <div />
           )}
-        </SideBarContext.Provider>
-        <ActionSequenceBarGrid>
-          <ActionSequence />
-        </ActionSequenceBarGrid>
-        {textBox ? (
-          <TextEditorGrid>
-            {" "}
-            <TextEditor />
-          </TextEditorGrid>
-        ) : (
-          <div />
-        )}
+        </ActionContext.Provider>
       </UIComponentGrid>
     </UIComponentRoot>
   );
