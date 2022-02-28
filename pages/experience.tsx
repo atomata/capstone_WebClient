@@ -42,6 +42,7 @@ function Experience({
   const [experienceData, setExperienceData] = useState<ExperienceData>();
 
   const {
+    setSelectedAction,
     selectedAction,
     actionList,
     removeActionFromList,
@@ -56,6 +57,7 @@ function Experience({
     setExperienceData,
     selectedAction,
     actionList,
+    setSelectedAction,
     removeActionFromList,
     setDescription,
     handleOnDragEnd,

@@ -34,15 +34,17 @@ type ActionSequenceItemProps = {
   id: string;
   name: string;
   removeAction: () => void;
+  selectAction: () => void;
 };
 
 function ActionSequenceItem({
   id,
   name,
   removeAction,
+  selectAction,
 }: ActionSequenceItemProps): JSX.Element {
   return (
-    <ActionSequenceItemRoot>
+    <ActionSequenceItemRoot onClick={selectAction}>
       <ActionSequenceItemApparatus>
         {id}:{name}
       </ActionSequenceItemApparatus>

@@ -9,6 +9,7 @@ export type globalContextTypes = {
     setExperienceData: React.Dispatch<React.SetStateAction<ExperienceData>>;
     selectedAction: number;
     actionList: ActionData[];
+    setSelectedAction: (index: number) => void
     removeActionFromList: (index: number) => void;
     setDescription: (description: string) => void;
     handleOnDragEnd: (result: {
