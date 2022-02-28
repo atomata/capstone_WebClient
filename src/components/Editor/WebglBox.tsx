@@ -12,11 +12,7 @@ const WebglRoot = styled.div`
   height: 100%;
 `;
 
-type WebglProps = {
-  userId: string;
-};
-
-function WebglBox({ userId }: WebglProps): JSX.Element {
+function WebglBox(): JSX.Element {
   const { experienceData }: globalContextTypes = useContext(GlobalContext);
 
   const [loading, setLoading] = useState(true);
