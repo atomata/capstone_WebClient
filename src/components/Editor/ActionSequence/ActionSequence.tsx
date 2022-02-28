@@ -1,11 +1,8 @@
 import styled from "styled-components";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import ActionSequenceItem from "./ActionSequenceItem";
 import { useContext } from "react";
-import {
-  GlobalContext,
-  globalContextTypes,
-} from "../../../../pages/experience";
+import ActionSequenceItem from "./ActionSequenceItem";
+import {GlobalContext, globalContextTypes} from "../../../util/globalContext";
 
 const ActionSequenceRoot = styled.div`
   display: relative;

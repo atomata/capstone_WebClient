@@ -9,7 +9,7 @@ import { SideBarContext } from "../../../util/customHooks/SideBarContext";
 import { saveExp } from "../../../util/cloudOperations/writeToCloud";
 import { useActionList } from "../../../util/customHooks/overlayfunc";
 import { urlFor } from "../../../util/utils";
-import { GlobalContext, globalContextTypes } from "../../../../pages/experience";
+import { GlobalContext, globalContextTypes } from "../../../util/globalContext";
 
 const SideBarItemBox = styled.div`
   position: flex;
@@ -45,7 +45,8 @@ const ImgLogo = styled.img.attrs({
 
 function SideBarItem(): JSX.Element {
   const { toggleApparatusInfo, toggleSkyBoxInfo } = useContext(SideBarContext);
-  const { experienceData, userId }: globalContextTypes = useContext(GlobalContext);
+  const { experienceData, userId }: globalContextTypes =
+    useContext(GlobalContext);
   const { actionList } = useActionList(experienceData);
 
   return (

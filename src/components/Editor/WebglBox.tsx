@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import Loading from "../Loading";
 import { unityContext, loadApparatus } from "../../util/unityContextActions";
 import Overlay from "./Overlay";
-import { GlobalContext, globalContextTypes } from "../../../pages/experience";
+import { GlobalContext, globalContextTypes } from "../../util/globalContext";
 
 const WebglRoot = styled.div`
   display: relative;
@@ -17,9 +17,7 @@ type WebglProps = {
 };
 
 function WebglBox({ userId }: WebglProps): JSX.Element {
-
-
-  const {experienceData} :globalContextTypes= useContext(GlobalContext)
+  const { experienceData }: globalContextTypes = useContext(GlobalContext);
 
   const [loading, setLoading] = useState(true);
   useEffect(() => {

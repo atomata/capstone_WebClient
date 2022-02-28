@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { SerializedApparatus } from "../../../util/types";
 import ApparatusListBox from "./ApparatusListBox";
 import ActionBox from "./ActionBox";
-import { GlobalContext, globalContextTypes } from "../../../../pages/experience";
+import { GlobalContext, globalContextTypes } from "../../../util/globalContext";
 
 function ApparatusInfo(): JSX.Element {
   const { experienceData, addActionToList }: globalContextTypes =

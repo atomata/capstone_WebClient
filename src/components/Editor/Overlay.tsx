@@ -62,7 +62,6 @@ const TextEditorGrid = styled.div`
  * @returns
  */
 function Overlay(): JSX.Element {
-
   const {
     toggleToolDoc,
     toggleApparatusInfo,
@@ -92,7 +91,7 @@ function Overlay(): JSX.Element {
           }}
         >
           <SideBarGrid>
-            <SideBarItem/>
+            <SideBarItem />
           </SideBarGrid>
           {toolDoc ? (
             <ToolDocGrid>

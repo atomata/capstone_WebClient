@@ -1,6 +1,6 @@
 /* eslint-disable prefer-arrow-callback */
 import styled from "styled-components";
-import React, { createContext, useState } from "react";
+import React, { useState } from "react";
 import { Alert, AlertTitle } from "@mui/material";
 import WebglBox from "../src/components/Editor/WebglBox";
 import {
@@ -12,9 +12,10 @@ import {
   getApparatusFromCloud,
   getExperienceFromCloud,
 } from "../src/util/cloudOperations/readFromCloud";
-import { ActionData, ExperienceData } from "../src/util/types";
+import { ExperienceData } from "../src/util/types";
 import Loading from "../src/components/Loading";
 import { useActionList } from "../src/util/customHooks/overlayfunc";
+import { globalContextTypes, GlobalContext } from "../src/util/globalContext";
 
 const Content = styled.div`
   width: 100%;
@@ -28,24 +29,6 @@ type ExperienceProps = {
   apparatusId: string;
   experienceId: string;
   dataType: string;
-};
-
-export const GlobalContext = createContext(null);
-
-// type for Context Values
-export type globalContextTypes = {
-  experienceData: ExperienceData;
-  setExperienceData: React.Dispatch<React.SetStateAction<ExperienceData>>;
-  selectedAction: number;
-  actionList: ActionData[];
-  removeActionFromList: (index: number) => void;
-  setDescription: (description: string) => void;
-  handleOnDragEnd: (result: {
-    destination: { index: number };
-    source: { index: number };
-  }) => void;
-  addActionToList: (actionData: ActionData) => void;
-  userId: string;
 };
 
 function Experience({
