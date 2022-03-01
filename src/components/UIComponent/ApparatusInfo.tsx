@@ -1,17 +1,13 @@
-import { useState } from "react";
-import { ActionData, ExperienceData, SerializedApparatus } from "../../util/types";
+import { useContext, useState } from "react";
+import { SerializedApparatus } from "../../util/types";
 import ApparatusListBox from "../editorBoxes/ApparatusListBox";
 import ActionBox from "../editorBoxes/ActionBox";
+import { GlobalContext, globalContextTypes } from "../../../pages/experience";
 
-type OverlayProps = {
-  experienceData: ExperienceData;
-  addActionToList: (actionData: ActionData) => void;
-  removeActionFromList : (index: number) => void;
+function ApparatusInfo(): JSX.Element {
+  const { experienceData }: globalContextTypes =
+    useContext(GlobalContext);
 
-};
-
-
-function ApparatusInfo({experienceData,addActionToList, removeActionFromList}: OverlayProps): JSX.Element {
   const [assetBundle, setAssetBundle] = useState({
     children: [],
     path: "",
@@ -25,9 +21,6 @@ function ApparatusInfo({experienceData,addActionToList, removeActionFromList}: O
       />
       <ActionBox
         assetBundle={assetBundle}
-        addAction={(actionData) =>
-          addActionToList(actionData)
-        }
       />
     </>
   );

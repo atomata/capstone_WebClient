@@ -1,6 +1,6 @@
 /* eslint-disable prefer-arrow-callback */
 import styled from "styled-components";
-import React, { useState } from "react";
+import React, { createContext, useState } from "react";
 import { Alert, AlertTitle } from "@mui/material";
 import WebglBox from "../src/components/WebglBox";
 import {
@@ -12,8 +12,9 @@ import {
   getApparatusFromCloud,
   getExperienceFromCloud,
 } from "../src/util/cloudOperations/readFromCloud";
-import { ExperienceData } from "../src/util/types";
+import { ActionData, ExperienceData } from "../src/util/types";
 import Loading from "../src/components/Loading";
+import { useActionList } from "../src/util/customHooks/overlayfunc";
 
 const Content = styled.div`
   width: 100%;
@@ -29,6 +30,24 @@ type ExperienceProps = {
   dataType: string;
 };
 
+export const GlobalContext = createContext(null);
+
+// type for Context Values
+export type globalContextTypes = {
+  experienceData: ExperienceData;
+  setExperienceData: React.Dispatch<React.SetStateAction<ExperienceData>>;
+  selectedAction: number;
+  actionList: ActionData[];
+  removeActionFromList: (index: number) => void;
+  setDescription: (description: string) => void;
+  handleOnDragEnd: (result: {
+    destination: { index: number };
+    source: { index: number };
+  }) => void;
+  addActionToList: (actionData: ActionData) => void;
+  userId: string;
+};
+
 function Experience({
   apparatusId,
   experienceId,
@@ -38,6 +57,28 @@ function Experience({
   const [error, setError] = useState("");
   const [userId] = useState(getUserName());
   const [experienceData, setExperienceData] = useState<ExperienceData>();
+
+  const {
+    selectedAction,
+    actionList,
+    removeActionFromList,
+    setDescription,
+    handleOnDragEnd,
+    addActionToList,
+  } = useActionList(experienceData, setExperienceData);
+
+  // All Global Context Hooks
+  const globalContextValues: globalContextTypes = {
+    experienceData,
+    setExperienceData,
+    selectedAction,
+    actionList,
+    removeActionFromList,
+    setDescription,
+    handleOnDragEnd,
+    addActionToList,
+    userId,
+  };
 
   const experienceDataTemp: ExperienceData = {
     apparatusMetadata: { Id: "", Paths: [], Data: [] },
@@ -82,7 +123,9 @@ function Experience({
       return (
         <main>
           <Content>
-            <WebglBox userId={userId} experienceData={experienceData} />
+            <GlobalContext.Provider value={globalContextValues}>
+              <WebglBox/>
+            </GlobalContext.Provider>
           </Content>
         </main>
       );

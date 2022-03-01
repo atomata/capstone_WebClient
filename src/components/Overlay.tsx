@@ -93,12 +93,10 @@ function Overlay({ userId, experienceData }: OverlayProps): JSX.Element {
   const {
     selectedAction,
     setSelectedAction,
-    setDescription,
     actionList,
-    addActionToList,
     removeActionFromList,
     handleOnDragEnd,
-  } = useActionList(experienceData);
+  } = useActionList(experienceData,undefined);  // set as undefined to fix ci/cd since we are not using this component anymore
 
   return experienceData !== undefined ? (
     <OverlayRoot>
@@ -134,15 +132,11 @@ function Overlay({ userId, experienceData }: OverlayProps): JSX.Element {
             <OverlayGridItem3>
               <ActionBox
                 assetBundle={assetBundle}
-                addAction={(actionData) => addActionToList(actionData)}
               />
             </OverlayGridItem3>
 
             <OverlayGridItem4>
               <TextEditor
-                actionList={actionList}
-                setDescription={(desc) => setDescription(desc)}
-                selectedAction={selectedAction}
               />
             </OverlayGridItem4>
           </OverlayGrid>

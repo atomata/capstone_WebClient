@@ -1,7 +1,11 @@
 import styled from "styled-components";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import { ActionData } from "../../../util/types";
+import { useContext } from "react";
 import ActionSequenceItem from "./ActionSequenceItem";
+import {
+  GlobalContext,
+  globalContextTypes,
+} from "../../../../pages/experience";
 
 const ActionSequenceRoot = styled.div`
   display: relative;
@@ -32,15 +36,6 @@ const ActionSequenceList = styled.div`
   }
 `;
 
-type ActionSequenceProps = {
-  actionList: ActionData[];
-  removeAction: (index: number) => void;
-  handleOnDragEnd: (result: {
-    destination: { index: number };
-    source: { index: number };
-  }) => void;
-};
-
 const DragContainer = styled.div`
   border: 1px solid black;
   max-height: 85%;
@@ -48,11 +43,14 @@ const DragContainer = styled.div`
   background-color: #3f3d56;
 `;
 
-function ActionSequence({
-  actionList,
-  handleOnDragEnd,
-  removeAction,
-}: ActionSequenceProps): JSX.Element {
+function ActionSequence(): JSX.Element {
+
+  const {
+    actionList,
+    handleOnDragEnd,
+    removeActionFromList,
+  }: globalContextTypes = useContext(GlobalContext);
+
   return (
     <ActionSequenceRoot>
       <ActionSequenceHeader />
@@ -83,7 +81,7 @@ function ActionSequence({
                               ? data.input.name
                               : data.input.command
                           }
-                          removeAction={() => removeAction(index)}
+                          removeAction={() => removeActionFromList(index)}
                         />
                       </DragContainer>
                     )}

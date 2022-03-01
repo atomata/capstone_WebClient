@@ -4,8 +4,6 @@ import SideBarItem from "./SideBarItem";
 import ActionSequence from "./Action Sequence 2.0/ActionSequence";
 import { SideBarContext } from "../../util/customHooks/SideBarContext";
 import ToolDocItem from "./ToolDocItem";
-import { ExperienceData } from "../../util/types";
-import { useActionList } from "../../util/customHooks/overlayfunc";
 import TextEditor from "../TextEditor";
 
 // the side bar box
@@ -59,16 +57,12 @@ const TextEditorGrid = styled.div`
   z-index: 2;
 `;
 
-type OverlayProps = {
-  userId: string;
-  experienceData: ExperienceData;
-};
-
 /**
  * The side bar define the area and the outline of what will be included.
  * @returns
  */
-function Overlay2({ userId, experienceData }: OverlayProps): JSX.Element {
+function Overlay2(): JSX.Element {
+
   const {
     toggleToolDoc,
     toggleApparatusInfo,
@@ -80,17 +74,6 @@ function Overlay2({ userId, experienceData }: OverlayProps): JSX.Element {
     setApparatusInfo,
     setSkyBoxInfo,
   } = useActionBar();
-
-  // Things Justin needs to use in action sequence, fix the variable names so I can use them please
-  const {
-    selectedAction,
-    actionList,
-    removeActionFromList,
-    setDescription,
-    handleOnDragEnd,
-    addActionToList,
-  } = useActionList(experienceData);
-
 
   return (
     <UIComponentRoot>
@@ -108,40 +91,27 @@ function Overlay2({ userId, experienceData }: OverlayProps): JSX.Element {
             setSkyBoxInfo,
           }}
         >
-
-            <SideBarGrid>
-              <SideBarItem userId={userId} experienceData={experienceData} />
-            </SideBarGrid>
-            {toolDoc ? (
-              <ToolDocGrid>
-                <ToolDocItem experienceData={experienceData} addActionToList={(actionData) => addActionToList(actionData)}  removeAction={(index: number) => removeActionFromList(index)} />
-              </ToolDocGrid>
-            ) : (
-              <div />
-            )}
-
+          <SideBarGrid>
+            <SideBarItem/>
+          </SideBarGrid>
+          {toolDoc ? (
+            <ToolDocGrid>
+              <ToolDocItem />
+            </ToolDocGrid>
+          ) : (
+            <div />
+          )}
         </SideBarContext.Provider>
         <ActionSequenceBarGrid>
-          <ActionSequence
-            actionList={actionList}
-            removeAction={(index: number) => removeActionFromList(index)}
-            handleOnDragEnd={handleOnDragEnd}
-          />
+          <ActionSequence />
         </ActionSequenceBarGrid>
         <TextEditorGrid>
           {" "}
-          <TextEditor
-            actionList={actionList}
-            setDescription={(desc) => setDescription(desc)}
-            selectedAction={selectedAction}
-          />
+          <TextEditor />
         </TextEditorGrid>
-
-        {/* <TextEditorGrid /> */}
       </UIComponentGrid>
     </UIComponentRoot>
   );
 }
 
 export default Overlay2;
-
