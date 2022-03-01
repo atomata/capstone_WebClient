@@ -27,13 +27,11 @@ describe("test creating experience", () => {
   });
 });
 
-test("workbench renders without crashing", () => {
+test("workbench create experience renders without crashing", () => {
   render(<CreateExperience />);
 });
 
-test("workbench renders without crashing", () => {
+test("workbench load experience renders without crashing", () => {
   render(<LoadExperience />);
 });
-
-
 

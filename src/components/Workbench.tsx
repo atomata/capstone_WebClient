@@ -174,7 +174,7 @@ const CreateExperience = () => {
             query: { experienceId: expName },
           }}
         >
-          <CreateButton onClick={(e) => handleExperienceCreate(e, expName)}> CREATE NEW EXPERIENCE </CreateButton>
+          <CreateButton data-testid="create-button" onClick={(e) => handleExperienceCreate(e, expName)}> CREATE NEW EXPERIENCE </CreateButton>
         </Link>
       </Box>
       <ErrorMsg>{expErr}</ErrorMsg>
@@ -209,7 +209,7 @@ const LoadExperience = () => {
   }, []);
 
   return (
-    <InnerBox>
+    <InnerBox data-testid="inner-box">
       <Dialog
         open={delOpen}
         TransitionComponent={slideTransition}
@@ -242,7 +242,7 @@ const LoadExperience = () => {
           </ExperienceHeader>
         </thead>
         <tbody>
-          {expList.map((exp) => (
+          {expList.map((exp, index) => (
             // eslint-disable-next-line react/jsx-key
             <ExperienceRow>
               <td>{exp[0]}</td>
@@ -265,7 +265,7 @@ const LoadExperience = () => {
                 <DeleteIcon
                   style={{ fontSize: "36px" }}
                   onClick={() => {
-                    handleDeleteDialogOpen(index, expName);       
+                    handleDeleteDialogOpen(index, exp[0]);       
                   }}
                 />
                 <MoreHorizIcon style={{ fontSize: "36px" }} />
