@@ -82,7 +82,7 @@ function Overlay(): JSX.Element {
 
   const { experienceData }: globalContextTypes = useContext(GlobalContext);
   const {
-    setSelectedAction,
+    selectAction,
     selectedAction,
     actionList,
     removeActionFromList,
@@ -96,7 +96,7 @@ function Overlay(): JSX.Element {
       <UIComponentGrid>
         <ActionContext.Provider
           value={{
-            setSelectedAction,
+            selectAction,
             selectedAction,
             actionList,
             removeActionFromList,
@@ -111,6 +111,7 @@ function Overlay(): JSX.Element {
               toggleToolDoc,
               toggleApparatusInfo,
               toggleSkyBoxInfo,
+              textBox,
               toolDoc,
               apparatusInfo,
               skyBoxInfo,

@@ -67,11 +67,8 @@ const TextEditor = (): JSX.Element => {
   const { actionList, selectedAction, setDescription } =
     useContext(ActionContext);
   useEffect(() => {
-    if (
-      actionList[selectedAction] !== undefined &&
-      actionList[selectedAction].desc !== undefined
-    ) {
-      setCurrDesc(actionList[selectedAction].desc);
+    if (selectedAction !== undefined && selectedAction.desc !== undefined) {
+      setCurrDesc(selectedAction.desc);
     } else {
       setCurrDesc("");
     }
@@ -81,7 +78,7 @@ const TextEditor = (): JSX.Element => {
       <table cellSpacing="0" cellPadding="0">
         <thead>
           <Header>
-            <SlideName>APPARATUS {selectedAction}</SlideName>
+            <SlideName>Action {selectedAction !== undefined? selectedAction.name : "Invalid"}</SlideName>
             <TestDiv>
               <IconButton
                 style={{ color: "white" }}

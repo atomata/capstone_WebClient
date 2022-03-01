@@ -1,5 +1,5 @@
-import { useContext } from "react";
-import { Link } from "@mui/material";
+import { useContext, useEffect } from "react";
+import { IconButton, Link } from "@mui/material";
 import styled from "styled-components";
 import StyleIcon from "@mui/icons-material/Style";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
@@ -52,11 +52,17 @@ const ImgLogo = styled.img.attrs({
 `;
 
 function SideBarItem(): JSX.Element {
-  const { toggleTextBox, toggleApparatusInfo, toggleSkyBoxInfo } =
+  const { textBox, toggleTextBox, toggleApparatusInfo, toggleSkyBoxInfo } =
     useContext(SideBarContext);
   const { experienceData, userId }: globalContextTypes =
     useContext(GlobalContext);
-  const { actionList } = useContext(ActionContext);
+  const { selectedAction, actionList } = useContext(ActionContext);
+
+  useEffect(() => {
+    if (selectedAction === undefined && textBox) {
+      toggleTextBox();
+    }
+  }, [textBox, selectedAction, toggleTextBox]);
 
   return (
     <>
@@ -83,12 +89,20 @@ function SideBarItem(): JSX.Element {
           />
         </SideBarItemWrapper>
         <SideBarItemWrapper>
-          <TextFormatIcon
-            type="button"
-            style={{ fontSize: "50px" }}
-            sx={{ "&:hover": { color: "#F75D77" } }}
-            onClick={toggleTextBox}
-          />
+          <IconButton
+            sx={{
+              "&:disabled": { color: "#555454" },
+              "&:enabled": { color: "white" },
+            }}
+            disabled={actionList[0] === undefined}
+          >
+            <TextFormatIcon
+              type="button"
+              style={{ fontSize: "50px" }}
+              sx={{ "&:hover": { color: "#F75D77" } }}
+              onClick={toggleTextBox}
+            />
+          </IconButton>
         </SideBarItemWrapper>
         <SideBarItemWrapper>
           <SideBarItemBottomBox>

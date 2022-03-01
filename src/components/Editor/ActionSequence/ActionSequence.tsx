@@ -54,7 +54,7 @@ function ActionSequence(): JSX.Element {
     actionList,
     handleOnDragEnd,
     removeActionFromList,
-    setSelectedAction,
+    selectAction,
     selectedAction,
   } = useContext(ActionContext);
 
@@ -78,7 +78,7 @@ function ActionSequence(): JSX.Element {
                     {(dragProvided) => (
                       <DragContainer
                         className={
-                          selectedAction === index ? classes.SelectedAction : ""
+                          selectedAction === data ? classes.SelectedAction : ""
                         }
                         {...dragProvided.draggableProps}
                         {...dragProvided.dragHandleProps}
@@ -91,7 +91,7 @@ function ActionSequence(): JSX.Element {
                               ? data.input.name
                               : data.input.command
                           }
-                          selectAction={() => setSelectedAction(index)}
+                          selectAction={() => selectAction(index)}
                           removeAction={() => removeActionFromList(index)}
                         />
                       </DragContainer>

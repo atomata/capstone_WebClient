@@ -7,7 +7,7 @@ export const ActionContext = createContext(null);
 export type actionContextTypes = {
   selectedAction: number;
   actionList: ActionData[];
-  setSelectedAction: (index: number) => void;
+  selectAction: (index: number) => void;
   removeActionFromList: (index: number) => void;
   setDescription: (description: string) => void;
   handleOnDragEnd: (result: {
