@@ -44,12 +44,24 @@ function ActionSequenceItem({
   selectAction,
 }: ActionSequenceItemProps): JSX.Element {
   return (
-    <ActionSequenceItemRoot onClick={selectAction}>
+    <ActionSequenceItemRoot
+      onClick={() => {
+        selectAction();
+        console.log("clicked");
+      }}
+    >
       <ActionSequenceItemApparatus>
         {id}:{name}
       </ActionSequenceItemApparatus>
       <ActionSequenceItemAction>
-        <Button variant="contained" color="error" onClick={removeAction}>
+        <Button
+          variant="contained"
+          color="error"
+          onClick={(e) => {
+            e.stopPropagation();
+            removeAction();
+          }}
+        >
           Delete
         </Button>
       </ActionSequenceItemAction>
