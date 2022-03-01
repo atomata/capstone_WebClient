@@ -94,7 +94,7 @@ function SideBarItem(): JSX.Element {
               "&:disabled": { color: "#555454" },
               "&:enabled": { color: "white" },
             }}
-            disabled={actionList[0] === undefined}
+            disabled={selectedAction === undefined}
           >
             <TextFormatIcon
               type="button"
