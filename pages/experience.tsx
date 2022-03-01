@@ -15,7 +15,10 @@ import {
 import { ExperienceData } from "../src/util/types";
 import Loading from "../src/components/Loading";
 import { useActionList } from "../src/util/customHooks/overlayfunc";
-import { globalContextTypes, GlobalContext } from "../src/util/customHooks/globalContext";
+import {
+  globalContextTypes,
+  GlobalContext,
+} from "../src/util/customHooks/globalContext";
 
 const Content = styled.div`
   width: 100%;
@@ -41,8 +44,6 @@ function Experience({
   const [userId] = useState(getUserName());
   const [experienceData, setExperienceData] = useState<ExperienceData>();
 
-
-
   // All Global Context Hooks
   const globalContextValues: globalContextTypes = {
     experienceData,
@@ -67,9 +68,12 @@ function Experience({
         })
         .catch(() => setError("apparatus not found"));
     } else if (dataType === "experience") {
-      setupExperienceData(userId, experienceId, experienceDataTemp).catch(() =>
-        setError("experience file not found")
-      );
+      setupExperienceData(userId, experienceId, experienceDataTemp)
+        .then(() => {
+          setExperienceData(experienceDataTemp);
+          setLoading(false);
+        })
+        .catch(() => setError("experience file not found"));
     }
   }, [apparatusId, experienceId, dataType, userId]);
 

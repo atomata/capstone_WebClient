@@ -31,7 +31,7 @@ function getExperienceFromCloud(
 function setupApparatusData(
   id: string,
   experienceDataTemp: ExperienceData
-): Promise<any> {
+): Promise<void> {
   return getApparatusFromCloud(id).then((apparatusJson) => {
     // eslint-disable-next-line no-param-reassign
     experienceDataTemp.apparatusMetadata = apparatusJson;
@@ -44,7 +44,7 @@ function setupExperienceData(
   userId: string,
   experienceId: string,
   experienceDataTemp: ExperienceData
-): Promise<any> {
+): Promise<void> {
   return getExperienceFromCloud(userId, experienceId).then((experienceJson) => {
     // eslint-disable-next-line no-param-reassign
     experienceDataTemp.experience = experienceJson;
