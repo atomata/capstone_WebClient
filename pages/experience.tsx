@@ -87,7 +87,7 @@ function Experience({
         <main>
           <Content>
             <GlobalContext.Provider value={globalContextValues}>
-              <WebglBox />
+              <WebglBox/>
             </GlobalContext.Provider>
           </Content>
         </main>
