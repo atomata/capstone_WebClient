@@ -1,5 +1,4 @@
 import { BlobServiceClient, ContainerClient } from "@azure/storage-blob";
-import { format } from "util";
 import {
   apparatusContainer,
   fileNamePostfix,
