@@ -51,6 +51,7 @@ const ExperienceHeader = styled.tr`
   color: white;
   font-family: Trebuchet MS;
   text-align: left;
+  height: 3em;
   th {
     background: #3F3D56;
     padding-bottom: 0.4em;
@@ -87,7 +88,7 @@ const ExperienceDesc = styled.th`
 `;
 
 const ExperienceMisc = styled.th`
-  padding-right: 1.3em;
+  padding-right: 1.8em;
   text-align: right;
   cursor: pointer;
 `;
@@ -238,7 +239,10 @@ const LoadExperience = () => {
           <ExperienceHeader>
             <ExperienceName>EXPERIENCE NAME</ExperienceName>
             <ExperienceDesc>LAST MODIFIED</ExperienceDesc>
-            <ExperienceMisc><MoreHorizIcon style={{fontSize: '36px'}}/></ExperienceMisc>
+            <ExperienceMisc>OPTIONS
+              {//<MoreHorizIcon style={{fontSize: '36px'}}/>
+              }
+            </ExperienceMisc>
           </ExperienceHeader>
         </thead>
         <tbody>
@@ -248,7 +252,8 @@ const LoadExperience = () => {
               <td>{exp[0]}</td>
               <td>{exp[1]}</td>
               <ExperienceButtons>
-                <PlayArrowOutlinedIcon style={{ fontSize: "40px" }} />
+                {//<PlayArrowOutlinedIcon style={{ fontSize: "40px" }} />
+                }
                 <Link
                   key={exp[0]}
                   href={{
@@ -268,7 +273,8 @@ const LoadExperience = () => {
                     handleDeleteDialogOpen(index, exp[0]);       
                   }}
                 />
-                <MoreHorizIcon style={{ fontSize: "36px" }} />
+                {//<MoreHorizIcon style={{ fontSize: "36px" }} />
+                }
               </ExperienceButtons>
             </ExperienceRow>
           ))}
