@@ -27,13 +27,13 @@ const UIComponentGrid = styled.div`
   width: inherit;
   height: inherit;
   z-index: 2;
-  grid-template-columns: repeat(50, 1fr);
+  grid-template-columns: repeat(60, 1fr);
   grid-template-rows: repeat(50, 1fr);
 `;
 
 // css and placement for the action bar (the action bar is the bar on the side which have the button)
 const SideBarGrid = styled.div`
-  grid-column: 1 / span 2;
+  grid-column: 1 / span 3;
   grid-row: 1 / span50;
   background-color: #3f3d56;
   z-index: 4;
@@ -43,7 +43,7 @@ const SideBarGrid = styled.div`
 
 // css and placement for the side bar (the side bar is the area where we can toggle on or off)
 const ToolDocGrid = styled.div`
-  grid-column: 3 / span 7;
+  grid-column: 4 / span 9;
   grid-row: 1 / span 39;
   background-color: #3f3d56;
   z-index: 2;
@@ -53,7 +53,7 @@ const ToolDocGrid = styled.div`
 
 // css and placement for the action sequence
 const ActionSequenceBarGrid = styled.div`
-  grid-column: 3 / span 48;
+  grid-column: 4 / span 58;
   grid-row: 40 / span 11;
   background-color: #a8ad68;
   z-index: 2;
@@ -61,7 +61,7 @@ const ActionSequenceBarGrid = styled.div`
 
 // css and placement for the text area
 const TextEditorGrid = styled.div`
-  grid-column: 18 / span 20;
+  grid-column: 25 / span 20;
   grid-row: 30 / span 10;
   z-index: 2;
 `;

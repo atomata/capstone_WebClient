@@ -21,6 +21,7 @@ const SideBarItemBox = styled.div`
   flex-direction: column;
   height: inherit;
   width: inherit;
+  color: #a6a5eb;
   background-color: #3f3d56;
 `;
 
@@ -76,7 +77,7 @@ function SideBarItem(): JSX.Element {
           <FormatListBulletedIcon
             type="button"
             style={{ fontSize: "40px" }}
-            sx={{ "&:hover": { color: "#F75D77" } }}
+            sx={{ "&:hover": { color: "white" } }}
             onClick={toggleApparatusInfo}
           />
         </SideBarItemWrapper>
@@ -84,7 +85,7 @@ function SideBarItem(): JSX.Element {
           <StyleIcon
             type="button"
             style={{ fontSize: "40px" }}
-            sx={{ "&:hover": { color: "#F75D77" } }}
+            sx={{ "&:hover": { color: "white" } }}
             onClick={toggleSkyBoxInfo}
           />
         </SideBarItemWrapper>
@@ -92,14 +93,15 @@ function SideBarItem(): JSX.Element {
           <IconButton
             sx={{
               "&:disabled": { color: "#555454" },
-              "&:enabled": { color: "white" },
+              "&:enabled": { color: "#a6a5eb" },
+              "&:hover": { color: "white" },
             }}
             disabled={selectedAction === undefined}
           >
             <TextFormatIcon
               type="button"
               style={{ fontSize: "50px" }}
-              sx={{ "&:hover": { color: "#F75D77" } }}
+              sx={{ "&:hover": { color: "white" } }}
               onClick={toggleTextBox}
             />
           </IconButton>
@@ -109,7 +111,7 @@ function SideBarItem(): JSX.Element {
             <SaveAltIcon
               type="button"
               style={{ fontSize: "40px" }}
-              sx={{ "&:hover": { color: "#F75D77" } }}
+              sx={{ "&:hover": { color: "white" }, mb: 3 }}
               onClick={() => {
                 experienceData.experience.actionList = [...actionList];
                 saveExp(userId, experienceData.experience);
@@ -120,7 +122,7 @@ function SideBarItem(): JSX.Element {
               <KeyboardReturnIcon
                 type="button"
                 style={{ fontSize: "40px" }}
-                sx={{ "&:hover": { color: "#F75D77" } }}
+                sx={{ "&:hover": { color: "white" }, color: "#a6a5eb" }}
                 onClick={() => {
                   experienceData.experience.actionList = [...actionList];
                   saveExp(userId, experienceData.experience);
