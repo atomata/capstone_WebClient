@@ -16,6 +16,8 @@ import {
 } from "../../../util/customHooks/globalContext";
 import { getAssetBundleActions } from "../../../util/jsonParsing";
 import styles from "../../ActionTreeItem.module.css";
+import { requestTrigger } from "../../../util/unityContextActions";
+import { ActionContext } from "../../../util/customHooks/actionContext";
 
 const ApparatusInfoHeader = styled.div.attrs({
   children: "Apparatus & Actions",
@@ -32,6 +34,8 @@ const ApparatusInfoHeader = styled.div.attrs({
 
 type StyledTreeItemProps = TreeItemProps & {
   labelIcon?: React.ElementType<SvgIconProps>;
+  onClick1?: () => void;
+  onClick2?: () => void;
   labelText: string;
 };
 
@@ -41,13 +45,15 @@ const useAssetItemStyles = makeStyles(() => ({
     backgroundColor: "#525067",
     color: "#a6a5eb",
     borderRadius: "8px",
-    "&.Mui-root, &:hover,&.Mui-selected, &.Mui-selected.Mui-focused": {
-      backgroundColor: "#525067",
-    },
-    "&:hover, &.Mui-expanded": {
+    "&.MuiTreeItem-root, &:hover,&.Mui-selected,&.Mui-selected:hover,&.Mui-selected.Mui-focused":
+      {
+        backgroundColor: "#525067",
+      },
+    "&:hover,&.Mui-expanded": {
       color: "white",
     },
   },
+
   labelText: {
     fontWeight: "bold",
     textTransform: "capitalize",
@@ -73,7 +79,7 @@ function StyledAssetItem(props: StyledTreeItemProps) {
             mb: -0.5,
           }}
         >
-          <LabelIcon sx={{ mr: 1, fontSize: "20px" }} />
+          <LabelIcon sx={{ ml: -1, mr: 1, fontSize: "22px" }} />
           <Typography variant="body2" className={classes.labelText}>
             {labelText}
           </Typography>
@@ -86,9 +92,8 @@ function StyledAssetItem(props: StyledTreeItemProps) {
     />
   );
 }
-
 function StyledActionItem(props: StyledTreeItemProps) {
-  const { labelText, ...other } = props;
+  const { labelText, onClick1, onClick2, ...other } = props;
   return (
     <TreeItem
       sx={{ pt: "10px" }}
@@ -98,7 +103,6 @@ function StyledActionItem(props: StyledTreeItemProps) {
             pt: "8px",
             pb: "8px",
             display: "flex",
-            alignItems: "center",
           }}
         >
           <Typography variant="body2" className={styles.labelTextClass}>
@@ -107,17 +111,19 @@ function StyledActionItem(props: StyledTreeItemProps) {
 
           <PlayCircleFilledWhiteOutlinedIcon
             sx={{
-              mr: 1,
-              fontSize: "20px",
+              mr: 0.7,
+              fontSize: "25px",
             }}
             className={styles.hiddenItem}
+            onClick={onClick1}
           />
           <AddCircleOutlineOutlinedIcon
             sx={{
-              mr: 1,
-              fontSize: "20px",
+              mr: -2,
+              fontSize: "25px",
             }}
             className={styles.hiddenItem}
+            onClick={onClick2}
           />
         </Box>
       }
@@ -131,6 +137,7 @@ function StyledActionItem(props: StyledTreeItemProps) {
 
 function ApparatusInfo(): JSX.Element {
   const { experienceData }: globalContextTypes = useContext(GlobalContext);
+  const { addActionToList } = useContext(ActionContext);
 
   const metadata = checkIfMetaExists();
   const assetbundleactions = React.useMemo(
@@ -160,6 +167,18 @@ function ApparatusInfo(): JSX.Element {
                     : actionData.input.command
                 }
                 nodeId={actionData}
+                onClick1={() =>
+                  requestTrigger(actionData.path, actionData.input.command)
+                }
+                onClick2={() => {
+                  const actionDataClone = {
+                    input: actionData.input,
+                    path: actionData.path,
+                    assetId: actionData.assetId,
+                    desc: actionData.desc,
+                  };
+                  addActionToList(actionDataClone);
+                }}
               />
             ))}
           </StyledAssetItem>

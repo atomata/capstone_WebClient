@@ -2,12 +2,11 @@
   flex-direction: row-reverse;
   color: #8c8c94;
   border-radius: 8px;
+  background-color: inherit !important;
 }
 
-.content:hover, .Mui-root,
-.Mui-selected,
-.Mui-selected.Mui-focused {
-  background-color: #525067;
+.content:hover {
+  background-color: #525067 !important;
   color: white;
 }
 
@@ -23,6 +22,6 @@
   visibility: hidden;
 }
 
-.content:hover .hiddenItem{
+.content:hover .hiddenItem {
   visibility: visible;
 }
