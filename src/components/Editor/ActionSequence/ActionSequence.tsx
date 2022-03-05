@@ -20,14 +20,18 @@ const ActionSequenceHeader = styled.div.attrs({
   width: stretch;
   font-size: 1.2em;
   font-weight: bold;
-  font-family: "Courier New", Courier, monospace;
+  font-family: Inter, monospace;
+  padding-top: 0.5em;
+  text-transform: uppercase;
+  color: white;
 `;
 
 const ActionSequenceList = styled.div`
   display: flex;
-  min-height: 89%;
+  max-height: 95%;
   min-width: stretch;
   padding-left: 1em;
+  padding-top: 0.5em;
   justify-content: left;
   overflow-x: scroll;
   ::-webkit-scrollbar {
@@ -37,10 +41,10 @@ const ActionSequenceList = styled.div`
 
 const DragContainer = styled.div`
   border: 1px solid black;
-  max-height: 85%;
+  max-height: 95%;
+  width: 16em;
   margin: 0.5em;
   background-color: #3f3d56;
-  // border-radius: 10px;
 `;
 
 const useStyles = makeStyles((theme) => ({
