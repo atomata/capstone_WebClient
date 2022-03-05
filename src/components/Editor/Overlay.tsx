@@ -61,7 +61,7 @@ const ActionSequenceBarGrid = styled.div`
 
 // css and placement for the text area
 const TextEditorGrid = styled.div`
-  grid-column: 25 / span 20;
+  grid-column: 25 / span 15;
   grid-row: 30 / span 10;
   z-index: 2;
 `;
