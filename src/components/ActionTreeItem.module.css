@@ -1,0 +1,28 @@
+.content {
+  flex-direction: row-reverse;
+  color: #8c8c94;
+  border-radius: 8px;
+}
+
+.content:hover, .Mui-root,
+.Mui-selected,
+.Mui-selected.Mui-focused {
+  background-color: #525067;
+  color: white;
+}
+
+.labelTextClass {
+  font-weight: inherit;
+  text-transform: capitalize;
+  flex-grow: 1;
+  font-size: 0.9em;
+  font-family: Inter, monospace;
+}
+
+.hiddenItem {
+  visibility: hidden;
+}
+
+.content:hover .hiddenItem{
+  visibility: visible;
+}

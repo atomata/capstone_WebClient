@@ -27,6 +27,7 @@ const ActionSequenceList = styled.div`
   display: flex;
   min-height: 89%;
   min-width: stretch;
+  padding-left: 1em;
   justify-content: left;
   overflow-x: scroll;
   ::-webkit-scrollbar {
@@ -39,6 +40,7 @@ const DragContainer = styled.div`
   max-height: 85%;
   margin: 0.5em;
   background-color: #3f3d56;
+  // border-radius: 10px;
 `;
 
 const useStyles = makeStyles((theme) => ({

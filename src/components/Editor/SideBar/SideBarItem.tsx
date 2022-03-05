@@ -101,7 +101,6 @@ function SideBarItem(): JSX.Element {
             <TextFormatIcon
               type="button"
               style={{ fontSize: "50px" }}
-              sx={{ "&:hover": { color: "white" } }}
               onClick={toggleTextBox}
             />
           </IconButton>
