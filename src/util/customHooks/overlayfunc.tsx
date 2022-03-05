@@ -1,31 +1,19 @@
-import { Dispatch, SetStateAction, useMemo, useState } from "react";
+import { useState } from "react";
 import { ActionData, ExperienceData } from "../types";
 
 /*
  *custom hook for overlay, action list
  */
 
-const useActionList = (
-  experienceData: ExperienceData,
-  setExperienceData: Dispatch<SetStateAction<ExperienceData>>
-) => {
-  // const [actionList, setActionList] = useState(
-  //   experienceData !== undefined ? experienceData.experience.actionList : []
-  // );
-
-  const [actionList, setActionList] = useMemo(
-    () => [
-      experienceData?.experience?.actionList ?? [],
-      (list: ActionData[]) =>
-        setExperienceData((e) => ({
-          ...e,
-          experience: { ...e?.experience, actionList: list },
-        })),
-    ],
-    [experienceData, setExperienceData]
+const useActionList = (experienceData: ExperienceData) => {
+  const [actionList, setActionList] = useState(
+    experienceData !== undefined ? experienceData.experience.actionList : []
   );
 
-  const [selectedAction, setSelectedAction] = useState(0);
+  const [selectedAction, setSelectedAction] = useState(actionList[0]);
+  const selectAction = (index: number) => {
+    setSelectedAction(actionList[index]);
+  };
 
   const addActionToList = (actionData: ActionData) => {
     actionList.push(actionData);
@@ -33,13 +21,16 @@ const useActionList = (
   };
 
   const setDescription = (desc: string) => {
-    if (actionList[selectedAction] !== undefined) {
-      actionList[selectedAction].desc = desc;
+    if (selectedAction !== undefined) {
+      selectedAction.desc = desc;
       setActionList([...actionList]);
     }
   };
 
   const removeActionFromList = (index: number) => {
+    if(actionList[index] === selectedAction){
+      setSelectedAction(undefined);
+    }
     actionList.splice(index, 1);
     setActionList([...actionList]);
   };
@@ -57,7 +48,7 @@ const useActionList = (
 
   return {
     selectedAction,
-    setSelectedAction,
+    selectAction,
     setDescription,
     actionList,
     setActionList,

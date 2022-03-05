@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import Unity from "react-unity-webgl";
 import { useContext, useEffect, useState } from "react";
-import Loading from "./Loading";
-import { unityContext, loadApparatus } from "../util/unityContextActions";
-import Overlay2 from "./UIComponent/Overlay2";
-import { GlobalContext, globalContextTypes } from "../../pages/experience";
+import Loading from "../Loading";
+import { unityContext, loadApparatus } from "../../util/unityContextActions";
+import Overlay from "./Overlay";
+import { GlobalContext, globalContextTypes } from "../../util/customHooks/globalContext";
 
 const WebglRoot = styled.div`
   display: relative;
@@ -42,7 +42,7 @@ function WebglBox(): JSX.Element {
         }}
         tabIndex={1}
       />
-      <Overlay2 />
+      <Overlay />
     </WebglRoot>
   ) : (
     <WebglRoot>

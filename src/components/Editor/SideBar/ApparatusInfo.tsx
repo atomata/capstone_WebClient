@@ -1,13 +1,16 @@
 import { useContext, useState } from "react";
-import { SerializedApparatus } from "../../util/types";
-import ApparatusListBox from "../editorBoxes/ApparatusListBox";
-import ActionBox from "../editorBoxes/ActionBox";
-import { GlobalContext, globalContextTypes } from "../../../pages/experience";
+import { SerializedApparatus } from "../../../util/types";
+import ApparatusListBox from "./ApparatusListBox";
+import ActionBox from "./ActionBox";
+import {
+  GlobalContext,
+  globalContextTypes,
+} from "../../../util/customHooks/globalContext";
+import { ActionContext } from "../../../util/customHooks/actionContext";
 
 function ApparatusInfo(): JSX.Element {
-  const { experienceData }: globalContextTypes =
-    useContext(GlobalContext);
-
+  const { experienceData }: globalContextTypes = useContext(GlobalContext);
+  const { addActionToList } = useContext(ActionContext);
   const [assetBundle, setAssetBundle] = useState({
     children: [],
     path: "",
@@ -21,6 +24,7 @@ function ApparatusInfo(): JSX.Element {
       />
       <ActionBox
         assetBundle={assetBundle}
+        addAction={(actionData) => addActionToList(actionData)}
       />
     </>
   );

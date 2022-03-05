@@ -8,11 +8,9 @@ import {
   ListItemSecondaryAction,
 } from "@mui/material";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
-import { useContext } from "react";
-import { requestTrigger } from "../../util/unityContextActions";
-import { getActions } from "../../util/jsonParsing";
-import { AssetBundle } from "../../util/types";
-import { GlobalContext, globalContextTypes } from "../../../pages/experience";
+import { requestTrigger } from "../../../util/unityContextActions";
+import { getActions } from "../../../util/jsonParsing";
+import { ActionData, AssetBundle } from "../../../util/types";
 
 const Box = styled.div`
   background: #fffaf0;
@@ -44,15 +42,14 @@ const ListHeading = styled.h1`
 
 type ActionBoxProps = {
   assetBundle: AssetBundle;
+  addAction: (actionData: ActionData) => void;
 };
 
-const ActionBox = ({ assetBundle }: ActionBoxProps): JSX.Element => {
+const ActionBox = ({ assetBundle, addAction }: ActionBoxProps): JSX.Element => {
   const actionList = React.useMemo(
     () => getActions(assetBundle),
     [assetBundle]
   );
-
-  const { addActionToList }: globalContextTypes = useContext(GlobalContext);
 
   // everytime metadata is rendered we reparse metadata using useMemo hook
   if (actionList !== undefined && actionList[0] !== undefined)
@@ -94,7 +91,7 @@ const ActionBox = ({ assetBundle }: ActionBoxProps): JSX.Element => {
                       assetId: actionData.assetId,
                       desc: actionData.desc,
                     };
-                    addActionToList(actionDataClone);
+                    addAction(actionDataClone);
                   }}
                 >
                   <AddOutlinedIcon />
@@ -113,3 +110,5 @@ const ActionBox = ({ assetBundle }: ActionBoxProps): JSX.Element => {
   );
 };
 export default ActionBox;
+
+// fixed

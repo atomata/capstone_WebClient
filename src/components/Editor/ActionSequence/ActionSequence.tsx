@@ -1,11 +1,9 @@
 import styled from "styled-components";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { useContext } from "react";
+import { makeStyles } from "@mui/styles";
 import ActionSequenceItem from "./ActionSequenceItem";
-import {
-  GlobalContext,
-  globalContextTypes,
-} from "../../../../pages/experience";
+import { ActionContext } from "../../../util/customHooks/actionContext";
 
 const ActionSequenceRoot = styled.div`
   display: relative;
@@ -43,13 +41,22 @@ const DragContainer = styled.div`
   background-color: #3f3d56;
 `;
 
-function ActionSequence(): JSX.Element {
+const useStyles = makeStyles((theme) => ({
+  SelectedAction: {
+    border: "3px solid yellow",
+    boxShadow: "0 0 10px yellow",
+  },
+}));
 
+function ActionSequence(): JSX.Element {
+  const classes = useStyles();
   const {
     actionList,
     handleOnDragEnd,
     removeActionFromList,
-  }: globalContextTypes = useContext(GlobalContext);
+    selectAction,
+    selectedAction,
+  } = useContext(ActionContext);
 
   return (
     <ActionSequenceRoot>
@@ -70,6 +77,9 @@ function ActionSequence(): JSX.Element {
                   >
                     {(dragProvided) => (
                       <DragContainer
+                        className={
+                          selectedAction === data ? classes.SelectedAction : ""
+                        }
                         {...dragProvided.draggableProps}
                         {...dragProvided.dragHandleProps}
                         ref={dragProvided.innerRef}
@@ -81,6 +91,7 @@ function ActionSequence(): JSX.Element {
                               ? data.input.name
                               : data.input.command
                           }
+                          selectAction={() => selectAction(index)}
                           removeAction={() => removeActionFromList(index)}
                         />
                       </DragContainer>

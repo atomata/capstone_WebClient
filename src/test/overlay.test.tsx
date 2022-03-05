@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { render } from "@testing-library/react";
 import { act, renderHook } from "@testing-library/react-hooks";
-import Overlay from "../components/Overlay";
+import Overlay from "../components/Editor/Overlay";
 import { useActionList, useOverlay } from "../util/customHooks/overlayfunc";
 import { ActionData } from "../util/types";
 

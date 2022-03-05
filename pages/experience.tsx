@@ -1,20 +1,23 @@
 /* eslint-disable prefer-arrow-callback */
 import styled from "styled-components";
-import React, { createContext, useState } from "react";
+import React, { useState } from "react";
 import { Alert, AlertTitle } from "@mui/material";
-import WebglBox from "../src/components/WebglBox";
+import WebglBox from "../src/components/Editor/WebglBox";
 import {
   verifyLogIn,
   checkIfLoggedIn,
   getUserName,
 } from "../src/util/loginCookies";
 import {
-  getApparatusFromCloud,
-  getExperienceFromCloud,
+  setupApparatusData,
+  setupExperienceData,
 } from "../src/util/cloudOperations/readFromCloud";
-import { ActionData, ExperienceData } from "../src/util/types";
+import { ExperienceData } from "../src/util/types";
 import Loading from "../src/components/Loading";
-import { useActionList } from "../src/util/customHooks/overlayfunc";
+import {
+  globalContextTypes,
+  GlobalContext,
+} from "../src/util/customHooks/globalContext";
 
 const Content = styled.div`
   width: 100%;
@@ -30,24 +33,6 @@ type ExperienceProps = {
   dataType: string;
 };
 
-export const GlobalContext = createContext(null);
-
-// type for Context Values
-export type globalContextTypes = {
-  experienceData: ExperienceData;
-  setExperienceData: React.Dispatch<React.SetStateAction<ExperienceData>>;
-  selectedAction: number;
-  actionList: ActionData[];
-  removeActionFromList: (index: number) => void;
-  setDescription: (description: string) => void;
-  handleOnDragEnd: (result: {
-    destination: { index: number };
-    source: { index: number };
-  }) => void;
-  addActionToList: (actionData: ActionData) => void;
-  userId: string;
-};
-
 function Experience({
   apparatusId,
   experienceId,
@@ -58,25 +43,10 @@ function Experience({
   const [userId] = useState(getUserName());
   const [experienceData, setExperienceData] = useState<ExperienceData>();
 
-  const {
-    selectedAction,
-    actionList,
-    removeActionFromList,
-    setDescription,
-    handleOnDragEnd,
-    addActionToList,
-  } = useActionList(experienceData, setExperienceData);
-
   // All Global Context Hooks
   const globalContextValues: globalContextTypes = {
     experienceData,
     setExperienceData,
-    selectedAction,
-    actionList,
-    removeActionFromList,
-    setDescription,
-    handleOnDragEnd,
-    addActionToList,
     userId,
   };
 
@@ -85,29 +55,22 @@ function Experience({
     experience: { experienceId, apparatusId: "", actionList: [] },
   };
   React.useEffect(() => {
-    // either apparatusID is provided or experience id but not both
-    function getApparatusFromCloudHelper(id) {
-      getApparatusFromCloud(id)
-        .then((apparatusJson) => {
-          experienceDataTemp.apparatusMetadata = apparatusJson;
-          experienceDataTemp.experience.apparatusId = apparatusJson.Id;
-          setExperienceData(experienceDataTemp);
-          setLoading(false);
-        })
-        .catch(() => setError("apparatus not found"));
-    }
-
     // Don't load if you aren't logged in
     // TODO test to see if this is  working properly
     if (!checkIfLoggedIn()) return;
 
     if (dataType === "apparatus") {
-      getApparatusFromCloudHelper(apparatusId);
+      setupApparatusData(apparatusId, experienceDataTemp)
+        .then(() => {
+          setExperienceData(experienceDataTemp);
+          setLoading(false);
+        })
+        .catch(() => setError("apparatus not found"));
     } else if (dataType === "experience") {
-      getExperienceFromCloud(userId, experienceId)
-        .then((experienceJson) => {
-          experienceDataTemp.experience = experienceJson;
-          getApparatusFromCloudHelper(experienceJson.apparatusId);
+      setupExperienceData(userId, experienceId, experienceDataTemp)
+        .then(() => {
+          setExperienceData(experienceDataTemp);
+          setLoading(false);
         })
         .catch(() => setError("experience file not found"));
     }
