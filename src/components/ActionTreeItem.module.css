@@ -1,16 +1,42 @@
-.content {
+.contentAction {
   flex-direction: row-reverse;
   color: #8c8c94;
   border-radius: 8px;
   background-color: inherit !important;
 }
 
-.content:hover {
+.contentAction:hover {
   background-color: #525067 !important;
   color: white;
 }
+.hiddenItem {
+  visibility: hidden;
+}
 
-.labelTextClass {
+.contentAction:hover .hiddenItem {
+  visibility: visible;
+}
+
+.contentAsset {
+  flex-direction: row-reverse;
+  background-color: #525067;
+  color: #a6a5eb;
+  border-radius: 8px;
+}
+
+.contentAsset:hover,
+.contentAsset:global(.Mui-root),
+.contentAsset:global(.Mui-selected) {
+  background-color: #525067 !important;
+}
+
+.contentAsset:hover,
+.contentAsset:global(.Mui-expanded) {
+  color: white !important;
+  background-color: #525067 !important;
+}
+
+.actionLabel {
   font-weight: inherit;
   text-transform: capitalize;
   flex-grow: 1;
@@ -18,10 +44,10 @@
   font-family: Inter, monospace;
 }
 
-.hiddenItem {
-  visibility: hidden;
-}
-
-.content:hover .hiddenItem {
-  visibility: visible;
+.assetLabel {
+  font-weight: inherit;
+  text-transform: capitalize;
+  flex-grow: 1;
+  font-size: 1em;
+  font-family: Inter, monospace;
 }
