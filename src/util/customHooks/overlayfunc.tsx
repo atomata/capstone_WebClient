@@ -10,7 +10,10 @@ const useActionList = (experienceData: ExperienceData) => {
     experienceData !== undefined ? experienceData.experience.actionList : []
   );
 
-  const [selectedAction, setSelectedAction] = useState(0);
+  const [selectedAction, setSelectedAction] = useState(actionList[0]);
+  const selectAction = (index: number) => {
+    setSelectedAction(actionList[index]);
+  };
 
   const addActionToList = (actionData: ActionData) => {
     actionList.push(actionData);
@@ -18,13 +21,16 @@ const useActionList = (experienceData: ExperienceData) => {
   };
 
   const setDescription = (desc: string) => {
-    if (actionList[selectedAction] !== undefined) {
-      actionList[selectedAction].desc = desc;
+    if (selectedAction !== undefined) {
+      selectedAction.desc = desc;
       setActionList([...actionList]);
     }
   };
 
   const removeActionFromList = (index: number) => {
+    if(actionList[index] === selectedAction){
+      setSelectedAction(undefined);
+    }
     actionList.splice(index, 1);
     setActionList([...actionList]);
   };
@@ -42,7 +48,7 @@ const useActionList = (experienceData: ExperienceData) => {
 
   return {
     selectedAction,
-    setSelectedAction,
+    selectAction,
     setDescription,
     actionList,
     setActionList,

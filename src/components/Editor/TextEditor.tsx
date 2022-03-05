@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import TextField from "@mui/material/TextField";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { IconButton } from "@mui/material";
 import SaveIcon from "@mui/icons-material/Save";
 import ExpandIcon from "@mui/icons-material/Expand";
-import { ActionData } from "../util/types";
+import { ActionContext } from "../../util/customHooks/actionContext";
 
 const Box = styled.tr`
   background: #3f3d56;
@@ -61,24 +61,14 @@ const TestDiv = styled.div`
   color: white;
 `;
 
-type TextEditorProps = {
-  actionList: ActionData[];
-  selectedAction: number;
-  setDescription: (desc) => void;
-};
-const TextEditor = ({
-  actionList,
-  selectedAction,
-  setDescription,
-}: TextEditorProps): JSX.Element => {
+const TextEditor = (): JSX.Element => {
   const [isExpanded, setExpanded] = useState(false);
   const [currDesc, setCurrDesc] = useState("");
+  const { actionList, selectedAction, setDescription } =
+    useContext(ActionContext);
   useEffect(() => {
-    if (
-      actionList[selectedAction] !== undefined &&
-      actionList[selectedAction].desc !== undefined
-    ) {
-      setCurrDesc(actionList[selectedAction].desc);
+    if (selectedAction !== undefined && selectedAction.desc !== undefined) {
+      setCurrDesc(selectedAction.desc);
     } else {
       setCurrDesc("");
     }
@@ -88,7 +78,7 @@ const TextEditor = ({
       <table cellSpacing="0" cellPadding="0">
         <thead>
           <Header>
-            <SlideName>APPARATUS {selectedAction}</SlideName>
+            <SlideName>Action {selectedAction !== undefined? selectedAction.name : "Invalid"}</SlideName>
             <TestDiv>
               <IconButton
                 style={{ color: "white" }}

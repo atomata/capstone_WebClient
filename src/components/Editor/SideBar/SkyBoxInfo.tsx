@@ -7,7 +7,7 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import {
   changeSkybox,
   defaultCameraView,
-} from "../../util/unityContextActions";
+} from "../../../util/unityContextActions";
 
 function SkyBoxInfo(): JSX.Element {
   const ITEM_HEIGHT = 48;

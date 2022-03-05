@@ -14,7 +14,7 @@ const useActionBar = () => {
     if (toolDoc === false) {
       toggleToolDoc();
       setApparatusInfo(true);
-      setSkyBoxInfo(false)
+      setSkyBoxInfo(false);
     } else if (toolDoc === true && apparatusInfo === false) {
       setApparatusInfo(true);
       setSkyBoxInfo(false);
@@ -26,29 +26,37 @@ const useActionBar = () => {
   };
 
   // hook for showing or not sky box setting
-  const [skyboxInfo, setSkyBoxInfo] = useState(false);
+  const [skyBoxInfo, setSkyBoxInfo] = useState(false);
   const toggleSkyBoxInfo = () => {
-    if(toolDoc === false){
+    if (toolDoc === false) {
       toggleToolDoc();
       setApparatusInfo(false);
       setSkyBoxInfo(true);
-    } else if (toolDoc === true && skyboxInfo === false){
+    } else if (toolDoc === true && skyBoxInfo === false) {
       setApparatusInfo(false);
       setSkyBoxInfo(true);
-    } else if (toolDoc === true && skyboxInfo === true){
+    } else if (toolDoc === true && skyBoxInfo === true) {
       toggleToolDoc();
       setApparatusInfo(false);
       setSkyBoxInfo(false);
     }
-  } 
+  };
+
+  // hook for showing or not sky box setting
+  const [textBox, setTextBox] = useState(false);
+  const toggleTextBox = () => {
+    setTextBox((v) => !v);
+  };
 
   return {
+    toggleTextBox,
     toggleToolDoc,
     toggleApparatusInfo,
     toggleSkyBoxInfo,
+    textBox,
     toolDoc,
     apparatusInfo,
-    skyboxInfo,
+    skyBoxInfo,
     setToolDoc,
     setApparatusInfo,
     setSkyBoxInfo,

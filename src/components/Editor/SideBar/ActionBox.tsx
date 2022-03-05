@@ -8,9 +8,9 @@ import {
   ListItemSecondaryAction,
 } from "@mui/material";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
-import { requestTrigger } from "../../util/unityContextActions";
-import { getActions } from "../../util/jsonParsing";
-import { ActionData, AssetBundle } from "../../util/types";
+import { requestTrigger } from "../../../util/unityContextActions";
+import { getActions } from "../../../util/jsonParsing";
+import { ActionData, AssetBundle } from "../../../util/types";
 
 const Box = styled.div`
   background: #fffaf0;

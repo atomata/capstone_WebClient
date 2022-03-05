@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
 import React from "react";
-import ActionBox from "../components/editorBoxes/ActionBox";
+import ActionBox from "../components/Editor/SideBar/ActionBox";
 import { getAssetBundles } from "../util/jsonParsing";
 import {testmetadata1} from "../util/testConstants";
 

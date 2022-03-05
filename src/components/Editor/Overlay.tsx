@@ -1,12 +1,17 @@
 import styled from "styled-components";
+import { useContext } from "react";
 import { useActionBar } from "../../util/customHooks/ActionBarFunc";
-import SideBarItem from "./SideBarItem";
-import ActionSequence from "./Action Sequence 2.0/ActionSequence";
+import SideBarItem from "./SideBar/SideBarItem";
+import ActionSequence from "./ActionSequence/ActionSequence";
 import { SideBarContext } from "../../util/customHooks/SideBarContext";
-import ToolDocItem from "./ToolDocItem";
-import { ExperienceData } from "../../util/types";
+import { ActionContext } from "../../util/customHooks/actionContext";
+import ToolDocItem from "./SideBar/ToolDocItem";
+import TextEditor from "./TextEditor";
 import { useActionList } from "../../util/customHooks/overlayfunc";
-import TextEditor from "../TextEditor";
+import {
+  GlobalContext,
+  globalContextTypes,
+} from "../../util/customHooks/globalContext";
 
 // the side bar box
 
@@ -59,30 +64,25 @@ const TextEditorGrid = styled.div`
   z-index: 2;
 `;
 
-type OverlayProps = {
-  userId: string;
-  experienceData: ExperienceData;
-};
-
 /**
  * The side bar define the area and the outline of what will be included.
  * @returns
  */
-function Overlay2({ userId, experienceData }: OverlayProps): JSX.Element {
+function Overlay(): JSX.Element {
   const {
+    toggleTextBox,
     toggleToolDoc,
     toggleApparatusInfo,
     toggleSkyBoxInfo,
+    textBox,
     toolDoc,
     apparatusInfo,
-    skyboxInfo,
-    setToolDoc,
-    setApparatusInfo,
-    setSkyBoxInfo,
+    skyBoxInfo,
   } = useActionBar();
 
-  // Things Justin needs to use in action sequence, fix the variable names so I can use them please
+  const { experienceData }: globalContextTypes = useContext(GlobalContext);
   const {
+    selectAction,
     selectedAction,
     actionList,
     removeActionFromList,
@@ -91,57 +91,58 @@ function Overlay2({ userId, experienceData }: OverlayProps): JSX.Element {
     addActionToList,
   } = useActionList(experienceData);
 
-
   return (
     <UIComponentRoot>
       <UIComponentGrid>
-        <SideBarContext.Provider
+        <ActionContext.Provider
           value={{
-            toggleToolDoc,
-            toggleApparatusInfo,
-            toggleSkyBoxInfo,
-            toolDoc,
-            apparatusInfo,
-            skyboxInfo,
-            setToolDoc,
-            setApparatusInfo,
-            setSkyBoxInfo,
+            selectAction,
+            selectedAction,
+            actionList,
+            removeActionFromList,
+            setDescription,
+            handleOnDragEnd,
+            addActionToList,
           }}
         >
-
+          <SideBarContext.Provider
+            value={{
+              toggleTextBox,
+              toggleToolDoc,
+              toggleApparatusInfo,
+              toggleSkyBoxInfo,
+              textBox,
+              toolDoc,
+              apparatusInfo,
+              skyBoxInfo,
+            }}
+          >
             <SideBarGrid>
-              <SideBarItem userId={userId} experienceData={experienceData} />
+              <SideBarItem />
             </SideBarGrid>
             {toolDoc ? (
               <ToolDocGrid>
-                <ToolDocItem experienceData={experienceData} addActionToList={(actionData) => addActionToList(actionData)}  removeAction={(index: number) => removeActionFromList(index)} />
+                <ToolDocItem />
               </ToolDocGrid>
             ) : (
               <div />
             )}
-
-        </SideBarContext.Provider>
-        <ActionSequenceBarGrid>
-          <ActionSequence
-            actionList={actionList}
-            removeAction={(index: number) => removeActionFromList(index)}
-            handleOnDragEnd={handleOnDragEnd}
-          />
-        </ActionSequenceBarGrid>
-        <TextEditorGrid>
-          {" "}
-          <TextEditor
-            actionList={actionList}
-            setDescription={(desc) => setDescription(desc)}
-            selectedAction={selectedAction}
-          />
-        </TextEditorGrid>
-
-        {/* <TextEditorGrid /> */}
+          </SideBarContext.Provider>
+          <ActionSequenceBarGrid>
+            <ActionSequence />
+          </ActionSequenceBarGrid>
+          {textBox ? (
+            <TextEditorGrid>
+              {" "}
+              <TextEditor />
+            </TextEditorGrid>
+          ) : (
+            <div />
+          )}
+        </ActionContext.Provider>
       </UIComponentGrid>
     </UIComponentRoot>
   );
 }
 
-export default Overlay2;
-
+export default Overlay;
