@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { useContext } from "react";
 import { useActionBar } from "../../util/customHooks/ActionBarFunc";
-import SideBarItem from "./SideBar/SideBarItem";
 import ActionSequence from "./ActionSequence/ActionSequence";
 import { SideBarContext } from "../../util/customHooks/SideBarContext";
 import { ActionContext } from "../../util/customHooks/actionContext";
@@ -12,6 +11,7 @@ import {
   GlobalContext,
   globalContextTypes,
 } from "../../util/customHooks/globalContext";
+import SideBarItem from "./SideBar/SideBarItem";
 
 // the side bar box
 
@@ -33,17 +33,17 @@ const UIComponentGrid = styled.div`
 
 // css and placement for the action bar (the action bar is the bar on the side which have the button)
 const SideBarGrid = styled.div`
-  grid-column: 1 / span 3;
+  grid-column: 1 / span 2;
   grid-row: 1 / span50;
   background-color: #3f3d56;
   z-index: 4;
   color: white;
-  box-shadow: 5px 0px 20px #000000;
+  box-shadow: 2px 0px 15px #000000;
 `;
 
 // css and placement for the side bar (the side bar is the area where we can toggle on or off)
 const ToolDocGrid = styled.div`
-  grid-column: 4 / span 9;
+  grid-column: 3 / span 9;
   grid-row: 1 / span 39;
   background-color: #3f3d56;
   z-index: 2;
@@ -53,7 +53,7 @@ const ToolDocGrid = styled.div`
 
 // css and placement for the action sequence
 const ActionSequenceBarGrid = styled.div`
-  grid-column: 4 / span 58;
+  grid-column: 3 / span 58;
   grid-row: 40 / span 11;
   background-color: #a8ad68;
   z-index: 2;
