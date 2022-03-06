@@ -5,8 +5,8 @@ const ActionSequenceItemRoot = styled.div`
   display: flex;
   flex-direction: column;
   min-height: stretch;
-  margin: 0.25em;
   padding-top: 1em;
+  padding-bottom: 1em;
 `;
 
 const ActionSequenceItemApparatus = styled.div`
@@ -45,7 +45,6 @@ function ActionSequenceItem({
     <ActionSequenceItemRoot
       onClick={() => {
         selectAction();
-        console.log("clicked");
       }}
     >
       <ActionSequenceItemApparatus>
