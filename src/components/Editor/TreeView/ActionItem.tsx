@@ -34,7 +34,7 @@ export default function ActionItem({
 
           <PlayCircleFilledWhiteOutlinedIcon
             sx={{
-              mr: "0.5em",
+              mr: "0.25em",
               fontSize: "1.5em",
             }}
             className={styles.hiddenItem}
