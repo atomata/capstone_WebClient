@@ -8,8 +8,8 @@ import styles from "../../ActionTreeItem.module.css";
 type actionItemProps = TreeItemProps & {
   labelText: string;
   nodeId: string;
-  add: () => void;
-  play: () => void;
+  add?: () => void;
+  play?: () => void;
 };
 export default function ActionItem({
   labelText,
@@ -32,14 +32,16 @@ export default function ActionItem({
             {labelText}
           </Typography>
 
-          <PlayCircleFilledWhiteOutlinedIcon
-            sx={{
-              mr: "0.5em",
-              fontSize: "1.5em",
-            }}
-            className={styles.hiddenItem}
-            onClick={play}
-          />
+          {play ? (
+            <PlayCircleFilledWhiteOutlinedIcon
+              sx={{
+                mr: "0.5em",
+                fontSize: "1.5em",
+              }}
+              className={styles.hiddenItem}
+              onClick={play}
+            />
+          ) : null}
           <AddCircleOutlineOutlinedIcon
             sx={{
               mr: "-0.5em",
