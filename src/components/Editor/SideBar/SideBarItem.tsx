@@ -1,8 +1,9 @@
 import { useContext, useEffect } from "react";
 import { IconButton, Link } from "@mui/material";
 import styled from "styled-components";
-import StyleIcon from "@mui/icons-material/Style";
+import SettingsIcon from "@mui/icons-material/Settings";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
+import CameraswitchIcon from "@mui/icons-material/Cameraswitch";
 import TextFormatIcon from "@mui/icons-material/TextFormat";
 import SaveAltIcon from "@mui/icons-material/SaveAlt";
 import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
@@ -15,6 +16,7 @@ import {
 } from "../../../util/customHooks/globalContext";
 import { ActionContext } from "../../../util/customHooks/actionContext";
 import styles from "../../SideBarButtons.module.css";
+import { defaultCameraView } from "../../../util/unityContextActions";
 
 const SideBarItemBox = styled.div`
   position: flex;
@@ -44,10 +46,10 @@ const SideBarItemWrapper = styled.div`
 const ImgLogo = styled.img.attrs({
   alt: "Image Placeholder",
 })`
-  margin-top: 5px;
+  margin-top: 1em;
   display: block;
-  height: 35px;
-  width: 45px;
+  height: 2em;
+  width: 2.5em;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 15px;
@@ -89,7 +91,7 @@ function SideBarItem(): JSX.Element {
           >
             <FormatListBulletedIcon
               sx={{
-                fontSize: "40px",
+                fontSize: "30px",
               }}
             />
           </IconButton>
@@ -101,9 +103,9 @@ function SideBarItem(): JSX.Element {
             }
             onClick={toggleSkyBoxInfo}
           >
-            <StyleIcon
+            <SettingsIcon
               sx={{
-                fontSize: "40px",
+                fontSize: "30px",
               }}
             />
           </IconButton>
@@ -116,14 +118,22 @@ function SideBarItem(): JSX.Element {
             disabled={selectedAction === undefined}
             onClick={toggleTextBox}
           >
-            <TextFormatIcon sx={{ fontSize: "50px" }} />
+            <TextFormatIcon sx={{ fontSize: "38px" }} />
+          </IconButton>
+        </SideBarItemWrapper>
+        <SideBarItemWrapper>
+          <IconButton
+            className={styles.sidebarItem}
+            onClick={() => defaultCameraView()}
+          >
+            <CameraswitchIcon sx={{ fontSize: "32px" }} />
           </IconButton>
         </SideBarItemWrapper>
         <SideBarItemWrapper>
           <SideBarItemBottomBox>
             <SaveAltIcon
               type="button"
-              style={{ fontSize: "40px" }}
+              style={{ fontSize: "35px" }}
               sx={{ "&:hover": { color: "white" }, mb: 3 }}
               onClick={() => {
                 experienceData.experience.actionList = [...actionList];
@@ -134,7 +144,7 @@ function SideBarItem(): JSX.Element {
               {" "}
               <KeyboardReturnIcon
                 type="button"
-                style={{ fontSize: "40px" }}
+                style={{ fontSize: "35px" }}
                 sx={{ "&:hover": { color: "white" }, color: "#a6a5eb" }}
                 onClick={() => {
                   experienceData.experience.actionList = [...actionList];
