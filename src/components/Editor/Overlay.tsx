@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useActionBar } from "../../util/customHooks/ActionBarFunc";
 import SideBarItem from "./SideBar/SideBarItem";
 import ActionSequence from "./ActionSequence/ActionSequence";
@@ -12,7 +12,7 @@ import {
   GlobalContext,
   globalContextTypes,
 } from "../../util/customHooks/globalContext";
-
+import { saveExp } from "../../util/cloudOperations/writeToCloud";
 // the side bar box
 
 const UIComponentRoot = styled.div`
@@ -80,7 +80,7 @@ function Overlay(): JSX.Element {
     skyBoxInfo,
   } = useActionBar();
 
-  const { experienceData }: globalContextTypes = useContext(GlobalContext);
+  const { experienceData,userId }: globalContextTypes = useContext(GlobalContext);
   const {
     selectAction,
     selectedAction,
@@ -91,6 +91,11 @@ function Overlay(): JSX.Element {
     addActionToList,
   } = useActionList(experienceData);
 
+  // useEffect for autoSave
+  useEffect(()=>{
+    experienceData.experience.actionList = [...actionList];
+    saveExp(userId, experienceData.experience);
+  }, [actionList, experienceData, userId])
   return (
     <UIComponentRoot>
       <UIComponentGrid>
