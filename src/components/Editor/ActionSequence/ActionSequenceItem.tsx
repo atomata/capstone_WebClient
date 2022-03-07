@@ -5,9 +5,8 @@ const ActionSequenceItemRoot = styled.div`
   display: flex;
   flex-direction: column;
   min-height: stretch;
-  min-width: 12em;
-  margin: 0.5em;
-  padding-top: 2em;
+  margin: 0.25em;
+  padding-top: 1em;
 `;
 
 const ActionSequenceItemApparatus = styled.div`
@@ -16,9 +15,8 @@ const ActionSequenceItemApparatus = styled.div`
   height: 1.5em;
   justify-content: center;
   margin: 0.5em;
-  font-size: 1.05em;
-  font-weight: bold;
-  font-family: "Courier New", Courier, monospace;
+  font-size: 1.1em;
+  font-family: Inter, monospace;
   color: #ffffff;
 `;
 

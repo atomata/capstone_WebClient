@@ -1,31 +1,77 @@
-import { useContext, useState } from "react";
+import React, { useContext } from "react";
+import TreeView from "@mui/lab/TreeView";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import styled from "styled-components";
 import { SerializedApparatus } from "../../../util/types";
-import ApparatusListBox from "./ApparatusListBox";
-import ActionBox from "./ActionBox";
 import {
   GlobalContext,
   globalContextTypes,
 } from "../../../util/customHooks/globalContext";
+import { getAssetBundleActions } from "../../../util/jsonParsing";
+import { requestTrigger } from "../../../util/unityContextActions";
 import { ActionContext } from "../../../util/customHooks/actionContext";
+import AssetItem from "../TreeView/AssetItem";
+import ActionItem from "../TreeView/ActionItem";
+
+const ApparatusInfoHeader = styled.div.attrs({
+  children: "Apparatus & Actions",
+})`
+  display: flex;
+  justify-content: center;
+  width: stretch;
+  font-size: 1.2em;
+  text-transform: uppercase;
+  color: white;
+  font-family: Inter, monospace;
+  margin-bottom: 1em;
+`;
 
 function ApparatusInfo(): JSX.Element {
   const { experienceData }: globalContextTypes = useContext(GlobalContext);
   const { addActionToList } = useContext(ActionContext);
-  const [assetBundle, setAssetBundle] = useState({
-    children: [],
-    path: "",
-    identifier: "",
-  });
+
+  const metadata = checkIfMetaExists();
+  const apparatusInfo = React.useMemo(
+    () => getAssetBundleActions(metadata),
+    [metadata]
+  );
   return (
     <>
-      <ApparatusListBox
-        metadata={checkIfMetaExists()}
-        handleAssetBundleChange={(data) => setAssetBundle(data)}
-      />
-      <ActionBox
-        assetBundle={assetBundle}
-        addAction={(actionData) => addActionToList(actionData)}
-      />
+      <ApparatusInfoHeader />
+      <TreeView
+        aria-label="file system navigator"
+        defaultCollapseIcon={<ExpandMoreIcon />}
+        defaultExpandIcon={<ChevronRightIcon />}
+        sx={{ maxHeight: "100%", flexGrow: 1, maxWidth: "90%" }}
+      >
+        {apparatusInfo.map((data, index) => (
+          <AssetItem labelText={data[0]} nodeId={`index ${index}`}>
+            {data[1].map((actionData) => (
+              <ActionItem
+                labelText={
+                  actionData.input.name !== undefined
+                    ? actionData.input.name
+                    : actionData.input.command
+                }
+                nodeId={actionData}
+                play={() =>
+                  requestTrigger(actionData.path, actionData.input.command)
+                }
+                add={() => {
+                  const actionDataClone = {
+                    input: actionData.input,
+                    path: actionData.path,
+                    assetId: actionData.assetId,
+                    desc: actionData.desc,
+                  };
+                  addActionToList(actionDataClone);
+                }}
+              />
+            ))}
+          </AssetItem>
+        ))}
+      </TreeView>
     </>
   );
 

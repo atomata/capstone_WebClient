@@ -130,6 +130,34 @@ function getActions(node: AssetBundle): ActionData[] {
   return actionList;
 }
 
+function getAssetBundleActions(metadata: SerializedApparatus) {
+  const list = [];
+  const assetBundleList = getAssetBundles(metadata);
+
+  for (const bundle of assetBundleList) {
+    const actionList = [];
+    for (const child in bundle.children) {
+      if (
+        bundle.children[child].type[0] === "Event" ||
+        bundle.children[child].type[0] === "CameraFocus"
+      ) {
+        for (const index in bundle.children[child].input) {
+          const actionData = {
+            input: bundle.children[child].input[index],
+            path: bundle.children[child].path,
+            assetId: bundle.identifier,
+          };
+          actionList.push(actionData);
+        }
+      }
+    }
+    list.push([bundle.identifier[0], actionList]);
+  }
+
+  console.log("the list is ", list);
+  return list;
+}
+
 // Checks if a given node is a parent node or not by recursively checking if it has any direct/indirect children of type 'AssetBundle'
 function checkIfParent(node: AssetBundle): boolean {
   if (node.children !== undefined) {
@@ -144,4 +172,10 @@ function checkIfParent(node: AssetBundle): boolean {
   }
   return false;
 }
-export { getAssetBundles, getActions, checkIfParent, linkPathsToData };
+export {
+  getAssetBundleActions,
+  getAssetBundles,
+  getActions,
+  checkIfParent,
+  linkPathsToData,
+};

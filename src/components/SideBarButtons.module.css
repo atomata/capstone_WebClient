@@ -1,0 +1,15 @@
+.sidebarItem {
+  color: #a6a5eb;
+}
+
+.sidebarItem:disabled {
+  color: #555454;
+}
+
+.sidebarItem:hover {
+  color: white;
+}
+
+.toggleOnSidebarItem {
+  color: white;
+}

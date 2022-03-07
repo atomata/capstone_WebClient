@@ -14,6 +14,7 @@ import {
   globalContextTypes,
 } from "../../../util/customHooks/globalContext";
 import { ActionContext } from "../../../util/customHooks/actionContext";
+import styles from "../../SideBarButtons.module.css";
 
 const SideBarItemBox = styled.div`
   position: flex;
@@ -21,6 +22,7 @@ const SideBarItemBox = styled.div`
   flex-direction: column;
   height: inherit;
   width: inherit;
+  color: #a6a5eb;
   background-color: #3f3d56;
 `;
 
@@ -52,8 +54,14 @@ const ImgLogo = styled.img.attrs({
 `;
 
 function SideBarItem(): JSX.Element {
-  const { textBox, toggleTextBox, toggleApparatusInfo, toggleSkyBoxInfo } =
-    useContext(SideBarContext);
+  const {
+    textBox,
+    toggleTextBox,
+    toggleApparatusInfo,
+    toggleSkyBoxInfo,
+    skyBoxInfo,
+    apparatusInfo,
+  } = useContext(SideBarContext);
   const { experienceData, userId }: globalContextTypes =
     useContext(GlobalContext);
   const { selectedAction, actionList } = useContext(ActionContext);
@@ -73,35 +81,42 @@ function SideBarItem(): JSX.Element {
         </Link>
 
         <SideBarItemWrapper>
-          <FormatListBulletedIcon
-            type="button"
-            style={{ fontSize: "40px" }}
-            sx={{ "&:hover": { color: "#F75D77" } }}
+          <IconButton
+            className={
+              apparatusInfo ? styles.toggleOnSidebarItem : styles.sidebarItem
+            }
             onClick={toggleApparatusInfo}
-          />
-        </SideBarItemWrapper>
-        <SideBarItemWrapper>
-          <StyleIcon
-            type="button"
-            style={{ fontSize: "40px" }}
-            sx={{ "&:hover": { color: "#F75D77" } }}
-            onClick={toggleSkyBoxInfo}
-          />
+          >
+            <FormatListBulletedIcon
+              sx={{
+                fontSize: "40px",
+              }}
+            />
+          </IconButton>
         </SideBarItemWrapper>
         <SideBarItemWrapper>
           <IconButton
-            sx={{
-              "&:disabled": { color: "#555454" },
-              "&:enabled": { color: "white" },
-            }}
-            disabled={selectedAction === undefined}
+            className={
+              skyBoxInfo ? styles.toggleOnSidebarItem : styles.sidebarItem
+            }
+            onClick={toggleSkyBoxInfo}
           >
-            <TextFormatIcon
-              type="button"
-              style={{ fontSize: "50px" }}
-              sx={{ "&:hover": { color: "#F75D77" } }}
-              onClick={toggleTextBox}
+            <StyleIcon
+              sx={{
+                fontSize: "40px",
+              }}
             />
+          </IconButton>
+        </SideBarItemWrapper>
+        <SideBarItemWrapper>
+          <IconButton
+            className={
+              textBox ? styles.toggleOnSidebarItem : styles.sidebarItem
+            }
+            disabled={selectedAction === undefined}
+            onClick={toggleTextBox}
+          >
+            <TextFormatIcon sx={{ fontSize: "50px" }} />
           </IconButton>
         </SideBarItemWrapper>
         <SideBarItemWrapper>
@@ -109,7 +124,7 @@ function SideBarItem(): JSX.Element {
             <SaveAltIcon
               type="button"
               style={{ fontSize: "40px" }}
-              sx={{ "&:hover": { color: "#F75D77" } }}
+              sx={{ "&:hover": { color: "white" }, mb: 3 }}
               onClick={() => {
                 experienceData.experience.actionList = [...actionList];
                 saveExp(userId, experienceData.experience);
@@ -120,7 +135,7 @@ function SideBarItem(): JSX.Element {
               <KeyboardReturnIcon
                 type="button"
                 style={{ fontSize: "40px" }}
-                sx={{ "&:hover": { color: "#F75D77" } }}
+                sx={{ "&:hover": { color: "white" }, color: "#a6a5eb" }}
                 onClick={() => {
                   experienceData.experience.actionList = [...actionList];
                   saveExp(userId, experienceData.experience);
