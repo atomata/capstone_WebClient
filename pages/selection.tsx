@@ -3,7 +3,7 @@ import { Button } from "@mui/material";
 import { useEffect, useState } from "react";
 import { verifyLogIn, checkIfLoggedIn } from "../src/util/loginCookies";
 import Loading from "../src/components/Loading";
-import { getBlobsInContainer } from "../src/util/cloudOperations/readFromCloud";
+import { getBlobNamesInContainer } from "../src/util/cloudOperations/readFromCloud";
 import { apparatusBlob, defaultStorage } from "../src/util/constants";
 import { OuterBox, SelectionContainer, SelectionHeading, SelectionContent, PreviewContainer, SelectionButton, SelectionOption, ImgIllustration1, ImgIllustration2, GifIllustration} from "../src/components/SelectionBox";
 import { urlFor } from "../src/util/utils";
@@ -13,7 +13,7 @@ const SelectionList = ({ experienceId }) => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const res = await getBlobsInContainer(apparatusBlob, defaultStorage);
+        const res = await getBlobNamesInContainer(apparatusBlob, defaultStorage);
         setApparatusList(res);
       } catch (err) {
         console.log("test", err);

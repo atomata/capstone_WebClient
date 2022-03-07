@@ -2,10 +2,8 @@ import Link from "next/link";
 import { useEffect, useState, forwardRef } from "react";
 import { makeStyles } from "@mui/styles";
 import styled from "styled-components";
-import PlayArrowOutlinedIcon from "@mui/icons-material/PlayArrowOutlined";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { Box, TextField, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Slide } from '@mui/material';
 import { TransitionProps } from '@mui/material/transitions';
 import { useWorkbench, useDeleteDialog } from "../util/customHooks/workbenchFunc";
@@ -17,11 +15,11 @@ const OuterBox = styled.div`
   margin-top: 2%;
   margin-left: 10%;
   margin-right: 10%;
-  padding: 20px;
+  padding: 1.2em;
   weight: 100%;
   height: 92%;
-  background: #3f3d56;
-  border-radius: 15px;
+  background: #3F3D56;
+  border-radius: 1.2em;
 `;
 
 const InnerBox = styled.div`
@@ -51,14 +49,15 @@ const ExperienceHeader = styled.tr`
   color: white;
   font-family: Trebuchet MS;
   text-align: left;
+  height: 3em;
   th {
-    background: #3f3d56;
-    padding-bottom: 12px;
+    background: #3F3D56;
+    padding-bottom: 0.4em;
     position: sticky;
     position: -webkit-sticky;
     top: 0;
     z-index: 1;
-    padding-left: 30px;
+    padding-left: 1.6em; 
   }
 `;
 
@@ -67,14 +66,14 @@ const ExperienceRow = styled.tr`
   background-color: white;
   color: #3f3d56;
   font-weight: bold;
-  height: 60px;
-  font-size: 16px;
+  height: 3em;
+  font-size: 1em;
   font-family: Trebuchet MS;
 
   td {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-left: 30px;
+    padding-top: 0.65em;
+    padding-bottom: 0.65em;
+    padding-left: 1.6em; 
   }
 `;
 
@@ -87,7 +86,7 @@ const ExperienceDesc = styled.th`
 `;
 
 const ExperienceMisc = styled.th`
-  padding-right: 20px;
+  padding-right: 1.8em;
   text-align: right;
   cursor: pointer;
 `;
@@ -95,29 +94,28 @@ const ExperienceMisc = styled.th`
 const ExperienceButtons = styled.td`
   color: #a5a4ea;
   float: right;
-  padding-right: 20px;
-  padding-top: 10px;
+  padding-right: 1.3em;
+  padding-top: 0.65em;
   cursor: pointer;
 
   * {
-    margin-left: 6px;
-    fontsize: 50px;
+    margin-left: 0.3em;
   }
 `;
 
 const CreateButton = styled.button`
   background-color: #f75d77;
-  border: 0px;
+  border: 0em;
   color: white;
   font-weight: bold;
-  padding: 15px 36px;
-  width: 50%;
-  font-size: 16px;
+  padding: 1.1em 2.3em;
+  width: 40%;
+  font-size: 1.05em;
   margin-left: 1%;
   cursor: pointer;
   font-family: Trebuchet MS;
-  border-radius: 20px;
-  margin-top: -6px;
+  border-radius: 1.3em;
+  margin-top: -0.25em;
 `;
 
 const CreateInnerBox = styled.div`
@@ -125,9 +123,9 @@ const CreateInnerBox = styled.div`
 `;
 
 const ExperienceField = styled(TextField)`
-  width: 40%;
-  margin-top: 15px;
-  margin-right: 20px;
+  width: 60%;
+  margin-top: 0.65em;
+  margin-right: 1.3em;
 `;
 
 const ErrorMsg = styled.label`
@@ -146,7 +144,6 @@ const useStyles = makeStyles((theme) => ({
 
 const CreateExperience = () => {
   const [expName, setExpName] = useState("");
-  const [descName, setDescName] = useState("");
 
   const { expErr, handleExperienceCreate } = useWorkbench();
 
@@ -169,18 +166,6 @@ const CreateExperience = () => {
           onChange={(e) => setExpName(e.target.value)}
           variant="outlined"
         />
-        <ExperienceField
-          InputProps={{
-            className: classes.textField,
-          }}
-          FormHelperTextProps={{
-            className: classes.helper,
-          }}
-          label="Description"
-          helperText=" "
-          onChange={(e) => setDescName(e.target.value)}
-          variant="outlined"
-        />
         <Link
           key="selectionPage"
           href={{
@@ -188,7 +173,7 @@ const CreateExperience = () => {
             query: { experienceId: expName },
           }}
         >
-          <CreateButton onClick={(e) => handleExperienceCreate(e, expName)}> CREATE NEW EXPERIENCE </CreateButton>
+          <CreateButton data-testid="create-button" onClick={(e) => handleExperienceCreate(e, expName)}> CREATE NEW EXPERIENCE </CreateButton>
         </Link>
       </Box>
       <ErrorMsg>{expErr}</ErrorMsg>
@@ -208,8 +193,8 @@ const slideTransition = forwardRef(function Transition(
 // TODO show proper error message when data cannot be fetched
 const LoadExperience = () => {
   const [expList, setExpList] = useState([]);
-  const { delOpen, delIndex, delExpName, handleDeleteDialogOpen, handleDeleteDialogClose } = useDeleteDialog();
 
+  const { delOpen, delIndex, delExpName, handleDeleteDialogOpen, handleDeleteDialogClose } = useDeleteDialog();
   useEffect(() => {
     async function fetchData() {
       try {
@@ -223,7 +208,7 @@ const LoadExperience = () => {
   }, []);
 
   return (
-    <InnerBox>
+    <InnerBox data-testid="inner-box">
       <Dialog
         open={delOpen}
         TransitionComponent={slideTransition}
@@ -251,26 +236,28 @@ const LoadExperience = () => {
         <thead>
           <ExperienceHeader>
             <ExperienceName>EXPERIENCE NAME</ExperienceName>
-            <ExperienceDesc>DESCRIPTION</ExperienceDesc>
-            <ExperienceMisc>
-              <MoreHorizIcon style={{ fontSize: "36px" }} />
+            <ExperienceDesc>LAST MODIFIED</ExperienceDesc>
+            <ExperienceMisc>OPTIONS
+              {//<MoreHorizIcon style={{fontSize: '36px'}}/>
+              }
             </ExperienceMisc>
           </ExperienceHeader>
         </thead>
         <tbody>
-          {expList.map((expName, index) => (
+          {expList.map((exp, index) => (
             // eslint-disable-next-line react/jsx-key
             <ExperienceRow>
-              <td>{expName}</td>
-              <td>DESCRIPTION GOES HERE</td>
+              <td>{exp[0]}</td>
+              <td>{exp[1]}</td>
               <ExperienceButtons>
-                <PlayArrowOutlinedIcon style={{ fontSize: "40px" }} />
+                {//<PlayArrowOutlinedIcon style={{ fontSize: "40px" }} />
+                }
                 <Link
-                  key={expName}
+                  key={exp[0]}
                   href={{
                     pathname: "/experience",
                     query: {
-                      experienceId: expName,
+                      experienceId: exp[0],
                       apparatusId: "",
                       dataType: "experience",
                     },
@@ -281,10 +268,11 @@ const LoadExperience = () => {
                 <DeleteIcon
                   style={{ fontSize: "36px" }}
                   onClick={() => {
-                    handleDeleteDialogOpen(index, expName);       
+                    handleDeleteDialogOpen(index, exp[0]);       
                   }}
                 />
-                <MoreHorizIcon style={{ fontSize: "36px" }} />
+                {//<MoreHorizIcon style={{ fontSize: "36px" }} />
+                }
               </ExperienceButtons>
             </ExperienceRow>
           ))}
