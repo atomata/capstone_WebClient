@@ -15,12 +15,12 @@ const useWorkbench = () => {
             setExpErr("");
        
         // No errors, go and log in
-        if (createError) event.preventDefault();
+        // Alternatively do nothing if there's no specified event
+        if (createError && event !== undefined) event.preventDefault();
     };
 
     return { handleExperienceCreate, expErr };
 };
-
 
 
 const useDeleteDialog = () => {

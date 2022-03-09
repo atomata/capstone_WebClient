@@ -33,7 +33,7 @@ const UIComponentGrid = styled.div`
 
 // css and placement for the action bar (the action bar is the bar on the side which have the button)
 const SideBarGrid = styled.div`
-  grid-column: 1 / span 2;
+  grid-column: 1 / span 3;
   grid-row: 1 / span50;
   background-color: #3f3d56;
   z-index: 4;
