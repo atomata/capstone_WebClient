@@ -28,7 +28,7 @@ const ActionSequenceHeader = styled.div.attrs({
 
 const ActionSequenceList = styled.div`
   display: flex;
-  max-height: 95%;
+  max-height: 100%;
   min-width: stretch;
   padding-left: 1em;
   padding-top: 0.5em;
@@ -41,7 +41,6 @@ const ActionSequenceList = styled.div`
 
 const DragContainer = styled.div`
   border: 1px solid black;
-  max-height: 95%;
   width: 16em;
   margin: 0.5em;
   background-color: #3f3d56;

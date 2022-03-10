@@ -1,16 +1,29 @@
 import * as React from "react";
-import {
-  Menu,
-  MenuItem,
-} from "@mui/material";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
+import styled from "styled-components";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import TreeView from "@mui/lab/TreeView";
+import SettingsInputComponentIcon from '@mui/icons-material/SettingsInputComponent';
 import {
   changeSkybox,
-  defaultCameraView,
 } from "../../../util/unityContextActions";
+import AssetItem from "../TreeView/AssetItem";
+import ActionItem from "../TreeView/ActionItem";
+
+const SkyboxInfoHeader = styled.div.attrs({
+  children: "General Settings",
+})`
+  display: flex;
+  justify-content: center;
+  width: stretch;
+  font-size: 1.2em;
+  text-transform: uppercase;
+  color: white;
+  font-family: Inter, monospace;
+  margin-bottom: 1em;
+`;
 
 function SkyBoxInfo(): JSX.Element {
-  const ITEM_HEIGHT = 48;
   const skyboxList = [
     "space",
     "ocean",
@@ -21,58 +34,27 @@ function SkyBoxInfo(): JSX.Element {
     "mars",
     "ambience",
   ];
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
   return (
     <>
-      <button
-        type="button"
-        aria-label="more"
-        id="long-button"
-        aria-controls={open ? "long-menu" : undefined}
-        aria-expanded={open ? "true" : undefined}
-        aria-haspopup="true"
-        onClick={handleClick}
+      <SkyboxInfoHeader />
+      <TreeView
+        aria-label="file system navigator"
+        defaultCollapseIcon={<ExpandMoreIcon />}
+        defaultExpandIcon={<ChevronRightIcon />}
+        sx={{ maxHeight: "100%", flexGrow: 1, maxWidth: "90%" }}
       >
-        Change Sky Box
-        <MoreVertIcon />
-      </button>
-      <Menu
-        id="long-menu"
-        MenuListProps={{
-          "aria-labelledby": "long-button",
-        }}
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-        PaperProps={{
-          style: {
-            maxHeight: ITEM_HEIGHT * 4.5,
-            width: "20ch",
-          },
-        }}
-      >
-        {skyboxList.map((skybox) => (
-          <MenuItem
-            key={skybox}
-            onClick={() => {
-              handleClose();
-              changeSkybox(skybox);
-            }}
-          >;
-            {skybox}
-          </MenuItem>
-        ))}
-      </Menu>
-      <button type="button" key="cam_view" onClick={() => defaultCameraView()}>
-        Default View
-      </button>
+        <AssetItem labelText="Change Background" nodeId="skybox"  LabelIcon={SettingsInputComponentIcon}>
+          {skyboxList.map((skybox) => (
+            <ActionItem
+              labelText={skybox}
+              nodeId={skybox}
+              add={() => {
+                changeSkybox(skybox);
+              }}
+            />
+          ))}
+        </AssetItem>
+      </TreeView>
     </>
   );
 }

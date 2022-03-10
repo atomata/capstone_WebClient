@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import TreeView from "@mui/lab/TreeView";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import CategoryIcon from "@mui/icons-material/Category";
 import styled from "styled-components";
 import { SerializedApparatus } from "../../../util/types";
 import {
@@ -46,7 +47,11 @@ function ApparatusInfo(): JSX.Element {
         sx={{ maxHeight: "100%", flexGrow: 1, maxWidth: "90%" }}
       >
         {apparatusInfo.map((data, index) => (
-          <AssetItem labelText={data[0]} nodeId={`index ${index}`}>
+          <AssetItem
+            labelText={data[0]}
+            nodeId={`index ${index}`}
+            LabelIcon={CategoryIcon}
+          >
             {data[1].map((actionData) => (
               <ActionItem
                 labelText={
