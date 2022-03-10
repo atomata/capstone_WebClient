@@ -12,6 +12,7 @@ import {
   globalContextTypes,
 } from "../../util/customHooks/globalContext";
 import { saveExp } from "../../util/cloudOperations/writeToCloud";
+import SideBarItem from "./SideBar/SideBarItem";
 // the side bar box
 
 const UIComponentRoot = styled.div`
