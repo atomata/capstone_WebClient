@@ -6,22 +6,24 @@ import { urlFor } from "../util/utils";
 
 const LoginRoot = styled.div`
   position: relative;
-  width: inherit;
+  width: 100%;
   display: flex;
   background-color: #A5A4EA;
+  height: 100vh;
+
 `;
 
 const LoginContainer = styled.div`
   text-align: center;
-  padding-top: 100px;
-  padding-bottom: 100px;
+  padding-top: 5em;
+  padding-bottom: 5em;
   background: #3F3D56;
   width: 50%;
   margin-left: 50%;
 `;
 
 const LoginFields = styled.div`
-  margin: 15px;
+  margin: 2em;
 `;
 
 const LoginButton = styled(Button)`
@@ -29,10 +31,11 @@ const LoginButton = styled(Button)`
     background-color: #FFFFFF;
     display: block-inline;
     color: #1710A1;
-    margin-top: 30px;
-    padding: 15px;
-    padding-left: 85px;
-    padding-right: 85px;
+    margin-top: 2em;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    padding-left: 6.1em;
+    padding-right: 6.1em;
     font-weight: bold;
   }
 `;
@@ -48,13 +51,13 @@ const ImgIllustration = styled.img.attrs({
     width: 48%;
   }
 
-  width: 62%;
+  width: 65%;
   position: absolute;
   display:block;
-  height: 600px;
+  height: 75%;
   margin-top: 5%;
   margin-bottom: 5%;
-  margin-left:50px;
+  margin-left: 3em;
   `
 ;
 

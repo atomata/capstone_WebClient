@@ -57,7 +57,7 @@ const SelectionList = ({ experienceId }) => {
           </SelectionContent>
       </SelectionContainer>
       <ImgIllustration1 src={urlFor("assets/selectionillustration1.svg")} />   
-      <PreviewContainer>GIF FOR PREVIEW
+      <PreviewContainer><SelectionHeading>GIF FOR PREVIEW</SelectionHeading>
       {visible && <div><GifIllustration src={urlFor(path)} /></div>}
       </PreviewContainer>
       <ImgIllustration2 src={urlFor("assets/selectionillustration2.svg")} />   
