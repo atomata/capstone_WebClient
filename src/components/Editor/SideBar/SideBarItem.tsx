@@ -6,6 +6,7 @@ import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import CameraswitchIcon from "@mui/icons-material/Cameraswitch";
 import TextFormatIcon from "@mui/icons-material/TextFormat";
 import SaveAltIcon from "@mui/icons-material/SaveAlt";
+import PlayArrowOutlinedIcon from "@mui/icons-material/PlayArrowOutlined"
 import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
 import { SideBarContext } from "../../../util/customHooks/SideBarContext";
 import { saveExp } from "../../../util/cloudOperations/writeToCloud";
@@ -61,8 +62,10 @@ function SideBarItem(): JSX.Element {
     toggleTextBox,
     toggleApparatusInfo,
     toggleSkyBoxInfo,
+    toggleOverlay,
     skyBoxInfo,
     apparatusInfo,
+    showOverlay
   } = useContext(SideBarContext);
   const { experienceData, userId }: globalContextTypes =
     useContext(GlobalContext);
@@ -131,6 +134,14 @@ function SideBarItem(): JSX.Element {
         </SideBarItemWrapper>
         <SideBarItemWrapper>
           <SideBarItemBottomBox>
+            <PlayArrowOutlinedIcon
+              type="button"
+              style={{ fontSize: "35px" }}
+              sx={{ "&:hover": { color: "white" }, mb: 3 }}
+              onClick={() => {
+                toggleOverlay();
+              }}
+            />
             <SaveAltIcon
               type="button"
               style={{ fontSize: "35px" }}

@@ -1,20 +1,30 @@
 import styled from "styled-components";
 import { useContext, useEffect } from "react";
+import { Button } from "@mui/material";
 import { useActionBar } from "../../util/customHooks/ActionBarFunc";
 import ActionSequence from "./ActionSequence/ActionSequence";
 import { SideBarContext } from "../../util/customHooks/SideBarContext";
 import { ActionContext } from "../../util/customHooks/actionContext";
 import ToolDocItem from "./SideBar/ToolDocItem";
 import TextEditor from "./TextEditor";
-import { useActionList } from "../../util/customHooks/overlayfunc";
+import { useOverlay, useActionList } from "../../util/customHooks/overlayfunc";
+import PreviewOverlay from "../PreviewOverlay";
 import {
   GlobalContext,
   globalContextTypes,
 } from "../../util/customHooks/globalContext";
 import { saveExp } from "../../util/cloudOperations/writeToCloud";
 import SideBarItem from "./SideBar/SideBarItem";
-// the side bar box
 
+const OverlayShown = styled.div`
+  display: absolute;
+  width: inherit;
+  height: 750px;
+  opacity: 1;
+  pointer-events: auto;
+`;
+
+// the side bar box
 const UIComponentRoot = styled.div`
   display: absolute;
   height: 100vh;
@@ -82,7 +92,9 @@ function Overlay(): JSX.Element {
     skyBoxInfo,
   } = useActionBar();
 
-  const { experienceData,userId }: globalContextTypes = useContext(GlobalContext);
+  const { showOverlay, toggleOverlay } = useOverlay();
+
+  const { experienceData, userId }: globalContextTypes = useContext(GlobalContext);
   const {
     selectAction,
     selectedAction,
@@ -98,8 +110,9 @@ function Overlay(): JSX.Element {
     experienceData.experience.actionList = [...actionList];
     saveExp(userId, experienceData.experience);
   }, [actionList, experienceData, userId])
-  return (
+  return (  
     <UIComponentRoot>
+      {showOverlay ? (
       <UIComponentGrid>
         <ActionContext.Provider
           value={{
@@ -118,10 +131,12 @@ function Overlay(): JSX.Element {
               toggleToolDoc,
               toggleApparatusInfo,
               toggleSkyBoxInfo,
+              toggleOverlay,
               textBox,
               toolDoc,
               apparatusInfo,
               skyBoxInfo,
+              showOverlay
             }}
           >
             <SideBarGrid>
@@ -148,7 +163,13 @@ function Overlay(): JSX.Element {
           )}
         </ActionContext.Provider>
       </UIComponentGrid>
-    </UIComponentRoot>
+      ) : (
+        <OverlayShown>
+          <Button onClick={toggleOverlay}>Return</Button>
+          <PreviewOverlay actionList={actionList} />
+        </OverlayShown>
+      )}
+    </UIComponentRoot> 
   );
 }
 
