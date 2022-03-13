@@ -2,7 +2,6 @@ import styled from "styled-components";
 import React from "react";
 import useKeypress from "react-use-keypress";
 import TextPreview from "./Editor/TextPreview";
-import { requestTrigger } from "../util/unityContextActions";
 import { useSelected } from "../util/customHooks/previewOverlayfunc";
 import { ActionData } from "../util/types";
 
