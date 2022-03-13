@@ -10,13 +10,13 @@ const defaultCamera = "ReturnCamera";
 const fileNamePostfix = 5;
 
 const apparatusContainer =
-  "https://addressabletest1.blob.core.windows.net/apparatus3";
+  "https://addressabletest1.blob.core.windows.net/apparatus";
 const developerStorage =
   "https://vclassroommspedex.blob.core.windows.net";
 
 const defaultStorage = "https://addressabletest1.blob.core.windows.net";
 
-const apparatusBlob = "apparatus2";
+const apparatusBlob = "apparatus";
 const skyboxBlob = "skyboxes";
 
 export {
