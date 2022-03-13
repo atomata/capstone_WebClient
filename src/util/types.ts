@@ -23,7 +23,6 @@ type SerializedExperience = {
 
 // TODO change to lower case
 type SerializedApparatus = {
-  Id: string;
   Paths: string[];
   Data: string[];
 };
