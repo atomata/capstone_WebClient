@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import useKeypress from 'react-use-keypress';
 import React, { useState } from "react";
-import { Box, IconButton } from "@mui/material";
 
 const TextDiv = styled.div`
   background: #3f3d56;
