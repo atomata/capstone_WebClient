@@ -25,7 +25,7 @@ const DescLabel = styled.label`
 
 const TextPreview = ({ desc }: any): JSX.Element => {
     const [isExpanded, setExpanded] = useState(true);
-    const isEmpty = (desc === "");
+    const isEmpty = (desc === "" || desc === undefined);;
 
     useKeypress(" ", () => {
       setExpanded(!isExpanded);
