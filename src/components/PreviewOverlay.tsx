@@ -132,22 +132,6 @@ function PreviewOverlay({ actionList }: PreviewOverlayProps): JSX.Element {
     <PreviewRoot>
       {actionList[0] !== undefined ? (
         <PreviewGrid>
-          <PreviewGridLeft>
-            <IconButton
-              disableRipple
-              className={classes.removeHoverEffect}
-              onClick={() => {
-                sideScroll(contentWrapper.current, 25, 50, -5);
-                cyclePreviewLeft();
-              }}
-            >
-              <ArrowLeftIcon
-                sx={{
-                  fontSize: 150,
-                }}
-              />
-            </IconButton>
-          </PreviewGridLeft>
           <PreviewGridCenter>
             <ActionTabList ref={contentWrapper}>
               {actionList.map((actionData, index) => (
@@ -177,22 +161,6 @@ function PreviewOverlay({ actionList }: PreviewOverlayProps): JSX.Element {
               ))}
             </ActionTabList>
           </PreviewGridCenter>
-          <PreviewGridRight>
-            <IconButton
-              disableRipple
-              className={classes.removeHoverEffect}
-              onClick={() => {
-                sideScroll(contentWrapper.current, 25, 50, 5);
-                cyclePreviewRight();
-              }}
-            >
-              <ArrowRightIcon
-                sx={{
-                  fontSize: 150,
-                }}
-              />
-            </IconButton>
-          </PreviewGridRight>
         </PreviewGrid>
       ) : (
         <div />
