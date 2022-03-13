@@ -2,9 +2,10 @@ import styled from "styled-components";
 import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import { Button, IconButton} from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import {makeStyles} from "@mui/styles";
 import useKeypress from 'react-use-keypress';
+import TextPreview from "./Editor/TextPreview";
 import { requestTrigger } from "../util/unityContextActions";
 import { useSelected } from "../util/customHooks/previewOverlayfunc";
 import { ActionData } from "../util/types";
@@ -109,7 +110,7 @@ type PreviewOverlayProps = {
 function PreviewOverlay({ actionList }: PreviewOverlayProps): JSX.Element {
   const classes = useStyles();
   const contentWrapper = React.useRef(null);
-  const { selected, setSelected, cyclePreviewLeft, cyclePreviewRight } =
+  const { desc, selected, updateDesc, setSelected, cyclePreviewLeft, cyclePreviewRight } =
     useSelected(actionList);
 
   useKeypress('ArrowLeft', () => {
@@ -143,6 +144,7 @@ function PreviewOverlay({ actionList }: PreviewOverlayProps): JSX.Element {
                       <Button
                         onClick={() => {
                           setSelected(index);
+                          updateDesc(index);
                         }}
                       >
                         {index}
@@ -152,6 +154,7 @@ function PreviewOverlay({ actionList }: PreviewOverlayProps): JSX.Element {
                     <Button
                       onClick={() => {
                         setSelected(index);
+                        updateDesc(index);
                       }}
                     >
                       {index}
@@ -160,6 +163,7 @@ function PreviewOverlay({ actionList }: PreviewOverlayProps): JSX.Element {
                 </ActionTabListItem>
               ))}
             </ActionTabList>
+            <TextPreview desc={desc}/>
           </PreviewGridCenter>
         </PreviewGrid>
       ) : (
