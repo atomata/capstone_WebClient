@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import useKeypress from 'react-use-keypress';
 import { useContext, useEffect } from "react";
-import { Button } from "@mui/material";
+import { Button, IconButton } from "@mui/material";
 import { useActionBar } from "../../util/customHooks/ActionBarFunc";
 import ActionSequence from "./ActionSequence/ActionSequence";
 import { SideBarContext } from "../../util/customHooks/SideBarContext";
@@ -9,6 +10,7 @@ import ToolDocItem from "./SideBar/ToolDocItem";
 import TextEditor from "./TextEditor";
 import { useOverlay, useActionList } from "../../util/customHooks/overlayfunc";
 import PreviewOverlay from "../PreviewOverlay";
+import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import {
   GlobalContext,
   globalContextTypes,
@@ -94,6 +96,11 @@ function Overlay(): JSX.Element {
 
   const { showOverlay, toggleOverlay } = useOverlay();
 
+  useKeypress('Escape', () => {
+    if(!showOverlay)
+      toggleOverlay();
+  });
+
   const { experienceData, userId }: globalContextTypes = useContext(GlobalContext);
   const {
     selectAction,
@@ -110,6 +117,7 @@ function Overlay(): JSX.Element {
     experienceData.experience.actionList = [...actionList];
     saveExp(userId, experienceData.experience);
   }, [actionList, experienceData, userId])
+  
   return (  
     <UIComponentRoot>
       {showOverlay ? (
@@ -163,9 +171,18 @@ function Overlay(): JSX.Element {
           )}
         </ActionContext.Provider>
       </UIComponentGrid>
-      ) : (
+      ) : (  
         <OverlayShown>
-          <Button onClick={toggleOverlay}>Return</Button>
+          <IconButton
+            className="ReturnButton"
+            onClick={toggleOverlay}
+          >
+            <KeyboardBackspaceIcon
+              sx={{
+                fontSize: "30px",
+              }}
+            />
+          </IconButton>
           <PreviewOverlay actionList={actionList} />
         </OverlayShown>
       )}

@@ -4,6 +4,7 @@ import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import { Button, IconButton} from "@mui/material";
 import React from "react";
 import {makeStyles} from "@mui/styles";
+import useKeypress from 'react-use-keypress';
 import { requestTrigger } from "../util/unityContextActions";
 import { useSelected } from "../util/customHooks/previewOverlayfunc";
 import { ActionData } from "../util/types";
@@ -16,6 +17,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
+
 const sideScroll = (
   element: HTMLDivElement,
   speed: number,
@@ -109,6 +111,23 @@ function PreviewOverlay({ actionList }: PreviewOverlayProps): JSX.Element {
   const contentWrapper = React.useRef(null);
   const { selected, setSelected, cyclePreviewLeft, cyclePreviewRight } =
     useSelected(actionList);
+
+  useKeypress('ArrowLeft', () => {
+    cyclePreviewLeft();
+  });
+
+  useKeypress('ArrowDown', () => {
+    cyclePreviewLeft();
+  });
+
+  useKeypress('ArrowRight', () => {
+    cyclePreviewRight();
+  });
+
+  useKeypress('ArrowUp', () => {
+    cyclePreviewRight();
+  });
+
   return (
     <PreviewRoot>
       {actionList[0] !== undefined ? (
