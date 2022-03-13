@@ -1,3 +1,4 @@
+import { ownerDocument } from "@mui/material";
 import {
   ActionData,
   AssetBundle,
@@ -26,24 +27,41 @@ function linkPathsToData(metadata: SerializedApparatus): PathData[] {
       pathDataList[index].data[dataSplit[0]] = [];
     }
     if (dataSplit[0] === "input") {
-      const commandSplit = dataSplit[1].split("/")[1].split("?");
-      let infoSplit;
-      if (commandSplit[1] !== undefined) {
-        infoSplit = commandSplit[1].split("&");
-      }
+      
+      const typeAndRest = dataSplit[1].split("/");
+      const idAndArgs = typeAndRest[1].split("?");
 
-      const inputObject = {
-        command: commandSplit[0],
-        name:
-          infoSplit !== undefined
-            ? infoSplit[0].split("uiname=")[1]
-            : undefined,
-        desc:
-          infoSplit !== undefined
-            ? infoSplit[1].split("uidesc=")[1]
-            : undefined,
-      };
-      pathDataList[index].data[dataSplit[0]].push(inputObject);
+      const type = typeAndRest[0]
+      const id = idAndArgs[0]
+      
+      // in the case where args arn't provided, use default values to populate name and description
+      const hasArgs = idAndArgs.length > 1;
+
+      if(!hasArgs)
+      {
+        pathDataList[index].data[dataSplit[0]].push({
+          command: id,
+          name: id,
+          desc: ""
+        });
+      }
+      else 
+      {
+        const args = idAndArgs[1]
+        const argSplit = args.split("&")
+
+        const argDictionary = {}
+        for(let i of argSplit){
+          let keyvalue = i.split("=")
+          argDictionary[keyvalue[0]] = argDictionary[keyvalue[1]]
+        }
+
+        pathDataList[index].data[dataSplit[0]].push({
+          command: id,
+          name: "uiname" in argDictionary ? argDictionary["uiname"] : id,
+          desc: "uidesc" in argDictionary ? argDictionary["uidesc"] : id,
+        });
+      }
     } else {
       pathDataList[index].data[dataSplit[0]].push(dataSplit[1]);
     }
