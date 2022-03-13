@@ -7,8 +7,6 @@ const useSelected = (
 ): {
   desc: string;
   selected: number;
-  updateDesc: (number) => void;
-  setSelected: Dispatch<SetStateAction<number>>;
   cyclePreviewLeft: () => void;
   cyclePreviewRight: () => void;
 } => {
@@ -45,7 +43,7 @@ const useSelected = (
       setDesc(actionList[index].desc);
   }
 
-  return { desc, selected, updateDesc, setSelected, cyclePreviewLeft, cyclePreviewRight };
+  return { desc, selected, cyclePreviewLeft, cyclePreviewRight };
 };
 
 export { useSelected };

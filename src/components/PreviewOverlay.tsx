@@ -82,7 +82,7 @@ type PreviewOverlayProps = {
 function PreviewOverlay({ actionList }: PreviewOverlayProps): JSX.Element {
   const classes = useStyles();
   const contentWrapper = React.useRef(null);
-  const { desc, selected, updateDesc, setSelected, cyclePreviewLeft, cyclePreviewRight } =
+  const { desc, selected, cyclePreviewLeft, cyclePreviewRight } =
     useSelected(actionList);
 
   useKeypress('ArrowLeft', () => {
