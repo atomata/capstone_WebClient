@@ -1,6 +1,4 @@
 import styled from "styled-components";
-import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
-import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import { Button, IconButton} from "@mui/material";
 import React, { useState } from "react";
 import {makeStyles} from "@mui/styles";
@@ -50,18 +48,6 @@ const PreviewGrid = styled.div`
   grid-template-rows: repeat(11, 1fr);
 `;
 
-const PreviewGridLeft = styled.div`
-  grid-column: 4 / span 1;
-  grid-row: 9 / span 1;
-  z-index: 2;
-  pointer-events: auto;
-  padding: 0;
-  min-height: 1em;
-  max-height: 1em;
-  min-width: 1em;
-  max-width: 1em;
-`;
-
 const PreviewGridCenter = styled.div`
   grid-column: 5 / span 3;
   grid-row: 10 / span 1;
@@ -73,17 +59,6 @@ const PreviewGridCenter = styled.div`
   padding-right: 5%;
 `;
 
-const PreviewGridRight = styled.div`
-  grid-column: 8 / span 1;
-  grid-row: 9 / span 1;
-  z-index: 2;
-  pointer-events: auto;
-  min-height: 1em;
-  max-height: 1em;
-  min-width: 1em;
-  max-width: 1em;
-`;
-
 const ActionTabList = styled.div`
   display: flex;
   overflow-x: hidden;
@@ -91,9 +66,6 @@ const ActionTabList = styled.div`
 `;
 const ActionTabListItem = styled.div`
   min-height: 1em;
-  outline-style: solid;
-  outline-width: 0.1em;
-  outline-color: black;
   margin: 0.5em;
   align-self: center;
 `;
@@ -141,24 +113,9 @@ function PreviewOverlay({ actionList }: PreviewOverlayProps): JSX.Element {
                     <ActionTabSelectedListItem>
                       {(() =>
                         requestTrigger(actionData.path, actionData.input.command))()}
-                      <Button
-                        onClick={() => {
-                          setSelected(index);
-                          updateDesc(index);
-                        }}
-                      >
-                        {index}
-                      </Button>
                     </ActionTabSelectedListItem>
                   ) : (
-                    <Button
-                      onClick={() => {
-                        setSelected(index);
-                        updateDesc(index);
-                      }}
-                    >
-                      {index}
-                    </Button>
+                    <div/>
                   )}
                 </ActionTabListItem>
               ))}
