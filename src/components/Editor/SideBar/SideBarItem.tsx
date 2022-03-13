@@ -18,6 +18,8 @@ import {
 import { ActionContext } from "../../../util/customHooks/actionContext";
 import styles from "../../SideBarButtons.module.css";
 import { defaultCameraView } from "../../../util/unityContextActions";
+import Tooltip from "../../../util/Tooltip"
+
 
 const SideBarItemBox = styled.div`
   position: flex;
@@ -86,6 +88,7 @@ function SideBarItem(): JSX.Element {
         </Link>
 
         <SideBarItemWrapper>
+        <Tooltip html={<p>Apparatus List</p>}>
           <IconButton
             className={
               apparatusInfo ? styles.toggleOnSidebarItem : styles.sidebarItem
@@ -98,8 +101,10 @@ function SideBarItem(): JSX.Element {
               }}
             />
           </IconButton>
+          </Tooltip>
         </SideBarItemWrapper>
         <SideBarItemWrapper>
+        <Tooltip html={<p>Settings</p>}>
           <IconButton
             className={
               skyBoxInfo ? styles.toggleOnSidebarItem : styles.sidebarItem
@@ -112,8 +117,10 @@ function SideBarItem(): JSX.Element {
               }}
             />
           </IconButton>
+          </Tooltip>
         </SideBarItemWrapper>
         <SideBarItemWrapper>
+          <Tooltip html={<p>Text box</p>}>
           <IconButton
             className={
               textBox ? styles.toggleOnSidebarItem : styles.sidebarItem
@@ -123,17 +130,21 @@ function SideBarItem(): JSX.Element {
           >
             <TextFormatIcon sx={{ fontSize: "38px" }} />
           </IconButton>
+          </Tooltip>
         </SideBarItemWrapper>
         <SideBarItemWrapper>
+          <Tooltip html={<p>Default view</p>}>
           <IconButton
             className={styles.sidebarItem}
             onClick={() => defaultCameraView()}
           >
             <CameraswitchIcon sx={{ fontSize: "32px" }} />
           </IconButton>
+          </Tooltip>
         </SideBarItemWrapper>
         <SideBarItemWrapper>
           <SideBarItemBottomBox>
+          <Tooltip html={<p>Preview</p>}>
             <PlayArrowOutlinedIcon
               type="button"
               style={{ fontSize: "35px" }}
@@ -142,6 +153,8 @@ function SideBarItem(): JSX.Element {
                 toggleOverlay();
               }}
             />
+           </Tooltip>
+          <Tooltip html={<p>Save</p>}>
             <SaveAltIcon
               type="button"
               style={{ fontSize: "35px" }}
@@ -151,8 +164,10 @@ function SideBarItem(): JSX.Element {
                 saveExp(userId, experienceData.experience);
               }}
             />
+            </Tooltip>
             <Link href="/">
               {" "}
+              <Tooltip html={<p>Return</p>}>
               <KeyboardReturnIcon
                 type="button"
                 style={{ fontSize: "35px" }}
@@ -162,6 +177,7 @@ function SideBarItem(): JSX.Element {
                   saveExp(userId, experienceData.experience);
                 }}
               />
+              </Tooltip>
             </Link>
           </SideBarItemBottomBox>
         </SideBarItemWrapper>
