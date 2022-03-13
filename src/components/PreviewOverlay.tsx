@@ -14,17 +14,18 @@ const PreviewRoot = styled.div`
   opacity: 1;
   pointer-events: auto;
 `;
+
 const PreviewGrid = styled.div`
   display: grid;
   width: inherit;
   height: inherit;
-  grid-template-columns: repeat(11, 1fr);
-  grid-template-rows: repeat(11, 1fr);
+  grid-template-columns: repeat(60, 1fr);
+  grid-template-rows: repeat(60, 1fr);
 `;
 
 const PreviewGridCenter = styled.div`
-  grid-column: 5 / span 3;
-  grid-row: 10 / span 1;
+  grid-column: 22 / span 20;
+  grid-row: 45 / span 15;
   z-index: 2;
   pointer-events: auto;
   min-height: 1em;
