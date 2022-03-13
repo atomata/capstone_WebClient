@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { IconButton, Link } from "@mui/material";
 import styled from "styled-components";
 import SettingsIcon from "@mui/icons-material/Settings";
