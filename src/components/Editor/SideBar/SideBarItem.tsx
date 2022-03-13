@@ -67,7 +67,6 @@ function SideBarItem(): JSX.Element {
     toggleOverlay,
     skyBoxInfo,
     apparatusInfo,
-    showOverlay
   } = useContext(SideBarContext);
   const { experienceData, userId }: globalContextTypes =
     useContext(GlobalContext);

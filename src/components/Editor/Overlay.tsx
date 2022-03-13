@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import useKeypress from 'react-use-keypress';
 import { useContext, useEffect } from "react";
-import { Button, IconButton } from "@mui/material";
+import { IconButton } from "@mui/material";
+import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import { useActionBar } from "../../util/customHooks/ActionBarFunc";
 import ActionSequence from "./ActionSequence/ActionSequence";
 import { SideBarContext } from "../../util/customHooks/SideBarContext";
@@ -10,7 +11,6 @@ import ToolDocItem from "./SideBar/ToolDocItem";
 import TextEditor from "./TextEditor";
 import { useOverlay, useActionList } from "../../util/customHooks/overlayfunc";
 import PreviewOverlay from "../PreviewOverlay";
-import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import {
   GlobalContext,
   globalContextTypes,
@@ -117,6 +117,21 @@ function Overlay(): JSX.Element {
     experienceData.experience.actionList = [...actionList];
     saveExp(userId, experienceData.experience);
   }, [actionList, experienceData, userId])
+
+  const renderTool = () => {
+    if (toolDoc) return (<ToolDocGrid>
+      <ToolDocItem />
+    </ToolDocGrid>);
+    return (<div/>);
+  };
+
+  const renderText = () => {
+    if (textBox) return (<TextEditorGrid>
+      {" "}
+      <TextEditor />
+    </TextEditorGrid>);
+    return (<div/>);
+  };
   
   return (  
     <UIComponentRoot>
@@ -150,25 +165,12 @@ function Overlay(): JSX.Element {
             <SideBarGrid>
               <SideBarItem />
             </SideBarGrid>
-            {toolDoc ? (
-              <ToolDocGrid>
-                <ToolDocItem />
-              </ToolDocGrid>
-            ) : (
-              <div />
-            )}
+            {renderTool()}
           </SideBarContext.Provider>
           <ActionSequenceBarGrid>
             <ActionSequence />
           </ActionSequenceBarGrid>
-          {textBox ? (
-            <TextEditorGrid>
-              {" "}
-              <TextEditor />
-            </TextEditorGrid>
-          ) : (
-            <div />
-          )}
+          {renderText()}
         </ActionContext.Provider>
       </UIComponentGrid>
       ) : (  

@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import { Button, IconButton} from "@mui/material";
-import React, { useState } from "react";
+import React from "react";
 import {makeStyles} from "@mui/styles";
 import useKeypress from 'react-use-keypress';
 import TextPreview from "./Editor/TextPreview";
@@ -80,7 +79,6 @@ type PreviewOverlayProps = {
 
 // TODO change styling instead of defining a new component
 function PreviewOverlay({ actionList }: PreviewOverlayProps): JSX.Element {
-  const classes = useStyles();
   const contentWrapper = React.useRef(null);
   const { desc, selected, cyclePreviewLeft, cyclePreviewRight } =
     useSelected(actionList);
