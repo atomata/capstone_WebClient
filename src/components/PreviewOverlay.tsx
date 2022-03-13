@@ -40,7 +40,7 @@ type PreviewOverlayProps = {
 
 // TODO change styling instead of defining a new component
 function PreviewOverlay({ actionList }: PreviewOverlayProps): JSX.Element {
-  const { desc,cyclePreviewLeft, cyclePreviewRight } =
+  const { desc, selected, cyclePreviewLeft, cyclePreviewRight } =
     useSelected(actionList);
 
   useKeypress("ArrowLeft", () => {
@@ -64,7 +64,7 @@ function PreviewOverlay({ actionList }: PreviewOverlayProps): JSX.Element {
       {actionList[0] !== undefined ? (
         <PreviewGrid>
           <PreviewGridCenter>
-            <TextPreview desc={desc} />
+            {selected >= 0 ? <TextPreview desc={desc} /> : null}
           </PreviewGridCenter>
         </PreviewGrid>
       ) : (
