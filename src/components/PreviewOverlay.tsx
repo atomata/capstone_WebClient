@@ -1,36 +1,11 @@
 import styled from "styled-components";
 import React from "react";
-import {makeStyles} from "@mui/styles";
-import useKeypress from 'react-use-keypress';
+import useKeypress from "react-use-keypress";
 import TextPreview from "./Editor/TextPreview";
 import { requestTrigger } from "../util/unityContextActions";
 import { useSelected } from "../util/customHooks/previewOverlayfunc";
 import { ActionData } from "../util/types";
 
-const useStyles = makeStyles((theme) => ({
-  removeHoverEffect: {
-    "&:hover": {
-      backgroundColor: "transparent",
-      cursor: "default",
-    },
-  },
-}));
-
-const sideScroll = (
-  element: HTMLDivElement,
-  speed: number,
-  distance: number,
-  step: number
-) => {
-  let scrollAmount = 0;
-  const slideTimer = setInterval(() => {
-    element.scrollLeft += step;
-    scrollAmount += Math.abs(step);
-    if (scrollAmount >= distance) {
-      clearInterval(slideTimer);
-    }
-  }, speed);
-};
 const PreviewRoot = styled.div`
   display: absolute;
   width: inherit;
@@ -58,44 +33,28 @@ const PreviewGridCenter = styled.div`
   padding-right: 5%;
 `;
 
-const ActionTabList = styled.div`
-  display: flex;
-  overflow-x: hidden;
-  align-items: center;
-`;
-const ActionTabListItem = styled.div`
-  min-height: 1em;
-  margin: 0.5em;
-  align-self: center;
-`;
-
-const ActionTabSelectedListItem = styled.div`
-  background-color: white;
-`;
-
 type PreviewOverlayProps = {
   actionList: ActionData[];
 };
 
 // TODO change styling instead of defining a new component
 function PreviewOverlay({ actionList }: PreviewOverlayProps): JSX.Element {
-  const contentWrapper = React.useRef(null);
   const { desc, selected, cyclePreviewLeft, cyclePreviewRight } =
     useSelected(actionList);
 
-  useKeypress('ArrowLeft', () => {
+  useKeypress("ArrowLeft", () => {
     cyclePreviewLeft();
   });
 
-  useKeypress('ArrowDown', () => {
+  useKeypress("ArrowDown", () => {
     cyclePreviewLeft();
   });
 
-  useKeypress('ArrowRight', () => {
+  useKeypress("ArrowRight", () => {
     cyclePreviewRight();
   });
 
-  useKeypress('ArrowUp', () => {
+  useKeypress("ArrowUp", () => {
     cyclePreviewRight();
   });
 
@@ -104,21 +63,12 @@ function PreviewOverlay({ actionList }: PreviewOverlayProps): JSX.Element {
       {actionList[0] !== undefined ? (
         <PreviewGrid>
           <PreviewGridCenter>
-            <ActionTabList ref={contentWrapper}>
-              {actionList.map((actionData, index) => (
-                <ActionTabListItem key={index}>
-                  {selected === index ? (
-                    <ActionTabSelectedListItem>
-                      {(() =>
-                        requestTrigger(actionData.path, actionData.input.command))()}
-                    </ActionTabSelectedListItem>
-                  ) : (
-                    <div/>
-                  )}
-                </ActionTabListItem>
-              ))}
-            </ActionTabList>
-            <TextPreview desc={desc}/>
+            {actionList.map((actionData, index) =>
+              selected === index
+                ? requestTrigger(actionData.path, actionData.input.command)
+                : null
+            )}
+            <TextPreview desc={desc} />
           </PreviewGridCenter>
         </PreviewGrid>
       ) : (
