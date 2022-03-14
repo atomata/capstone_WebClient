@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import useKeypress from 'react-use-keypress';
 import React, { useState } from "react";
+import Draggable from "react-draggable";
 
 const TextDiv = styled.div`
   background: #3f3d56;
@@ -32,9 +33,11 @@ const TextPreview = ({ desc }: any): JSX.Element => {
     });
 
     return isExpanded && !isEmpty ? (
+      <Draggable>
       <TextDiv>
         <DescLabel>{desc}</DescLabel>  
       </TextDiv>
+      </Draggable>
     ) : (
       <div/>
     );
