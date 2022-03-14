@@ -48,15 +48,24 @@ const useActionBar = () => {
     setTextBox((v) => !v);
   };
 
+  // hook for the saving tip
+  const [savingTip, setSavingTip] = useState(false);
+  const toggleSavingTip = () =>{
+    setSavingTip((v) => !v);
+  };
+
   return {
     toggleTextBox,
     toggleToolDoc,
     toggleApparatusInfo,
     toggleSkyBoxInfo,
+    toggleSavingTip,
+    savingTip,
     textBox,
     toolDoc,
     apparatusInfo,
     skyBoxInfo,
+    setSavingTip,
     setToolDoc,
     setApparatusInfo,
     setSkyBoxInfo,

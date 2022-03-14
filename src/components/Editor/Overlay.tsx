@@ -19,6 +19,7 @@ import {
 import { saveExp } from "../../util/cloudOperations/writeToCloud";
 import SideBarItem from "./SideBar/SideBarItem";
 import { defaultCameraView } from "../../util/unityContextActions";
+import SavingTip from "../savingTip";
 
 const OverlayShown = styled.div`
   display: absolute;
@@ -80,6 +81,15 @@ const TextEditorGrid = styled.div`
   z-index: 2;
 `;
 
+const SavingTipGrid = styled.div`
+  grid-column: 59 / span 2;
+  grid-row: 39 / span 1;
+  background-color: gray;
+  z-index: 2;
+  ml:1em;
+  mr:1em;
+`
+
 /**
  * The side bar define the area and the outline of what will be included.
  * @returns
@@ -90,6 +100,8 @@ function Overlay(): JSX.Element {
     toggleToolDoc,
     toggleApparatusInfo,
     toggleSkyBoxInfo,
+    toggleSavingTip,
+    savingTip,
     textBox,
     toolDoc,
     apparatusInfo,
@@ -121,6 +133,8 @@ function Overlay(): JSX.Element {
   useEffect(() => {
     experienceData.experience.actionList = [...actionList];
     saveExp(userId, experienceData.experience);
+    toggleSavingTip();
+    setTimeout(toggleSavingTip, 1000); // run this after 1 seconds
   }, [actionList, experienceData, userId]);
 
   const renderTool = () => {
@@ -184,6 +198,11 @@ function Overlay(): JSX.Element {
               <ActionSequence />
             </ActionSequenceBarGrid>
             {renderText()}
+            {savingTip ?
+            <SavingTipGrid>
+               <SavingTip />
+            </SavingTipGrid>
+            : <div />}
           </ActionContext.Provider>
         </UIComponentGrid>
       ) : (
