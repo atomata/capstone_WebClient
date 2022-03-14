@@ -12,12 +12,13 @@ const Header = styled.div`
 
 const TextDiv = styled.div`
   background: #3f3d56;
-  max-height: 80%;
   display: flex;
+  width: inherit;
+  height:inherit;
   flex-direction: column;
   border-radius: 15px;
 `;
-
+  // max-height: 80%;
 const DefaultButton = styled.div`
   padding: 0.5em;
   cursor: pointer;
