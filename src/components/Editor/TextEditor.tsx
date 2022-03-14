@@ -72,12 +72,13 @@ const TextEditor = (): JSX.Element => {
           height:"100%",
         }}
       >
-        <textarea
+        <textarea 
           style={{
             background: "white",
             borderRadius: "5px",
             width: "100%",
             height:"100%",
+            resize: "none",
           }}
           value={currDesc}
           // multiline
