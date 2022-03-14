@@ -29,19 +29,26 @@ const ActionSequenceHeader = styled.div.attrs({
 const ActionSequenceList = styled.div`
   display: flex;
   max-height: 100%;
+  min-height:71%;
   min-width: stretch;
   padding-left: 1em;
   padding-top: 0.5em;
   justify-content: left;
   overflow-x: scroll;
-  ::-webkit-scrollbar {
-    display: none;
+  flex-direction: row ;
+  &::-webkit-scrollbar {
+    height: 1em;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #3F3D58;
+    min-width: 3em;
+    border-radius: 1em;
   }
 `;
-
 const DragContainer = styled.div`
   border: 1px solid black;
-  width: 16em;
+  max-width: 16em;
+  min-width: 16em;
   margin: 0.5em;
   background-color: #3f3d56;
 `;
@@ -66,49 +73,47 @@ function ActionSequence(): JSX.Element {
   return (
     <ActionSequenceRoot>
       <ActionSequenceHeader />
-      <ActionSequenceList>
-        <DragDropContext onDragEnd={handleOnDragEnd}>
-          <Droppable droppableId="droppable" direction="horizontal">
-            {(dropProvided) => (
-              <ActionSequenceList
-                {...dropProvided.droppableProps}
-                ref={dropProvided.innerRef}
-              >
-                {actionList.map((data, index) => (
-                  <Draggable
-                    key={index}
-                    index={index}
-                    draggableId={index.toString()}
-                  >
-                    {(dragProvided) => (
-                      <DragContainer
-                        className={
-                          selectedAction === data ? classes.SelectedAction : ""
+      <DragDropContext onDragEnd={handleOnDragEnd}>
+        <Droppable droppableId="droppable" direction="horizontal">
+          {(dropProvided) => (
+            <ActionSequenceList
+              {...dropProvided.droppableProps}
+              ref={dropProvided.innerRef}
+            >
+              {actionList.map((data, index) => (
+                <Draggable
+                  key={index}
+                  index={index}
+                  draggableId={index.toString()}
+                >
+                  {(dragProvided) => (
+                    <DragContainer
+                      className={
+                        selectedAction === data ? classes.SelectedAction : ""
+                      }
+                      {...dragProvided.draggableProps}
+                      {...dragProvided.dragHandleProps}
+                      ref={dragProvided.innerRef}
+                    >
+                      <ActionSequenceItem
+                        id={data.assetId}
+                        name={
+                          data.input.name !== undefined
+                            ? data.input.name
+                            : data.input.command
                         }
-                        {...dragProvided.draggableProps}
-                        {...dragProvided.dragHandleProps}
-                        ref={dragProvided.innerRef}
-                      >
-                        <ActionSequenceItem
-                          id={data.assetId}
-                          name={
-                            data.input.name !== undefined
-                              ? data.input.name
-                              : data.input.command
-                          }
-                          selectAction={() => selectAction(index)}
-                          removeAction={() => removeActionFromList(index)}
-                        />
-                      </DragContainer>
-                    )}
-                  </Draggable>
-                ))}
-                {dropProvided.placeholder}
-              </ActionSequenceList>
-            )}
-          </Droppable>
-        </DragDropContext>
-      </ActionSequenceList>
+                        selectAction={() => selectAction(index)}
+                        removeAction={() => removeActionFromList(index)}
+                      />
+                    </DragContainer>
+                  )}
+                </Draggable>
+              ))}
+              {dropProvided.placeholder}
+            </ActionSequenceList>
+          )}
+        </Droppable>
+      </DragDropContext>
     </ActionSequenceRoot>
   );
 }
