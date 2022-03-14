@@ -23,8 +23,8 @@ const PreviewGrid = styled.div`
 `;
 
 const PreviewGridCenter = styled.div`
-  grid-column: 22 / span 20;
-  grid-row: 45 / span 15;
+  grid-column: 21 / span 20;
+  grid-row: 50 / span 15;
   z-index: 2;
   pointer-events: auto;
   min-height: 1em;
