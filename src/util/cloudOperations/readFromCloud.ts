@@ -35,8 +35,17 @@ function setupApparatusData(
   return getApparatusFromCloud(id).then((apparatusJson) => {
     // eslint-disable-next-line no-param-reassign
     experienceDataTemp.apparatusMetadata = apparatusJson;
+    
+    let id = "id-not-found"
+
+    for(let meta of apparatusJson.Data){
+      if(meta.includes("identifier") && meta[0] === "0")
+        id = meta.split(":")[1]
+    }
+    console.log(id)
+    
     // eslint-disable-next-line no-param-reassign
-    experienceDataTemp.experience.apparatusId = apparatusJson.Id;
+    experienceDataTemp.experience.apparatusId = id
   });
 }
 

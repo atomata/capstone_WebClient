@@ -8,14 +8,15 @@ import {
 } from "./constants";
 
 const unityContext = new UnityContext({
-  loaderUrl: "build/AtomataScene0_0_5.loader.js",
-  dataUrl: "build/AtomataScene0_0_5.data",
-  frameworkUrl: "build/AtomataScene0_0_5.framework.js",
-  codeUrl: "build/AtomataScene0_0_5.wasm",
+  loaderUrl: "build/AtomataScene0_0_6.loader.js",
+  dataUrl: "build/AtomataScene0_0_6.data",
+  frameworkUrl: "build/AtomataScene0_0_6.framework.js",
+  codeUrl: "build/AtomataScene0_0_6.wasm",
 });
 
 // TODO what if args string is empty?
 function loadApparatus(apparatus: string): void {
+  console.log(apparatus);
   unityContext.send(unityScene, loadTrigger, apparatus);
 }
 
