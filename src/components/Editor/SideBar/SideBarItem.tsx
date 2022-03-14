@@ -6,6 +6,7 @@ import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import CameraswitchIcon from "@mui/icons-material/Cameraswitch";
 import TextFormatIcon from "@mui/icons-material/TextFormat";
 import SaveAltIcon from "@mui/icons-material/SaveAlt";
+import PlayArrowIcon from "@mui/icons-material/PlayArrow"
 import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
 import { SideBarContext } from "../../../util/customHooks/SideBarContext";
 import { saveExp } from "../../../util/cloudOperations/writeToCloud";
@@ -63,6 +64,7 @@ function SideBarItem(): JSX.Element {
     toggleTextBox,
     toggleApparatusInfo,
     toggleSkyBoxInfo,
+    toggleOverlay,
     skyBoxInfo,
     apparatusInfo,
   } = useContext(SideBarContext);
@@ -138,6 +140,18 @@ function SideBarItem(): JSX.Element {
             <CameraswitchIcon sx={{ fontSize: "32px" }} />
           </IconButton>
           </Tooltip>
+        </SideBarItemWrapper>
+        <SideBarItemWrapper>
+          <Tooltip html={<p>Preview</p>}>
+            <PlayArrowIcon
+              type="button"
+              style={{ fontSize: "35px" }}
+              sx={{ "&:hover": { color: "white" }, mb: 3 }}
+              onClick={() => {
+                toggleOverlay();
+              }}
+            />
+           </Tooltip>
         </SideBarItemWrapper>
         <SideBarItemWrapper>
           <SideBarItemBottomBox>

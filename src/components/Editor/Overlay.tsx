@@ -1,20 +1,33 @@
 import styled from "styled-components";
+import useKeypress from "react-use-keypress";
 import { useContext, useEffect } from "react";
+import { IconButton } from "@mui/material";
+import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import { useActionBar } from "../../util/customHooks/ActionBarFunc";
 import ActionSequence from "./ActionSequence/ActionSequence";
 import { SideBarContext } from "../../util/customHooks/SideBarContext";
 import { ActionContext } from "../../util/customHooks/actionContext";
 import ToolDocItem from "./SideBar/ToolDocItem";
 import TextEditor from "./TextEditor";
-import { useActionList } from "../../util/customHooks/overlayfunc";
+import { useOverlay, useActionList } from "../../util/customHooks/overlayfunc";
+import PreviewOverlay from "../PreviewOverlay";
 import {
   GlobalContext,
   globalContextTypes,
 } from "../../util/customHooks/globalContext";
 import { saveExp } from "../../util/cloudOperations/writeToCloud";
 import SideBarItem from "./SideBar/SideBarItem";
-// the side bar box
+import { defaultCameraView } from "../../util/unityContextActions";
 
+const OverlayShown = styled.div`
+  display: absolute;
+  width: inherit;
+  height: 750px;
+  opacity: 1;
+  pointer-events: auto;
+`;
+
+// the side bar box
 const UIComponentRoot = styled.div`
   display: absolute;
   height: 100vh;
@@ -82,7 +95,17 @@ function Overlay(): JSX.Element {
     skyBoxInfo,
   } = useActionBar();
 
-  const { experienceData,userId }: globalContextTypes = useContext(GlobalContext);
+  const { showOverlay, toggleOverlay } = useOverlay();
+
+  useKeypress("Escape", () => {
+    if (!showOverlay) {
+      toggleOverlay();
+      defaultCameraView();
+    }
+  });
+
+  const { experienceData, userId }: globalContextTypes =
+    useContext(GlobalContext);
   const {
     selectAction,
     selectedAction,
@@ -94,60 +117,90 @@ function Overlay(): JSX.Element {
   } = useActionList(experienceData);
 
   // useEffect for autoSave
-  useEffect(()=>{
+  useEffect(() => {
     experienceData.experience.actionList = [...actionList];
     saveExp(userId, experienceData.experience);
-  }, [actionList, experienceData, userId])
+  }, [actionList, experienceData, userId]);
+
+  const renderTool = () => {
+    if (toolDoc)
+      return (
+        <ToolDocGrid>
+          <ToolDocItem />
+        </ToolDocGrid>
+      );
+    return <div />;
+  };
+
+  const renderText = () => {
+    if (textBox)
+      return (
+        <TextEditorGrid>
+          {" "}
+          <TextEditor />
+        </TextEditorGrid>
+      );
+    return <div />;
+  };
+
   return (
     <UIComponentRoot>
-      <UIComponentGrid>
-        <ActionContext.Provider
-          value={{
-            selectAction,
-            selectedAction,
-            actionList,
-            removeActionFromList,
-            setDescription,
-            handleOnDragEnd,
-            addActionToList,
-          }}
-        >
-          <SideBarContext.Provider
+      {showOverlay ? (
+        <UIComponentGrid>
+          <ActionContext.Provider
             value={{
-              toggleTextBox,
-              toggleToolDoc,
-              toggleApparatusInfo,
-              toggleSkyBoxInfo,
-              textBox,
-              toolDoc,
-              apparatusInfo,
-              skyBoxInfo,
+              selectAction,
+              selectedAction,
+              actionList,
+              removeActionFromList,
+              setDescription,
+              handleOnDragEnd,
+              addActionToList,
             }}
           >
-            <SideBarGrid>
-              <SideBarItem />
-            </SideBarGrid>
-            {toolDoc ? (
-              <ToolDocGrid>
-                <ToolDocItem />
-              </ToolDocGrid>
-            ) : (
-              <div />
-            )}
-          </SideBarContext.Provider>
-          <ActionSequenceBarGrid>
-            <ActionSequence />
-          </ActionSequenceBarGrid>
-          {textBox ? (
-            <TextEditorGrid>
-              {" "}
-              <TextEditor />
-            </TextEditorGrid>
-          ) : (
-            <div />
-          )}
-        </ActionContext.Provider>
-      </UIComponentGrid>
+            <SideBarContext.Provider
+              value={{
+                toggleTextBox,
+                toggleToolDoc,
+                toggleApparatusInfo,
+                toggleSkyBoxInfo,
+                toggleOverlay,
+                textBox,
+                toolDoc,
+                apparatusInfo,
+                skyBoxInfo,
+                showOverlay,
+              }}
+            >
+              <SideBarGrid>
+                <SideBarItem />
+              </SideBarGrid>
+              {renderTool()}
+            </SideBarContext.Provider>
+            <ActionSequenceBarGrid>
+              <ActionSequence />
+            </ActionSequenceBarGrid>
+            {renderText()}
+          </ActionContext.Provider>
+        </UIComponentGrid>
+      ) : (
+        <OverlayShown>
+          <IconButton
+            className="ReturnButton"
+            onClick={() => {
+              toggleOverlay();
+              defaultCameraView();
+            }}
+          >
+            <KeyboardBackspaceIcon
+              sx={{
+                fontSize: "30px",
+              }}
+            />
+          </IconButton>
+          <PreviewOverlay actionList={actionList} />
+        </OverlayShown>
+      )}
     </UIComponentRoot>
   );
 }
