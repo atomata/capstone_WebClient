@@ -66,21 +66,23 @@ const TextEditor = (): JSX.Element => {
         sx={{
           m: "1em",
           mt: "0.5em",
+          mb: "1.2em",
+          mr: "1.3em",
           alignItems: "center",
+          height:"100%",
         }}
       >
-        <TextField
-          sx={{
+        <textarea
+          style={{
             background: "white",
             borderRadius: "5px",
             width: "100%",
-            height: "100%",
+            height:"100%",
           }}
           value={currDesc}
-          multiline
-          rows={2}
+          // multiline
+          // rows={2}
           onChange={(e) => setCurrDesc(e.target.value)}
-          variant="outlined"
         />
       </Box>
     </TextDiv>
