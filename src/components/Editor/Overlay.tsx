@@ -3,7 +3,7 @@ import useKeypress from "react-use-keypress";
 import { useContext, useEffect } from "react";
 import { IconButton } from "@mui/material";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
-import Draggable from 'react-draggable';
+import Draggable from "react-draggable";
 import { useActionBar } from "../../util/customHooks/ActionBarFunc";
 import ActionSequence from "./ActionSequence/ActionSequence";
 import { SideBarContext } from "../../util/customHooks/SideBarContext";
@@ -137,10 +137,10 @@ function Overlay(): JSX.Element {
     if (textBox)
       return (
         <Draggable>
-        <TextEditorGrid>
-          {" "}
-          <TextEditor />
-        </TextEditorGrid>
+          <TextEditorGrid>
+            {" "}
+            <TextEditor />
+          </TextEditorGrid>
         </Draggable>
       );
     return <div />;
