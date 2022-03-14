@@ -51,7 +51,7 @@ function Experience({
   };
 
   const experienceDataTemp: ExperienceData = {
-    apparatusMetadata: { Id: "", Paths: [], Data: [] },
+    apparatusMetadata: { Paths: [], Data: [] },
     experience: { experienceId, apparatusId: "", actionList: [] },
   };
   React.useEffect(() => {
