@@ -28,6 +28,13 @@ const ApparatusInfoHeader = styled.div.attrs({
   margin-bottom: 1em;
 `;
 
+const Container = styled.div`
+  max-height: 40em;
+  overflow-y: scroll;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+`;
 function ApparatusInfo(): JSX.Element {
   const { experienceData }: globalContextTypes = useContext(GlobalContext);
   const { addActionToList } = useContext(ActionContext);
@@ -38,7 +45,7 @@ function ApparatusInfo(): JSX.Element {
     [metadata]
   );
   return (
-    <>
+    <Container>
       <ApparatusInfoHeader />
       <TreeView
         aria-label="file system navigator"
@@ -77,7 +84,7 @@ function ApparatusInfo(): JSX.Element {
           </AssetItem>
         ))}
       </TreeView>
-    </>
+    </Container>
   );
 
   function checkIfMetaExists(): SerializedApparatus {

@@ -2,7 +2,6 @@ import styled from "styled-components";
 import React from "react";
 import useKeypress from "react-use-keypress";
 import TextPreview from "./Editor/TextPreview";
-import { requestTrigger } from "../util/unityContextActions";
 import { useSelected } from "../util/customHooks/previewOverlayfunc";
 import { ActionData } from "../util/types";
 
@@ -64,12 +63,7 @@ function PreviewOverlay({ actionList }: PreviewOverlayProps): JSX.Element {
       {actionList[0] !== undefined ? (
         <PreviewGrid>
           <PreviewGridCenter>
-            {actionList.map((actionData, index) =>
-              selected === index
-                ? requestTrigger(actionData.path, actionData.input.command)
-                : null
-            )}
-            <TextPreview desc={desc} />
+            {selected >= 0 ? <TextPreview desc={desc} /> : null}
           </PreviewGridCenter>
         </PreviewGrid>
       ) : (
