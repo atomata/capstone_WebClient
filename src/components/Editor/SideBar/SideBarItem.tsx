@@ -6,7 +6,7 @@ import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import CameraswitchIcon from "@mui/icons-material/Cameraswitch";
 import TextFormatIcon from "@mui/icons-material/TextFormat";
 import SaveAltIcon from "@mui/icons-material/SaveAlt";
-import PlayArrowOutlinedIcon from "@mui/icons-material/PlayArrowOutlined"
+import PlayArrowIcon from "@mui/icons-material/PlayArrow"
 import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
 import { SideBarContext } from "../../../util/customHooks/SideBarContext";
 import { saveExp } from "../../../util/cloudOperations/writeToCloud";
@@ -142,9 +142,8 @@ function SideBarItem(): JSX.Element {
           </Tooltip>
         </SideBarItemWrapper>
         <SideBarItemWrapper>
-          <SideBarItemBottomBox>
           <Tooltip html={<p>Preview</p>}>
-            <PlayArrowOutlinedIcon
+            <PlayArrowIcon
               type="button"
               style={{ fontSize: "35px" }}
               sx={{ "&:hover": { color: "white" }, mb: 3 }}
@@ -153,6 +152,9 @@ function SideBarItem(): JSX.Element {
               }}
             />
            </Tooltip>
+        </SideBarItemWrapper>
+        <SideBarItemWrapper>
+          <SideBarItemBottomBox>
           <Tooltip html={<p>Save</p>}>
             <SaveAltIcon
               type="button"
