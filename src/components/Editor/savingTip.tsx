@@ -17,7 +17,6 @@ function SavingTip(): JSX.Element {
       {savingTip? <SavingTipBox>Saving</SavingTipBox>: <div />}
     </div>
   );
-
 }
 
 export default SavingTip;

@@ -85,8 +85,6 @@ const SavingTipGrid = styled.div`
   grid-column: 59 / span 2;
   grid-row: 39 / span 1;
   z-index: 2;
-  ml:1em;
-  mr:1em;
 `
 
 /**
@@ -196,6 +194,7 @@ function Overlay(): JSX.Element {
               <SavingTipGrid>
                 <SavingTip />
               </SavingTipGrid>
+              {renderTool()}
             </SideBarContext.Provider>
             <ActionSequenceBarGrid>
               <ActionSequence />
