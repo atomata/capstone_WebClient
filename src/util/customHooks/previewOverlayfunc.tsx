@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { requestTrigger } from "../unityContextActions";
+import { defaultCameraView, requestTrigger } from "../unityContextActions";
 import { ActionData } from "../types";
 
 const useSelected = (
@@ -10,8 +10,8 @@ const useSelected = (
   cyclePreviewLeft: () => void;
   cyclePreviewRight: () => void;
 } => {
-  const [selected, setSelected] = useState(0);
-  const [desc, setDesc] = useState(actionList[0].desc);
+  const [selected, setSelected] = useState(-1);
+  const [desc, setDesc] = useState("");
 
   const cyclePreviewRight = () => {
     if (selected < actionList.length - 1) {
@@ -21,6 +21,9 @@ const useSelected = (
       );
       setSelected((prevVal) => prevVal + 1);
       updateDesc(selected + 1);
+    } else {
+      defaultCameraView();
+      setSelected(-1);
     }
   };
   // same logic with the cyclePreviewLeft, but check if seleteced is the end of the actionList
@@ -33,15 +36,16 @@ const useSelected = (
       );
       setSelected((prevVal) => prevVal - 1);
       updateDesc(selected - 1);
+    } else {
+      defaultCameraView();
+      setSelected(-1);
     }
   };
 
-  const updateDesc = (index : number) => {
-    if(actionList[index].desc === undefined)
-      setDesc("");
-    else
-      setDesc(actionList[index].desc);
-  }
+  const updateDesc = (index: number) => {
+    if (actionList[index].desc === undefined) setDesc("");
+    else setDesc(actionList[index].desc);
+  };
 
   return { desc, selected, cyclePreviewLeft, cyclePreviewRight };
 };

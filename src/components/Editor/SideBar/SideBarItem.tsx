@@ -156,9 +156,7 @@ function SideBarItem(): JSX.Element {
               type="button"
               style={{ fontSize: "35px" }}
               sx={{ "&:hover": { color: "white" }, mb: 3 }}
-              onClick={() => {
-                toggleOverlay();
-              }}
+              onClick={toggleOverlay}
             />
           </Tooltip>
         </SideBarItemWrapper>
