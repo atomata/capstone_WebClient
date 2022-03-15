@@ -19,7 +19,7 @@ import {
 import { saveExp } from "../../util/cloudOperations/writeToCloud";
 import SideBarItem from "./SideBar/SideBarItem";
 import { defaultCameraView } from "../../util/unityContextActions";
-import SavingTip from "../savingTip";
+import SavingTip from "./savingTip";
 
 const OverlayShown = styled.div`
   display: absolute;
@@ -84,7 +84,6 @@ const TextEditorGrid = styled.div`
 const SavingTipGrid = styled.div`
   grid-column: 59 / span 2;
   grid-row: 39 / span 1;
-  background-color: gray;
   z-index: 2;
   ml:1em;
   mr:1em;
@@ -194,12 +193,9 @@ function Overlay(): JSX.Element {
               <SideBarGrid>
                 <SideBarItem />
               </SideBarGrid>
-              {renderTool()}
-              {savingTip ?
-            <SavingTipGrid>
-               <SavingTip />
-            </SavingTipGrid>
-            : <div />}
+              <SavingTipGrid>
+                <SavingTip />
+              </SavingTipGrid>
             </SideBarContext.Provider>
             <ActionSequenceBarGrid>
               <ActionSequence />
