@@ -19,7 +19,6 @@ import { ActionContext } from "../../../util/customHooks/actionContext";
 import styles from "../../SideBarButtons.module.css";
 import { defaultCameraView } from "../../../util/unityContextActions";
 import Tooltip from "../../../util/Tooltip"
-import { useActionBar } from "../../../util/customHooks/ActionBarFunc";
 
 
 const SideBarItemBox = styled.div`
@@ -82,6 +81,11 @@ function SideBarItem(): JSX.Element {
     }
   }, [textBox, selectedAction, toggleTextBox]);
 
+  function savingFunction() {
+
+    toggleSavingTip();
+    setTimeout(toggleSavingTip,1000);
+  }
   return (
     <>
       <SideBarItemBox>
@@ -167,8 +171,7 @@ function SideBarItem(): JSX.Element {
               onClick={() => {
                 experienceData.experience.actionList = [...actionList];
                 saveExp(userId, experienceData.experience);
-                toggleSavingTip();
-                setTimeout(toggleSavingTip,1000);
+                savingFunction();
               }}
             />
             </Tooltip>
@@ -182,8 +185,7 @@ function SideBarItem(): JSX.Element {
                 onClick={() => {
                   experienceData.experience.actionList = [...actionList];
                   saveExp(userId, experienceData.experience);
-                  toggleSavingTip();
-                  setTimeout(toggleSavingTip,1000);
+                  savingFunction();
                 }}
               />
               </Tooltip>

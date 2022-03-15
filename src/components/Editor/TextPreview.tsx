@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import useKeypress from 'react-use-keypress';
 import React, { useState } from "react";
-import Draggable from "react-draggable";
 import { Rnd } from "react-rnd";
 
 const TextDiv = styled.div`

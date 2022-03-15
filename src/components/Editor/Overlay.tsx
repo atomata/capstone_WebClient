@@ -195,16 +195,16 @@ function Overlay(): JSX.Element {
                 <SideBarItem />
               </SideBarGrid>
               {renderTool()}
+              {savingTip ?
+            <SavingTipGrid>
+               <SavingTip />
+            </SavingTipGrid>
+            : <div />}
             </SideBarContext.Provider>
             <ActionSequenceBarGrid>
               <ActionSequence />
             </ActionSequenceBarGrid>
             {renderText()}
-            {savingTip ?
-            <SavingTipGrid>
-               <SavingTip />
-            </SavingTipGrid>
-            : <div />}
           </ActionContext.Provider>
         </UIComponentGrid>
       ) : (
