@@ -182,11 +182,13 @@ function Overlay(): JSX.Element {
                 toggleApparatusInfo,
                 toggleSkyBoxInfo,
                 toggleOverlay,
+                toggleSavingTip,
                 textBox,
                 toolDoc,
                 apparatusInfo,
                 skyBoxInfo,
                 showOverlay,
+                savingTip,
               }}
             >
               <SideBarGrid>
