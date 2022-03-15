@@ -64,11 +64,14 @@ function SideBarItem(): JSX.Element {
     toggleApparatusInfo,
     toggleSkyBoxInfo,
     toggleOverlay,
+    toggleSavingTip,
     skyBoxInfo,
     apparatusInfo,
   } = useContext(SideBarContext);
+
   const { experienceData, userId }: globalContextTypes =
     useContext(GlobalContext);
+
   const { selectedAction, actionList } = useContext(ActionContext);
 
   useEffect(() => {
@@ -77,6 +80,13 @@ function SideBarItem(): JSX.Element {
     }
   }, [textBox, selectedAction, toggleTextBox]);
 
+  const savingFunction = () =>  {
+    experienceData.experience.actionList = [...actionList];
+    saveExp(userId, experienceData.experience);
+    toggleSavingTip();
+    setTimeout(toggleSavingTip, 1000);
+  }
+  
   return (
     <>
       <SideBarItemBox>
@@ -157,10 +167,7 @@ function SideBarItem(): JSX.Element {
                 type="button"
                 style={{ fontSize: "35px" }}
                 sx={{ "&:hover": { color: "white" }, mb: 3 }}
-                onClick={() => {
-                  experienceData.experience.actionList = [...actionList];
-                  saveExp(userId, experienceData.experience);
-                }}
+                onClick={savingFunction}
               />
             </Tooltip>
             <Link href="/">
@@ -170,10 +177,7 @@ function SideBarItem(): JSX.Element {
                   type="button"
                   style={{ fontSize: "35px" }}
                   sx={{ "&:hover": { color: "white" }, color: "#a6a5eb" }}
-                  onClick={() => {
-                    experienceData.experience.actionList = [...actionList];
-                    saveExp(userId, experienceData.experience);
-                  }}
+                  onClick={savingFunction}
                 />
               </Tooltip>
             </Link>

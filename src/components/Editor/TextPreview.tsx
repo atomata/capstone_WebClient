@@ -1,14 +1,17 @@
 import styled from "styled-components";
 import useKeypress from 'react-use-keypress';
 import React, { useState } from "react";
+import { Rnd } from "react-rnd";
 
 const TextDiv = styled.div`
   background: #3f3d56;
-  max-height: 80%;
+  min-height: 5em;
+  min-width: 10em;
   display: flex;
   flex-direction: column;
   border-radius: 15px;
-  width: 35em;
+  width: inherit;
+  height: inherit;
   text-align:justify;
 `;
 
@@ -32,9 +35,11 @@ const TextPreview = ({ desc }: any): JSX.Element => {
     });
 
     return isExpanded && !isEmpty ? (
+      <Rnd>
       <TextDiv>
         <DescLabel>{desc}</DescLabel>  
       </TextDiv>
+      </Rnd>
     ) : (
       <div/>
     );

@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import TextField from "@mui/material/TextField";
 import React, { useContext, useEffect, useState } from "react";
 import { Box, IconButton } from "@mui/material";
 import SaveAltIcon from "@mui/icons-material/SaveAlt";
@@ -12,12 +11,13 @@ const Header = styled.div`
 
 const TextDiv = styled.div`
   background: #3f3d56;
-  max-height: 80%;
   display: flex;
+  width: inherit;
+  height:inherit;
   flex-direction: column;
   border-radius: 15px;
 `;
-
+  // max-height: 80%;
 const DefaultButton = styled.div`
   padding: 0.5em;
   cursor: pointer;
@@ -65,21 +65,24 @@ const TextEditor = (): JSX.Element => {
         sx={{
           m: "1em",
           mt: "0.5em",
+          mb: "1.2em",
+          mr: "1.3em",
           alignItems: "center",
+          height:"100%",
         }}
       >
-        <TextField
-          sx={{
+        <textarea 
+          style={{
             background: "white",
             borderRadius: "5px",
             width: "100%",
-            height: "100%",
+            height:"100%",
+            resize: "none",
           }}
           value={currDesc}
-          multiline
-          rows={2}
+          // multiline
+          // rows={2}
           onChange={(e) => setCurrDesc(e.target.value)}
-          variant="outlined"
         />
       </Box>
     </TextDiv>

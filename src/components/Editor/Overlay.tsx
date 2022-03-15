@@ -1,8 +1,9 @@
 import styled from "styled-components";
 import useKeypress from "react-use-keypress";
-import { useContext, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { IconButton } from "@mui/material";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
+import { Rnd } from "react-rnd";
 import { useActionBar } from "../../util/customHooks/ActionBarFunc";
 import ActionSequence from "./ActionSequence/ActionSequence";
 import { SideBarContext } from "../../util/customHooks/SideBarContext";
@@ -18,6 +19,7 @@ import {
 import { saveExp } from "../../util/cloudOperations/writeToCloud";
 import SideBarItem from "./SideBar/SideBarItem";
 import { defaultCameraView } from "../../util/unityContextActions";
+import SavingTip from "./savingTip";
 
 const OverlayShown = styled.div`
   display: absolute;
@@ -79,6 +81,12 @@ const TextEditorGrid = styled.div`
   z-index: 2;
 `;
 
+const SavingTipGrid = styled.div`
+  grid-column: 59 / span 2;
+  grid-row: 39 / span 1;
+  z-index: 2;
+`
+
 /**
  * The side bar define the area and the outline of what will be included.
  * @returns
@@ -89,6 +97,8 @@ function Overlay(): JSX.Element {
     toggleToolDoc,
     toggleApparatusInfo,
     toggleSkyBoxInfo,
+    toggleSavingTip,
+    savingTip,
     textBox,
     toolDoc,
     apparatusInfo,
@@ -120,6 +130,8 @@ function Overlay(): JSX.Element {
   useEffect(() => {
     experienceData.experience.actionList = [...actionList];
     saveExp(userId, experienceData.experience);
+    toggleSavingTip();
+    setTimeout(toggleSavingTip, 1000); // run this after 1 seconds
   }, [actionList, experienceData, userId]);
 
   const renderTool = () => {
@@ -135,10 +147,12 @@ function Overlay(): JSX.Element {
   const renderText = () => {
     if (textBox)
       return (
-        <TextEditorGrid>
-          {" "}
-          <TextEditor />
-        </TextEditorGrid>
+          <TextEditorGrid>
+            <Rnd>
+            {" "}
+            <TextEditor />
+            </Rnd>
+          </TextEditorGrid>
       );
     return <div />;
   };
@@ -165,16 +179,21 @@ function Overlay(): JSX.Element {
                 toggleApparatusInfo,
                 toggleSkyBoxInfo,
                 toggleOverlay,
+                toggleSavingTip,
                 textBox,
                 toolDoc,
                 apparatusInfo,
                 skyBoxInfo,
                 showOverlay,
+                savingTip,
               }}
             >
               <SideBarGrid>
                 <SideBarItem />
               </SideBarGrid>
+              <SavingTipGrid>
+                <SavingTip />
+              </SavingTipGrid>
               {renderTool()}
             </SideBarContext.Provider>
             <ActionSequenceBarGrid>
@@ -206,3 +225,4 @@ function Overlay(): JSX.Element {
 }
 
 export default Overlay;
+

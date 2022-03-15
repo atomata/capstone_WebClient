@@ -8,8 +8,10 @@ export type sideBarContextType = {
     toggleApparatusInfo: () => void,
     toggleSkyBoxInfo : () => void,
     toggleOverlay : () => void,
+    toggleSavingTip: () =>void,
     toolDoc: boolean,
     apparatusInfo: boolean,
     skyBoxInfo: boolean,
-    showOverlay: boolean
+    showOverlay: boolean,
+    savingTip: boolean,
 };
