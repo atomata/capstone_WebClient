@@ -171,8 +171,6 @@ function getAssetBundleActions(metadata: SerializedApparatus) {
     }
     list.push([bundle.identifier[0], actionList]);
   }
-
-  console.log("the list is ", list);
   return list;
 }
 
