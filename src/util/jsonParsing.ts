@@ -30,8 +30,6 @@ function linkPathsToData(metadata: SerializedApparatus): PathData[] {
       
       const typeAndRest = dataSplit[1].split("/");
       const idAndArgs = typeAndRest[1].split("?");
-
-      const type = typeAndRest[0]
       const id = idAndArgs[0]
       
       // in the case where args arn't provided, use default values to populate name and description
@@ -53,7 +51,7 @@ function linkPathsToData(metadata: SerializedApparatus): PathData[] {
         const argDictionary = {}
         for(let i of argSplit){
           let keyvalue = i.split("=")
-          argDictionary[keyvalue[0]] = argDictionary[keyvalue[1]]
+          argDictionary[keyvalue[0]] = keyvalue[1];
         }
 
         pathDataList[index].data[dataSplit[0]].push({
@@ -171,8 +169,6 @@ function getAssetBundleActions(metadata: SerializedApparatus) {
     }
     list.push([bundle.identifier[0], actionList]);
   }
-
-  console.log("the list is ", list);
   return list;
 }
 

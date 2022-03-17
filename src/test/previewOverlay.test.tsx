@@ -11,11 +11,13 @@ const actionData1: ActionData = {
   path: "test1",
   input: { command: "testinput1", name: undefined, desc: undefined },
   assetId: "testasset1",
+  desc: "Test description"
 };
 const actionData2: ActionData = {
   path: "test2",
   input: { command: "testinput2", name: undefined, desc: undefined },
   assetId: "testasset2",
+  desc: "Test description"
 };
 
 const testList = [actionData1, actionData2];
@@ -23,14 +25,10 @@ test("previewOverlay renders without crashing", () => {
   const { result } = renderHook(useActionList);
   act(() => {
     result.current.addActionToList(
-      actionData1,
-      result.current.actionList,
-      result.current.setActionList
+      actionData1
     );
     result.current.addActionToList(
-      actionData2,
-      result.current.actionList,
-      result.current.setActionList
+      actionData2
     );
   });
 
@@ -38,21 +36,18 @@ test("previewOverlay renders without crashing", () => {
   render(<PreviewOverlay actionList={testActionList} />);
 });
 
-describe("test use selected", () => {
+describe("test useselected hook", () => {
   it("cyclePreviewRight = length-1", () => {
     const { result } = renderHook(useSelected, {
       initialProps: testList,
     });
-    expect(result.current.selected).toBe(0);
+    expect(result.current.selected).toBe(-1);
 
-    act(() => {
-      result.current.setSelected(1);
-    });
     act(() => {
       result.current.cyclePreviewRight();
     });
 
-    expect(result.current.selected).toBe(1);
+    expect(result.current.selected).toBe(0);
   });
 
   it("cyclePreviewRight < length-1", () => {
@@ -60,7 +55,7 @@ describe("test use selected", () => {
       initialProps: testList,
     });
     act(() => {
-      result.current.setSelected(0);
+      result.current.cyclePreviewRight();
     });
     act(() => {
       result.current.cyclePreviewRight();
@@ -68,18 +63,31 @@ describe("test use selected", () => {
     expect(result.current.selected).toBe(1);
   });
 
-  it("cyclePreviewLeft if selected = 0", () => {
+  it("cyclePreviewRight = length-1", () => {
     const { result } = renderHook(useSelected, {
       initialProps: testList,
     });
     act(() => {
-      result.current.setSelected(0);
+      result.current.cyclePreviewRight();
+    });
+    act(() => {
+      result.current.cyclePreviewRight();
+    });
+    act(() => {
+      result.current.cyclePreviewRight();
+    });
+    expect(result.current.selected).toBe(-1);
+  });
+
+  it("cyclePreviewLeft if selected = -1", () => {
+    const { result } = renderHook(useSelected, {
+      initialProps: testList,
     });
     act(() => {
       result.current.cyclePreviewLeft();
     });
 
-    expect(result.current.selected).toBe(0);
+    expect(result.current.selected).toBe(-1);
   });
 
   it("cyclePreviewLeft if selected > 0", () => {
@@ -87,12 +95,15 @@ describe("test use selected", () => {
       initialProps: testList,
     });
     act(() => {
-      result.current.setSelected(1);
+      result.current.cyclePreviewRight();
     });
-
+    act(() => {
+      result.current.cyclePreviewRight();
+    });
     act(() => {
       result.current.cyclePreviewLeft();
     });
+
     expect(result.current.selected).toBe(0);
   });
 });
