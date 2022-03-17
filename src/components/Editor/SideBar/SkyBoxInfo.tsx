@@ -3,12 +3,15 @@ import styled from "styled-components";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import TreeView from "@mui/lab/TreeView";
-import SettingsInputComponentIcon from '@mui/icons-material/SettingsInputComponent';
-import {
-  changeSkybox,
-} from "../../../util/unityContextActions";
+import SettingsInputComponentIcon from "@mui/icons-material/SettingsInputComponent";
+import { useContext } from "react";
+import { changeSkybox } from "../../../util/unityContextActions";
 import AssetItem from "../TreeView/AssetItem";
 import ActionItem from "../TreeView/ActionItem";
+import {
+  GlobalContext,
+  globalContextTypes,
+} from "../../../util/customHooks/globalContext";
 
 const SkyboxInfoHeader = styled.div.attrs({
   children: "General Settings",
@@ -24,6 +27,7 @@ const SkyboxInfoHeader = styled.div.attrs({
 `;
 
 function SkyBoxInfo(): JSX.Element {
+  const { experienceData }: globalContextTypes = useContext(GlobalContext);
   const skyboxList = [
     "space",
     "ocean",
@@ -43,13 +47,18 @@ function SkyBoxInfo(): JSX.Element {
         defaultExpandIcon={<ChevronRightIcon />}
         sx={{ maxHeight: "100%", flexGrow: 1, maxWidth: "90%" }}
       >
-        <AssetItem labelText="Change Background" nodeId="skybox"  LabelIcon={SettingsInputComponentIcon}>
+        <AssetItem
+          labelText="Change Background"
+          nodeId="skybox"
+          LabelIcon={SettingsInputComponentIcon}
+        >
           {skyboxList.map((skybox) => (
             <ActionItem
               labelText={skybox}
               nodeId={skybox}
               add={() => {
                 changeSkybox(skybox);
+                experienceData.experience.skyboxId = skybox;
               }}
             />
           ))}
