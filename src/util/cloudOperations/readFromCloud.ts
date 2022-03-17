@@ -42,8 +42,6 @@ function setupApparatusData(
       if(meta.includes("identifier") && meta[0] === "0")
         id = meta.split(":")[1]
     }
-    console.log(id)
-    
     // eslint-disable-next-line no-param-reassign
     experienceDataTemp.experience.apparatusId = id
   });
