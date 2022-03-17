@@ -18,7 +18,7 @@ import {
 import { ActionContext } from "../../../util/customHooks/actionContext";
 import styles from "../../SideBarButtons.module.css";
 import { defaultCameraView } from "../../../util/unityContextActions";
-import Tooltip from "../../../util/Tooltip";
+import Tooltip from "../Tooltip";
 
 const SideBarItemBox = styled.div`
   position: flex;
@@ -55,6 +55,11 @@ const ImgLogo = styled.img.attrs({
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 15px;
+`;
+
+const StyledToolTipText = styled.p`
+  font-family: Trebuchet MS;
+  font-size: 1em;
 `;
 
 function SideBarItem(): JSX.Element {
@@ -96,7 +101,7 @@ function SideBarItem(): JSX.Element {
         </Link>
 
         <SideBarItemWrapper>
-          <Tooltip html={<p>Apparatus List</p>}>
+          <Tooltip html={<StyledToolTipText>Apparatus List</StyledToolTipText>}>
             <IconButton
               className={
                 apparatusInfo ? styles.toggleOnSidebarItem : styles.sidebarItem
@@ -112,7 +117,7 @@ function SideBarItem(): JSX.Element {
           </Tooltip>
         </SideBarItemWrapper>
         <SideBarItemWrapper>
-          <Tooltip html={<p>Settings</p>}>
+          <Tooltip html={<StyledToolTipText>Settings</StyledToolTipText>}>
             <IconButton
               className={
                 skyBoxInfo ? styles.toggleOnSidebarItem : styles.sidebarItem
@@ -128,7 +133,7 @@ function SideBarItem(): JSX.Element {
           </Tooltip>
         </SideBarItemWrapper>
         <SideBarItemWrapper>
-          <Tooltip html={<p>Text box</p>}>
+          <Tooltip html={<StyledToolTipText>Text box</StyledToolTipText>}>
             <IconButton
               className={
                 textBox ? styles.toggleOnSidebarItem : styles.sidebarItem
@@ -141,7 +146,7 @@ function SideBarItem(): JSX.Element {
           </Tooltip>
         </SideBarItemWrapper>
         <SideBarItemWrapper>
-          <Tooltip html={<p>Default view</p>}>
+          <Tooltip html={<StyledToolTipText>Default view</StyledToolTipText>}>
             <IconButton
               className={styles.sidebarItem}
               onClick={() => defaultCameraView()}
@@ -151,22 +156,22 @@ function SideBarItem(): JSX.Element {
           </Tooltip>
         </SideBarItemWrapper>
         <SideBarItemWrapper>
-          <Tooltip html={<p>Preview</p>}>
+          <Tooltip html={<StyledToolTipText>Present</StyledToolTipText>}>
             <IconButton className={styles.sidebarItem} onClick={toggleOverlay}>
-              <PlayArrowIcon sx={{ fontSize: "35px" }} />
+              <PlayArrowIcon sx={{ fontSize: "38px" }} />
             </IconButton>
           </Tooltip>
         </SideBarItemWrapper>
         <SideBarItemWrapper>
           <SideBarItemBottomBox>
-            <Tooltip html={<p>Save</p>}>
+            <Tooltip html={<StyledToolTipText>Save</StyledToolTipText>}>
               <IconButton className={styles.sidebarItem} onClick={save}>
                 <SaveAltIcon sx={{ fontSize: "35px" }} />
               </IconButton>
             </Tooltip>
             <Link href="/">
               {" "}
-              <Tooltip html={<p>Return</p>}>
+              <Tooltip html={<StyledToolTipText>Return</StyledToolTipText>}>
                 <IconButton className={styles.sidebarItem} onClick={save}>
                   <KeyboardReturnIcon sx={{ fontSize: "35px" }} />
                 </IconButton>
