@@ -5,7 +5,7 @@ import styles from "../../ActionTreeItem.module.css";
 
 type AssetItemPropsType = TreeItemProps & {
   labelText: string;
-  LabelIcon?: React.ElementType<SvgIconProps>;
+  LabelIcon: React.ElementType<SvgIconProps>;
 };
 export default function AssetItem({
   labelText,
