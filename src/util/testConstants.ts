@@ -43,6 +43,7 @@ const testSerializedExperience = {
   experienceId: "testexp1",
   apparatusId: "evil-cylinder",
   actionList: [],
+  skyboxId: "default"
 };
 
 const testExperienceData = {
