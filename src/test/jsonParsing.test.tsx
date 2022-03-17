@@ -4,7 +4,7 @@ import {
   getAssetBundles,
   linkPathsToData,
 } from "../util/jsonParsing";
-import {testmetadata1} from "../util/testConstants";
+import { testmetadata1 } from "../util/testConstants";
 
 const testActionList = [
   {
@@ -20,6 +20,15 @@ const testActionList = [
   {
     path: "evil-cylinder/evil-cylinder/delta/wobble-sphere/wobble-sphere/animations",
     input: { command: "bounce", name: "bounce", desc: "" },
+    assetId: ["wobble-sphere"],
+  },
+  {
+    path: "evil-cylinder/evil-cylinder/delta/wobble-sphere/wobble-sphere/cam_closeup",
+    input: {
+      command: "focus",
+      name: "Close Up",
+      desc: "A close up of the wobble sphere",
+    },
     assetId: ["wobble-sphere"],
   },
 ];
@@ -48,7 +57,7 @@ const testpathDataList = [
         {
           command: "position",
           desc: "",
-          name:  "position",
+          name: "position",
         },
         {
           command: "rotation",
@@ -102,7 +111,9 @@ const testpathDataList = [
     data: {
       identifier: ["animations"],
       type: ["Event"],
-      associatedNode: ["evil-cylinder/evil-cylinder/delta/wobble-sphere/wobble-sphere"],
+      associatedNode: [
+        "evil-cylinder/evil-cylinder/delta/wobble-sphere/wobble-sphere",
+      ],
       input: [
         {
           command: "still",
@@ -118,6 +129,23 @@ const testpathDataList = [
           command: "bounce",
           desc: "",
           name: "bounce",
+        },
+      ],
+    },
+  },
+  {
+    path: "evil-cylinder/evil-cylinder/delta/wobble-sphere/wobble-sphere/cam_closeup",
+    data: {
+      identifier: ["cam_closeup"],
+      type: ["CameraFocus"],
+      associatedNode: [
+        "evil-cylinder/evil-cylinder/delta/wobble-sphere/wobble-sphere",
+      ],
+      input: [
+        {
+          command: "focus",
+          desc: "A close up of the wobble sphere",
+          name: "Close Up",
         },
       ],
     },
