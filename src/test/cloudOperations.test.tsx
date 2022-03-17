@@ -1,17 +1,13 @@
-import { when } from "jest-when";
-import * as readFromCloud from "../util/cloudOperations/readFromCloud";
 import {
   getApparatusFromCloud,
   getExperienceFromCloud,
   getBlobNamesInContainer,
   getBlobsInContainer,
   setupApparatusData,
-  setupExperienceData,
 } from "../util/cloudOperations/readFromCloud";
-import {deleteExp, saveExp} from "../util/cloudOperations/writeToCloud";
+import { deleteExp, saveExp } from "../util/cloudOperations/writeToCloud";
 import { testSerializedExperience, testmetadata1 } from "../util/testConstants";
 import { ExperienceData } from "../util/types";
-import { apparatusContainer, defaultStorage } from "../util/constants";
 
 test("based on the apparatus id it should return the apparatus json, but can reject", () => {
   global.fetch = jest.fn(() => Promise.reject()) as jest.Mock;

@@ -106,13 +106,4 @@ describe("test useselected hook", () => {
 
     expect(result.current.selected).toBe(0);
   });
-  it("cyclePreviewLeft if selected = -1", () => {
-    const { result } = renderHook(useSelected, {
-      initialProps: testList,
-    });
-    act(() => {
-      result.current.cyclePreviewLeft();
-    });
-    expect(result.current.selected).toBe(-1);
-  });
 });

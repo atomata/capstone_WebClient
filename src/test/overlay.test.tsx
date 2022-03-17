@@ -3,7 +3,7 @@ import { render } from "@testing-library/react";
 import { act, renderHook } from "@testing-library/react-hooks";
 import Overlay from "../components/Editor/Overlay";
 import { useActionList, useOverlay } from "../util/customHooks/overlayfunc";
-import { ActionData, ExperienceData } from "../util/types";
+import { ActionData } from "../util/types";
 import { useActionBar } from "../util/customHooks/ActionBarFunc";
 import {
   globalContextTypes,
