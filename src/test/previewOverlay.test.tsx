@@ -36,7 +36,7 @@ test("previewOverlay renders without crashing", () => {
   render(<PreviewOverlay actionList={testActionList} />);
 });
 
-describe("test use selected", () => {
+describe("test useselected hook", () => {
   it("cyclePreviewRight = length-1", () => {
     const { result } = renderHook(useSelected, {
       initialProps: testList,
@@ -57,10 +57,29 @@ describe("test use selected", () => {
     act(() => {
       result.current.cyclePreviewRight();
     });
-    expect(result.current.selected).toBe(0);
+    act(() => {
+      result.current.cyclePreviewRight();
+    });
+    expect(result.current.selected).toBe(1);
   });
 
-  it("cyclePreviewLeft if selected = 0", () => {
+  it("cyclePreviewRight = length-1", () => {
+    const { result } = renderHook(useSelected, {
+      initialProps: testList,
+    });
+    act(() => {
+      result.current.cyclePreviewRight();
+    });
+    act(() => {
+      result.current.cyclePreviewRight();
+    });
+    act(() => {
+      result.current.cyclePreviewRight();
+    });
+    expect(result.current.selected).toBe(-1);
+  });
+
+  it("cyclePreviewLeft if selected = -1", () => {
     const { result } = renderHook(useSelected, {
       initialProps: testList,
     });
@@ -72,6 +91,22 @@ describe("test use selected", () => {
   });
 
   it("cyclePreviewLeft if selected > 0", () => {
+    const { result } = renderHook(useSelected, {
+      initialProps: testList,
+    });
+    act(() => {
+      result.current.cyclePreviewRight();
+    });
+    act(() => {
+      result.current.cyclePreviewRight();
+    });
+    act(() => {
+      result.current.cyclePreviewLeft();
+    });
+
+    expect(result.current.selected).toBe(0);
+  });
+  it("cyclePreviewLeft if selected = -1", () => {
     const { result } = renderHook(useSelected, {
       initialProps: testList,
     });
