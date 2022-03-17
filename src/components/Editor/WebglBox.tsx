@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Unity from "react-unity-webgl";
 import { useContext, useEffect, useState } from "react";
 import Loading from "../Loading";
-import { unityContext, loadApparatus } from "../../util/unityContextActions";
+import {unityContext, loadApparatus, changeSkybox} from "../../util/unityContextActions";
 import Overlay from "./Overlay";
 import { GlobalContext, globalContextTypes } from "../../util/customHooks/globalContext";
 
@@ -22,6 +22,7 @@ function WebglBox(): JSX.Element {
         setTimeout(() => {
           setLoading(false);
           loadApparatus(experienceData.experience.apparatusId);
+          changeSkybox(experienceData.experience.skyboxId);
         }, 100);
       };
     }
