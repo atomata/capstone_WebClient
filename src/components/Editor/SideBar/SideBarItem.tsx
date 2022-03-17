@@ -80,13 +80,13 @@ function SideBarItem(): JSX.Element {
     }
   }, [textBox, selectedAction, toggleTextBox]);
 
-  const savingFunction = () =>  {
+  const save = () => {
     experienceData.experience.actionList = [...actionList];
     saveExp(userId, experienceData.experience);
     toggleSavingTip();
     setTimeout(toggleSavingTip, 1000);
-  }
-  
+  };
+
   return (
     <>
       <SideBarItemBox>
@@ -152,33 +152,24 @@ function SideBarItem(): JSX.Element {
         </SideBarItemWrapper>
         <SideBarItemWrapper>
           <Tooltip html={<p>Preview</p>}>
-            <PlayArrowIcon
-              type="button"
-              style={{ fontSize: "35px" }}
-              sx={{ "&:hover": { color: "white" }, mb: 3 }}
-              onClick={toggleOverlay}
-            />
+            <IconButton className={styles.sidebarItem} onClick={toggleOverlay}>
+              <PlayArrowIcon sx={{ fontSize: "35px" }} />
+            </IconButton>
           </Tooltip>
         </SideBarItemWrapper>
         <SideBarItemWrapper>
           <SideBarItemBottomBox>
             <Tooltip html={<p>Save</p>}>
-              <SaveAltIcon
-                type="button"
-                style={{ fontSize: "35px" }}
-                sx={{ "&:hover": { color: "white" }, mb: 3 }}
-                onClick={savingFunction}
-              />
+              <IconButton className={styles.sidebarItem} onClick={save}>
+                <SaveAltIcon sx={{ fontSize: "35px" }} />
+              </IconButton>
             </Tooltip>
             <Link href="/">
               {" "}
               <Tooltip html={<p>Return</p>}>
-                <KeyboardReturnIcon
-                  type="button"
-                  style={{ fontSize: "35px" }}
-                  sx={{ "&:hover": { color: "white" }, color: "#a6a5eb" }}
-                  onClick={savingFunction}
-                />
+                <IconButton className={styles.sidebarItem} onClick={save}>
+                  <KeyboardReturnIcon sx={{ fontSize: "35px" }} />
+                </IconButton>
               </Tooltip>
             </Link>
           </SideBarItemBottomBox>
