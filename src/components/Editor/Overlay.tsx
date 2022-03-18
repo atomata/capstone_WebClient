@@ -71,6 +71,7 @@ const ActionSequenceBarGrid = styled.div`
   grid-column: 3 / span 58;
   grid-row: 40 / span 11;
   z-index: 2;
+  background-color: #f75d77;
 `;
 
 // css and placement for the text area
