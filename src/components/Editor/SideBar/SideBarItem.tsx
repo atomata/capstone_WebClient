@@ -26,8 +26,6 @@ const SideBarItemBox = styled.div`
   flex-direction: column;
   height: inherit;
   width: inherit;
-  color: #a6a5eb;
-  background-color: #3f3d56;
 `;
 
 const SideBarItemBottomBox = styled.div`
@@ -35,8 +33,6 @@ const SideBarItemBottomBox = styled.div`
   display: flex;
   flex-direction: column;
   bottom: 0%;
-  background-color: #3f3d56;
-  margin-bottom: 15px;
 `;
 
 const SideBarItemWrapper = styled.div`
