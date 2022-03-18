@@ -148,7 +148,13 @@ function Overlay(): JSX.Element {
     if (textBox)
       return (
         <TextEditorGrid>
-          <Rnd cancel=".noDrag">
+          <Rnd
+            cancel=".noDrag"
+            minWidth="200"
+            minHeight="150"
+            maxWidth="600"
+            maxHeight="400"
+          >
             {" "}
             <TextEditor />
           </Rnd>

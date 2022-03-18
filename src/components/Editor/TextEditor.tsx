@@ -10,8 +10,6 @@ const TextDiv = styled.div`
   display: flex;
   width: inherit;
   height: inherit;
-  min-width: 10rem;
-  min-height: 10rem;
   flex-direction: column;
   border-radius: 15px;
 `;
