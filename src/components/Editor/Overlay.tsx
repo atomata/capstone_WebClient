@@ -78,7 +78,7 @@ const ActionSequenceBarGrid = styled.div`
 const TextEditorGrid = styled.div`
   grid-column: 25 / span 15;
   grid-row: 30 / span 10;
-  z-index: 2;
+  z-index: 4;
 `;
 
 const SavingTipGrid = styled.div`
@@ -201,11 +201,11 @@ function Overlay(): JSX.Element {
                 <SavingTip />
               </SavingTipGrid>
               {renderTool()}
+              {renderText()}
             </SideBarContext.Provider>
             <ActionSequenceBarGrid>
               <ActionSequence />
             </ActionSequenceBarGrid>
-            {renderText()}
           </ActionContext.Provider>
         </UIComponentGrid>
       ) : (
