@@ -70,7 +70,6 @@ const ToolDocGrid = styled.div`
 const ActionSequenceBarGrid = styled.div`
   grid-column: 3 / span 58;
   grid-row: 40 / span 11;
-  background-color: #a8ad68;
   z-index: 2;
 `;
 
