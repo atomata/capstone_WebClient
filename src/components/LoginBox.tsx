@@ -8,16 +8,15 @@ const LoginRoot = styled.div`
   position: relative;
   width: 100%;
   display: flex;
-  background-color: #A5A4EA;
+  background-color: #a5a4ea;
   height: 100vh;
-
 `;
 
 const LoginContainer = styled.div`
   text-align: center;
   padding-top: 5em;
   padding-bottom: 5em;
-  background: #3F3D56;
+  background: #3f3d56;
   width: 50%;
   margin-left: 50%;
 `;
@@ -28,9 +27,9 @@ const LoginFields = styled.div`
 
 const LoginButton = styled(Button)`
   && {
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     display: block-inline;
-    color: #1710A1;
+    color: #1710a1;
     margin-top: 2em;
     padding-top: 1em;
     padding-bottom: 1em;
@@ -53,81 +52,76 @@ const ImgIllustration = styled.img.attrs({
 
   width: 65%;
   position: absolute;
-  display:block;
+  display: block;
   height: 75%;
   margin-top: 5%;
   margin-bottom: 5%;
   margin-left: 3em;
-  `
-;
-
+`;
 const ImgLogo = styled.img.attrs({
   alt: "Image Placeholder",
 })`
-  display:block;
+  display: block;
   height: 30%;
   margin-left: auto;
   margin-right: auto;
-  `
-;
-
+`;
 const useStyles = makeStyles((theme) => ({
   textField: {
-    color: "#FFFFFF"
+    color: "#FFFFFF",
   },
 }));
 
-
 function LoginBox(): JSX.Element {
-  const {
-    nameErr,
-    passErr,
-    handleSubmit
-  } = useLoginSubmit();
+  const { nameErr, passErr, handleSubmit } = useLoginSubmit();
 
   const classes = useStyles();
 
   // https://mui.com/components/text-fields/
+  // '@Url.Content("~/images/1.jpg")'
+  // '@Url.Content("~assets/epistaLogo.png")'
   return (
     <LoginRoot>
       <LoginContainer>
-      <ImgLogo src={urlFor("assets/epistaLogo.png")} />
+        <ImgLogo src='@Url.Content("~/assets/epistaLogo.png")' />
         <form className="loginForm" autoComplete="off" onSubmit={handleSubmit}>
           <LoginFields>
             <TextField
               required
-              error={nameErr !== ''}
+              error={nameErr !== ""}
               id="username-input"
               label="Username"
               helperText={nameErr}
-              variant="outlined" 
+              variant="outlined"
               InputProps={{
-                className: classes.textField
+                className: classes.textField,
               }}
               InputLabelProps={{
-                className: classes.textField
+                className: classes.textField,
               }}
             />
             <br />
             <br />
             <TextField
               required
-              error={passErr !== ''}
+              error={passErr !== ""}
               id="password-input"
               label="Password"
               type="password"
               autoComplete="current-password"
               helperText={passErr}
-              variant="outlined" 
+              variant="outlined"
               InputProps={{
-                className: classes.textField
+                className: classes.textField,
               }}
               InputLabelProps={{
-                className: classes.textField
+                className: classes.textField,
               }}
             />
             <br />
-            <LoginButton type="submit" variant="contained">LOG IN</LoginButton>
+            <LoginButton type="submit" variant="contained">
+              LOG IN
+            </LoginButton>
           </LoginFields>
         </form>
       </LoginContainer>
