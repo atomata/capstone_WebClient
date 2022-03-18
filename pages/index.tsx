@@ -62,7 +62,7 @@ function Home(): JSX.Element {
     <main>
       <Content>
         <LeftIndex>
-          <ImgIllustration src={urlFor("assets/teaching.svg")} />
+          <ImgIllustration src= "assets/teaching.svg" />
           <LogOutButton onClick={logOut}>DO YOU WISH TO LOGOUT?</LogOutButton>
         </LeftIndex>
         <RightIndex>

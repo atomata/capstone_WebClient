@@ -92,7 +92,7 @@ function SideBarItem(): JSX.Element {
       <SideBarItemBox>
         <Link href="/">
           {" "}
-          <ImgLogo src={urlFor("assets/justlogo.png")} />
+          <ImgLogo src="assets/justlogo.png" />
         </Link>
 
         <SideBarItemWrapper>

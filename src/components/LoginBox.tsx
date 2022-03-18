@@ -125,7 +125,7 @@ function LoginBox(): JSX.Element {
           </LoginFields>
         </form>
       </LoginContainer>
-      <ImgIllustration src={urlFor("assets/loginillustration.svg")} />
+      <ImgIllustration src="assets/loginillustration.svg" />
     </LoginRoot>
   );
 }
