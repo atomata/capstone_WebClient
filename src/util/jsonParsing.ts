@@ -13,7 +13,7 @@ function linkPathsToData(metadata: SerializedApparatus): PathData[] {
 
   // make an empty object for each path
   metadata.Paths.forEach((path) => {
-    const datum: PathData = { path, data: {} };
+    const datum: PathData = { path, data: {}, enabled: false };
     pathDataList.push(datum);
   });
 
@@ -58,6 +58,7 @@ function linkPathsToData(metadata: SerializedApparatus): PathData[] {
           command: id,
           name: "uiname" in argDictionary ? argDictionary["uiname"] : id,
           desc: "uidesc" in argDictionary ? argDictionary["uidesc"] : id,
+          enabled: "uienabled" in argDictionary ? argDictionary["uidesc"] == 'True' : false,
         });
       }
     } else {

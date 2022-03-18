@@ -29,6 +29,7 @@ type SerializedApparatus = {
 type PathData = {
   path: string;
   data: Record<string, any[]>;
+  enabled : boolean;
 };
 
 type AssetBundle = { children: any[]; path: string; identifier: string };
