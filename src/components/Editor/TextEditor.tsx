@@ -1,10 +1,16 @@
 import styled from "styled-components";
 import React, { useContext, useEffect, useState } from "react";
 import { Box, IconButton } from "@mui/material";
-import SaveAltIcon from "@mui/icons-material/SaveAlt";
+import SaveIcon from "@mui/icons-material/Save";
+import CancelIcon from "@mui/icons-material/Cancel";
 import styles from "../SideBarButtons.module.css";
 import { ActionContext } from "../../util/customHooks/actionContext";
+import { SideBarContext } from "../../util/customHooks/SideBarContext";
 
+const Header = styled.div`
+  display: flex;
+  justify-content: right;
+`;
 const TextDiv = styled.div`
   background: #3f3d56;
   display: flex;
@@ -15,6 +21,7 @@ const TextDiv = styled.div`
 `;
 
 const TextEditor = (): JSX.Element => {
+  const { toggleTextBox } = useContext(SideBarContext);
   const [currDesc, setCurrDesc] = useState("");
   const { actionList, selectedAction, setDescription } =
     useContext(ActionContext);
@@ -27,14 +34,22 @@ const TextEditor = (): JSX.Element => {
   }, [selectedAction, actionList]);
   return (
     <TextDiv>
-      <div>
+      <Header>
         <IconButton
           className={styles.sidebarItem}
-          onClick={() => setDescription(currDesc)}
+          onClick={() => {
+            toggleTextBox();
+            setDescription(currDesc);
+          }}
         >
-          <SaveAltIcon sx={{ fontSize: 30, ml: "0.3rem" }} />
+          <CancelIcon
+            sx={{
+              fontSize: 25,
+              marginRight: "0.3rem",
+            }}
+          />
         </IconButton>
-      </div>
+      </Header>
       <Box
         className="noDrag"
         sx={{
