@@ -83,7 +83,7 @@ function LoginBox(): JSX.Element {
   return (
     <LoginRoot>
       <LoginContainer>
-        <ImgLogo src='@Url.Content("~/assets/epistaLogo.png")' />
+        <ImgLogo src="/assets/epistaLogo.png" />
         <form className="loginForm" autoComplete="off" onSubmit={handleSubmit}>
           <LoginFields>
             <TextField
