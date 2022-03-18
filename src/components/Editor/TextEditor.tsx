@@ -53,7 +53,7 @@ const TextEditor = (): JSX.Element => {
             borderRadius: "5px",
             width: "100%",
             height: "100%",
-            minHeight: "5rem",
+            boxSizing: "border-box",
             resize: "none",
             fontSize: "1.6rem",
           }}
