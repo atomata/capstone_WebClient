@@ -10,7 +10,6 @@ import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
 import { SideBarContext } from "../../../util/customHooks/SideBarContext";
 import { saveExp } from "../../../util/cloudOperations/writeToCloud";
-import { urlFor } from "../../../util/utils";
 import {
   GlobalContext,
   globalContextTypes,
