@@ -1,7 +1,6 @@
 import { Button } from "@mui/material";
 import { useEffect } from "react";
 import styled from "styled-components";
-import { urlFor } from "../src/util/utils";
 import {
   verifyLogIn,
   logOut,
@@ -62,7 +61,7 @@ function Home(): JSX.Element {
     <main>
       <Content>
         <LeftIndex>
-          <ImgIllustration src={urlFor("assets/teaching.svg")} />
+          <ImgIllustration src= "assets/teaching.svg" />
           <LogOutButton onClick={logOut}>DO YOU WISH TO LOGOUT?</LogOutButton>
         </LeftIndex>
         <RightIndex>
