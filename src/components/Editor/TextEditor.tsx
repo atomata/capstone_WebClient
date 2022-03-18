@@ -64,6 +64,7 @@ const TextEditor = (): JSX.Element => {
         </IconButton>
       </div>
       <Box
+        className="noDrag"
         sx={{
           m: "1em",
           mt: "0.5em",
@@ -74,7 +75,7 @@ const TextEditor = (): JSX.Element => {
         }}
       >
         <textarea
-          draggable="false"
+          className="noDrag"
           style={{
             background: "white",
             borderRadius: "5px",

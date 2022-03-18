@@ -85,7 +85,7 @@ const SavingTipGrid = styled.div`
   grid-column: 59 / span 2;
   grid-row: 39 / span 1;
   z-index: 2;
-`
+`;
 
 /**
  * The side bar define the area and the outline of what will be included.
@@ -147,12 +147,12 @@ function Overlay(): JSX.Element {
   const renderText = () => {
     if (textBox)
       return (
-          <TextEditorGrid>
-            <Rnd>
+        <TextEditorGrid>
+          <Rnd cancel=".noDrag">
             {" "}
             <TextEditor />
-            </Rnd>
-          </TextEditorGrid>
+          </Rnd>
+        </TextEditorGrid>
       );
     return <div />;
   };
@@ -225,4 +225,3 @@ function Overlay(): JSX.Element {
 }
 
 export default Overlay;
-
