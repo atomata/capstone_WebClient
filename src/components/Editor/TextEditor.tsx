@@ -2,13 +2,8 @@ import styled from "styled-components";
 import React, { useContext, useEffect, useState } from "react";
 import { Box, IconButton } from "@mui/material";
 import SaveAltIcon from "@mui/icons-material/SaveAlt";
-import ExpandIcon from "@mui/icons-material/Expand";
 import styles from "../SideBarButtons.module.css";
 import { ActionContext } from "../../util/customHooks/actionContext";
-
-// const Header = styled.div`
-//   color: white;
-// `;
 
 const TextDiv = styled.div`
   background: #3f3d56;
@@ -21,20 +16,7 @@ const TextDiv = styled.div`
   border-radius: 15px;
 `;
 
-// const DefaultButton = styled.div`
-//   padding: 0.5em;
-//   cursor: pointer;
-//   text-align: center;
-//   font-family: Inter, monospace;
-//   font-size: 1.5em;
-//   color: white;
-//   background: #3f3d56;
-//   max-height: 22%;
-//   border-radius: 15px;
-// `;
-
 const TextEditor = (): JSX.Element => {
-  // const [isExpanded, setExpanded] = useState(false);
   const [currDesc, setCurrDesc] = useState("");
   const { actionList, selectedAction, setDescription } =
     useContext(ActionContext);
@@ -48,14 +30,6 @@ const TextEditor = (): JSX.Element => {
   return (
     <TextDiv>
       <div>
-        {/*<IconButton*/}
-        {/*  sx={{ color: "white" }}*/}
-        {/*  onClick={() => {*/}
-        {/*    setExpanded((value) => !value);*/}
-        {/*  }}*/}
-        {/*>*/}
-        {/*  <ExpandIcon sx={{ fontSize: 30, ml: "0.5em" }} />*/}
-        {/*</IconButton>*/}
         <IconButton
           className={styles.sidebarItem}
           onClick={() => setDescription(currDesc)}
@@ -91,11 +65,6 @@ const TextEditor = (): JSX.Element => {
       </Box>
     </TextDiv>
   );
-  //     : (
-  //   <DefaultButton onClick={() => setExpanded((value) => !value)}>
-  //     ADD/EDIT DESCRIPTION
-  //   </DefaultButton>
-  // );
 };
 
 export default TextEditor;
