@@ -53,7 +53,7 @@ const ImgLogo = styled.img.attrs({
 `;
 
 const StyledToolTipText = styled.p`
-  font-family: Inter MS;
+  font-family: Trebuchet MS;
   font-size: 1em;
 `;
 
