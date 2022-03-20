@@ -26,7 +26,7 @@ const useGuide = () => {
     } = useContext(SideBarContext);
 
     const pages : string[][] = [
-        ["Welcome!", "Description 1"],
+        ["Welcome!", "This is the beginner's guide to utilizing the Epista Experience Editor. To navigate between each page, click on the left and right arrows or use the arrow keys."],
         ["Apparatus List", "The Apparatus List displays all available assets for this apparatus. Selecting an Asset will display its Action List."],
         ["Actions List", "The Action List displays all actions for the selected asset. To preview the action, click on the play button. To add the action into your experience, click on the + button."],
         ["Action Sequence List", "Any actions selected by the user will appear in the Action Sequence List displayed at the bottom of the editor. These actions can be dragged around or deleted at any point."],
