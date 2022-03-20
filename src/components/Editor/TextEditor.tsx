@@ -6,6 +6,7 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import styles from "../SideBarButtons.module.css";
 import { ActionContext } from "../../util/customHooks/actionContext";
 import { SideBarContext } from "../../util/customHooks/SideBarContext";
+import { Rnd } from "react-rnd";
 
 const Header = styled.div`
   display: flex;
@@ -33,50 +34,71 @@ const TextEditor = (): JSX.Element => {
     }
   }, [selectedAction, actionList]);
   return (
-    <TextDiv>
-      <Header>
-        <IconButton
-          className={styles.sidebarItem}
-          onClick={() => {
-            toggleTextBox();
-            setDescription(currDesc);
+    <Rnd
+      cancel=".noDrag"
+      minWidth="200"
+      minHeight="150"
+      maxWidth="400"
+      maxHeight="250"
+    >
+      {" "}
+      <TextDiv>
+        <Header>
+          <IconButton
+            className={styles.sidebarItem}
+            onClick={() => {
+              setDescription(currDesc);
+            }}
+          >
+            <SaveIcon
+              sx={{
+                fontSize: 25,
+                marginRight: "0.3rem",
+              }}
+            />
+          </IconButton>
+          <IconButton
+            className={styles.sidebarItem}
+            onClick={() => {
+              toggleTextBox();
+            }}
+          >
+            <CancelIcon
+              sx={{
+                fontSize: 25,
+                marginRight: "0.3rem",
+              }}
+            />
+          </IconButton>
+        </Header>
+        <Box
+          className="noDrag"
+          sx={{
+            position: "relative",
+            ml: "1em",
+            mr: "1.4em",
+            mt: "0.5em",
+            mb: "1.2em",
+            alignItems: "center",
+            height: "100%",
           }}
         >
-          <CancelIcon
-            sx={{
-              fontSize: 25,
-              marginRight: "0.3rem",
+          <textarea
+            className="noDrag"
+            style={{
+              background: "white",
+              borderRadius: "5px",
+              width: "100%",
+              height: "100%",
+              resize: "none",
+              fontSize: "1.3rem",
             }}
+            value={currDesc}
+            onChange={(e) => setCurrDesc(e.target.value)}
           />
-        </IconButton>
-      </Header>
-      <Box
-        className="noDrag"
-        sx={{
-          m: "1em",
-          mt: "0.5em",
-          mb: "1.2em",
-          mr: "1.3em",
-          alignItems: "center",
-          height: "100%",
-        }}
-      >
-        <textarea
-          className="noDrag"
-          style={{
-            background: "white",
-            borderRadius: "5px",
-            width: "100%",
-            height: "100%",
-            boxSizing: "border-box",
-            resize: "none",
-            fontSize: "1.6rem",
-          }}
-          value={currDesc}
-          onChange={(e) => setCurrDesc(e.target.value)}
-        />
-      </Box>
-    </TextDiv>
+        </Box>
+      </TextDiv>
+    </Rnd>
   );
 };
 

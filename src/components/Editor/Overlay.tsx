@@ -49,7 +49,7 @@ const UIComponentGrid = styled.div`
 // css and placement for the action bar (the action bar is the bar on the side which have the button)
 const SideBarGrid = styled.div`
   grid-column: 1 / span 2;
-  grid-row: 1 / span50;
+  grid-row: 1 / span 50;
   background-color: #3f3d56;
   z-index: 4;
   color: white;
@@ -148,16 +148,7 @@ function Overlay(): JSX.Element {
     if (textBox)
       return (
         <TextEditorGrid>
-          <Rnd
-            cancel=".noDrag"
-            minWidth="200"
-            minHeight="150"
-            maxWidth="600"
-            maxHeight="400"
-          >
-            {" "}
-            <TextEditor />
-          </Rnd>
+          <TextEditor />
         </TextEditorGrid>
       );
     return <div />;
