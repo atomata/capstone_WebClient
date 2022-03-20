@@ -19,6 +19,7 @@ type SerializedExperience = {
   experienceId: string;
   apparatusId: string;
   actionList: ActionData[];
+  skyboxId: string;
 };
 
 // TODO change to lower case
