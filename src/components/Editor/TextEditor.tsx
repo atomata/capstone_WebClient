@@ -13,11 +13,11 @@ const TextDiv = styled.div`
   background: #3f3d56;
   display: flex;
   width: inherit;
-  height:inherit;
+  height: inherit;
   flex-direction: column;
   border-radius: 15px;
 `;
-  // max-height: 80%;
+
 const DefaultButton = styled.div`
   padding: 0.5em;
   cursor: pointer;
@@ -60,7 +60,6 @@ const TextEditor = (): JSX.Element => {
           <SaveAltIcon sx={{ fontSize: 30 }} />
         </IconButton>
       </Header>
-
       <Box
         sx={{
           m: "1em",
@@ -68,20 +67,19 @@ const TextEditor = (): JSX.Element => {
           mb: "1.2em",
           mr: "1.3em",
           alignItems: "center",
-          height:"100%",
+          height: "100%",
         }}
       >
-        <textarea 
+        <textarea
           style={{
             background: "white",
             borderRadius: "5px",
             width: "100%",
-            height:"100%",
+            height: "100%",
             resize: "none",
+            fontSize: "1.6em",
           }}
           value={currDesc}
-          // multiline
-          // rows={2}
           onChange={(e) => setCurrDesc(e.target.value)}
         />
       </Box>

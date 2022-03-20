@@ -52,7 +52,7 @@ function Experience({
 
   const experienceDataTemp: ExperienceData = {
     apparatusMetadata: { Paths: [], Data: [] },
-    experience: { experienceId, apparatusId: "", actionList: [] },
+    experience: { experienceId, apparatusId: "", actionList: [], skyboxId: "default" },
   };
   React.useEffect(() => {
     // Don't load if you aren't logged in
