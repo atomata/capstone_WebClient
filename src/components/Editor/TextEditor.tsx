@@ -3,10 +3,10 @@ import React, { useContext, useEffect, useState } from "react";
 import { Box, IconButton } from "@mui/material";
 import SaveIcon from "@mui/icons-material/Save";
 import CancelIcon from "@mui/icons-material/Cancel";
+import { Rnd } from "react-rnd";
 import styles from "../SideBarButtons.module.css";
 import { ActionContext } from "../../util/customHooks/actionContext";
 import { SideBarContext } from "../../util/customHooks/SideBarContext";
-import { Rnd } from "react-rnd";
 
 const Header = styled.div`
   display: flex;

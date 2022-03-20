@@ -3,7 +3,6 @@ import useKeypress from "react-use-keypress";
 import React, { useContext, useEffect } from "react";
 import { IconButton } from "@mui/material";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
-import { Rnd } from "react-rnd";
 import { useActionBar } from "../../util/customHooks/ActionBarFunc";
 import ActionSequence from "./ActionSequence/ActionSequence";
 import { SideBarContext } from "../../util/customHooks/SideBarContext";
