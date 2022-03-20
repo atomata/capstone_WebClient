@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import useKeypress from "react-use-keypress";
 import SettingsIcon from "@mui/icons-material/Settings";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
