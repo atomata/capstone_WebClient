@@ -10,20 +10,6 @@ import Typography from '@mui/material/Typography';
 import { useGuide } from "../../util/customHooks/guideFunc"
 import { SideBarContext } from "../../util/customHooks/SideBarContext";
 
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '80%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  background: '#3f3d56',
-  borderRadius: '15px',
-  boxShadow: 24,
-  p: 4, 
-  fontFamily: 'Trebuchet MS'
-};
-
 function Guide() : JSX.Element {
     const { 
         guideNum,
@@ -47,7 +33,19 @@ function Guide() : JSX.Element {
             }}
             >
             <Fade in={showGuide}>
-                <Box sx={style}>           
+                <Box sx={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '80%',
+                    transform: 'translate(-50%, -50%)',
+                    width: 400,
+                    bgcolor: 'background.paper',
+                    background: '#3f3d56',
+                    borderRadius: '15px',
+                    boxShadow: 24,
+                    p: 4, 
+                    fontFamily: 'Trebuchet MS'
+                }}>           
                 <Grid container
                     direction="row"
                     justifyContent="flex-start"
