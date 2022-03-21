@@ -162,12 +162,12 @@ function SideBarItem(): JSX.Element {
         <SideBarItemWrapper>
           <SideBarItemBottomBox>
             <Tooltip html={<StyledToolTipText>Beginner's Guide</StyledToolTipText>}>
-				<IconButton
-				  className={styles.sidebarItem}
-				  onClick={() => toggleGuide()}
-				>
-					<HelpIcon sx={{fontSize: "35px"}}/>
-				</IconButton>
+              <IconButton
+                className={styles.sidebarItem}
+                onClick={() => toggleGuide()}
+              >
+                <HelpIcon sx={{fontSize: "30px", mb: "1rem"}}/>
+              </IconButton>
             </Tooltip>
             <Tooltip html={<StyledToolTipText>Save</StyledToolTipText>}>
               <IconButton className={styles.sidebarItem} onClick={save}>

@@ -4,7 +4,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import CameraswitchIcon from "@mui/icons-material/Cameraswitch";
 import TextFormatIcon from "@mui/icons-material/TextFormat";
-import SaveAltIcon from "@mui/icons-material/SaveAlt";
+import SaveIcon from "@mui/icons-material/Save";
 import HelpIcon from "@mui/icons-material/Help";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
@@ -145,7 +145,7 @@ const useGuide = () => {
             );
             case 8:
             return (
-                <SaveAltIcon
+                <SaveIcon
                     sx={{
                         fontSize: "60px",
                         color: "#a6a5eb"
