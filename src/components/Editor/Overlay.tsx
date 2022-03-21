@@ -3,7 +3,6 @@ import useKeypress from "react-use-keypress";
 import React, { useContext, useEffect } from "react";
 import { IconButton } from "@mui/material";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
-import { Rnd } from "react-rnd";
 import { useActionBar } from "../../util/customHooks/ActionBarFunc";
 import ActionSequence from "./ActionSequence/ActionSequence";
 import { SideBarContext } from "../../util/customHooks/SideBarContext";
@@ -50,7 +49,7 @@ const UIComponentGrid = styled.div`
 // css and placement for the action bar (the action bar is the bar on the side which have the button)
 const SideBarGrid = styled.div`
   grid-column: 1 / span 2;
-  grid-row: 1 / span50;
+  grid-row: 1 / span 50;
   background-color: #3f3d56;
   z-index: 4;
   color: white;
@@ -71,22 +70,22 @@ const ToolDocGrid = styled.div`
 const ActionSequenceBarGrid = styled.div`
   grid-column: 3 / span 58;
   grid-row: 40 / span 11;
-  background-color: #a8ad68;
   z-index: 2;
+  background-color: #f75d77;
 `;
 
 // css and placement for the text area
 const TextEditorGrid = styled.div`
   grid-column: 25 / span 15;
   grid-row: 30 / span 10;
-  z-index: 2;
+  z-index: 4;
 `;
 
 const SavingTipGrid = styled.div`
   grid-column: 59 / span 2;
   grid-row: 39 / span 1;
   z-index: 2;
-`
+`;
 
 /**
  * The side bar define the area and the outline of what will be included.
@@ -155,12 +154,9 @@ function Overlay(): JSX.Element {
   const renderText = () => {
     if (textBox)
       return (
-          <TextEditorGrid>
-            <Rnd>
-            {" "}
-            <TextEditor />
-            </Rnd>
-          </TextEditorGrid>
+        <TextEditorGrid>
+          <TextEditor />
+        </TextEditorGrid>
       );
     return <div />;
   };
@@ -206,13 +202,13 @@ function Overlay(): JSX.Element {
               <SavingTipGrid>
                 <SavingTip />
               </SavingTipGrid>
-              {renderTool()}
+              {renderTool()}            
+              {renderText()}
               <Guide/>
             </SideBarContext.Provider>
             <ActionSequenceBarGrid>
               <ActionSequence />
             </ActionSequenceBarGrid>
-            {renderText()}
           </ActionContext.Provider>
         </UIComponentGrid>
       ) : (
@@ -272,4 +268,3 @@ function Overlay(): JSX.Element {
 }
 
 export default Overlay;
-

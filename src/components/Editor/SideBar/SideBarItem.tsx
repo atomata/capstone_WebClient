@@ -4,8 +4,8 @@ import styled from "styled-components";
 import SettingsIcon from "@mui/icons-material/Settings";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import CameraswitchIcon from "@mui/icons-material/Cameraswitch";
+import SaveIcon from "@mui/icons-material/Save";
 import TextFormatIcon from "@mui/icons-material/TextFormat";
-import SaveAltIcon from "@mui/icons-material/SaveAlt";
 import HelpIcon from "@mui/icons-material/Help";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
@@ -26,8 +26,6 @@ const SideBarItemBox = styled.div`
   flex-direction: column;
   height: inherit;
   width: inherit;
-  color: #a6a5eb;
-  background-color: #3f3d56;
 `;
 
 const SideBarItemBottomBox = styled.div`
@@ -35,8 +33,6 @@ const SideBarItemBottomBox = styled.div`
   display: flex;
   flex-direction: column;
   bottom: 0%;
-  background-color: #3f3d56;
-  margin-bottom: 15px;
 `;
 
 const SideBarItemWrapper = styled.div`
@@ -175,14 +171,14 @@ function SideBarItem(): JSX.Element {
             </Tooltip>
             <Tooltip html={<StyledToolTipText>Save</StyledToolTipText>}>
               <IconButton className={styles.sidebarItem} onClick={save}>
-                <SaveAltIcon sx={{ fontSize: "35px" }} />
+                <SaveIcon sx={{ fontSize: "30px", mb: "1rem" }} />
               </IconButton>
             </Tooltip>
             <Link href="/">
               {" "}
               <Tooltip html={<StyledToolTipText>Return</StyledToolTipText>}>
                 <IconButton className={styles.sidebarItem} onClick={save}>
-                  <KeyboardReturnIcon sx={{ fontSize: "35px" }} />
+                  <KeyboardReturnIcon sx={{ fontSize: "30px" }} />
                 </IconButton>
               </Tooltip>
             </Link>
