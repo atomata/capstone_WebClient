@@ -41,6 +41,8 @@ const TextEditor = (): JSX.Element => {
       minHeight="150px"
       maxWidth="400px"
       maxHeight="250px"
+      dragAxis="both"
+      bounds="parent"
     >
       {" "}
       <TextDiv>

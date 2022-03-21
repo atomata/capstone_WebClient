@@ -23,7 +23,7 @@ import SavingTip from "./savingTip";
 const OverlayShown = styled.div`
   display: absolute;
   width: inherit;
-  height: 750px;
+  height: inherit;
   opacity: 1;
   pointer-events: auto;
 `;
@@ -75,8 +75,9 @@ const ActionSequenceBarGrid = styled.div`
 
 // css and placement for the text area
 const TextEditorGrid = styled.div`
-  grid-column: 25 / span 15;
-  grid-row: 30 / span 10;
+  position: relative;
+  grid-column: 2 / span 56;
+  grid-row: 2 / span 45;
   z-index: 4;
 `;
 
@@ -85,7 +86,6 @@ const SavingTipGrid = styled.div`
   grid-row: 39 / span 1;
   z-index: 2;
 `;
-
 /**
  * The side bar define the area and the outline of what will be included.
  * @returns
