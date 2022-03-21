@@ -4,25 +4,21 @@ import Button from "@mui/material/Button";
 const ActionSequenceItemRoot = styled.div`
   display: flex;
   flex-direction: column;
-  min-height: stretch;
-  padding-top: 1em;
-  padding-bottom: 1em;
+  width: 10em;
+  justify-content: center;
 `;
 
 const ActionSequenceItemApparatus = styled.div`
-  display: flex;
-  min-width: stretch;
+  display: inline-block;
   height: 1.5em;
-  justify-content: center;
   margin: 0.5em;
-  font-size: 1.1em;
+  font-size: 1em;
   font-family: Inter, monospace;
   color: #ffffff;
 `;
 
 const ActionSequenceItemAction = styled.div`
   display: flex;
-  min-width: stretch;
   height: 1.5em;
   justify-content: center;
   margin: 0.5em;
