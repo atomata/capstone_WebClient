@@ -1,8 +1,6 @@
 import styled from "styled-components";
 import useKeypress from "react-use-keypress";
 import React, { useContext, useEffect } from "react";
-import { IconButton } from "@mui/material";
-import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import { useActionBar } from "../../util/customHooks/ActionBarFunc";
 import ActionSequence from "./ActionSequence/ActionSequence";
 import { SideBarContext } from "../../util/customHooks/SideBarContext";
@@ -20,14 +18,6 @@ import SideBarItem from "./SideBar/SideBarItem";
 import { defaultCameraView } from "../../util/unityContextActions";
 import SavingTip from "./savingTip";
 
-const OverlayShown = styled.div`
-  display: absolute;
-  width: inherit;
-  height: inherit;
-  opacity: 1;
-  pointer-events: auto;
-`;
-
 // the side bar box
 const UIComponentRoot = styled.div`
   display: absolute;
@@ -36,7 +26,7 @@ const UIComponentRoot = styled.div`
   z-index: 0;
 `;
 
-const UIComponentGrid = styled.div`
+const EditorGrid = styled.div`
   display: grid;
   width: inherit;
   height: inherit;
@@ -76,8 +66,8 @@ const ActionSequenceBarGrid = styled.div`
 // css and placement for the text area
 const TextEditorGrid = styled.div`
   position: relative;
-  grid-column: 2 / span 56;
-  grid-row: 2 / span 45;
+  grid-column: 13 / span 47;
+  grid-row: 2 / span 47;
   z-index: 4;
 `;
 
@@ -156,7 +146,7 @@ function Overlay(): JSX.Element {
   return (
     <UIComponentRoot>
       {showOverlay ? (
-        <UIComponentGrid>
+        <EditorGrid>
           <ActionContext.Provider
             value={{
               selectAction,
@@ -197,24 +187,9 @@ function Overlay(): JSX.Element {
               <ActionSequence />
             </ActionSequenceBarGrid>
           </ActionContext.Provider>
-        </UIComponentGrid>
+        </EditorGrid>
       ) : (
-        <OverlayShown>
-          <IconButton
-            className="ReturnButton"
-            onClick={() => {
-              toggleOverlay();
-              defaultCameraView();
-            }}
-          >
-            <KeyboardBackspaceIcon
-              sx={{
-                fontSize: "30px",
-              }}
-            />
-          </IconButton>
-          <PreviewOverlay actionList={actionList} />
-        </OverlayShown>
+        <PreviewOverlay actionList={actionList} toggle={toggleOverlay} />
       )}
     </UIComponentRoot>
   );
