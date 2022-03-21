@@ -18,8 +18,6 @@ import ActionItem from "../TreeView/ActionItem";
 const ApparatusInfoHeader = styled.div.attrs({
   children: "Apparatus & Actions",
 })`
-  display: flex;
-  justify-content: center;
   width: stretch;
   font-size: 1.2em;
   text-transform: uppercase;
@@ -29,7 +27,8 @@ const ApparatusInfoHeader = styled.div.attrs({
 `;
 
 const Container = styled.div`
-  max-height: 40em;
+  display: flex;
+  flex-direction: column;
   overflow-y: scroll;
   ::-webkit-scrollbar {
     display: none;
@@ -51,7 +50,7 @@ function ApparatusInfo(): JSX.Element {
         aria-label="file system navigator"
         defaultCollapseIcon={<ExpandMoreIcon />}
         defaultExpandIcon={<ChevronRightIcon />}
-        sx={{ maxHeight: "100%", flexGrow: 1, maxWidth: "90%" }}
+        sx={{ maxHeight: "100%", maxWidth: "90%" }}
       >
         {apparatusInfo.map((data, index) => (
           <AssetItem
