@@ -19,19 +19,27 @@ import styles from "../../SideBarButtons.module.css";
 import { defaultCameraView } from "../../../util/unityContextActions";
 import Tooltip from "../Tooltip";
 
+const SideBarItemRoot = styled.div`
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+`;
 const SideBarItemBox = styled.div`
-  position: flex;
   display: flex;
   flex-direction: column;
-  height: inherit;
-  width: inherit;
+  overflow: hidden;
+  width: 100%;
 `;
 
 const SideBarItemBottomBox = styled.div`
-  position: absolute;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  bottom: 0%;
+  height: 20%;
+  width: 100%;
 `;
 
 const SideBarItemWrapper = styled.div`
@@ -88,7 +96,7 @@ function SideBarItem(): JSX.Element {
   };
 
   return (
-    <>
+    <SideBarItemRoot>
       <SideBarItemBox>
         <Link href="/">
           {" "}
@@ -157,25 +165,27 @@ function SideBarItem(): JSX.Element {
             </IconButton>
           </Tooltip>
         </SideBarItemWrapper>
+      </SideBarItemBox>
+      <SideBarItemBottomBox>
         <SideBarItemWrapper>
-          <SideBarItemBottomBox>
-            <Tooltip html={<StyledToolTipText>Save</StyledToolTipText>}>
+          <Tooltip html={<StyledToolTipText>Save</StyledToolTipText>}>
+            <IconButton className={styles.sidebarItem} onClick={save}>
+              <SaveIcon sx={{ fontSize: "30px", mb: "1rem" }} />
+            </IconButton>
+          </Tooltip>
+        </SideBarItemWrapper>
+        <SideBarItemWrapper>
+          <Link href="/">
+            {" "}
+            <Tooltip html={<StyledToolTipText>Return</StyledToolTipText>}>
               <IconButton className={styles.sidebarItem} onClick={save}>
-                <SaveIcon sx={{ fontSize: "30px", mb: "1rem" }} />
+                <KeyboardReturnIcon sx={{ fontSize: "30px" }} />
               </IconButton>
             </Tooltip>
-            <Link href="/">
-              {" "}
-              <Tooltip html={<StyledToolTipText>Return</StyledToolTipText>}>
-                <IconButton className={styles.sidebarItem} onClick={save}>
-                  <KeyboardReturnIcon sx={{ fontSize: "30px" }} />
-                </IconButton>
-              </Tooltip>
-            </Link>
-          </SideBarItemBottomBox>
+          </Link>
         </SideBarItemWrapper>
-      </SideBarItemBox>
-    </>
+      </SideBarItemBottomBox>
+    </SideBarItemRoot>
   );
 }
 
