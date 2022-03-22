@@ -37,8 +37,9 @@ const EditorGrid = styled.div`
 
 // css and placement for the action bar (the action bar is the bar on the side which have the button)
 const SideBarGrid = styled.div`
-  grid-column: 1 / span 2;
+  width: auto;
   grid-row: 1 / span 50;
+  grid-column: 1 / span 1;
   background-color: #3f3d56;
   z-index: 4;
   color: white;
@@ -47,8 +48,10 @@ const SideBarGrid = styled.div`
 
 // css and placement for the side bar (the side bar is the area where we can toggle on or off)
 const ToolDocGrid = styled.div`
-  grid-column: 3 / span 9;
   grid-row: 1 / span 39;
+  grid-column: 2 / span 4;
+  width: auto;
+  min-width: 15em;
   background-color: #3f3d56;
   z-index: 2;
   padding-left: 1em;
@@ -57,7 +60,7 @@ const ToolDocGrid = styled.div`
 
 // css and placement for the action sequence
 const ActionSequenceBarGrid = styled.div`
-  grid-column: 3 / span 58;
+  grid-column: 2 / span 60;
   grid-row: 40 / span 11;
   z-index: 2;
   background-color: #f75d77;
@@ -66,7 +69,7 @@ const ActionSequenceBarGrid = styled.div`
 // css and placement for the text area
 const TextEditorGrid = styled.div`
   position: relative;
-  grid-column: 13 / span 47;
+  grid-column: 9 / span 47;
   grid-row: 2 / span 47;
   z-index: 4;
 `;
