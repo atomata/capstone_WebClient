@@ -3,7 +3,6 @@ import useKeypress from "react-use-keypress";
 import React, { useContext, useEffect } from "react";
 import { IconButton } from "@mui/material";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
-import { Rnd } from "react-rnd";
 import { useActionBar } from "../../util/customHooks/ActionBarFunc";
 import ActionSequence from "./ActionSequence/ActionSequence";
 import { SideBarContext } from "../../util/customHooks/SideBarContext";
@@ -20,6 +19,7 @@ import { saveExp } from "../../util/cloudOperations/writeToCloud";
 import SideBarItem from "./SideBar/SideBarItem";
 import { defaultCameraView } from "../../util/unityContextActions";
 import SavingTip from "./savingTip";
+import Guide from "./Guide";
 
 const OverlayShown = styled.div`
   display: absolute;
@@ -49,7 +49,7 @@ const UIComponentGrid = styled.div`
 // css and placement for the action bar (the action bar is the bar on the side which have the button)
 const SideBarGrid = styled.div`
   grid-column: 1 / span 2;
-  grid-row: 1 / span50;
+  grid-row: 1 / span 50;
   background-color: #3f3d56;
   z-index: 4;
   color: white;
@@ -70,22 +70,22 @@ const ToolDocGrid = styled.div`
 const ActionSequenceBarGrid = styled.div`
   grid-column: 3 / span 58;
   grid-row: 40 / span 11;
-  background-color: #a8ad68;
   z-index: 2;
+  background-color: #f75d77;
 `;
 
 // css and placement for the text area
 const TextEditorGrid = styled.div`
   grid-column: 25 / span 15;
   grid-row: 30 / span 10;
-  z-index: 2;
+  z-index: 4;
 `;
 
 const SavingTipGrid = styled.div`
   grid-column: 59 / span 2;
   grid-row: 39 / span 1;
   z-index: 2;
-`
+`;
 
 /**
  * The side bar define the area and the outline of what will be included.
@@ -97,12 +97,16 @@ function Overlay(): JSX.Element {
     toggleToolDoc,
     toggleApparatusInfo,
     toggleSkyBoxInfo,
+    toggleGuide,
     toggleSavingTip,
+    setGuideNum,
     savingTip,
     textBox,
     toolDoc,
     apparatusInfo,
     skyBoxInfo,
+    showGuide,
+    guideNum
   } = useActionBar();
 
   const { showOverlay, toggleOverlay } = useOverlay();
@@ -112,6 +116,9 @@ function Overlay(): JSX.Element {
       toggleOverlay();
       defaultCameraView();
     }
+
+    if(showGuide)
+      toggleGuide();
   });
 
   const { experienceData, userId }: globalContextTypes =
@@ -147,12 +154,9 @@ function Overlay(): JSX.Element {
   const renderText = () => {
     if (textBox)
       return (
-          <TextEditorGrid>
-            <Rnd>
-            {" "}
-            <TextEditor />
-            </Rnd>
-          </TextEditorGrid>
+        <TextEditorGrid>
+          <TextEditor />
+        </TextEditorGrid>
       );
     return <div />;
   };
@@ -179,13 +183,17 @@ function Overlay(): JSX.Element {
                 toggleApparatusInfo,
                 toggleSkyBoxInfo,
                 toggleOverlay,
+                toggleGuide,
                 toggleSavingTip,
+                setGuideNum,
                 textBox,
                 toolDoc,
                 apparatusInfo,
                 skyBoxInfo,
                 showOverlay,
+                showGuide,
                 savingTip,
+                guideNum
               }}
             >
               <SideBarGrid>
@@ -194,30 +202,65 @@ function Overlay(): JSX.Element {
               <SavingTipGrid>
                 <SavingTip />
               </SavingTipGrid>
-              {renderTool()}
+              {renderTool()}            
+              {renderText()}
+              <Guide/>
             </SideBarContext.Provider>
             <ActionSequenceBarGrid>
               <ActionSequence />
             </ActionSequenceBarGrid>
-            {renderText()}
           </ActionContext.Provider>
         </UIComponentGrid>
       ) : (
         <OverlayShown>
-          <IconButton
-            className="ReturnButton"
-            onClick={() => {
-              toggleOverlay();
-              defaultCameraView();
+          <ActionContext.Provider
+            value={{
+              selectAction,
+              selectedAction,
+              actionList,
+              removeActionFromList,
+              setDescription,
+              handleOnDragEnd,
+              addActionToList,
             }}
           >
-            <KeyboardBackspaceIcon
-              sx={{
-                fontSize: "30px",
+            <SideBarContext.Provider
+              value={{
+                toggleTextBox,
+                toggleToolDoc,
+                toggleApparatusInfo,
+                toggleSkyBoxInfo,
+                toggleOverlay,
+                toggleGuide,
+                toggleSavingTip,
+                setGuideNum,
+                textBox,
+                toolDoc,
+                apparatusInfo,
+                skyBoxInfo,
+                showOverlay,
+                showGuide,
+                savingTip,
+                guideNum
               }}
-            />
-          </IconButton>
-          <PreviewOverlay actionList={actionList} />
+            >
+              <IconButton
+                className="ReturnButton"
+                onClick={() => {
+                  toggleOverlay();
+                  defaultCameraView();
+                }}
+              >
+                <KeyboardBackspaceIcon
+                  sx={{
+                    fontSize: "30px",
+                  }}
+                />
+              </IconButton>
+              <PreviewOverlay actionList={actionList} />
+              <Guide/>
+            </SideBarContext.Provider>
+          </ActionContext.Provider>
         </OverlayShown>
       )}
     </UIComponentRoot>
@@ -225,4 +268,3 @@ function Overlay(): JSX.Element {
 }
 
 export default Overlay;
-

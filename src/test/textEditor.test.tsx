@@ -1,14 +1,15 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import React from "react";
 import TextEditor from "../components/Editor/TextEditor";
 import { ActionContext } from "../util/customHooks/actionContext";
+import { SideBarContext } from "../util/customHooks/SideBarContext";
 
 test("Text editor renders without crashing", () => {
   render(
-    <ActionContext.Provider value={{ addActionToList: () => undefined }}>
-      <TextEditor />
-    </ActionContext.Provider>
+    <SideBarContext.Provider value={{ toggleTextBox: () => undefined }}>
+      <ActionContext.Provider value={{ addActionToList: () => undefined }}>
+        <TextEditor />
+      </ActionContext.Provider>
+    </SideBarContext.Provider>
   );
-  const button = screen.getByText("ADD/EDIT DESCRIPTION");
-  fireEvent.click(button);
 });

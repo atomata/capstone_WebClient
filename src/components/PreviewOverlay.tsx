@@ -1,9 +1,10 @@
 import styled from "styled-components";
-import React from "react";
+import React, { useContext } from "react";
 import useKeypress from "react-use-keypress";
 import TextPreview from "./Editor/TextPreview";
 import { useSelected } from "../util/customHooks/previewOverlayfunc";
 import { ActionData } from "../util/types";
+import { SideBarContext } from "../util/customHooks/SideBarContext";
 
 const PreviewRoot = styled.div`
   display: absolute;
@@ -39,23 +40,28 @@ type PreviewOverlayProps = {
 
 // TODO change styling instead of defining a new component
 function PreviewOverlay({ actionList }: PreviewOverlayProps): JSX.Element {
+  const { showGuide } = useContext(SideBarContext);
   const { desc, selected, cyclePreviewLeft, cyclePreviewRight } =
     useSelected(actionList);
-
+    
   useKeypress("ArrowLeft", () => {
-    cyclePreviewLeft();
+    if(!showGuide)
+      cyclePreviewLeft();
   });
 
   useKeypress("ArrowDown", () => {
-    cyclePreviewLeft();
+    if(!showGuide)
+      cyclePreviewLeft();
   });
 
   useKeypress("ArrowRight", () => {
-    cyclePreviewRight();
+    if(!showGuide)
+      cyclePreviewRight();
   });
 
   useKeypress("ArrowUp", () => {
-    cyclePreviewRight();
+    if(!showGuide)
+      cyclePreviewRight();
   });
 
   return (

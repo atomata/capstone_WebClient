@@ -9,7 +9,6 @@ const ActionSequenceRoot = styled.div`
   display: relative;
   height: stretch;
   width: stretch;
-  background-color: #f75d77;
 `;
 
 const ActionSequenceHeader = styled.div.attrs({
