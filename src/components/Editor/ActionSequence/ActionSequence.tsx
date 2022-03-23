@@ -34,6 +34,7 @@ const ActionSequenceList = styled.div`
   bottom: 0.5em;
   justify-content: left;
   overflow-x: scroll;
+  overflow-y: hidden;
   flex-direction: row;
   ::-webkit-scrollbar {
     height: 0.9em;

@@ -39,7 +39,6 @@ const SideBarItemBottomBox = styled.div`
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  height: 20%;
   width: 100%;
 `;
 
@@ -170,17 +169,21 @@ function SideBarItem(): JSX.Element {
       </SideBarItemBox>
       <SideBarItemBottomBox>
         <SideBarItemWrapper>
-            <Tooltip html={<StyledToolTipText>Beginner's Guide</StyledToolTipText>}>
-              <IconButton
-                className={styles.sidebarItem}
-                onClick={() => toggleGuide()}
-              >
-                <HelpIcon sx={{fontSize: "30px", mb: "1rem"}}/>
-              </IconButton>
-            </Tooltip>
+          <Tooltip
+            html={<StyledToolTipText>Beginner's Guide</StyledToolTipText>}
+          >
+            <IconButton
+              className={styles.sidebarItem}
+              onClick={() => toggleGuide()}
+            >
+              <HelpIcon sx={{ fontSize: "30px"}} />
+            </IconButton>
+          </Tooltip>
+        </SideBarItemWrapper>
+        <SideBarItemWrapper>
           <Tooltip html={<StyledToolTipText>Save</StyledToolTipText>}>
             <IconButton className={styles.sidebarItem} onClick={save}>
-              <SaveIcon sx={{ fontSize: "30px", mb: "1rem" }} />
+              <SaveIcon sx={{ fontSize: "30px"}} />
             </IconButton>
           </Tooltip>
         </SideBarItemWrapper>
@@ -189,7 +192,7 @@ function SideBarItem(): JSX.Element {
             {" "}
             <Tooltip html={<StyledToolTipText>Return</StyledToolTipText>}>
               <IconButton className={styles.sidebarItem} onClick={save}>
-                <KeyboardReturnIcon sx={{ fontSize: "30px" }} />
+                <KeyboardReturnIcon sx={{ fontSize: "30px"}} />
               </IconButton>
             </Tooltip>
           </Link>

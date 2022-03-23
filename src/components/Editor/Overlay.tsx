@@ -99,7 +99,7 @@ function Overlay(): JSX.Element {
     apparatusInfo,
     skyBoxInfo,
     showGuide,
-    guideNum
+    guideNum,
   } = useActionBar();
 
   const { showOverlay, toggleOverlay } = useOverlay();
@@ -110,8 +110,7 @@ function Overlay(): JSX.Element {
       defaultCameraView();
     }
 
-    if(showGuide)
-      toggleGuide();
+    if (showGuide) toggleGuide();
   });
 
   const { experienceData, userId }: globalContextTypes =
@@ -186,7 +185,7 @@ function Overlay(): JSX.Element {
                 showOverlay,
                 showGuide,
                 savingTip,
-                guideNum
+                guideNum,
               }}
             >
               <SideBarGrid>
@@ -195,6 +194,7 @@ function Overlay(): JSX.Element {
               <SavingTipGrid>
                 <SavingTip />
               </SavingTipGrid>
+              <Guide/>
               {renderTool()}
               {renderText()}
             </SideBarContext.Provider>
@@ -204,7 +204,41 @@ function Overlay(): JSX.Element {
           </ActionContext.Provider>
         </EditorGrid>
       ) : (
-        <PreviewOverlay actionList={actionList} toggle={toggleOverlay} />
+        <ActionContext.Provider
+          value={{
+            selectAction,
+            selectedAction,
+            actionList,
+            removeActionFromList,
+            setDescription,
+            handleOnDragEnd,
+            addActionToList,
+          }}
+        >
+          <SideBarContext.Provider
+            value={{
+              toggleTextBox,
+              toggleToolDoc,
+              toggleApparatusInfo,
+              toggleSkyBoxInfo,
+              toggleOverlay,
+              toggleGuide,
+              toggleSavingTip,
+              setGuideNum,
+              textBox,
+              toolDoc,
+              apparatusInfo,
+              skyBoxInfo,
+              showOverlay,
+              showGuide,
+              savingTip,
+              guideNum,
+            }}
+          >
+            <PreviewOverlay actionList={actionList} toggle={toggleOverlay} />
+            <Guide/>
+          </SideBarContext.Provider>
+        </ActionContext.Provider>
       )}
     </UIComponentRoot>
   );

@@ -7,6 +7,7 @@ import TextPreview from "./Editor/TextPreview";
 import { useSelected } from "../util/customHooks/previewOverlayfunc";
 import { ActionData } from "../util/types";
 import { defaultCameraView } from "../util/unityContextActions";
+import { SideBarContext } from "../util/customHooks/SideBarContext";
 
 const PreviewGrid = styled.div`
   display: grid;
@@ -40,27 +41,24 @@ function PreviewOverlay({
   actionList,
   toggle,
 }: PreviewOverlayProps): JSX.Element {
+  const { showGuide } = useContext(SideBarContext);
   const { desc, selected, cyclePreviewLeft, cyclePreviewRight } =
     useSelected(actionList);
-    
+
   useKeypress("ArrowLeft", () => {
-    if(!showGuide)
-      cyclePreviewLeft();
+    if (!showGuide) cyclePreviewLeft();
   });
 
   useKeypress("ArrowDown", () => {
-    if(!showGuide)
-      cyclePreviewLeft();
+    if (!showGuide) cyclePreviewLeft();
   });
 
   useKeypress("ArrowRight", () => {
-    if(!showGuide)
-      cyclePreviewRight();
+    if (!showGuide) cyclePreviewRight();
   });
 
   useKeypress("ArrowUp", () => {
-    if(!showGuide)
-      cyclePreviewRight();
+    if (!showGuide) cyclePreviewRight();
   });
 
   return (
@@ -78,7 +76,7 @@ function PreviewOverlay({
               fontSize: "45px",
               background: "#3f3d56",
               color: "white",
-              borderRadius: "4em"
+              borderRadius: "4em",
             }}
           />
         </IconButton>
