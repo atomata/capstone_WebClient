@@ -3,6 +3,7 @@ import { Button, TextField } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useLoginSubmit } from "../util/customHooks/loginBoxfunc";
 import Login from "./GoogleLog/googleLogin";
+import Logout from "./GoogleLog/googleLogout";
 
 const LoginRoot = styled.div`
   position: relative;
@@ -73,7 +74,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function LoginBox(): JSX.Element {
-
   const { nameErr, passErr, handleSubmit } = useLoginSubmit();
 
   const classes = useStyles();
@@ -123,7 +123,10 @@ function LoginBox(): JSX.Element {
               LOG IN
             </LoginButton>
             <br />
-            <Login />
+            <div>
+              <Login />
+              <Logout />
+            </div>
           </LoginFields>
         </form>
       </LoginContainer>
