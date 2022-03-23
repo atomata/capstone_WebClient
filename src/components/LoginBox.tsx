@@ -125,7 +125,6 @@ function LoginBox(): JSX.Element {
             <br />
             <div>
               <Login />
-              <Logout />
             </div>
           </LoginFields>
         </form>

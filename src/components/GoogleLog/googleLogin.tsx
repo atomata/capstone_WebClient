@@ -1,24 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import GoogleLogin from "react-google-login";
-import { refreshTokenSetup } from './refreshTokenSetup' 
+import { refreshTokenSetup } from "./refreshTokenSetup";
+import {useGoogleLog} from '../../util/customHooks/googleLoginFunc';
 
-const clientId = "940221773800-2kpn0pebpu339lmg7tgeu675aooj1mln.apps.googleusercontent.com";
+const clientId =
+  "940221773800-2kpn0pebpu339lmg7tgeu675aooj1mln.apps.googleusercontent.com";
 
 function Login() {
-  const onSuccess = (res) => {
-    console.log("[Login Success] currentUser: ", res.progileObj);
-    alert(
-      `Logged in successfully welcome ${res.profileObj.name}`
-    )
-    refreshTokenSetup(res);
-  };
-
-  const onFailure = (res) => {
-    console.log("[Login failed] res: ", res);
-    alert(
-      `Failed to login.`
-    )
-  };
+const {onSuccess, onFailure} = useGoogleLog();
   return (
     <div>
       <GoogleLogin

@@ -12,6 +12,7 @@ import {
   LoadExperience,
   CreateExperience,
 } from "../src/components/Workbench";
+import Logout from '../src/components/GoogleLog/googleLogout'
 
 const Content = styled.div`
   display: flex;
