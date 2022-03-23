@@ -12,12 +12,13 @@ const LoginRoot = styled.div`
 `;
 
 const LoginContainer = styled.div`
+  display: flex;
+  flex-direction: column;
   text-align: center;
-  padding-top: 5em;
-  padding-bottom: 5em;
   background: #3f3d56;
   width: 50%;
   margin-left: 50%;
+  overflow: hidden;
 `;
 
 const LoginFields = styled.div`
@@ -60,6 +61,7 @@ const ImgIllustration = styled.img.attrs({
 const ImgLogo = styled.img.attrs({
   alt: "Image Placeholder",
 })`
+  margin-top: 5%;
   display: block;
   height: 30%;
   margin-left: auto;
