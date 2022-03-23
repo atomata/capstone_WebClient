@@ -1,9 +1,8 @@
 import styled from "styled-components";
 import { Button, TextField } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import GoogleLogin from "react-google-login";
-import { useState } from "react";
 import { useLoginSubmit } from "../util/customHooks/loginBoxfunc";
+import Login from "./GoogleLog/googleLogin";
 
 const LoginRoot = styled.div`
   position: relative;
@@ -74,40 +73,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function LoginBox(): JSX.Element {
-  const [loginData, setLoginData] = useState(
-    localStorage.getItem("loginData")
-      ? JSON.parse(localStorage.getItem("loginData"))
-      : null
-  );
 
   const { nameErr, passErr, handleSubmit } = useLoginSubmit();
 
   const classes = useStyles();
-
-  const handleFailure = (result) => {
-    alert(result);
-  };
-
-  const handleLogin = async (googleData) => {
-    const res = await fetch ('/api/google-login',{
-      method: "POST",
-      body: JSON.stringify({
-        token: googleData.tokenId,
-      }),
-      headers:{
-        'Content-Type' : 'application/json',
-      },
-    })
-
-    const data = await res.json();
-    setLoginData(data);
-    localStorage.setItem('loginData', JSON.stringify(data));
-  };
-
-  const handleLogout = () =>{
-    localStorage.removeItem('loginData');
-    setLoginData(null)
-  }
   // https://mui.com/components/text-fields/
   // '@Url.Content("~/images/1.jpg")'
   // '@Url.Content("~assets/epistaLogo.png")'
@@ -153,21 +122,8 @@ function LoginBox(): JSX.Element {
             <LoginButton type="submit" variant="contained">
               LOG IN
             </LoginButton>
-            <div>
-              {loginData ? (
-                <div>
-                  <h3>You logged in as {loginData.email}</h3>
-                  <button type="button" onClick={handleLogout}>Log Out</button>
-                </div>
-              ):(              <GoogleLogin
-                clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
-                buttonText="Log In with Google"
-                onSuccess={handleLogin}
-                onFailure={handleFailure}
-                cookiePolicy="single_host_origin"
-              />)}
-
-            </div>
+            <br />
+            <Login />
           </LoginFields>
         </form>
       </LoginContainer>
