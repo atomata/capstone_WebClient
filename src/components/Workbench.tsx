@@ -28,8 +28,7 @@ const OuterBox = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  margin-top: 2em;
-  margin-left: 4em;
+  margin: auto;
   width: 90%;
   height: 90%;
   background: #3f3d56;
