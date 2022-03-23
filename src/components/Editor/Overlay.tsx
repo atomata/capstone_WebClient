@@ -17,6 +17,7 @@ import { saveExp } from "../../util/cloudOperations/writeToCloud";
 import SideBarItem from "./SideBar/SideBarItem";
 import { defaultCameraView } from "../../util/unityContextActions";
 import SavingTip from "./savingTip";
+import Guide from "./Guide";
 
 // the side bar box
 const UIComponentRoot = styled.div`
@@ -89,12 +90,16 @@ function Overlay(): JSX.Element {
     toggleToolDoc,
     toggleApparatusInfo,
     toggleSkyBoxInfo,
+    toggleGuide,
     toggleSavingTip,
+    setGuideNum,
     savingTip,
     textBox,
     toolDoc,
     apparatusInfo,
     skyBoxInfo,
+    showGuide,
+    guideNum
   } = useActionBar();
 
   const { showOverlay, toggleOverlay } = useOverlay();
@@ -104,6 +109,9 @@ function Overlay(): JSX.Element {
       toggleOverlay();
       defaultCameraView();
     }
+
+    if(showGuide)
+      toggleGuide();
   });
 
   const { experienceData, userId }: globalContextTypes =
@@ -168,13 +176,17 @@ function Overlay(): JSX.Element {
                 toggleApparatusInfo,
                 toggleSkyBoxInfo,
                 toggleOverlay,
+                toggleGuide,
                 toggleSavingTip,
+                setGuideNum,
                 textBox,
                 toolDoc,
                 apparatusInfo,
                 skyBoxInfo,
                 showOverlay,
+                showGuide,
                 savingTip,
+                guideNum
               }}
             >
               <SideBarGrid>

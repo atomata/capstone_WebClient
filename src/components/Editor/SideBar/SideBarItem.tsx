@@ -6,6 +6,7 @@ import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import CameraswitchIcon from "@mui/icons-material/Cameraswitch";
 import SaveIcon from "@mui/icons-material/Save";
 import TextFormatIcon from "@mui/icons-material/TextFormat";
+import HelpIcon from "@mui/icons-material/Help";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
 import { SideBarContext } from "../../../util/customHooks/SideBarContext";
@@ -72,6 +73,7 @@ function SideBarItem(): JSX.Element {
     toggleApparatusInfo,
     toggleSkyBoxInfo,
     toggleOverlay,
+    toggleGuide,
     toggleSavingTip,
     skyBoxInfo,
     apparatusInfo,
@@ -168,6 +170,14 @@ function SideBarItem(): JSX.Element {
       </SideBarItemBox>
       <SideBarItemBottomBox>
         <SideBarItemWrapper>
+            <Tooltip html={<StyledToolTipText>Beginner's Guide</StyledToolTipText>}>
+              <IconButton
+                className={styles.sidebarItem}
+                onClick={() => toggleGuide()}
+              >
+                <HelpIcon sx={{fontSize: "30px", mb: "1rem"}}/>
+              </IconButton>
+            </Tooltip>
           <Tooltip html={<StyledToolTipText>Save</StyledToolTipText>}>
             <IconButton className={styles.sidebarItem} onClick={save}>
               <SaveIcon sx={{ fontSize: "30px", mb: "1rem" }} />
