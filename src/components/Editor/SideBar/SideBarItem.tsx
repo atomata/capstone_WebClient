@@ -145,7 +145,7 @@ function SideBarItem(): JSX.Element {
               disabled={selectedAction === undefined}
               onClick={toggleTextBox}
             >
-              <TextFormatIcon sx={{ fontSize: "38px" }} />
+              <TextFormatIcon sx={{ fontSize: "38px", color: "inherit" }} />
             </IconButton>
           </Tooltip>
         </SideBarItemWrapper>
