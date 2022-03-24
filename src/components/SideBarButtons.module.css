@@ -13,3 +13,19 @@
 .toggleOnSidebarItem {
   color: white;
 }
+
+.sidebarItemCancel {
+  color: #D23F2F;
+}
+
+.sidebarItemCancel:disabled {
+  color: #555454;
+}
+
+.sidebarItemCancel:hover {
+  color: white;
+}
+
+.toggleOnSidebarItemCancel {
+  color: white;
+}

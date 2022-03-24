@@ -61,7 +61,7 @@ const TextEditor = (): JSX.Element => {
             />
           </IconButton>
           <IconButton
-            className={styles.sidebarItem}
+            className={styles.sidebarItemCancel}
             onClick={() => {
               toggleTextBox();
             }}
