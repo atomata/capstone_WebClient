@@ -13,9 +13,7 @@ import {
   PreviewContainer,
   SelectionButton,
   SelectionOption,
-  ImgIllustration1,
-  ImgIllustration2,
-  GifIllustration,
+  PreviewContent,
 } from "../src/components/SelectionBox";
 
 const SelectionList = ({ experienceId }) => {
@@ -81,16 +79,10 @@ const SelectionList = ({ experienceId }) => {
           </table>
         </SelectionContent>
       </SelectionContainer>
-      <ImgIllustration1 src="assets/selectionillustration1.svg" />
       <PreviewContainer>
         <SelectionHeading>GIF FOR PREVIEW</SelectionHeading>
-        {visible && (
-          <div>
-            <GifIllustration src={path} />
-          </div>
-        )}
+        {visible && <PreviewContent path={path} />}
       </PreviewContainer>
-      <ImgIllustration2 src="assets/selectionillustration2.svg" />
     </OuterBox>
   );
 };

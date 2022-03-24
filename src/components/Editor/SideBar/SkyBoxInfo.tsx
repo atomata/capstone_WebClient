@@ -25,7 +25,24 @@ const SkyboxInfoHeader = styled.div.attrs({
   font-family: Inter, monospace;
   margin-bottom: 1em;
 `;
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+`;
 
+const TreeViewContainer = styled.div`
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    width: 1em;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #a5a4ea;
+    border-radius: 1em;
+    border: 0.25em solid rgba(0, 0, 0, 0);
+    background-clip: padding-box;
+  }
+`;
 function SkyBoxInfo(): JSX.Element {
   const { experienceData }: globalContextTypes = useContext(GlobalContext);
   const skyboxList = [
@@ -39,32 +56,34 @@ function SkyBoxInfo(): JSX.Element {
     "ambience",
   ];
   return (
-    <>
+    <Container>
       <SkyboxInfoHeader />
-      <TreeView
-        aria-label="file system navigator"
-        defaultCollapseIcon={<ExpandMoreIcon />}
-        defaultExpandIcon={<ChevronRightIcon />}
-        sx={{ maxHeight: "100%", flexGrow: 1, maxWidth: "90%" }}
-      >
-        <AssetItem
-          labelText="Change Background"
-          nodeId="skybox"
-          LabelIcon={SettingsInputComponentIcon}
+      <TreeViewContainer>
+        <TreeView
+          aria-label="file system navigator"
+          defaultCollapseIcon={<ExpandMoreIcon />}
+          defaultExpandIcon={<ChevronRightIcon />}
+          sx={{ maxHeight: "100%", flexGrow: 1, maxWidth: "90%" }}
         >
-          {skyboxList.map((skybox) => (
-            <ActionItem
-              labelText={skybox}
-              nodeId={skybox}
-              add={() => {
-                changeSkybox(skybox);
-                experienceData.experience.skyboxId = skybox;
-              }}
-            />
-          ))}
-        </AssetItem>
-      </TreeView>
-    </>
+          <AssetItem
+            labelText="Change Background"
+            nodeId="skybox"
+            LabelIcon={SettingsInputComponentIcon}
+          >
+            {skyboxList.map((skybox) => (
+              <ActionItem
+                labelText={skybox}
+                nodeId={skybox}
+                add={() => {
+                  changeSkybox(skybox);
+                  experienceData.experience.skyboxId = skybox;
+                }}
+              />
+            ))}
+          </AssetItem>
+        </TreeView>
+      </TreeViewContainer>
+    </Container>
   );
 }
 

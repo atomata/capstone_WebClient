@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import React, { useContext, useEffect, useState } from "react";
-import { Box, IconButton } from "@mui/material";
+import { IconButton } from "@mui/material";
 import SaveIcon from "@mui/icons-material/Save";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { Rnd } from "react-rnd";
@@ -14,9 +14,10 @@ const Header = styled.div`
 `;
 const TextDiv = styled.div`
   background: #3f3d56;
+  position: absolute;
   display: flex;
-  width: inherit;
-  height: inherit;
+  height: 100%;
+  width: 100%;
   flex-direction: column;
   border-radius: 15px;
 `;
@@ -36,10 +37,12 @@ const TextEditor = (): JSX.Element => {
   return (
     <Rnd
       cancel=".noDrag"
-      minWidth="200"
-      minHeight="150"
-      maxWidth="400"
-      maxHeight="250"
+      minWidth="250px"
+      minHeight="170px"
+      maxWidth="400px"
+      maxHeight="250px"
+      dragAxis="both"
+      bounds="parent"
     >
       {" "}
       <TextDiv>
@@ -71,32 +74,22 @@ const TextEditor = (): JSX.Element => {
             />
           </IconButton>
         </Header>
-        <Box
+        <textarea
           className="noDrag"
-          sx={{
-            position: "relative",
-            ml: "1em",
-            mr: "1.4em",
-            mt: "0.5em",
-            mb: "1.2em",
-            alignItems: "center",
-            height: "100%",
+          style={{
+            position: "absolute",
+            background: "white",
+            borderRadius: "5px",
+            resize: "none",
+            fontSize: "1.3em",
+            left: "0.5em",
+            right: "0.5em",
+            bottom: "1em",
+            top: "2.5em",
           }}
-        >
-          <textarea
-            className="noDrag"
-            style={{
-              background: "white",
-              borderRadius: "5px",
-              width: "100%",
-              height: "100%",
-              resize: "none",
-              fontSize: "1.3rem",
-            }}
-            value={currDesc}
-            onChange={(e) => setCurrDesc(e.target.value)}
-          />
-        </Box>
+          value={currDesc}
+          onChange={(e) => setCurrDesc(e.target.value)}
+        />
       </TextDiv>
     </Rnd>
   );

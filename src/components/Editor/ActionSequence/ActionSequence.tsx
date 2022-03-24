@@ -6,49 +6,50 @@ import ActionSequenceItem from "./ActionSequenceItem";
 import { ActionContext } from "../../../util/customHooks/actionContext";
 
 const ActionSequenceRoot = styled.div`
-  display: relative;
-  height: stretch;
-  width: stretch;
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 100%;
 `;
 
 const ActionSequenceHeader = styled.div.attrs({
   children: "Action Sequence List",
 })`
   display: flex;
+  width: 100%;
+  height: 10%;
   justify-content: center;
-  width: stretch;
   font-size: 1.2em;
   font-weight: bold;
   font-family: Inter, monospace;
-  padding-top: 0.5em;
   text-transform: uppercase;
   color: white;
 `;
 
 const ActionSequenceList = styled.div`
   display: flex;
-  max-height: 100%;
-  min-height:71%;
-  min-width: stretch;
-  padding-left: 1em;
-  padding-top: 0.5em;
+  position: absolute;
+  width: 100%;
+  top: 2em;
+  bottom: 0.5em;
   justify-content: left;
   overflow-x: scroll;
-  flex-direction: row ;
-  &::-webkit-scrollbar {
-    height: 1em;
+  overflow-y: hidden;
+  flex-direction: row;
+  ::-webkit-scrollbar {
+    height: 0.9em;
   }
-  &::-webkit-scrollbar-thumb {
-    background: #3F3D58;
-    min-width: 3em;
+  ::-webkit-scrollbar-thumb {
+    background: #3f3d58;
+    max-width: 1em;
     border-radius: 1em;
   }
 `;
 const DragContainer = styled.div`
+  display: flex;
+  margin-left: 2em;
+  margin-bottom: 0.5em;
   border: 1px solid black;
-  max-width: 16em;
-  min-width: 16em;
-  margin: 0.5em;
   background-color: #3f3d56;
 `;
 
