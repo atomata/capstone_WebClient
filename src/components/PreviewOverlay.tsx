@@ -5,9 +5,9 @@ import { IconButton } from "@mui/material";
 import ArrowBackSharpIcon from "@mui/icons-material/ArrowBackSharp";
 import TextPreview from "./Editor/TextPreview";
 import { useSelected } from "../util/customHooks/previewOverlayfunc";
-import { ActionData } from "../util/types";
 import { defaultCameraView } from "../util/unityContextActions";
 import { SideBarContext } from "../util/customHooks/SideBarContext";
+import { ActionContext } from "../util/customHooks/actionContext";
 
 const PreviewGrid = styled.div`
   display: grid;
@@ -32,16 +32,10 @@ const PreviewGridCenter = styled.div`
   pointer-events: auto;
 `;
 
-type PreviewOverlayProps = {
-  actionList: ActionData[];
-  toggle: () => void;
-};
+function PreviewOverlay(): JSX.Element {
+  const { showGuide, toggleOverlay } = useContext(SideBarContext);
+  const { actionList } = useContext(ActionContext);
 
-function PreviewOverlay({
-  actionList,
-  toggle,
-}: PreviewOverlayProps): JSX.Element {
-  const { showGuide } = useContext(SideBarContext);
   const { desc, selected, cyclePreviewLeft, cyclePreviewRight } =
     useSelected(actionList);
 
@@ -67,7 +61,7 @@ function PreviewOverlay({
         <IconButton
           className="ReturnButton"
           onClick={() => {
-            toggle();
+            toggleOverlay();
             defaultCameraView();
           }}
         >

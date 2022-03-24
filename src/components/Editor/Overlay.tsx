@@ -235,7 +235,7 @@ function Overlay(): JSX.Element {
               guideNum,
             }}
           >
-            <PreviewOverlay actionList={actionList} toggle={toggleOverlay} />
+            <PreviewOverlay />
             <Guide/>
           </SideBarContext.Provider>
         </ActionContext.Provider>
