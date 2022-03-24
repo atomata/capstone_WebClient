@@ -307,7 +307,7 @@ const LoadExperience = () => {
               // eslint-disable-next-line react/jsx-key
               <ExperienceRow>
                 <td>{exp[0]}</td>
-                <td style={{ textAlign: " center", width: "50%" }}>{exp[1]}</td>
+                <td style={{ textAlign: "center", width: "50%" }}>{exp[1]}</td>
                 <ExperienceButtons>
                   <Link
                     key={exp[0]}
