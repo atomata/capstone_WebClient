@@ -37,8 +37,8 @@ const TextEditor = (): JSX.Element => {
   return (
     <Rnd
       cancel=".noDrag"
-      minWidth="200px"
-      minHeight="150px"
+      minWidth="250px"
+      minHeight="170px"
       maxWidth="400px"
       maxHeight="250px"
       dragAxis="both"
