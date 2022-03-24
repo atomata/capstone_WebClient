@@ -1,15 +1,80 @@
 .sidebarItem {
+  font-size: 30px;
   color: #a6a5eb;
+  margin-right: 0.2em;
+  margin-left: 0.2em;
+  margin-bottom: 0.2em;
+  cursor: pointer;
 }
 
 .sidebarItem:disabled {
+  font-size: 30px;
   color: #555454;
+  margin-right: 0.2em;
+  margin-left: 0.2em;
+  margin-bottom: 0.2em;
+  cursor: pointer;
 }
 
 .sidebarItem:hover {
+  font-size: 30px;
   color: white;
+  margin-right: 0.2em;
+  margin-left: 0.2em;
+  margin-bottom: 0.2em;
+  cursor: pointer;
 }
 
 .toggleOnSidebarItem {
+  font-size: 30px;
   color: white;
+  margin-right: 0.2em;
+  margin-left: 0.2em;
+  margin-bottom: 0.2em;
+  cursor: pointer;
+}
+
+.sidebarItemLarge {
+  font-size: 38px;
+  color: #a6a5eb;
+  margin-right: 0.2em;
+  margin-left: 0.2em;
+  margin-bottom: 0.2em;
+  cursor: pointer;
+}
+
+.sidebarItemLarge:disabled {
+  font-size: 38px;
+  color: #555454;
+  margin-right: 0.2em;
+  margin-left: 0.2em;
+  margin-bottom: 0.2em;
+  cursor: pointer;
+}
+
+.sidebarItemLarge:hover {
+  font-size: 38px;
+  color: white;
+  margin-right: 0.2em;
+  margin-left: 0.2em;
+  margin-bottom: 0.2em;
+  cursor: pointer;
+}
+
+.toggleOnSidebarItemLarge {
+  font-size: 38px;
+  color: white;
+  margin-right: 0.2em;
+  margin-left: 0.2em;
+  margin-bottom: 0.2em;
+  cursor: pointer;
+}
+
+.textboxButtons {
+  color: #a6a5eb;
+  font-size: 25px;
+  margin-top: 0.25em;
+  margin-right: 0.4em;
+  margin-left: 0.3em;
+  cursor: pointer;
 }

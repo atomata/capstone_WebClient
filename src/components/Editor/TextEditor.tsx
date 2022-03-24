@@ -47,32 +47,19 @@ const TextEditor = (): JSX.Element => {
       {" "}
       <TextDiv>
         <Header>
-          <IconButton
-            className={styles.sidebarItem}
+          <SaveIcon
+            className={styles.textboxButtons}
             onClick={() => {
               setDescription(currDesc);
             }}
-          >
-            <SaveIcon
-              sx={{
-                fontSize: 25,
-                marginRight: "0.3rem",
-              }}
-            />
-          </IconButton>
-          <IconButton
-            className={styles.sidebarItem}
+          />
+
+          <CancelIcon
+            className={styles.textboxButtons}
             onClick={() => {
               toggleTextBox();
             }}
-          >
-            <CancelIcon
-              sx={{
-                fontSize: 25,
-                marginRight: "0.3rem",
-              }}
-            />
-          </IconButton>
+          />
         </Header>
         <textarea
           className="noDrag"
