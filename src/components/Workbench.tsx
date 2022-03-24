@@ -145,6 +145,7 @@ const CreateButton = styled.button`
   cursor: pointer;
   font-family: Trebuchet MS;
   border-radius: 1.5em;
+  margin-left: 1em;
   margin-bottom: 2em;
   margin-right: 1em;
   margin-top: 1em;
@@ -306,7 +307,7 @@ const LoadExperience = () => {
               // eslint-disable-next-line react/jsx-key
               <ExperienceRow>
                 <td>{exp[0]}</td>
-                <td>{exp[1]}</td>
+                <td style={{ textAlign: " center", width: "50%" }}>{exp[1]}</td>
                 <ExperienceButtons>
                   <Link
                     key={exp[0]}
