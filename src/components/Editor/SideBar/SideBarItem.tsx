@@ -149,6 +149,7 @@ function SideBarItem(): JSX.Element {
                 },
               ]}
             />
+            >
           </Tooltip>
         </SideBarItemWrapper>
         <SideBarItemWrapper>
