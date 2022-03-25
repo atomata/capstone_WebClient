@@ -71,7 +71,7 @@ const ActionSequenceBarGrid = styled.div`
 const TextEditorGrid = styled.div`
   position: relative;
   grid-column: 9 / span 47;
-  grid-row: 2 / span 47;
+  grid-row: 2 / span 38;
   z-index: 4;
 `;
 
