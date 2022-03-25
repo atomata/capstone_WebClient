@@ -37,3 +37,19 @@
   margin-left: 0.3em;
   cursor: pointer;
 }
+
+.sidebarItemCancel {
+  color: #D23F2F;
+}
+
+.sidebarItemCancel:disabled {
+  color: #555454;
+}
+
+.sidebarItemCancel:hover {
+  color: white;
+}
+
+.toggleOnSidebarItemCancel {
+  color: white;
+}

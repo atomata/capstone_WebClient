@@ -55,8 +55,8 @@ const DragContainer = styled.div`
 
 const useStyles = makeStyles((theme) => ({
   SelectedAction: {
-    border: "3px solid yellow",
-    boxShadow: "0 0 10px yellow",
+    border: "3px solid white",
+    boxShadow: "0 0 10px white",
   },
 }));
 
