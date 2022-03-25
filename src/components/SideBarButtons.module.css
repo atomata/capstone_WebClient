@@ -38,16 +38,16 @@
   cursor: pointer;
 }
 
-
 .cancelButton {
-  color: #D23F2F;
+  color: #d23f2f;
   margin-top: 0.25em;
   margin-right: 0.4em;
   margin-left: 0.3em;
   cursor: pointer;
 }
 
-.saveButton:hover .cancelButton:hover{
+.saveButton:hover,
+.cancelButton:hover {
   color: white;
   margin-top: 0.25em;
   margin-right: 0.4em;
