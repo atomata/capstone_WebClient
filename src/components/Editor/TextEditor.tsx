@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import React, { useContext, useEffect, useState } from "react";
-import { IconButton } from "@mui/material";
 import SaveIcon from "@mui/icons-material/Save";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { Rnd } from "react-rnd";

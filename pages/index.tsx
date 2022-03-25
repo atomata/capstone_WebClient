@@ -1,4 +1,3 @@
-import { Button } from "@mui/material";
 import { useEffect } from "react";
 import styled from "styled-components";
 import { verifyLogIn, logOut, checkIfLoggedIn } from "../src/util/loginCookies";
@@ -40,7 +39,7 @@ const ImgIllustration = styled.img.attrs({
   margin-right: auto;
 `;
 
-const LogOutButton = styled(Button)`
+const LogOutButton = styled.button`
   color: #1710a1;
   font-size: 1em;
   font-weight: bold;
