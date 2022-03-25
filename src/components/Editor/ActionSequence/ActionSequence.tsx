@@ -23,7 +23,7 @@ const ActionSequenceList = styled.div`
   overflow-y: hidden;
   flex-direction: row;
   ::-webkit-scrollbar {
-    height: 0.9em;
+    height: 0.7em;
   }
   ::-webkit-scrollbar-thumb {
     background: #3f3d58;
