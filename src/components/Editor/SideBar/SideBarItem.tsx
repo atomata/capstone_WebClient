@@ -110,6 +110,7 @@ function SideBarItem(): JSX.Element {
               className={
                 apparatusInfo ? styles.toggleOnSidebarItem : styles.sidebarItem
               }
+              sx={{ fontSize: "30px" }}
               onClick={toggleApparatusInfo}
             />
           </Tooltip>
@@ -120,6 +121,7 @@ function SideBarItem(): JSX.Element {
               className={
                 skyBoxInfo ? styles.toggleOnSidebarItem : styles.sidebarItem
               }
+              sx={{ fontSize: "30px" }}
               onClick={toggleSkyBoxInfo}
             />
           </Tooltip>
@@ -155,6 +157,7 @@ function SideBarItem(): JSX.Element {
           <Tooltip html={<StyledToolTipText>Default view</StyledToolTipText>}>
             <CameraswitchIcon
               className={styles.sidebarItem}
+              sx={{ fontSize: "30px" }}
               onClick={() => defaultCameraView()}
             />
           </Tooltip>
@@ -162,7 +165,8 @@ function SideBarItem(): JSX.Element {
         <SideBarItemWrapper>
           <Tooltip html={<StyledToolTipText>Present</StyledToolTipText>}>
             <PlayArrowIcon
-              className={styles.sidebarItemLarge}
+              sx={{ fontSize: "38px" }}
+              className={styles.sidebarItem}
               onClick={toggleOverlay}
             />
           </Tooltip>
@@ -174,6 +178,7 @@ function SideBarItem(): JSX.Element {
             html={<StyledToolTipText>Beginner's Guide</StyledToolTipText>}
           >
             <HelpIcon
+              sx={{ fontSize: "30px" }}
               className={styles.sidebarItem}
               onClick={() => toggleGuide()}
             />
@@ -181,7 +186,11 @@ function SideBarItem(): JSX.Element {
         </SideBarItemWrapper>
         <SideBarItemWrapper>
           <Tooltip html={<StyledToolTipText>Save</StyledToolTipText>}>
-            <SaveIcon className={styles.sidebarItem} onClick={save} />
+            <SaveIcon
+              sx={{ fontSize: "30px" }}
+              className={styles.sidebarItem}
+              onClick={save}
+            />
           </Tooltip>
         </SideBarItemWrapper>
         <SideBarItemWrapper>
@@ -189,6 +198,7 @@ function SideBarItem(): JSX.Element {
             {" "}
             <Tooltip html={<StyledToolTipText>Return</StyledToolTipText>}>
               <KeyboardReturnIcon
+                sx={{ fontSize: "30px" }}
                 className={styles.sidebarItem}
                 onClick={save}
               />
