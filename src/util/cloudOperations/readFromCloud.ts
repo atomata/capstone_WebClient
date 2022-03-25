@@ -55,6 +55,9 @@ function setupExperienceData(
   return getExperienceFromCloud(userId, experienceId).then((experienceJson) => {
     // eslint-disable-next-line no-param-reassign
     experienceDataTemp.experience = experienceJson;
+    if(experienceJson.skyboxId === undefined){
+      experienceDataTemp.experience.skyboxId = "default";
+    }
     setupApparatusData(experienceJson.apparatusId, experienceDataTemp);
   });
 }
@@ -106,8 +109,6 @@ async function getBlobsInContainer(
   // eslint-disable-next-line no-restricted-syntax
   for await (const exp of containerClient.listBlobsFlat()) {
     const expName = exp.name.substring(0, exp.name.length - fileNamePostfix);
-    //const lastModified = exp.properties.lastModified.toLocaleString('en-GB', { timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone });
-    // const lastModified = exp.properties.lastModified.toUTCString();
     const lastModified = new Intl.DateTimeFormat("en-US", {
       year: "numeric",
       month: "long",

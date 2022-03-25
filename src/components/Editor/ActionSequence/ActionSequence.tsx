@@ -6,57 +6,43 @@ import ActionSequenceItem from "./ActionSequenceItem";
 import { ActionContext } from "../../../util/customHooks/actionContext";
 
 const ActionSequenceRoot = styled.div`
-  display: relative;
-  height: stretch;
-  width: stretch;
-  background-color: #f75d77;
-`;
-
-const ActionSequenceHeader = styled.div.attrs({
-  children: "Action Sequence List",
-})`
+  position: relative;
   display: flex;
-  justify-content: center;
-  width: stretch;
-  font-size: 1.2em;
-  font-weight: bold;
-  font-family: Inter, monospace;
-  padding-top: 0.5em;
-  text-transform: uppercase;
-  color: white;
+  width: 100%;
+  height: 100%;
 `;
 
 const ActionSequenceList = styled.div`
   display: flex;
-  max-height: 100%;
-  min-height:71%;
-  min-width: stretch;
-  padding-left: 1em;
-  padding-top: 0.5em;
+  position: absolute;
+  width: 100%;
+  top: 2em;
+  bottom: 0.5em;
   justify-content: left;
   overflow-x: scroll;
-  flex-direction: row ;
-  &::-webkit-scrollbar {
-    height: 1em;
+  overflow-y: hidden;
+  flex-direction: row;
+  ::-webkit-scrollbar {
+    height: 0.7em;
   }
-  &::-webkit-scrollbar-thumb {
-    background: #3F3D58;
-    min-width: 3em;
+  ::-webkit-scrollbar-thumb {
+    background: #3f3d58;
+    max-width: 1em;
     border-radius: 1em;
   }
 `;
 const DragContainer = styled.div`
+  display: flex;
+  margin-left: 2em;
+  margin-bottom: 0.5em;
   border: 1px solid black;
-  max-width: 16em;
-  min-width: 16em;
-  margin: 0.5em;
   background-color: #3f3d56;
 `;
 
 const useStyles = makeStyles((theme) => ({
   SelectedAction: {
-    border: "3px solid yellow",
-    boxShadow: "0 0 10px yellow",
+    border: "3px solid white",
+    boxShadow: "0 0 10px white",
   },
 }));
 
@@ -72,7 +58,6 @@ function ActionSequence(): JSX.Element {
 
   return (
     <ActionSequenceRoot>
-      <ActionSequenceHeader />
       <DragDropContext onDragEnd={handleOnDragEnd}>
         <Droppable droppableId="droppable" direction="horizontal">
           {(dropProvided) => (

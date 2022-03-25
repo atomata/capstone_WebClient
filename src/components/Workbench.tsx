@@ -4,61 +4,85 @@ import { makeStyles } from "@mui/styles";
 import styled from "styled-components";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { Box, TextField, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Slide } from '@mui/material';
-import { TransitionProps } from '@mui/material/transitions';
-import { useWorkbench, useDeleteDialog } from "../util/customHooks/workbenchFunc";
+import {
+  Box,
+  TextField,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Slide,
+} from "@mui/material";
+import { TransitionProps } from "@mui/material/transitions";
+import {
+  useWorkbench,
+  useDeleteDialog,
+} from "../util/customHooks/workbenchFunc";
 import { getBlobsInContainer } from "../util/cloudOperations/readFromCloud";
 import { deleteExp } from "../util/cloudOperations/writeToCloud";
 import { getUserName } from "../util/loginCookies";
 
 const OuterBox = styled.div`
-  margin-top: 2%;
-  margin-left: 10%;
-  margin-right: 10%;
-  padding: 1.2em;
-  weight: 100%;
-  height: 92%;
-  background: #3F3D56;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: 90%;
+  height: 90%;
+  background: #3f3d56;
   border-radius: 1.2em;
 `;
 
-const InnerBox = styled.div`
-  font-family: Trebuchet MS;
-  font-weight: bold;
-  background: white;
+const ExperienceContainer = styled.div`
+  position: relative;
   flex-direction: column;
   justify-items: center;
   display: flex;
   height: 85%;
-  background: #3f3d56;
-  overflow: scroll;
-
+  margin-right: 1em;
+  margin-left: 1em;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  &::-webkit-scrollbar {
+    width: 0.7em;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #a5a4ea;
+    border-radius: 1em;
+    background-clip: padding-box;
+  }
   table {
     border-collapse: separate;
     border-spacing: 0 0.5em;
   }
+`;
 
-  -ms-overflow-style: none; /* Internet Explorer 10+ */
-  scrollbar-width: none; /* Firefox */
-  ::-webkit-scrollbar {
-    display: none; /* Safari and Chrome */
-  }
+const InnerBox = styled.div`
+  position: relative;
+  font-family: Trebuchet MS;
+  font-weight: bold;
+  flex-direction: column;
+  justify-items: center;
+  display: flex;
+  height: 100%;
+  margin-right: 1em;
+  margin-left: 1em;
 `;
 
 const ExperienceHeader = styled.tr`
   color: white;
   font-family: Trebuchet MS;
-  text-align: left;
-  height: 3em;
-  th {
-    background: #3F3D56;
-    padding-bottom: 0.4em;
-    position: sticky;
-    position: -webkit-sticky;
-    top: 0;
-    z-index: 1;
-    padding-left: 1.6em; 
-  }
+  background: #3f3d56;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-left: 2em;
+  margin-right: 3em;
+  margin-top: 1.5em;
+  margin-bottom: 1em;
+  z-index: 4;
 `;
 
 const ExperienceRow = styled.tr`
@@ -69,26 +93,33 @@ const ExperienceRow = styled.tr`
   height: 3em;
   font-size: 1em;
   font-family: Trebuchet MS;
-
   td {
     padding-top: 0.65em;
     padding-bottom: 0.65em;
-    padding-left: 1.6em; 
+    padding-left: 1.6em;
   }
 `;
 
 const ExperienceName = styled.th`
-  width: 35%;
+  text-align: left;
+  width: 30%;
+  text-overflow: ellipsis;
+  overflow: hidden;
 `;
 
 const ExperienceDesc = styled.th`
-  width: 35%;
+  text-align: center;
+  width: 50%;
+  text-overflow: ellipsis;
+  overflow: hidden;
 `;
 
 const ExperienceMisc = styled.th`
-  padding-right: 1.8em;
   text-align: right;
+  width: 30%;
   cursor: pointer;
+  text-overflow: ellipsis;
+  overflow: hidden;
 `;
 
 const ExperienceButtons = styled.td`
@@ -108,23 +139,29 @@ const CreateButton = styled.button`
   border: 0em;
   color: white;
   font-weight: bold;
-  padding: 1.1em 2.3em;
+  height: 3.5em;
   width: 40%;
   font-size: 1.05em;
-  margin-left: 1%;
   cursor: pointer;
   font-family: Trebuchet MS;
-  border-radius: 1.3em;
-  margin-top: -0.25em;
+  border-radius: 1.5em;
+  margin-left: 1em;
+  margin-bottom: 2em;
+  margin-right: 1em;
+  margin-top: 1em;
+  text-overflow: ellipsis;
+  overflow: hidden;
 `;
 
 const CreateInnerBox = styled.div`
-  margin-top: 2%;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  margin-right: 1.5em;
+  margin-left: 2em;
 `;
 
 const ExperienceField = styled(TextField)`
   width: 60%;
-  margin-top: 0.65em;
   margin-right: 1.3em;
 `;
 
@@ -139,8 +176,20 @@ const useStyles = makeStyles((theme) => ({
   },
   helper: {
     color: "#FFFFFF",
-  }
+  },
 }));
+
+const WorkbenchTable = () => (
+  <OuterBox>
+    <ExperienceHeader>
+      <ExperienceName>EXPERIENCE NAME</ExperienceName>
+      <ExperienceDesc>LAST MODIFIED</ExperienceDesc>
+      <ExperienceMisc>OPTIONS</ExperienceMisc>
+    </ExperienceHeader>
+    <LoadExperience />
+    <CreateExperience />
+  </OuterBox>
+);
 
 const CreateExperience = () => {
   const [expName, setExpName] = useState("");
@@ -173,7 +222,13 @@ const CreateExperience = () => {
             query: { experienceId: expName },
           }}
         >
-          <CreateButton data-testid="create-button" onClick={(e) => handleExperienceCreate(e, expName)}> CREATE NEW EXPERIENCE </CreateButton>
+          <CreateButton
+            data-testid="create-button"
+            onClick={(e) => handleExperienceCreate(e, expName)}
+          >
+            {" "}
+            CREATE NEW EXPERIENCE{" "}
+          </CreateButton>
         </Link>
       </Box>
       <ErrorMsg>{expErr}</ErrorMsg>
@@ -181,20 +236,26 @@ const CreateExperience = () => {
   );
 };
 
-const slideTransition = forwardRef(function Transition(
-  props: TransitionProps & {
-    children: React.ReactElement<any, any>;
-  },
-  ref: React.Ref<unknown>,
-) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
+const slideTransition = forwardRef(
+  (
+    props: TransitionProps & {
+      children: React.ReactElement<any, any>;
+    },
+    ref: React.Ref<unknown>
+  ) => <Slide direction="up" ref={ref} {...props} />
+);
 
 // TODO show proper error message when data cannot be fetched
 const LoadExperience = () => {
   const [expList, setExpList] = useState([]);
 
-  const { delOpen, delIndex, delExpName, handleDeleteDialogOpen, handleDeleteDialogClose } = useDeleteDialog();
+  const {
+    delOpen,
+    delIndex,
+    delExpName,
+    handleDeleteDialogOpen,
+    handleDeleteDialogClose,
+  } = useDeleteDialog();
   useEffect(() => {
     async function fetchData() {
       try {
@@ -208,78 +269,73 @@ const LoadExperience = () => {
   }, []);
 
   return (
-    <InnerBox data-testid="inner-box">
-      <Dialog
-        open={delOpen}
-        TransitionComponent={slideTransition}
-        keepMounted
-        onClose={handleDeleteDialogClose}
-        aria-describedby="alert-dialog-slide-description"
-      >
-        <DialogTitle>Are you sure you want to delete this experience?</DialogTitle>
-        <DialogContent color="primary">
-          <DialogContentText id="alert-dialog-slide-description">
-            Once deleted, this experience cannot be returned and will be lost forever. Do you wish to continue?
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => {
-                    expList.splice(delIndex, 1);
-                    setExpList([...expList]);
-                    deleteExp(getUserName(), delExpName);
-                    handleDeleteDialogClose();
-                  }}>YES</Button>
-          <Button onClick={handleDeleteDialogClose}>NO</Button>
-        </DialogActions>
-      </Dialog>
-      <table cellSpacing="0" cellPadding="0">
-        <thead>
-          <ExperienceHeader>
-            <ExperienceName>EXPERIENCE NAME</ExperienceName>
-            <ExperienceDesc>LAST MODIFIED</ExperienceDesc>
-            <ExperienceMisc>OPTIONS
-              {//<MoreHorizIcon style={{fontSize: '36px'}}/>
-              }
-            </ExperienceMisc>
-          </ExperienceHeader>
-        </thead>
-        <tbody>
-          {expList.map((exp, index) => (
-            // eslint-disable-next-line react/jsx-key
-            <ExperienceRow>
-              <td>{exp[0]}</td>
-              <td>{exp[1]}</td>
-              <ExperienceButtons>
-                {//<PlayArrowOutlinedIcon style={{ fontSize: "40px" }} />
-                }
-                <Link
-                  key={exp[0]}
-                  href={{
-                    pathname: "/experience",
-                    query: {
-                      experienceId: exp[0],
-                      apparatusId: "",
-                      dataType: "experience",
-                    },
-                  }}
-                >
-                  <EditIcon style={{ fontSize: "36px" }} />
-                </Link>
-                <DeleteIcon
-                  style={{ fontSize: "36px" }}
-                  onClick={() => {
-                    handleDeleteDialogOpen(index, exp[0]);       
-                  }}
-                />
-                {//<MoreHorizIcon style={{ fontSize: "36px" }} />
-                }
-              </ExperienceButtons>
-            </ExperienceRow>
-          ))}
-        </tbody>
-      </table>
-    </InnerBox>
+    <ExperienceContainer>
+      <InnerBox data-testid="inner-box">
+        <Dialog
+          open={delOpen}
+          TransitionComponent={slideTransition}
+          keepMounted
+          onClose={handleDeleteDialogClose}
+          aria-describedby="alert-dialog-slide-description"
+        >
+          <DialogTitle>
+            Are you sure you want to delete this experience?
+          </DialogTitle>
+          <DialogContent color="primary">
+            <DialogContentText id="alert-dialog-slide-description">
+              Once deleted, this experience cannot be returned and will be lost
+              forever. Do you wish to continue?
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button
+              onClick={() => {
+                expList.splice(delIndex, 1);
+                setExpList([...expList]);
+                deleteExp(getUserName(), delExpName);
+                handleDeleteDialogClose();
+              }}
+            >
+              YES
+            </Button>
+            <Button onClick={handleDeleteDialogClose}>NO</Button>
+          </DialogActions>
+        </Dialog>
+        <table cellSpacing="0" cellPadding="0">
+          <tbody>
+            {expList.map((exp, index) => (
+              // eslint-disable-next-line react/jsx-key
+              <ExperienceRow>
+                <td>{exp[0]}</td>
+                <td style={{ textAlign: "center", width: "50%" }}>{exp[1]}</td>
+                <ExperienceButtons>
+                  <Link
+                    key={exp[0]}
+                    href={{
+                      pathname: "/experience",
+                      query: {
+                        experienceId: exp[0],
+                        apparatusId: "",
+                        dataType: "experience",
+                      },
+                    }}
+                  >
+                    <EditIcon style={{ fontSize: "36px" }} />
+                  </Link>
+                  <DeleteIcon
+                    style={{ fontSize: "36px" }}
+                    onClick={() => {
+                      handleDeleteDialogOpen(index, exp[0]);
+                    }}
+                  />
+                </ExperienceButtons>
+              </ExperienceRow>
+            ))}
+          </tbody>
+        </table>
+      </InnerBox>
+    </ExperienceContainer>
   );
 };
 
-export { OuterBox, LoadExperience, CreateExperience };
+export { WorkbenchTable, LoadExperience, CreateExperience };
