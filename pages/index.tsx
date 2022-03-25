@@ -41,10 +41,12 @@ const ImgIllustration = styled.img.attrs({
 
 const LogOutButton = styled.button`
   color: #1710a1;
+  background: Transparent;
+  border: none;
   font-size: 1em;
   font-weight: bold;
   width: 100%;
-  margin-left:auto;
+  margin-left: 22%;
   margin-right: auto;
 `;
 
