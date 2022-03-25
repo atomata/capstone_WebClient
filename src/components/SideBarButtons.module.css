@@ -30,7 +30,7 @@
   cursor: pointer;
 }
 
-.textboxButtons {
+.saveButton {
   color: #a6a5eb;
   margin-top: 0.25em;
   margin-right: 0.4em;
@@ -38,18 +38,19 @@
   cursor: pointer;
 }
 
-.sidebarItemCancel {
+
+.cancelButton {
   color: #D23F2F;
+  margin-top: 0.25em;
+  margin-right: 0.4em;
+  margin-left: 0.3em;
+  cursor: pointer;
 }
 
-.sidebarItemCancel:disabled {
-  color: #555454;
-}
-
-.sidebarItemCancel:hover {
+.saveButton:hover .cancelButton:hover{
   color: white;
-}
-
-.toggleOnSidebarItemCancel {
-  color: white;
+  margin-top: 0.25em;
+  margin-right: 0.4em;
+  margin-left: 0.3em;
+  cursor: pointer;
 }

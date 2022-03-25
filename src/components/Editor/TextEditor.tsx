@@ -48,7 +48,7 @@ const TextEditor = (): JSX.Element => {
       <TextDiv>
         <Header>
           <SaveIcon
-            className={styles.textboxButtons}
+            className={styles.saveButton}
             sx={{ fontSize: "25px" }}
             onClick={() => {
               setDescription(currDesc);
@@ -56,7 +56,7 @@ const TextEditor = (): JSX.Element => {
           />
 
           <CancelIcon
-            className={styles.textboxButtons}
+            className={styles.cancelButton}
             sx={{ fontSize: "25px" }}
             onClick={() => {
               toggleTextBox();
