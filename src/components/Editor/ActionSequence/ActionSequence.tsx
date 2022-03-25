@@ -12,20 +12,6 @@ const ActionSequenceRoot = styled.div`
   height: 100%;
 `;
 
-const ActionSequenceHeader = styled.div.attrs({
-  children: "Action Sequence List",
-})`
-  display: flex;
-  width: 100%;
-  height: 10%;
-  justify-content: center;
-  font-size: 1.2em;
-  font-weight: bold;
-  font-family: Inter, monospace;
-  text-transform: uppercase;
-  color: white;
-`;
-
 const ActionSequenceList = styled.div`
   display: flex;
   position: absolute;
@@ -37,7 +23,7 @@ const ActionSequenceList = styled.div`
   overflow-y: hidden;
   flex-direction: row;
   ::-webkit-scrollbar {
-    height: 0.9em;
+    height: 0.7em;
   }
   ::-webkit-scrollbar-thumb {
     background: #3f3d58;
@@ -72,7 +58,6 @@ function ActionSequence(): JSX.Element {
 
   return (
     <ActionSequenceRoot>
-      <ActionSequenceHeader />
       <DragDropContext onDragEnd={handleOnDragEnd}>
         <Droppable droppableId="droppable" direction="horizontal">
           {(dropProvided) => (

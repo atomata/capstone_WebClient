@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import React, { useContext, useEffect, useState } from "react";
-import { IconButton } from "@mui/material";
 import SaveIcon from "@mui/icons-material/Save";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { Rnd } from "react-rnd";
@@ -47,32 +46,21 @@ const TextEditor = (): JSX.Element => {
       {" "}
       <TextDiv>
         <Header>
-          <IconButton
-            className={styles.sidebarItem}
+          <SaveIcon
+            className={styles.saveButton}
+            sx={{ fontSize: "25px" }}
             onClick={() => {
               setDescription(currDesc);
             }}
-          >
-            <SaveIcon
-              sx={{
-                fontSize: 25,
-                marginRight: "0.3rem",
-              }}
-            />
-          </IconButton>
-          <IconButton
-            className={styles.sidebarItemCancel}
+          />
+
+          <CancelIcon
+            className={styles.cancelButton}
+            sx={{ fontSize: "25px" }}
             onClick={() => {
               toggleTextBox();
             }}
-          >
-            <CancelIcon
-              sx={{
-                fontSize: 25,
-                marginRight: "0.3rem",
-              }}
-            />
-          </IconButton>
+          />
         </Header>
         <textarea
           className="noDrag"

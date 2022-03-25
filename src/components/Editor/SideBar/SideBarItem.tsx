@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react";
-import { IconButton, Link } from "@mui/material";
+import { Link } from "@mui/material";
 import styled from "styled-components";
 import SettingsIcon from "@mui/icons-material/Settings";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
@@ -106,64 +106,69 @@ function SideBarItem(): JSX.Element {
 
         <SideBarItemWrapper>
           <Tooltip html={<StyledToolTipText>Apparatus List</StyledToolTipText>}>
-            <IconButton
+            <FormatListBulletedIcon
               className={
                 apparatusInfo ? styles.toggleOnSidebarItem : styles.sidebarItem
               }
+              sx={{ fontSize: "30px" }}
               onClick={toggleApparatusInfo}
-            >
-              <FormatListBulletedIcon
-                sx={{
-                  fontSize: "30px",
-                }}
-              />
-            </IconButton>
+            />
           </Tooltip>
         </SideBarItemWrapper>
         <SideBarItemWrapper>
           <Tooltip html={<StyledToolTipText>Settings</StyledToolTipText>}>
-            <IconButton
+            <SettingsIcon
               className={
                 skyBoxInfo ? styles.toggleOnSidebarItem : styles.sidebarItem
               }
+              sx={{ fontSize: "30px" }}
               onClick={toggleSkyBoxInfo}
-            >
-              <SettingsIcon
-                sx={{
-                  fontSize: "30px",
-                }}
-              />
-            </IconButton>
+            />
           </Tooltip>
         </SideBarItemWrapper>
         <SideBarItemWrapper>
           <Tooltip html={<StyledToolTipText>Text box</StyledToolTipText>}>
-            <IconButton
-              className={
-                textBox ? styles.toggleOnSidebarItem : styles.sidebarItem
-              }
-              disabled={selectedAction === undefined}
+            <TextFormatIcon
               onClick={toggleTextBox}
-            >
-              <TextFormatIcon sx={{ fontSize: "38px", color: "inherit" }} />
-            </IconButton>
+              sx={[
+                {
+                  cursor: "pointer",
+                  marginRight: "0.2em",
+                  marginLeft: " 0.2em",
+                  marginBottom: "0.2em",
+                  fontSize: "38px",
+                  color:
+                    selectedAction === undefined
+                      ? "#555454"
+                      : textBox
+                      ? "white"
+                      : "#a6a5eb",
+                },
+                {
+                  "&:hover": {
+                    color: selectedAction === undefined ? "#555454" : "white",
+                  },
+                },
+              ]}
+            />
           </Tooltip>
         </SideBarItemWrapper>
         <SideBarItemWrapper>
           <Tooltip html={<StyledToolTipText>Default view</StyledToolTipText>}>
-            <IconButton
+            <CameraswitchIcon
               className={styles.sidebarItem}
+              sx={{ fontSize: "30px" }}
               onClick={() => defaultCameraView()}
-            >
-              <CameraswitchIcon sx={{ fontSize: "32px" }} />
-            </IconButton>
+            />
           </Tooltip>
         </SideBarItemWrapper>
         <SideBarItemWrapper>
           <Tooltip html={<StyledToolTipText>Present</StyledToolTipText>}>
-            <IconButton className={styles.sidebarItem} onClick={toggleOverlay}>
-              <PlayArrowIcon sx={{ fontSize: "38px" }} />
-            </IconButton>
+            <PlayArrowIcon
+              sx={{ fontSize: "38px" }}
+              className={styles.sidebarItem}
+              onClick={toggleOverlay}
+            />
           </Tooltip>
         </SideBarItemWrapper>
       </SideBarItemBox>
@@ -172,28 +177,31 @@ function SideBarItem(): JSX.Element {
           <Tooltip
             html={<StyledToolTipText>Beginner's Guide</StyledToolTipText>}
           >
-            <IconButton
+            <HelpIcon
+              sx={{ fontSize: "30px" }}
               className={styles.sidebarItem}
               onClick={() => toggleGuide()}
-            >
-              <HelpIcon sx={{ fontSize: "30px"}} />
-            </IconButton>
+            />
           </Tooltip>
         </SideBarItemWrapper>
         <SideBarItemWrapper>
           <Tooltip html={<StyledToolTipText>Save</StyledToolTipText>}>
-            <IconButton className={styles.sidebarItem} onClick={save}>
-              <SaveIcon sx={{ fontSize: "30px"}} />
-            </IconButton>
+            <SaveIcon
+              sx={{ fontSize: "30px" }}
+              className={styles.sidebarItem}
+              onClick={save}
+            />
           </Tooltip>
         </SideBarItemWrapper>
         <SideBarItemWrapper>
           <Link href="/">
             {" "}
             <Tooltip html={<StyledToolTipText>Return</StyledToolTipText>}>
-              <IconButton className={styles.sidebarItem} onClick={save}>
-                <KeyboardReturnIcon sx={{ fontSize: "30px"}} />
-              </IconButton>
+              <KeyboardReturnIcon
+                sx={{ fontSize: "30px" }}
+                className={styles.sidebarItem}
+                onClick={save}
+              />
             </Tooltip>
           </Link>
         </SideBarItemWrapper>

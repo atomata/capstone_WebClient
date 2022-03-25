@@ -15,10 +15,10 @@ const TextDiv = styled.div`
 
 const DescLabel = styled.label`
   position: absolute;
-  top: 1.5em;
+  top: 0.5em;
   left: 0.7em;
   right: 0.7em;
-  bottom: 1.5em;
+  bottom: 0.5em;
   font-family: Inter, monospace;
   font-size: 1.6em;
   word-break: break-all;
@@ -26,7 +26,7 @@ const DescLabel = styled.label`
   border-radius: 15px;
   overflow-y: scroll;
   &::-webkit-scrollbar {
-    width: 0.5em;
+    width: 0.3em;
   }
   &::-webkit-scrollbar-thumb {
     background: #a5a4ea;
@@ -46,7 +46,7 @@ const TextPreview = ({ desc }: any): JSX.Element => {
   return isExpanded && !isEmpty ? (
     <Rnd
       cancel=".noDrag"
-      minWidth="200px"
+      minWidth="250px"
       minHeight="150px"
       maxWidth="400px"
       maxHeight="250px"

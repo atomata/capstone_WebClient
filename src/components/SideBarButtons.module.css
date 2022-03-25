@@ -1,31 +1,56 @@
 .sidebarItem {
   color: #a6a5eb;
+  margin-right: 0.2em;
+  margin-left: 0.2em;
+  margin-bottom: 0.2em;
+  cursor: pointer;
 }
 
 .sidebarItem:disabled {
   color: #555454;
+  margin-right: 0.2em;
+  margin-left: 0.2em;
+  margin-bottom: 0.2em;
+  cursor: pointer;
 }
 
 .sidebarItem:hover {
   color: white;
+  margin-right: 0.2em;
+  margin-left: 0.2em;
+  margin-bottom: 0.2em;
+  cursor: pointer;
 }
 
 .toggleOnSidebarItem {
   color: white;
+  margin-right: 0.2em;
+  margin-left: 0.2em;
+  margin-bottom: 0.2em;
+  cursor: pointer;
 }
 
-.sidebarItemCancel {
-  color: #D23F2F;
+.saveButton {
+  color: #a6a5eb;
+  margin-top: 0.25em;
+  margin-right: 0.4em;
+  margin-left: 0.3em;
+  cursor: pointer;
 }
 
-.sidebarItemCancel:disabled {
-  color: #555454;
+.cancelButton {
+  color: #d23f2f;
+  margin-top: 0.25em;
+  margin-right: 0.4em;
+  margin-left: 0.3em;
+  cursor: pointer;
 }
 
-.sidebarItemCancel:hover {
+.saveButton:hover,
+.cancelButton:hover {
   color: white;
-}
-
-.toggleOnSidebarItemCancel {
-  color: white;
+  margin-top: 0.25em;
+  margin-right: 0.4em;
+  margin-left: 0.3em;
+  cursor: pointer;
 }
