@@ -6,10 +6,11 @@ type ActionData = {
 };
 
 type Input = {
-  command: string,
-  name: string,
-  desc:string
-}
+  command: string;
+  name: string;
+  desc: string;
+  enabled: boolean;
+};
 type ExperienceData = {
   apparatusMetadata: SerializedApparatus;
   experience: SerializedExperience;
@@ -22,7 +23,6 @@ type SerializedExperience = {
   skyboxId: string;
 };
 
-// TODO change to lower case
 type SerializedApparatus = {
   Paths: string[];
   Data: string[];
@@ -30,7 +30,6 @@ type SerializedApparatus = {
 type PathData = {
   path: string;
   data: Record<string, any[]>;
-  enabled : boolean;
 };
 
 type AssetBundle = { children: any[]; path: string; identifier: string };
