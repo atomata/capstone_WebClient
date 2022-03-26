@@ -137,39 +137,26 @@ function getActions(node: AssetBundle): ActionData[] {
       node.children[child].type[0] === "CameraFocus"
     ) {
       for (const index in node.children[child].input) {
-        const actionData = {
-          input: node.children[child].input[index],
-          path: node.children[child].path,
-          assetId: node.identifier,
-        };
-        actionList.push(actionData);
+        if (node.children[child].input[index].enabled) {
+          const actionData = {
+            input: node.children[child].input[index],
+            path: node.children[child].path,
+            assetId: node.identifier,
+          };
+          actionList.push(actionData);
+        }
       }
     }
   }
   return actionList;
 }
 
-function getAssetBundleActions(metadata: SerializedApparatus) {
+function getAssetBundleActions(metadata: SerializedApparatus): any[] {
   const list = [];
   const assetBundleList = getAssetBundles(metadata);
 
   for (const bundle of assetBundleList) {
-    const actionList = [];
-    for (const child in bundle.children) {
-      if (
-        bundle.children[child].type[0] === "Event" ||
-        bundle.children[child].type[0] === "CameraFocus"
-      ) {
-        for (const index in bundle.children[child].input) {
-          const actionData = {
-            input: bundle.children[child].input[index],
-            path: bundle.children[child].path,
-            assetId: bundle.identifier,
-          };
-          actionList.push(actionData);
-        }
-      }
-    }
+    const actionList = getActions(bundle);
     list.push([bundle.identifier[0], actionList]);
   }
   return list;
