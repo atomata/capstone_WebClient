@@ -1,4 +1,3 @@
-import { ownerDocument } from "@mui/material";
 import {
   ActionData,
   AssetBundle,
@@ -13,7 +12,7 @@ function linkPathsToData(metadata: SerializedApparatus): PathData[] {
 
   // make an empty object for each path
   metadata.Paths.forEach((path) => {
-    const datum: PathData = { path, data: {}, enabled: false };
+    const datum: PathData = { path, data: {} };
     pathDataList.push(datum);
   });
 
@@ -22,47 +21,50 @@ function linkPathsToData(metadata: SerializedApparatus): PathData[] {
     const unpack = data.split("@");
     const index = Number(unpack[0]);
 
-    const dataSplit = unpack[1].split(":");
-    if (pathDataList[index].data[dataSplit[0]] === undefined) {
-      pathDataList[index].data[dataSplit[0]] = [];
+    // TODO fix the semicolon split issue , fix the uienabled , fix the boolean inputs
+
+    const semicolonIndex = unpack[1].indexOf(":");
+    const identifier = unpack[1].substring(0, semicolonIndex);
+    const dataVal = unpack[1].substring(semicolonIndex + 1);
+    if (pathDataList[index].data[identifier] === undefined) {
+      pathDataList[index].data[identifier] = [];
     }
-    if (dataSplit[0] === "input") {
-      
-      const typeAndRest = dataSplit[1].split("/");
+    if (identifier === "input") {
+      const typeAndRest = dataVal.split("/");
       const idAndArgs = typeAndRest[1].split("?");
-      const id = idAndArgs[0]
-      
+      const id = idAndArgs[0];
+
       // in the case where args arn't provided, use default values to populate name and description
       const hasArgs = idAndArgs.length > 1;
 
-      if(!hasArgs)
-      {
-        pathDataList[index].data[dataSplit[0]].push({
+      if (!hasArgs) {
+        pathDataList[index].data[identifier].push({
           command: id,
           name: id,
-          desc: ""
+          desc: "",
         });
-      }
-      else 
-      {
-        const args = idAndArgs[1]
-        const argSplit = args.split("&")
+      } else {
+        const args = idAndArgs[1];
+        const argSplit = args.split("&");
 
-        const argDictionary = {}
-        for(let i of argSplit){
-          let keyvalue = i.split("=")
+        const argDictionary = {};
+        for (let i of argSplit) {
+          let keyvalue = i.split("=");
           argDictionary[keyvalue[0]] = keyvalue[1];
         }
 
-        pathDataList[index].data[dataSplit[0]].push({
+        pathDataList[index].data[identifier].push({
           command: id,
           name: "uiname" in argDictionary ? argDictionary["uiname"] : id,
           desc: "uidesc" in argDictionary ? argDictionary["uidesc"] : id,
-          enabled: "uienabled" in argDictionary ? argDictionary["uidesc"] == 'True' : false,
+          enabled:
+            "uienabled" in argDictionary
+              ? argDictionary["uienabled"] === "True"
+              : false,
         });
       }
     } else {
-      pathDataList[index].data[dataSplit[0]].push(dataSplit[1]);
+      pathDataList[index].data[identifier].push(dataVal);
     }
   });
   // return the created object
