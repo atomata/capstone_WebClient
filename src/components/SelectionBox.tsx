@@ -26,10 +26,10 @@ const SelectionHeading = styled.div`
   width: 100%;
   padding-top: 2em;
   text-align: center;
-  font-family: Trebuchet MS;
+  font-family: Inter, monospace;
+  letter-spacing: 0.1em;
+  font-size: 18px;
   font-weight: bold;
-  font-size: 1.05em;
-  letter-spacing: 0.05em;
   color: #ffffff;
   margin-bottom: 2em;
   border-radius: 1.2em;
@@ -57,19 +57,19 @@ const SelectionButton = styled.div`
   flex-direction: column;
   justify-items: center;
   display: flex;
-  font-family: Trebuchet MS;
-  color: #ffffff;
+  font-family: Inter, monospace;
+  letter-spacing: 0.1em;
   font-weight: bold;
-  font-size: 1em;
-  letter-spacing: 0.05em;
+  color: #ffffff;
+  font-size: 14px;
   text-align: center;
 `;
 
 const SelectionOption = styled.div`
-  font-family: Trebuchet MS;
+  font-family: Inter, monospace;
   font-weight: bold;
-  font-size: 1em;
-  letter-spacing: 0.05em;
+  font-size: 14px;
+  letter-spacing: 0.1em;
   color: #ffffff;
   padding: 2em;
   text-transform: uppercase;
