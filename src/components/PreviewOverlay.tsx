@@ -45,8 +45,10 @@ function PreviewOverlay(): JSX.Element {
   const { showGuide, toggleOverlay } = useContext(SideBarContext);
   const { actionList } = useContext(ActionContext);
 
-  const { desc, selected, cyclePreviewLeft, cyclePreviewRight } =
-    useSelected(actionList,experienceData.apparatusRoot);
+  const { desc, selected, cyclePreviewLeft, cyclePreviewRight } = useSelected({
+    actionList,
+    apparatusRoot: experienceData.apparatusRoot,
+  });
 
   useKeypress("ArrowLeft", () => {
     if (!showGuide) cyclePreviewLeft();
