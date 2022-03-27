@@ -8,10 +8,14 @@ import {
 } from "../unityContextActions";
 import { ActionData, TreeNode } from "../types";
 
-const useSelected = (
-  actionList: ActionData[],
-  apparatusRoot: TreeNode
-): {
+type useSelectedProps = {
+  actionList: ActionData[];
+  apparatusRoot: TreeNode;
+};
+const useSelected = ({
+  actionList,
+  apparatusRoot,
+}: useSelectedProps): {
   desc: string;
   selected: number;
   cyclePreviewLeft: () => void;

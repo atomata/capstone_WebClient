@@ -1,5 +1,6 @@
 import {
   checkIfParent,
+  convertPathDataToTree,
   getActions,
   getAssetBundles,
   linkPathsToData,
@@ -9,17 +10,17 @@ import { testmetadata1 } from "../util/testConstants";
 const testActionList = [
   {
     path: "evil-cylinder/evil-cylinder/delta/wobble-sphere/wobble-sphere/animations",
-    input: { command: "still", name: "still", desc: "" },
+    input: { command: "still", name: "still", desc: "", enabled: true },
     assetId: ["wobble-sphere"],
   },
   {
     path: "evil-cylinder/evil-cylinder/delta/wobble-sphere/wobble-sphere/animations",
-    input: { command: "wobble", name: "wobble", desc: "" },
+    input: { command: "wobble", name: "wobble", desc: "", enabled: true },
     assetId: ["wobble-sphere"],
   },
   {
     path: "evil-cylinder/evil-cylinder/delta/wobble-sphere/wobble-sphere/animations",
-    input: { command: "bounce", name: "bounce", desc: "" },
+    input: { command: "bounce", name: "bounce", desc: "", enabled: true },
     assetId: ["wobble-sphere"],
   },
   {
@@ -28,6 +29,7 @@ const testActionList = [
       command: "focus",
       name: "Close Up",
       desc: "A close up of the wobble sphere",
+      enabled: true,
     },
     assetId: ["wobble-sphere"],
   },
@@ -39,6 +41,7 @@ const testpathDataList = [
     data: {
       identifier: ["evil-cylinder"],
       type: ["Serialization"],
+      defaultState : ["evil-cylinder/default"]
     },
   },
   {
@@ -58,36 +61,49 @@ const testpathDataList = [
           command: "position",
           desc: "",
           name: "position",
+          enabled: true,
         },
         {
           command: "rotation",
           desc: "",
           name: "rotation",
+          enabled: true,
         },
         {
           command: "scale",
           desc: "",
           name: "scale",
+          enabled: true,
         },
         {
           command: "position_delta",
           desc: "",
           name: "position_delta",
+          enabled: true,
         },
         {
           command: "rotation_delta",
           desc: "",
           name: "rotation_delta",
+          enabled: true,
         },
         {
           command: "scale_delta",
           desc: "",
           name: "scale_delta",
+          enabled: true,
         },
         {
-          command: "isLocal",
+          command: "isLocal?=true",
           desc: "",
-          name: "isLocal",
+          name: "isLocal: true",
+          enabled: true,
+        },
+        {
+          command: "isLocal?=false",
+          desc: "",
+          name: "isLocal: false",
+          enabled: true,
         },
       ],
     },
@@ -119,16 +135,19 @@ const testpathDataList = [
           command: "still",
           desc: "",
           name: "still",
+          enabled: true,
         },
         {
           command: "wobble",
           desc: "",
           name: "wobble",
+          enabled: true,
         },
         {
           command: "bounce",
           desc: "",
           name: "bounce",
+          enabled: true,
         },
       ],
     },
@@ -146,6 +165,7 @@ const testpathDataList = [
           command: "focus",
           desc: "A close up of the wobble sphere",
           name: "Close Up",
+          enabled: true,
         },
       ],
     },
@@ -162,7 +182,7 @@ describe("linkpathsToData returns the correct pathDataList", () => {
 
 describe("getActions to return actions of a node", () => {
   it("getActions non null", () => {
-    const testNode = getAssetBundles(testmetadata1)[1];
+    const testNode = getAssetBundles(convertPathDataToTree(testmetadata1))[1];
     expect(getActions(testNode)).toEqual(testActionList);
   });
 
@@ -173,12 +193,12 @@ describe("getActions to return actions of a node", () => {
   });
 
   it("checkIfParent true", () => {
-    const testNode = getAssetBundles(testmetadata1)[0];
+    const testNode = getAssetBundles(convertPathDataToTree(testmetadata1))[0];
     expect(checkIfParent(testNode)).toEqual(true);
   });
 
   it("checkIfParent false", () => {
-    const testNode = getAssetBundles(testmetadata1)[1];
+    const testNode = getAssetBundles(convertPathDataToTree(testmetadata1))[1];
     expect(checkIfParent(testNode)).toEqual(false);
   });
 });

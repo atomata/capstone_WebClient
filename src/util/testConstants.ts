@@ -1,3 +1,5 @@
+import { convertPathDataToTree } from "./jsonParsing";
+
 const testmetadata1 = {
   Paths: [
     "evil-cylinder",
@@ -6,11 +8,12 @@ const testmetadata1 = {
     "evil-cylinder/evil-cylinder/delta/wobble-sphere",
     "evil-cylinder/evil-cylinder/delta/wobble-sphere/wobble-sphere",
     "evil-cylinder/evil-cylinder/delta/wobble-sphere/wobble-sphere/animations",
-    "evil-cylinder/evil-cylinder/delta/wobble-sphere/wobble-sphere/cam_closeup"
+    "evil-cylinder/evil-cylinder/delta/wobble-sphere/wobble-sphere/cam_closeup",
   ],
   Data: [
     "0@identifier:evil-cylinder",
     "0@type:Serialization",
+    "0@defaultState:evil-cylinder/default",
     "1@identifier:evil-cylinder",
     "1@type:AssetBundle",
     "2@identifier:delta",
@@ -43,11 +46,11 @@ const testSerializedExperience = {
   experienceId: "testexp1",
   apparatusId: "evil-cylinder",
   actionList: [],
-  skyboxId: "default"
+  skyboxId: "default",
 };
 
 const testExperienceData = {
-  apparatusMetadata: testmetadata1,
+  apparatusRoot: convertPathDataToTree(testmetadata1),
   experience: testSerializedExperience,
 };
 export { testmetadata1, testSerializedExperience, testExperienceData };

@@ -8,6 +8,7 @@ import {
 import { deleteExp, saveExp } from "../util/cloudOperations/writeToCloud";
 import { testSerializedExperience, testmetadata1 } from "../util/testConstants";
 import { ExperienceData } from "../util/types";
+import {convertPathDataToTree} from "../util/jsonParsing";
 
 test("based on the apparatus id it should return the apparatus json, but can reject", () => {
   global.fetch = jest.fn(() => Promise.reject()) as jest.Mock;
@@ -77,7 +78,6 @@ test("save an experience to the cloud", () => {
   });
 });
 
-
 test("delete an experience form cloud", () => {
   const id = "testuser1";
   const output = [];
@@ -90,8 +90,13 @@ test("delete an experience form cloud", () => {
 
 test("setup apparatus data", () => {
   const experienceDataTemp: ExperienceData = {
-    apparatusMetadata: { Paths: [], Data: [] },
-    experience: { experienceId: "exp1", apparatusId: "", actionList: [] },
+    apparatusRoot: convertPathDataToTree(testmetadata1),
+    experience: {
+      experienceId: "exp1",
+      apparatusId: "",
+      actionList: [],
+      skyboxId: "",
+    },
   };
 
   global.fetch = jest.fn(() =>
@@ -101,6 +106,6 @@ test("setup apparatus data", () => {
   ) as jest.Mock;
   const apparatusId = "evil-cylinder";
   setupApparatusData(apparatusId, experienceDataTemp).then(() => {
-    expect(experienceDataTemp.apparatusMetadata).toEqual(testmetadata1);
+    expect(experienceDataTemp.apparatusRoot).toEqual(convertPathDataToTree(testmetadata1));
   });
 });
