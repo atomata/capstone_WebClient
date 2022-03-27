@@ -4,11 +4,13 @@ import {
   pauseApparatus,
   playApparatus,
   requestTrigger,
+  setDefault,
 } from "../unityContextActions";
-import { ActionData } from "../types";
+import { ActionData, TreeNode } from "../types";
 
 const useSelected = (
-  actionList: ActionData[]
+  actionList: ActionData[],
+  apparatusRoot: TreeNode
 ): {
   desc: string;
   selected: number;
@@ -30,6 +32,7 @@ const useSelected = (
       setSelected((prevVal) => prevVal + 1);
       updateDesc(selected + 1);
     } else {
+      setDefault(apparatusRoot);
       defaultCameraView();
       pauseApparatus();
       setSelected(-1);
@@ -46,6 +49,7 @@ const useSelected = (
       setSelected((prevVal) => prevVal - 1);
       updateDesc(selected - 1);
     } else {
+      setDefault(apparatusRoot);
       defaultCameraView();
       pauseApparatus();
       setSelected(-1);
