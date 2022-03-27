@@ -14,7 +14,7 @@ const ActionSequenceItemApparatus = styled.div`
   display: inline-block;
   height: 1.5em;
   margin: 0.5em;
-  font-size: 1em;
+  font-size: 14px;
   font-family: Inter, monospace;
   color: #ffffff;
 `;

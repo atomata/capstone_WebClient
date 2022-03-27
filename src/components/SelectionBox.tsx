@@ -59,7 +59,6 @@ const SelectionButton = styled.div`
   display: flex;
   font-family: Trebuchet MS;
   color: #ffffff;
-  font-family: Arial;
   font-weight: bold;
   font-size: 1em;
   letter-spacing: 0.05em;

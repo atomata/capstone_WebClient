@@ -40,7 +40,7 @@
   font-weight: inherit;
   text-transform: capitalize;
   flex-grow: 1;
-  font-size: 0.9em;
+  font-size: 12px;
   font-family: Inter, monospace;
 }
 
@@ -48,6 +48,6 @@
   font-weight: inherit;
   text-transform: capitalize;
   flex-grow: 1;
-  font-size: 1em;
+  font-size: 13px;
   font-family: Inter, monospace;
 }

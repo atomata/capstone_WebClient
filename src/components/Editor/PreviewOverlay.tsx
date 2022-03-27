@@ -3,11 +3,11 @@ import React, { useContext } from "react";
 import useKeypress from "react-use-keypress";
 import { IconButton } from "@mui/material";
 import ArrowBackSharpIcon from "@mui/icons-material/ArrowBackSharp";
-import TextPreview from "./Editor/TextPreview";
-import { useSelected } from "../util/customHooks/previewOverlayfunc";
-import { defaultCameraView } from "../util/unityContextActions";
-import { SideBarContext } from "../util/customHooks/SideBarContext";
-import { ActionContext } from "../util/customHooks/actionContext";
+import TextPreview from "./TextPreview";
+import { useSelected } from "../../util/customHooks/previewOverlayfunc";
+import { defaultCameraView } from "../../util/unityContextActions";
+import { SideBarContext } from "../../util/customHooks/SideBarContext";
+import { ActionContext } from "../../util/customHooks/actionContext";
 
 const PreviewGrid = styled.div`
   display: grid;
