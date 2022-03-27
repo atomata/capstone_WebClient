@@ -32,7 +32,13 @@ type PathData = {
   data: Record<string, any[]>;
 };
 
-type TreeNode = { children: TreeNode[]; path: string, identifier: string, type: string };
+type TreeNode = {
+  children: TreeNode[];
+  path: string;
+  identifier: string;
+  type: string;
+  input?: any[];
+};
 
 export type {
   ExperienceData,
