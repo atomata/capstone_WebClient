@@ -8,6 +8,7 @@ import {
   unityScene,
   voidTrigger,
 } from "./constants";
+import { TreeNode } from "./types";
 
 const unityContext = new UnityContext({
   loaderUrl: "build/AtomataScene0_0_9.loader.js",
@@ -43,7 +44,18 @@ function pauseApparatus(): void {
 function playApparatus(): void {
   unityContext.send(unityScene, playApparatusCommand);
 }
+
+function setDefault(apparatusRoot: TreeNode): void {
+  if (
+    apparatusRoot.defaultState !== undefined &&
+    apparatusRoot.defaultState[0] !== undefined
+  ) {
+    unityContext.send(unityScene, voidTrigger, apparatusRoot.defaultState[0]);
+  }
+}
+
 export {
+  setDefault,
   playApparatus,
   pauseApparatus,
   loadApparatus,
