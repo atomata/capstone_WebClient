@@ -38,6 +38,7 @@ type TreeNode = {
   identifier: string;
   type: string;
   input?: any[];
+  defaultState?: string;
 };
 
 export type {
