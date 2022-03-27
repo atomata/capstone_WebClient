@@ -36,15 +36,6 @@ function changeSkybox(skybox: string): void {
 function defaultCameraView(): void {
   unityContext.send(unityScene, defaultCameraCommand);
 }
-
-function pauseApparatus(): void {
-  unityContext.send(unityScene, pauseApparatusCommand);
-}
-
-function playApparatus(): void {
-  unityContext.send(unityScene, playApparatusCommand);
-}
-
 function setDefault(apparatusRoot: TreeNode): void {
   if (
     apparatusRoot.defaultState !== undefined &&
@@ -54,6 +45,14 @@ function setDefault(apparatusRoot: TreeNode): void {
   }
 }
 
+
+function pauseApparatus(): void {
+  unityContext.send(unityScene, pauseApparatusCommand);
+}
+
+function playApparatus(): void {
+  unityContext.send(unityScene, playApparatusCommand);
+}
 export {
   setDefault,
   playApparatus,
