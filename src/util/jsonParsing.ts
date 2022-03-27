@@ -1,10 +1,4 @@
-import {
-  ActionData,
-  AssetBundle,
-  PathData,
-  SerializedApparatus,
-  Tree,
-} from "./types";
+import { ActionData, PathData, SerializedApparatus, TreeNode } from "./types";
 
 // Creates a list of path-data objects
 function linkPathsToData(metadata: SerializedApparatus): PathData[] {
@@ -42,20 +36,20 @@ function linkPathsToData(metadata: SerializedApparatus): PathData[] {
             command: `${id}?=true`,
             name: `${id}: true`,
             desc: "",
-            enabled: true
+            enabled: true,
           });
           pathDataList[index].data[identifier].push({
             command: `${id}?=false`,
             name: `${id}: false`,
             desc: "",
-            enabled: true
+            enabled: true,
           });
         } else {
           pathDataList[index].data[identifier].push({
             command: id,
             name: id,
             desc: "",
-            enabled: true
+            enabled: true,
           });
         }
       } else {
@@ -120,11 +114,16 @@ function linkPathsToData(metadata: SerializedApparatus): PathData[] {
 
 // takes a string[] path and makes sure it's in the tree
 // returns the node at that path
-function addPathToTreeAndReturnNode(items: string[], tree: Tree) {
+function addPathToTreeAndReturnNode(items: string[], tree: TreeNode) {
   let node = tree;
   items.forEach((item) => {
     if (!(item in node.children)) {
-      node.children[item] = { children: [], path: "" };
+      node.children[item] = {
+        children: [],
+        path: "",
+        identifier: "",
+        type: "",
+      };
     }
     node = node.children[item];
   });
@@ -132,8 +131,8 @@ function addPathToTreeAndReturnNode(items: string[], tree: Tree) {
 }
 
 // converts the pathdata object created with linkPathsToData into a tree structure
-function convertPathDataToTree(metadata: SerializedApparatus): Tree {
-  const tree = { children: [], path: "" };
+function convertPathDataToTree(metadata: SerializedApparatus): TreeNode {
+  const tree = { children: [], path: "", identifier: "", type: "" };
   const pathDataList = linkPathsToData(metadata);
   pathDataList.forEach((pathData) => {
     const node = addPathToTreeAndReturnNode(pathData.path.split("/"), tree);
@@ -142,8 +141,8 @@ function convertPathDataToTree(metadata: SerializedApparatus): Tree {
       node[data] = pathData.data[data];
     }
   });
-
-  return tree;
+  const rootKey = metadata.Paths[0];
+  return tree.children[rootKey];
 }
 
 // travers the tree depth first to find the asset bundle nodes
@@ -161,19 +160,18 @@ function traverseNodeDepthFirst(node, assetBundleList) {
 }
 
 // returns the list of assetbundle nodes in the tree
-function getAssetBundles(metadata: SerializedApparatus): AssetBundle[] {
-  if (metadata === undefined) {
+function getAssetBundles(apparatusRoot: TreeNode): TreeNode[] {
+  if (apparatusRoot === undefined) {
     return undefined;
   }
-  const assetTree = convertPathDataToTree(metadata);
   const assetBundleList = [];
-  traverseNodeDepthFirst(assetTree, assetBundleList);
+  traverseNodeDepthFirst(apparatusRoot, assetBundleList);
   return assetBundleList;
 }
 
 // input to one event can be multi valued . currently adding them separately in the list
 // returns the list of actions of the given node
-function getActions(node: AssetBundle): ActionData[] {
+function getActions(node: TreeNode): ActionData[] {
   const actionList = [];
   if (node === undefined) {
     return undefined;
@@ -198,9 +196,9 @@ function getActions(node: AssetBundle): ActionData[] {
   return actionList;
 }
 
-function getAssetBundleActions(metadata: SerializedApparatus): any[] {
+function getAssetBundleActions(apparatusRoot: TreeNode): any[] {
   const list = [];
-  const assetBundleList = getAssetBundles(metadata);
+  const assetBundleList = getAssetBundles(apparatusRoot);
 
   for (const bundle of assetBundleList) {
     const actionList = getActions(bundle);
@@ -210,7 +208,7 @@ function getAssetBundleActions(metadata: SerializedApparatus): any[] {
 }
 
 // Checks if a given node is a parent node or not by recursively checking if it has any direct/indirect children of type 'AssetBundle'
-function checkIfParent(node: AssetBundle): boolean {
+function checkIfParent(node: TreeNode): boolean {
   if (node.children !== undefined) {
     for (const child in node.children) {
       if (
@@ -224,6 +222,7 @@ function checkIfParent(node: AssetBundle): boolean {
   return false;
 }
 export {
+  convertPathDataToTree,
   getAssetBundleActions,
   getAssetBundles,
   getActions,
