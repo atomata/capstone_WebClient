@@ -15,7 +15,11 @@ import {
 } from "../../util/customHooks/globalContext";
 import { saveExp } from "../../util/cloudOperations/writeToCloud";
 import SideBarItem from "./SideBar/SideBarItem";
-import {defaultCameraView, pauseApparatus} from "../../util/unityContextActions";
+import {
+  defaultCameraView,
+  pauseApparatus,
+  setDefault,
+} from "../../util/unityContextActions";
 import SavingTip from "./savingTip";
 import Guide from "./Guide";
 
@@ -108,6 +112,7 @@ function Overlay(): JSX.Element {
 
   useKeypress("Escape", () => {
     if (!showOverlay) {
+      setDefault(experienceData.apparatusRoot);
       pauseApparatus();
       toggleOverlay();
       defaultCameraView();
@@ -115,9 +120,6 @@ function Overlay(): JSX.Element {
 
     if (showGuide) toggleGuide();
   });
-
-  const { experienceData, userId }: globalContextTypes =
-    useContext(GlobalContext);
   const {
     selectAction,
     selectedAction,

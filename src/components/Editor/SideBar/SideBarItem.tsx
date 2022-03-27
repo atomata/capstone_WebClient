@@ -175,7 +175,7 @@ function SideBarItem(): JSX.Element {
                 setDefault(experienceData.apparatusRoot);
                 defaultCameraView();
                 toggleOverlay();
-                // pauseApparatus();
+                pauseApparatus();
               }}
             />
           </Tooltip>
