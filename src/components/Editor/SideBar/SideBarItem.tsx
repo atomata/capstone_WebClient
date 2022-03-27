@@ -17,7 +17,10 @@ import {
 } from "../../../util/customHooks/globalContext";
 import { ActionContext } from "../../../util/customHooks/actionContext";
 import styles from "../../SideBarButtons.module.css";
-import { defaultCameraView } from "../../../util/unityContextActions";
+import {
+  defaultCameraView,
+  pauseApparatus,
+} from "../../../util/unityContextActions";
 import Tooltip from "../Tooltip";
 
 const SideBarItemRoot = styled.div`
@@ -167,7 +170,11 @@ function SideBarItem(): JSX.Element {
             <PlayArrowIcon
               sx={{ fontSize: "38px" }}
               className={styles.sidebarItem}
-              onClick={toggleOverlay}
+              onClick={() => {
+                defaultCameraView();
+                toggleOverlay();
+                pauseApparatus();
+              }}
             />
           </Tooltip>
         </SideBarItemWrapper>

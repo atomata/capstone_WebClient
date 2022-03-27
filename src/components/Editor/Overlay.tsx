@@ -15,7 +15,7 @@ import {
 } from "../../util/customHooks/globalContext";
 import { saveExp } from "../../util/cloudOperations/writeToCloud";
 import SideBarItem from "./SideBar/SideBarItem";
-import { defaultCameraView } from "../../util/unityContextActions";
+import {defaultCameraView, pauseApparatus} from "../../util/unityContextActions";
 import SavingTip from "./savingTip";
 import Guide from "./Guide";
 
@@ -104,6 +104,7 @@ function Overlay(): JSX.Element {
 
   useKeypress("Escape", () => {
     if (!showOverlay) {
+      pauseApparatus();
       toggleOverlay();
       defaultCameraView();
     }

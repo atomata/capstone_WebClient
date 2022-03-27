@@ -5,14 +5,15 @@ const unityScene = "AtomataScene";
 const loadTrigger = "LoadApparatus";
 const voidTrigger = "Trigger";
 const skyboxTrigger = "LoadSkybox";
-const defaultCamera = "ReturnCamera";
+const defaultCameraCommand = "ReturnCamera";
+const pauseApparatusCommand = "PauseApparatus";
+const playApparatusCommand = "PlayApparatus";
 
 const fileNamePostfix = 5;
 
 const apparatusContainer =
   "https://addressabletest1.blob.core.windows.net/apparatus";
-const developerStorage =
-  "https://vclassroommspedex.blob.core.windows.net";
+const developerStorage = "https://vclassroommspedex.blob.core.windows.net";
 
 const defaultStorage = "https://addressabletest1.blob.core.windows.net";
 
@@ -20,6 +21,8 @@ const apparatusBlob = "apparatus";
 const skyboxBlob = "skyboxes";
 
 export {
+  playApparatusCommand,
+  pauseApparatusCommand,
   apparatusBlob,
   skyboxBlob,
   defaultStorage,
@@ -31,5 +34,5 @@ export {
   loadTrigger,
   voidTrigger,
   skyboxTrigger,
-  defaultCamera,
+  defaultCameraCommand,
 };
