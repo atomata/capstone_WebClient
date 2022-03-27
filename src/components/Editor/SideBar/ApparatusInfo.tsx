@@ -21,9 +21,10 @@ const ApparatusInfoHeader = styled.div.attrs({
   display: flex;
   justify-content: center;
   width: stretch;
-  font-size: 18px;
+  font-size: 16px;
   color: white;
   font-family: Inter, monospace;
+  letter-spacing: 0.1em;
   margin-bottom: 1em;
 `;
 
