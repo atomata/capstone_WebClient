@@ -43,9 +43,10 @@ const LogOutButton = styled.button`
   color: #1710a1;
   background: Transparent;
   border: none;
-  font-family: Inter, monospace;
+  font-family: Trebuchet MS;
+  cursor: pointer;
   font-weight: bold;
-  font-size: 16px;
+  font-size: 14px;
   width: 100%;
   margin-left: 22%;
   margin-right: auto;
