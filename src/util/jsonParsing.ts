@@ -42,17 +42,20 @@ function linkPathsToData(metadata: SerializedApparatus): PathData[] {
             command: `${id}?=true`,
             name: `${id}: true`,
             desc: "",
+            enabled: true
           });
           pathDataList[index].data[identifier].push({
             command: `${id}?=false`,
             name: `${id}: false`,
             desc: "",
+            enabled: true
           });
         } else {
           pathDataList[index].data[identifier].push({
             command: id,
             name: id,
             desc: "",
+            enabled: true
           });
         }
       } else {
@@ -78,7 +81,7 @@ function linkPathsToData(metadata: SerializedApparatus): PathData[] {
             enabled:
               "uienabled" in argDictionary
                 ? argDictionary["uienabled"] === "True"
-                : false,
+                : true,
           });
           pathDataList[index].data[identifier].push({
             command: `${id}?=false`,
@@ -93,7 +96,7 @@ function linkPathsToData(metadata: SerializedApparatus): PathData[] {
             enabled:
               "uienabled" in argDictionary
                 ? argDictionary["uienabled"] === "True"
-                : false,
+                : true,
           });
         } else {
           pathDataList[index].data[identifier].push({
@@ -103,7 +106,7 @@ function linkPathsToData(metadata: SerializedApparatus): PathData[] {
             enabled:
               "uienabled" in argDictionary
                 ? argDictionary["uienabled"] === "True"
-                : false,
+                : true,
           });
         }
       }
