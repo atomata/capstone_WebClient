@@ -5,7 +5,7 @@ import {
   unityContext,
 } from "../util/unityContextActions";
 import {
-  defaultCamera,
+  defaultCameraCommand,
   loadTrigger,
   skyboxTrigger,
   unityScene,
@@ -28,5 +28,5 @@ test("test if the correct skybox is requested", () => {
 test("test if the correct camera angle is requested", () => {
   const spy = jest.spyOn(unityContext, "send");
   defaultCameraView();
-  expect(spy).toHaveBeenCalledWith(unityScene, defaultCamera);
+  expect(spy).toHaveBeenCalledWith(unityScene, defaultCameraCommand);
 });

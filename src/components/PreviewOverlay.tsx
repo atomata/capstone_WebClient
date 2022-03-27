@@ -5,7 +5,7 @@ import { IconButton } from "@mui/material";
 import ArrowBackSharpIcon from "@mui/icons-material/ArrowBackSharp";
 import TextPreview from "./Editor/TextPreview";
 import { useSelected } from "../util/customHooks/previewOverlayfunc";
-import { defaultCameraView } from "../util/unityContextActions";
+import {defaultCameraView, pauseApparatus} from "../util/unityContextActions";
 import { SideBarContext } from "../util/customHooks/SideBarContext";
 import { ActionContext } from "../util/customHooks/actionContext";
 
@@ -63,6 +63,7 @@ function PreviewOverlay(): JSX.Element {
           onClick={() => {
             toggleOverlay();
             defaultCameraView();
+            pauseApparatus();
           }}
         >
           <ArrowBackSharpIcon

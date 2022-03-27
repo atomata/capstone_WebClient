@@ -1,5 +1,10 @@
 import { useState } from "react";
-import { defaultCameraView, requestTrigger } from "../unityContextActions";
+import {
+  defaultCameraView,
+  pauseApparatus,
+  playApparatus,
+  requestTrigger,
+} from "../unityContextActions";
 import { ActionData } from "../types";
 
 const useSelected = (
@@ -14,6 +19,9 @@ const useSelected = (
   const [desc, setDesc] = useState("");
 
   const cyclePreviewRight = () => {
+    if (selected === -1) {
+      playApparatus();
+    }
     if (selected < actionList.length - 1) {
       requestTrigger(
         actionList[selected + 1].path,
@@ -23,6 +31,7 @@ const useSelected = (
       updateDesc(selected + 1);
     } else {
       defaultCameraView();
+      pauseApparatus();
       setSelected(-1);
     }
   };
@@ -38,6 +47,7 @@ const useSelected = (
       updateDesc(selected - 1);
     } else {
       defaultCameraView();
+      pauseApparatus();
       setSelected(-1);
     }
   };
