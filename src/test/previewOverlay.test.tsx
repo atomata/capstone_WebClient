@@ -3,7 +3,7 @@ import { renderHook } from "@testing-library/react-hooks";
 import { act } from "react-dom/test-utils";
 import { useSelected } from "../util/customHooks/previewOverlayfunc";
 
-import PreviewOverlay from "../components/Editor/PreviewOverlay";
+import PreviewOverlay from "../components/PreviewOverlay";
 import { useActionList } from "../util/customHooks/overlayfunc";
 import { ActionData } from "../util/types";
 

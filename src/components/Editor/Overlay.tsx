@@ -8,7 +8,7 @@ import { ActionContext } from "../../util/customHooks/actionContext";
 import ToolDocItem from "./SideBar/ToolDocItem";
 import TextEditor from "./TextEditor";
 import { useOverlay, useActionList } from "../../util/customHooks/overlayfunc";
-import PreviewOverlay from "./PreviewOverlay";
+import PreviewOverlay from "../PreviewOverlay";
 import {
   GlobalContext,
   globalContextTypes,
