@@ -3,7 +3,6 @@ import TreeView from "@mui/lab/TreeView";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import CategoryIcon from "@mui/icons-material/Category";
-import styled from "styled-components";
 import { SerializedApparatus } from "../../../util/types";
 import {
   GlobalContext,
@@ -14,41 +13,8 @@ import { requestTrigger } from "../../../util/unityContextActions";
 import { ActionContext } from "../../../util/customHooks/actionContext";
 import AssetItem from "../TreeView/AssetItem";
 import ActionItem from "../TreeView/ActionItem";
+import { Container, Header, TreeViewContainer } from "./ToolDocContent";
 
-const ApparatusInfoHeader = styled.div.attrs({
-  children: "Apparatus & Actions",
-})`
-  display: flex;
-  justify-content: center;
-  width: stretch;
-  font-size: 16px;
-  color: white;
-  font-family: Inter, monospace;
-  letter-spacing: 0.1em;
-  margin-bottom: 1em;
-`;
-
-const Container = styled.div`
-  margin-top: 1.5em;
-  margin-left: 0.5em;
-  margin-right: 0.5em;
-  display: flex;
-  height: 100%;
-  flex-direction: column;
-`;
-
-const TreeViewContainer = styled.div`
-  overflow-y: scroll;
-  margin-left: 0.5em;
-  &::-webkit-scrollbar {
-    width: 0.2em;
-  }
-  &::-webkit-scrollbar-thumb {
-    background: #a5a4ea;
-    border-radius: 1em;
-    background-clip: padding-box;
-  }
-`;
 function ApparatusInfo(): JSX.Element {
   const { experienceData }: globalContextTypes = useContext(GlobalContext);
   const { addActionToList } = useContext(ActionContext);
@@ -60,7 +26,7 @@ function ApparatusInfo(): JSX.Element {
   );
   return (
     <Container>
-      <ApparatusInfoHeader />
+      <Header>Apparatus & Actions</Header>
       <TreeViewContainer>
         <TreeView
           aria-label="file system navigator"
