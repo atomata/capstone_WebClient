@@ -16,7 +16,6 @@ const unityContext = new UnityContext({
 
 // TODO what if args string is empty?
 function loadApparatus(apparatus: string): void {
-  console.log(apparatus);
   unityContext.send(unityScene, loadTrigger, apparatus);
 }
 

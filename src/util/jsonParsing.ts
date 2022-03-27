@@ -20,9 +20,6 @@ function linkPathsToData(metadata: SerializedApparatus): PathData[] {
   metadata.Data.forEach((data) => {
     const unpack = data.split("@");
     const index = Number(unpack[0]);
-
-    // TODO fix the semicolon split issue , fix the uienabled , fix the boolean inputs
-
     const semicolonIndex = unpack[1].indexOf(":");
     const identifier = unpack[1].substring(0, semicolonIndex);
     const dataVal = unpack[1].substring(semicolonIndex + 1);
@@ -31,18 +28,33 @@ function linkPathsToData(metadata: SerializedApparatus): PathData[] {
     }
     if (identifier === "input") {
       const typeAndRest = dataVal.split("/");
+
       const idAndArgs = typeAndRest[1].split("?");
+
       const id = idAndArgs[0];
 
       // in the case where args arn't provided, use default values to populate name and description
       const hasArgs = idAndArgs.length > 1;
 
       if (!hasArgs) {
-        pathDataList[index].data[identifier].push({
-          command: id,
-          name: id,
-          desc: "",
-        });
+        if (typeAndRest[0] === "bool") {
+          pathDataList[index].data[identifier].push({
+            command: `${id}?=true`,
+            name: `${id}: true`,
+            desc: "",
+          });
+          pathDataList[index].data[identifier].push({
+            command: `${id}?=false`,
+            name: `${id}: false`,
+            desc: "",
+          });
+        } else {
+          pathDataList[index].data[identifier].push({
+            command: id,
+            name: id,
+            desc: "",
+          });
+        }
       } else {
         const args = idAndArgs[1];
         const argSplit = args.split("&");
@@ -52,16 +64,48 @@ function linkPathsToData(metadata: SerializedApparatus): PathData[] {
           let keyvalue = i.split("=");
           argDictionary[keyvalue[0]] = keyvalue[1];
         }
-
-        pathDataList[index].data[identifier].push({
-          command: id,
-          name: "uiname" in argDictionary ? argDictionary["uiname"] : id,
-          desc: "uidesc" in argDictionary ? argDictionary["uidesc"] : id,
-          enabled:
-            "uienabled" in argDictionary
-              ? argDictionary["uienabled"] === "True"
-              : false,
-        });
+        if (typeAndRest[0] === "bool") {
+          pathDataList[index].data[identifier].push({
+            command: `${id}?=true`,
+            name:
+              "uiname" in argDictionary
+                ? `${argDictionary["uiname"]}?true`
+                : `${id}?=true`,
+            desc:
+              "uidesc" in argDictionary
+                ? argDictionary["uidesc"]
+                : `${id}?=true`,
+            enabled:
+              "uienabled" in argDictionary
+                ? argDictionary["uienabled"] === "True"
+                : false,
+          });
+          pathDataList[index].data[identifier].push({
+            command: `${id}?=false`,
+            name:
+              "uiname" in argDictionary
+                ? `${argDictionary["uiname"]}?false`
+                : `${id}?=false`,
+            desc:
+              "uidesc" in argDictionary
+                ? argDictionary["uidesc"]
+                : `${id}?=false`,
+            enabled:
+              "uienabled" in argDictionary
+                ? argDictionary["uienabled"] === "True"
+                : false,
+          });
+        } else {
+          pathDataList[index].data[identifier].push({
+            command: id,
+            name: "uiname" in argDictionary ? argDictionary["uiname"] : id,
+            desc: "uidesc" in argDictionary ? argDictionary["uidesc"] : id,
+            enabled:
+              "uienabled" in argDictionary
+                ? argDictionary["uienabled"] === "True"
+                : false,
+          });
+        }
       }
     } else {
       pathDataList[index].data[identifier].push(dataVal);
