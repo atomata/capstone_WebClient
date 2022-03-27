@@ -1,7 +1,9 @@
 import { UnityContext } from "react-unity-webgl";
 import {
-  defaultCamera,
+  defaultCameraCommand,
   loadTrigger,
+  pauseApparatusCommand,
+  playApparatusCommand,
   skyboxTrigger,
   unityScene,
   voidTrigger,
@@ -21,6 +23,7 @@ function loadApparatus(apparatus: string): void {
 
 // TODO what if args string is empty?
 function requestTrigger(path: string, input: string): void {
+  playApparatus();
   const arg = `${path}/${input}`;
   unityContext.send(unityScene, voidTrigger, arg);
 }
@@ -30,9 +33,19 @@ function changeSkybox(skybox: string): void {
 }
 
 function defaultCameraView(): void {
-  unityContext.send(unityScene, defaultCamera);
+  unityContext.send(unityScene, defaultCameraCommand);
+}
+
+function pauseApparatus(): void {
+  unityContext.send(unityScene, pauseApparatusCommand);
+}
+
+function playApparatus(): void {
+  unityContext.send(unityScene, playApparatusCommand);
 }
 export {
+  playApparatus,
+  pauseApparatus,
   loadApparatus,
   requestTrigger,
   changeSkybox,
