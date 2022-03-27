@@ -51,8 +51,13 @@ function Experience({
   };
 
   const experienceDataTemp: ExperienceData = {
-    apparatusMetadata: { Paths: [], Data: [] },
-    experience: { experienceId, apparatusId: "", actionList: [], skyboxId: "default" },
+    apparatusRoot: { children: [], path: "", identifier: "", type: "" },
+    experience: {
+      experienceId,
+      apparatusId: "",
+      actionList: [],
+      skyboxId: "default",
+    },
   };
   React.useEffect(() => {
     // Don't load if you aren't logged in
@@ -87,7 +92,7 @@ function Experience({
         <main>
           <Content>
             <GlobalContext.Provider value={globalContextValues}>
-              <WebglBox/>
+              <WebglBox />
             </GlobalContext.Provider>
           </Content>
         </main>
