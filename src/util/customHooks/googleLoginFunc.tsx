@@ -24,9 +24,4 @@ const useGoogleLog = () => {
   };
 };
 
-function removeSpace(x: string){
-    const name = x.replace(/\s+/g, '');
-    const lowerName = name.toLowerCase();
-    return lowerName;
-}
 export { useGoogleLog };
