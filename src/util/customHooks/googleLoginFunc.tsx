@@ -6,10 +6,11 @@ const useGoogleLog = () => {
     const [name, setName] = useState<string>();
   const onSuccess = (res) => {
     console.log("[Login Success] currentUser: ", res.progileObj);
-    alert(`Logged in successfully welcome ${res.profileObj.name}`);
-    setName(removeSpace(`${res.profileObj.name}`));
-    // console.log("this name:" , name);
-    logIn(name);
+    alert(`Logged in successfully welcome ${res.profileObj.googleId}`);
+    console.log(`${res.profileObj.googleId}`);
+    setName(`${res.profileObj.googleId}`);
+    console.log("this name:" , name);
+    logIn(`${res.profileObj.googleId}`);
     refreshTokenSetup(res);
   };
 
