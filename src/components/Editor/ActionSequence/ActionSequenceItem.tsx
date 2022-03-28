@@ -1,31 +1,29 @@
 import styled from "styled-components";
-import Button from "@mui/material/Button";
+import CancelIcon from "@mui/icons-material/Cancel";
+import React from "react";
+import styles from "../../SideBarButtons.module.css";
 
 const ActionSequenceItemRoot = styled.div`
   display: flex;
   flex-direction: column;
-  min-height: stretch;
-  padding-top: 1em;
-  padding-bottom: 1em;
+  width: 10em;
 `;
 
 const ActionSequenceItemApparatus = styled.div`
-  display: flex;
-  min-width: stretch;
+  text-align: center;
+  display: inline-block;
   height: 1.5em;
-  justify-content: center;
   margin: 0.5em;
-  font-size: 1.1em;
+  font-size: 1em;
   font-family: Inter, monospace;
   color: #ffffff;
 `;
 
-const ActionSequenceItemAction = styled.div`
+const Header = styled.div`
   display: flex;
-  min-width: stretch;
   height: 1.5em;
-  justify-content: center;
-  margin: 0.5em;
+  justify-content: right;
+  width: 100%;
 `;
 
 type ActionSequenceItemProps = {
@@ -47,21 +45,19 @@ function ActionSequenceItem({
         selectAction();
       }}
     >
-      <ActionSequenceItemApparatus>
-        {id}:{name}
-      </ActionSequenceItemApparatus>
-      <ActionSequenceItemAction>
-        <Button
-          variant="contained"
-          color="error"
+      <Header>
+        <CancelIcon
+          className={styles.cancelButton}
+          sx={{ fontSize: "20px" }}
           onClick={(e) => {
             e.stopPropagation();
             removeAction();
           }}
-        >
-          Delete
-        </Button>
-      </ActionSequenceItemAction>
+        />
+      </Header>
+      <ActionSequenceItemApparatus>
+        {id}:{name}
+      </ActionSequenceItemApparatus>
     </ActionSequenceItemRoot>
   );
 }

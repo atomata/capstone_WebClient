@@ -1,4 +1,3 @@
-import { ownerDocument } from "@mui/material";
 import {
   ActionData,
   AssetBundle,
@@ -21,47 +20,98 @@ function linkPathsToData(metadata: SerializedApparatus): PathData[] {
   metadata.Data.forEach((data) => {
     const unpack = data.split("@");
     const index = Number(unpack[0]);
-
-    const dataSplit = unpack[1].split(":");
-    if (pathDataList[index].data[dataSplit[0]] === undefined) {
-      pathDataList[index].data[dataSplit[0]] = [];
+    const semicolonIndex = unpack[1].indexOf(":");
+    const identifier = unpack[1].substring(0, semicolonIndex);
+    const dataVal = unpack[1].substring(semicolonIndex + 1);
+    if (pathDataList[index].data[identifier] === undefined) {
+      pathDataList[index].data[identifier] = [];
     }
-    if (dataSplit[0] === "input") {
-      
-      const typeAndRest = dataSplit[1].split("/");
+    if (identifier === "input") {
+      const typeAndRest = dataVal.split("/");
+
       const idAndArgs = typeAndRest[1].split("?");
-      const id = idAndArgs[0]
-      
+
+      const id = idAndArgs[0];
+
       // in the case where args arn't provided, use default values to populate name and description
       const hasArgs = idAndArgs.length > 1;
 
-      if(!hasArgs)
-      {
-        pathDataList[index].data[dataSplit[0]].push({
-          command: id,
-          name: id,
-          desc: ""
-        });
-      }
-      else 
-      {
-        const args = idAndArgs[1]
-        const argSplit = args.split("&")
+      if (!hasArgs) {
+        if (typeAndRest[0] === "bool") {
+          pathDataList[index].data[identifier].push({
+            command: `${id}?=true`,
+            name: `${id}: true`,
+            desc: "",
+            enabled: true
+          });
+          pathDataList[index].data[identifier].push({
+            command: `${id}?=false`,
+            name: `${id}: false`,
+            desc: "",
+            enabled: true
+          });
+        } else {
+          pathDataList[index].data[identifier].push({
+            command: id,
+            name: id,
+            desc: "",
+            enabled: true
+          });
+        }
+      } else {
+        const args = idAndArgs[1];
+        const argSplit = args.split("&");
 
-        const argDictionary = {}
-        for(let i of argSplit){
-          let keyvalue = i.split("=")
+        const argDictionary = {};
+        for (let i of argSplit) {
+          let keyvalue = i.split("=");
           argDictionary[keyvalue[0]] = keyvalue[1];
         }
-
-        pathDataList[index].data[dataSplit[0]].push({
-          command: id,
-          name: "uiname" in argDictionary ? argDictionary["uiname"] : id,
-          desc: "uidesc" in argDictionary ? argDictionary["uidesc"] : id,
-        });
+        if (typeAndRest[0] === "bool") {
+          pathDataList[index].data[identifier].push({
+            command: `${id}?=true`,
+            name:
+              "uiname" in argDictionary
+                ? `${argDictionary["uiname"]}?true`
+                : `${id}?=true`,
+            desc:
+              "uidesc" in argDictionary
+                ? argDictionary["uidesc"]
+                : `${id}?=true`,
+            enabled:
+              "uienabled" in argDictionary
+                ? argDictionary["uienabled"] === "True"
+                : true,
+          });
+          pathDataList[index].data[identifier].push({
+            command: `${id}?=false`,
+            name:
+              "uiname" in argDictionary
+                ? `${argDictionary["uiname"]}?false`
+                : `${id}?=false`,
+            desc:
+              "uidesc" in argDictionary
+                ? argDictionary["uidesc"]
+                : `${id}?=false`,
+            enabled:
+              "uienabled" in argDictionary
+                ? argDictionary["uienabled"] === "True"
+                : true,
+          });
+        } else {
+          pathDataList[index].data[identifier].push({
+            command: id,
+            name: "uiname" in argDictionary ? argDictionary["uiname"] : id,
+            desc: "uidesc" in argDictionary ? argDictionary["uidesc"] : id,
+            enabled:
+              "uienabled" in argDictionary
+                ? argDictionary["uienabled"] === "True"
+                : true,
+          });
+        }
       }
     } else {
-      pathDataList[index].data[dataSplit[0]].push(dataSplit[1]);
+      pathDataList[index].data[identifier].push(dataVal);
     }
   });
   // return the created object
@@ -134,39 +184,26 @@ function getActions(node: AssetBundle): ActionData[] {
       node.children[child].type[0] === "CameraFocus"
     ) {
       for (const index in node.children[child].input) {
-        const actionData = {
-          input: node.children[child].input[index],
-          path: node.children[child].path,
-          assetId: node.identifier,
-        };
-        actionList.push(actionData);
+        if (node.children[child].input[index].enabled) {
+          const actionData = {
+            input: node.children[child].input[index],
+            path: node.children[child].path,
+            assetId: node.identifier,
+          };
+          actionList.push(actionData);
+        }
       }
     }
   }
   return actionList;
 }
 
-function getAssetBundleActions(metadata: SerializedApparatus) {
+function getAssetBundleActions(metadata: SerializedApparatus): any[] {
   const list = [];
   const assetBundleList = getAssetBundles(metadata);
 
   for (const bundle of assetBundleList) {
-    const actionList = [];
-    for (const child in bundle.children) {
-      if (
-        bundle.children[child].type[0] === "Event" ||
-        bundle.children[child].type[0] === "CameraFocus"
-      ) {
-        for (const index in bundle.children[child].input) {
-          const actionData = {
-            input: bundle.children[child].input[index],
-            path: bundle.children[child].path,
-            assetId: bundle.identifier,
-          };
-          actionList.push(actionData);
-        }
-      }
-    }
+    const actionList = getActions(bundle);
     list.push([bundle.identifier[0], actionList]);
   }
   return list;
