@@ -8,7 +8,6 @@ const useGoogleLog = () => {
     console.log("[Login Success] currentUser: ", res.progileObj);
     alert(`Logged in successfully welcome ${res.profileObj.name}`);
     setName(`${res.profileObj.googleId}`);
-    console.log("this name:" , name);
     logIn(`${res.profileObj.googleId}`);
     refreshTokenSetup(res);
   };

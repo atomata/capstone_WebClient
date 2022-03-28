@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import styled from "styled-components";
 import { verifyLogIn, logOut, checkIfLoggedIn } from "../src/util/loginCookies";
 import Loading from "../src/components/Loading";
-import Logout from '../src/components/GoogleLog/googleLogout'
 import { WorkbenchTable } from "../src/components/Workbench";
 
 

@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import GoogleLogin from "react-google-login";
 import styled from "styled-components";
 import { Button } from "@mui/material";
-import { refreshTokenSetup } from "./refreshTokenSetup";
 import { useGoogleLog } from "../../util/customHooks/googleLoginFunc";
 
 const clientId =
