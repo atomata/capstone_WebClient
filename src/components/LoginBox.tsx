@@ -122,7 +122,7 @@ function LoginBox(): JSX.Element {
               }}
             />
             <br />
-            <LoginButton type="submit" variant="contained">
+            <LoginButton type="submit">
               LOG IN
             </LoginButton>
             <Login />
