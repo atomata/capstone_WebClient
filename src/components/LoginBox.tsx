@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { TextField } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useLoginSubmit } from "../util/customHooks/loginBoxfunc";
+import Login from "./GoogleLog/Login";
 
 const LoginRoot = styled.div`
   position: relative;
@@ -79,6 +80,9 @@ function LoginBox(): JSX.Element {
   const { nameErr, passErr, handleSubmit } = useLoginSubmit();
 
   const classes = useStyles();
+  // https://mui.com/components/text-fields/
+  // '@Url.Content("~/images/1.jpg")'
+  // '@Url.Content("~assets/epistaLogo.png")'
   return (
     <LoginRoot>
       <LoginContainer>
@@ -118,7 +122,11 @@ function LoginBox(): JSX.Element {
               }}
             />
             <br />
-            <LoginButton type="submit">LOG IN</LoginButton>
+            <LoginButton type="submit" variant="contained">
+              LOG IN
+            </LoginButton>
+            <Login />
+            <br />
           </LoginFields>
         </form>
       </LoginContainer>
