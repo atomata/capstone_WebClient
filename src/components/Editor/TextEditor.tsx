@@ -21,6 +21,16 @@ const TextDiv = styled.div`
   border-radius: 15px;
 `;
 
+const TextBoxDiv = styled.div`
+  position: relative;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  padding-top: 0.5em;
+  padding-left: 0.5em;
+`;
+
 const TextEditor = (): JSX.Element => {
   const { toggleTextBox } = useContext(SideBarContext);
   const [currDesc, setCurrDesc] = useState("");
@@ -62,22 +72,21 @@ const TextEditor = (): JSX.Element => {
             }}
           />
         </Header>
-        <textarea
-          className="noDrag"
-          style={{
-            position: "absolute",
-            background: "white",
-            borderRadius: "5px",
-            resize: "none",
-            fontSize: "1.3em",
-            left: "0.5em",
-            right: "0.5em",
-            bottom: "1em",
-            top: "2.5em",
-          }}
-          value={currDesc}
-          onChange={(e) => setCurrDesc(e.target.value)}
-        />
+        <TextBoxDiv>
+          <textarea
+            className="noDrag"
+            style={{
+              background: "white",
+              borderRadius: "5px",
+              height: "calc(100% - 1.5em)",
+              width: "calc(100% - 1.5em)",
+              resize: "none",
+              fontSize: "1.3em",
+            }}
+            value={currDesc}
+            onChange={(e) => setCurrDesc(e.target.value)}
+          />
+        </TextBoxDiv> 
       </TextDiv>
     </Rnd>
   );
