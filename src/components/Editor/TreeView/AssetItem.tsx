@@ -1,8 +1,15 @@
 import { TreeItem, TreeItemProps } from "@mui/lab";
-import { Box, SvgIconProps, Typography } from "@mui/material";
+import {Box, createTheme, SvgIconProps, ThemeProvider, Typography} from "@mui/material";
 import React from "react";
 import styles from "../../ActionTreeItem.module.css";
 
+
+const theme = createTheme({
+    typography: {
+        fontFamily: "Inter,monospace",
+        fontSize: 13,
+    },
+});
 type AssetItemPropsType = TreeItemProps & {
   labelText: string;
   LabelIcon: React.ElementType<SvgIconProps>;
@@ -23,9 +30,11 @@ export default function AssetItem({
           }}
         >
           <LabelIcon sx={{ ml: "-0.5em", mr: "0.5em", fontSize: "1.5em" }} />
-          <Typography variant="body2" className={styles.assetLabel}>
-            {labelText}
-          </Typography>
+          <ThemeProvider theme={theme}>
+            <Typography variant="body2" className={styles.actionLabel}>
+              {labelText}
+            </Typography>
+          </ThemeProvider>
         </Box>
       }
       classes={{

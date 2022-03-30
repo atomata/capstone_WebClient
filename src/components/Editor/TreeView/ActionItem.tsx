@@ -1,10 +1,17 @@
 import { TreeItem, TreeItemProps } from "@mui/lab";
-import { Box, Typography } from "@mui/material";
+import {Box, createTheme, ThemeProvider, Typography} from "@mui/material";
 import PlayCircleFilledWhiteOutlinedIcon from "@mui/icons-material/PlayCircleFilledWhiteOutlined";
 import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
 import React from "react";
 import styles from "../../ActionTreeItem.module.css";
 
+
+const theme = createTheme({
+    typography: {
+        fontFamily: "Inter,monospace",
+        fontSize: 12,
+    },
+});
 type actionItemProps = TreeItemProps & {
   labelText: string;
   nodeId: string;
@@ -28,9 +35,11 @@ export default function ActionItem({
             display: "flex",
           }}
         >
-          <Typography variant="body2" className={styles.actionLabel}>
-            {labelText}
-          </Typography>
+          <ThemeProvider theme={theme}>
+            <Typography variant="body2" className={styles.actionLabel}>
+              {labelText}
+            </Typography>
+          </ThemeProvider>
 
           {play ? (
             <PlayCircleFilledWhiteOutlinedIcon
