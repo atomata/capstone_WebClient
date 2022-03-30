@@ -40,14 +40,10 @@
   font-weight: inherit;
   text-transform: capitalize;
   flex-grow: 1;
-  font-size: 0.9em;
-  font-family: Inter, monospace;
 }
 
 .assetLabel {
   font-weight: inherit;
   text-transform: capitalize;
   flex-grow: 1;
-  font-size: 1em;
-  font-family: Inter, monospace;
 }

@@ -59,8 +59,6 @@ const ToolDocGrid = styled.div`
   min-width: 15em;
   background-color: #3f3d56;
   z-index: 2;
-  padding-left: 1em;
-  padding-top: 1em;
 `;
 
 // css and placement for the action sequence

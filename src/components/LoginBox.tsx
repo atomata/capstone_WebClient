@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Button, TextField } from "@mui/material";
+import { TextField } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useLoginSubmit } from "../util/customHooks/loginBoxfunc";
 import Login from "./GoogleLog/Login";
@@ -26,18 +26,20 @@ const LoginFields = styled.div`
   margin: 2em;
 `;
 
-const LoginButton = styled(Button)`
-  && {
-    background-color: #ffffff;
-    display: block-inline;
-    color: #1710a1;
-    margin-top: 2em;
-    padding-top: 1em;
-    padding-bottom: 1em;
-    padding-left: 6.1em;
-    padding-right: 6.1em;
-    font-weight: bold;
-  }
+const LoginButton = styled.button`
+  background-color: #ffffff;
+  font-family: Trebuchet MS;
+  font-size: 14px;
+  border-radius: 8px;
+  display: block-inline;
+  color: #1710a1;
+  margin-top: 2em;
+  padding-top: 1.5em;
+  padding-bottom: 1.5em;
+  padding-left: 6.2em;
+  padding-right: 6.2em;
+  font-weight: bold;
+  cursor: pointer;
 `;
 
 const ImgIllustration = styled.img.attrs({
@@ -120,7 +122,7 @@ function LoginBox(): JSX.Element {
               }}
             />
             <br />
-            <LoginButton type="submit" variant="contained">
+            <LoginButton type="submit">
               LOG IN
             </LoginButton>
             <Login />

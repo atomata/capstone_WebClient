@@ -73,7 +73,10 @@ const InnerBox = styled.div`
 
 const ExperienceHeader = styled.tr`
   color: white;
-  font-family: Trebuchet MS;
+  font-family: Inter, monospace;
+  letter-spacing: 0.1em;
+  font-weight: bold;
+  font-size: 16px;
   background: #3f3d56;
   display: flex;
   flex-direction: row;
@@ -91,8 +94,8 @@ const ExperienceRow = styled.tr`
   color: #3f3d56;
   font-weight: bold;
   height: 3em;
-  font-size: 1em;
-  font-family: Trebuchet MS;
+  font-family: Inter, monospace;
+  font-size: 14px;
   td {
     padding-top: 0.65em;
     padding-bottom: 0.65em;
@@ -141,9 +144,10 @@ const CreateButton = styled.button`
   font-weight: bold;
   height: 3.5em;
   width: 40%;
-  font-size: 1.05em;
+  font-size: 16px;
   cursor: pointer;
-  font-family: Trebuchet MS;
+  font-family: Inter, monospace;
+  letter-spacing: 0.1em;
   border-radius: 1.5em;
   margin-left: 1em;
   margin-bottom: 2em;
@@ -166,7 +170,7 @@ const ExperienceField = styled(TextField)`
 `;
 
 const ErrorMsg = styled.label`
-  font-family: Trebuchet MS;
+  font-family: Inter, monospace;
   color: red;
 `;
 
@@ -306,7 +310,7 @@ const LoadExperience = () => {
             {expList.map((exp, index) => (
               // eslint-disable-next-line react/jsx-key
               <ExperienceRow>
-                <td>{exp[0]}</td>
+                <td style={{ textAlign: "left", width: "25%" }}>{exp[0]}</td>
                 <td style={{ textAlign: "center", width: "50%" }}>{exp[1]}</td>
                 <ExperienceButtons>
                   <Link
