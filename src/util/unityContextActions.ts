@@ -38,13 +38,13 @@ function defaultCameraView(): void {
 }
 function setDefault(apparatusRoot: TreeNode): void {
   if (
+    apparatusRoot !== undefined &&
     apparatusRoot.defaultState !== undefined &&
     apparatusRoot.defaultState[0] !== undefined
   ) {
     unityContext.send(unityScene, voidTrigger, apparatusRoot.defaultState[0]);
   }
 }
-
 
 function pauseApparatus(): void {
   unityContext.send(unityScene, pauseApparatusCommand);
