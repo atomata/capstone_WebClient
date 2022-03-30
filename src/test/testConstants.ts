@@ -1,4 +1,4 @@
-import { convertPathDataToTree } from "./jsonParsing";
+import { convertPathDataToTree } from "../util/jsonParsing";
 
 const testmetadata1 = {
   Paths: [

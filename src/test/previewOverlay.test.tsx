@@ -8,7 +8,7 @@ import PreviewOverlay from "../components/PreviewOverlay";
 import { useActionList } from "../util/customHooks/overlayfunc";
 import { ActionData } from "../util/types";
 import { convertPathDataToTree } from "../util/jsonParsing";
-import { testExperienceData, testmetadata1 } from "../util/testConstants";
+import { testExperienceData, testmetadata1 } from "./testConstants";
 import {
   GlobalContext,
   globalContextTypes,

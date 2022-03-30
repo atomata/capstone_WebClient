@@ -4,7 +4,7 @@ import {
   getAssetBundles,
   linkPathsToData,
 } from "../util/jsonParsing";
-import {testActionList, testmetadata1, testpathDataList} from "../util/testConstants";
+import {testActionList, testmetadata1, testpathDataList} from "./testConstants";
 
 
 const testmetadata2 = undefined;

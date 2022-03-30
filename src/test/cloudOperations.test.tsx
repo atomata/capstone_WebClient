@@ -6,7 +6,7 @@ import {
   setupApparatusData,
 } from "../util/cloudOperations/readFromCloud";
 import { deleteExp, saveExp } from "../util/cloudOperations/writeToCloud";
-import { testSerializedExperience, testmetadata1 } from "../util/testConstants";
+import { testSerializedExperience, testmetadata1 } from "./testConstants";
 import { ExperienceData } from "../util/types";
 import {convertPathDataToTree} from "../util/jsonParsing";
 

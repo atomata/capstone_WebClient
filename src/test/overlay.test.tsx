@@ -9,7 +9,7 @@ import {
   globalContextTypes,
   GlobalContext,
 } from "../util/customHooks/globalContext";
-import { testExperienceData } from "../util/testConstants";
+import { testExperienceData } from "./testConstants";
 
 const actionData1: ActionData = {
   path: "test1",

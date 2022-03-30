@@ -16,7 +16,7 @@ import {
   unityScene,
 } from "../util/constants";
 import {convertPathDataToTree} from "../util/jsonParsing";
-import {testmetadata1} from "../util/testConstants";
+import {testmetadata1} from "./testConstants";
 
 test("test if the correct appartus is requested", () => {
   const apparatus = "wobble-sphere";
