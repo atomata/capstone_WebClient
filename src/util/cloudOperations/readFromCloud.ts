@@ -10,6 +10,7 @@ import {
   SerializedApparatus,
   SerializedExperience,
 } from "../types";
+import { convertPathDataToTree } from "../jsonParsing";
 
 function getApparatusFromCloud(id: string): Promise<SerializedApparatus> {
   return fetch(`${apparatusContainer}/${id}.json`, { mode: "cors" })
@@ -34,16 +35,18 @@ function setupApparatusData(
 ): Promise<void> {
   return getApparatusFromCloud(id).then((apparatusJson) => {
     // eslint-disable-next-line no-param-reassign
-    experienceDataTemp.apparatusMetadata = apparatusJson;
-    
-    let id = "id-not-found"
+    experienceDataTemp.apparatusRoot = convertPathDataToTree(apparatusJson);
 
-    for(let meta of apparatusJson.Data){
-      if(meta.includes("identifier") && meta[0] === "0")
-        id = meta.split(":")[1]
+    if (
+      experienceDataTemp.apparatusRoot === undefined ||
+      experienceDataTemp.apparatusRoot.identifier === undefined ||
+      experienceDataTemp.apparatusRoot.identifier.length === 0 ||
+      experienceDataTemp.apparatusRoot.path === undefined
+    ) {
+      throw new Error("Invalid apparatus data");
     }
     // eslint-disable-next-line no-param-reassign
-    experienceDataTemp.experience.apparatusId = id
+    experienceDataTemp.experience.apparatusId = id;
   });
 }
 
@@ -53,9 +56,16 @@ function setupExperienceData(
   experienceDataTemp: ExperienceData
 ): Promise<void> {
   return getExperienceFromCloud(userId, experienceId).then((experienceJson) => {
-    // eslint-disable-next-line no-param-reassign
+    if (
+      experienceJson === undefined ||
+      experienceJson.experienceId === undefined ||
+      experienceJson.apparatusId === undefined ||
+      experienceJson.actionList === undefined
+    ) {
+      throw new Error("Invalid experience data");
+    }
     experienceDataTemp.experience = experienceJson;
-    if(experienceJson.skyboxId === undefined){
+    if (experienceJson.skyboxId === undefined) {
       experienceDataTemp.experience.skyboxId = "default";
     }
     setupApparatusData(experienceJson.apparatusId, experienceDataTemp);
@@ -63,7 +73,6 @@ function setupExperienceData(
 }
 
 async function getBlobNamesInContainer(
-
   blobName: string,
   storage = defaultStorage
 ): Promise<string[]> {
@@ -113,10 +122,10 @@ async function getBlobsInContainer(
       year: "numeric",
       month: "long",
       day: "2-digit",
-      hour: '2-digit', 
-      minute: '2-digit', 
-      second: '2-digit',
-      timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
     }).format(exp.properties.lastModified);
     returnedBlobs.push([expName, lastModified]);
   }
@@ -132,4 +141,3 @@ export {
   setupApparatusData,
   setupExperienceData,
 };
-
