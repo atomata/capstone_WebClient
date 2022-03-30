@@ -3,8 +3,7 @@ import TreeView from "@mui/lab/TreeView";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import CategoryIcon from "@mui/icons-material/Category";
-import styled from "styled-components";
-import { SerializedApparatus } from "../../../util/types";
+import { TreeNode } from "../../../util/types";
 import {
   GlobalContext,
   globalContextTypes,
@@ -14,42 +13,8 @@ import { requestTrigger } from "../../../util/unityContextActions";
 import { ActionContext } from "../../../util/customHooks/actionContext";
 import AssetItem from "../TreeView/AssetItem";
 import ActionItem from "../TreeView/ActionItem";
+import { Container, Header, TreeViewContainer } from "./ToolDocContent";
 
-const ApparatusInfoHeader = styled.div.attrs({
-  children: "Apparatus & Actions",
-})`
-  display: flex;
-  justify-content: center;
-  width: stretch;
-  font-size: 1.2em;
-  text-transform: uppercase;
-  color: white;
-  font-family: Inter, monospace;
-  margin-bottom: 1em;
-`;
-
-const Container = styled.div`
-  display: flex;
-  height: 100%;
-  flex-direction: column;
-`;
-
-const TreeViewContainer = styled.div`
-  overflow-y: scroll;
-  &{
-    scrollbar-color: #a5a4ea #3f3d56;
-    scrollbar-width: thin;
-  } 
-  &::-webkit-scrollbar {
-    width: 1em;
-  }
-  &::-webkit-scrollbar-thumb {
-    background: #a5a4ea;
-    border-radius: 1em;
-    border: 0.25em solid rgba(0, 0, 0, 0);
-    background-clip: padding-box;
-  }
-`;
 function ApparatusInfo(): JSX.Element {
   const { experienceData }: globalContextTypes = useContext(GlobalContext);
   const { addActionToList } = useContext(ActionContext);
@@ -61,7 +26,7 @@ function ApparatusInfo(): JSX.Element {
   );
   return (
     <Container>
-      <ApparatusInfoHeader />
+      <Header>Apparatus & Actions</Header>
       <TreeViewContainer>
         <TreeView
           aria-label="file system navigator"
@@ -104,9 +69,9 @@ function ApparatusInfo(): JSX.Element {
     </Container>
   );
 
-  function checkIfMetaExists(): SerializedApparatus {
+  function checkIfMetaExists(): TreeNode {
     return experienceData !== undefined
-      ? experienceData.apparatusMetadata
+      ? experienceData.apparatusRoot
       : undefined;
   }
 }

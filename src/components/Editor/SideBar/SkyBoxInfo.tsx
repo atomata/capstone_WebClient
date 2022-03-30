@@ -1,5 +1,4 @@
 import * as React from "react";
-import styled from "styled-components";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import TreeView from "@mui/lab/TreeView";
@@ -12,41 +11,8 @@ import {
   GlobalContext,
   globalContextTypes,
 } from "../../../util/customHooks/globalContext";
+import { Container, Header, TreeViewContainer } from "./ToolDocContent";
 
-const SkyboxInfoHeader = styled.div.attrs({
-  children: "General Settings",
-})`
-  display: flex;
-  justify-content: center;
-  width: stretch;
-  font-size: 1.2em;
-  text-transform: uppercase;
-  color: white;
-  font-family: Inter, monospace;
-  margin-bottom: 1em;
-`;
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-`;
-
-const TreeViewContainer = styled.div`
-  overflow-y: scroll;
-  &{
-    scrollbar-color: #a5a4ea #3f3d56;
-    scrollbar-width: thin;
-  } 
-  &::-webkit-scrollbar {
-    width: 1em;
-  }
-  &::-webkit-scrollbar-thumb {
-    background: #a5a4ea;
-    border-radius: 1em;
-    border: 0.25em solid rgba(0, 0, 0, 0);
-    background-clip: padding-box;
-  }
-`;
 function SkyBoxInfo(): JSX.Element {
   const { experienceData }: globalContextTypes = useContext(GlobalContext);
   const skyboxList = [
@@ -61,7 +27,7 @@ function SkyBoxInfo(): JSX.Element {
   ];
   return (
     <Container>
-      <SkyboxInfoHeader />
+      <Header>General Settings</Header>
       <TreeViewContainer>
         <TreeView
           aria-label="file system navigator"

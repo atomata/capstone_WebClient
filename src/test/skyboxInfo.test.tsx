@@ -2,7 +2,7 @@ import { render } from "@testing-library/react";
 import React from "react";
 import SkyBoxInfo from "../components/Editor/SideBar/SkyBoxInfo";
 import {GlobalContext, globalContextTypes} from "../util/customHooks/globalContext";
-import {testExperienceData} from "../util/testConstants";
+import {testExperienceData} from "./testConstants";
 
 test("Skybox renders without crashing", () => {
   const globalContextValues: globalContextTypes = {

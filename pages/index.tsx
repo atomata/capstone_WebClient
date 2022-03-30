@@ -4,6 +4,7 @@ import { verifyLogIn, logOut, checkIfLoggedIn } from "../src/util/loginCookies";
 import Loading from "../src/components/Loading";
 import { WorkbenchTable } from "../src/components/Workbench";
 
+
 const Content = styled.div`
   display: flex;
   flex-direction: row;
@@ -43,8 +44,10 @@ const LogOutButton = styled.button`
   color: #1710a1;
   background: Transparent;
   border: none;
-  font-size: 1em;
+  font-family: Trebuchet MS;
+  cursor: pointer;
   font-weight: bold;
+  font-size: 14px;
   width: 100%;
   margin-left: 22%;
   margin-right: auto;
