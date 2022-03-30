@@ -4,6 +4,7 @@ import { verifyLogIn, logOut, checkIfLoggedIn } from "../src/util/loginCookies";
 import Loading from "../src/components/Loading";
 import { WorkbenchTable } from "../src/components/Workbench";
 
+
 const Content = styled.div`
   display: flex;
   flex-direction: row;
