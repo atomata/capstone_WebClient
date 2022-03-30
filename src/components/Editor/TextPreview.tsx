@@ -24,6 +24,10 @@ const DescLabel = styled.label`
   word-break: break-all;
   color: white;
   border-radius: 15px;
+  &{
+    scrollbar-color: #a5a4ea #3f3d56;
+    scrollbar-width: thin;
+  } 
   overflow-y: scroll;
   &::-webkit-scrollbar {
     width: 0.3em;

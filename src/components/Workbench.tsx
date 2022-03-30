@@ -45,6 +45,10 @@ const ExperienceContainer = styled.div`
   margin-left: 1em;
   overflow-y: scroll;
   overflow-x: hidden;
+  &{
+    scrollbar-color: #a5a4ea #3f3d56;
+    scrollbar-width: thin;
+  }  
   &::-webkit-scrollbar {
     width: 0.7em;
   }

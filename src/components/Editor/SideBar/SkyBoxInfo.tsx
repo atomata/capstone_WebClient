@@ -33,6 +33,10 @@ const Container = styled.div`
 
 const TreeViewContainer = styled.div`
   overflow-y: scroll;
+  &{
+    scrollbar-color: #a5a4ea #3f3d56;
+    scrollbar-width: thin;
+  } 
   &::-webkit-scrollbar {
     width: 1em;
   }
