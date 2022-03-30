@@ -69,14 +69,22 @@ function Experience({
           setExperienceData(experienceDataTemp);
           setLoading(false);
         })
-        .catch(() => setError("apparatus not found"));
+        .catch((err) =>
+          setError(
+            `${err.message !== "" ? err.message : "apparatus not found"} `
+          )
+        );
     } else if (dataType === "experience") {
       setupExperienceData(userId, experienceId, experienceDataTemp)
         .then(() => {
           setExperienceData(experienceDataTemp);
           setLoading(false);
         })
-        .catch(() => setError("experience file not found"));
+        .catch((err) =>
+          setError(
+            `${err.message !== "" ? err.message : "experience not found"} `
+          )
+        );
     }
   }, [apparatusId, experienceId, dataType, userId]);
 
