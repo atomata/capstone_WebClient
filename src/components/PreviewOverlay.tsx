@@ -5,9 +5,17 @@ import { IconButton } from "@mui/material";
 import ArrowBackSharpIcon from "@mui/icons-material/ArrowBackSharp";
 import TextPreview from "./Editor/TextPreview";
 import { useSelected } from "../util/customHooks/previewOverlayfunc";
-import {defaultCameraView, pauseApparatus} from "../util/unityContextActions";
+import {
+  defaultCameraView,
+  pauseApparatus,
+  setDefault,
+} from "../util/unityContextActions";
 import { SideBarContext } from "../util/customHooks/SideBarContext";
 import { ActionContext } from "../util/customHooks/actionContext";
+import {
+  GlobalContext,
+  globalContextTypes,
+} from "../util/customHooks/globalContext";
 
 const PreviewGrid = styled.div`
   display: grid;
@@ -33,11 +41,14 @@ const PreviewGridCenter = styled.div`
 `;
 
 function PreviewOverlay(): JSX.Element {
+  const { experienceData }: globalContextTypes = useContext(GlobalContext);
   const { showGuide, toggleOverlay } = useContext(SideBarContext);
   const { actionList } = useContext(ActionContext);
 
-  const { desc, selected, cyclePreviewLeft, cyclePreviewRight } =
-    useSelected(actionList);
+  const { desc, selected, cyclePreviewLeft, cyclePreviewRight } = useSelected({
+    actionList,
+    apparatusRoot: experienceData.apparatusRoot,
+  });
 
   useKeypress("ArrowLeft", () => {
     if (!showGuide) cyclePreviewLeft();
@@ -61,6 +72,7 @@ function PreviewOverlay(): JSX.Element {
         <IconButton
           className="ReturnButton"
           onClick={() => {
+            setDefault(experienceData.apparatusRoot);
             toggleOverlay();
             defaultCameraView();
             pauseApparatus();

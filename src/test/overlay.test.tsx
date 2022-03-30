@@ -9,27 +9,26 @@ import {
   globalContextTypes,
   GlobalContext,
 } from "../util/customHooks/globalContext";
-import {testExperienceData} from "../util/testConstants";
-
+import { testExperienceData } from "./testConstants";
 
 const actionData1: ActionData = {
   path: "test1",
-  input: { command: "testinput1", name: "", desc: "" },
+  input: { command: "testinput1", name: "", desc: "", enabled: true },
   assetId: "testasset1",
   desc: "This is the text added to action data in text box",
 };
 const actionData2: ActionData = {
   path: "test2",
-  input: { command: "testinput2", name: "", desc: "" },
+  input: { command: "testinput2", name: "", desc: "", enabled: true },
   assetId: "testasset2",
   desc: "This is the text added to action data in text box",
 };
 
 test("Overlay renders without crashing", () => {
   const globalContextValues: globalContextTypes = {
-    experienceData : testExperienceData,
-    setExperienceData: ()=> undefined,
-    userId:"testuser1",
+    experienceData: testExperienceData,
+    setExperienceData: () => undefined,
+    userId: "testuser1",
   };
   render(
     <GlobalContext.Provider value={globalContextValues}>
@@ -174,7 +173,6 @@ describe("ActionBar", () => {
     expect(result.current.apparatusInfo).toEqual(true);
   });
 
-
   it("ToggleApparatusInfo 2", () => {
     const { result } = renderHook(useActionBar);
     act(() => {
@@ -196,5 +194,4 @@ describe("ActionBar", () => {
     });
     expect(result.current.apparatusInfo).toEqual(true);
   });
-
 });

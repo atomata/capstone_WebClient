@@ -3,7 +3,8 @@ import TreeView from "@mui/lab/TreeView";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import CategoryIcon from "@mui/icons-material/Category";
-import { SerializedApparatus } from "../../../util/types";
+import styled from "styled-components";
+import { TreeNode } from "../../../util/types";
 import {
   GlobalContext,
   globalContextTypes,
@@ -69,9 +70,9 @@ function ApparatusInfo(): JSX.Element {
     </Container>
   );
 
-  function checkIfMetaExists(): SerializedApparatus {
+  function checkIfMetaExists(): TreeNode {
     return experienceData !== undefined
-      ? experienceData.apparatusMetadata
+      ? experienceData.apparatusRoot
       : undefined;
   }
 }

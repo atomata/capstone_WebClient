@@ -2,7 +2,7 @@ import { render } from "@testing-library/react";
 import React from "react";
 import WebglBox from "../components/Editor/WebglBox";
 import {GlobalContext, globalContextTypes} from "../util/customHooks/globalContext";
-import {testExperienceData} from "../util/testConstants";
+import {testExperienceData} from "./testConstants";
 
 
 test("WebglBox renders without crashing", () => {
