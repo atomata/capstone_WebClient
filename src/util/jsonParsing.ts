@@ -36,89 +36,7 @@ function linkPathsToData(metadata: SerializedApparatus): PathData[] {
       pathDataList[index].data[identifier] = [];
     }
     if (identifier === "input") {
-      const typeAndRest = dataVal.split("/");
-
-      const idAndArgs = typeAndRest[1].split("?");
-
-      const id = idAndArgs[0];
-
-      // in the case where args arn't provided, use default values to populate name and description
-      const hasArgs = idAndArgs.length > 1;
-
-      if (!hasArgs) {
-        if (typeAndRest[0] === "bool") {
-          pathDataList[index].data[identifier].push({
-            command: `${id}?=true`,
-            name: `${id}: true`,
-            desc: "",
-            enabled: true,
-          });
-          pathDataList[index].data[identifier].push({
-            command: `${id}?=false`,
-            name: `${id}: false`,
-            desc: "",
-            enabled: true,
-          });
-        } else {
-          pathDataList[index].data[identifier].push({
-            command: id,
-            name: id,
-            desc: "",
-            enabled: true,
-          });
-        }
-      } else {
-        const args = idAndArgs[1];
-        const argSplit = args.split("&");
-
-        const argDictionary = {};
-        for (let i of argSplit) {
-          let keyvalue = i.split("=");
-          argDictionary[keyvalue[0]] = keyvalue[1];
-        }
-        if (typeAndRest[0] === "bool") {
-          pathDataList[index].data[identifier].push({
-            command: `${id}?=true`,
-            name:
-              "uiname" in argDictionary
-                ? `${argDictionary["uiname"]}?true`
-                : `${id}?=true`,
-            desc:
-              "uidesc" in argDictionary
-                ? argDictionary["uidesc"]
-                : `${id}?=true`,
-            enabled:
-              "uienabled" in argDictionary
-                ? argDictionary["uienabled"] === "True"
-                : true,
-          });
-          pathDataList[index].data[identifier].push({
-            command: `${id}?=false`,
-            name:
-              "uiname" in argDictionary
-                ? `${argDictionary["uiname"]}?false`
-                : `${id}?=false`,
-            desc:
-              "uidesc" in argDictionary
-                ? argDictionary["uidesc"]
-                : `${id}?=false`,
-            enabled:
-              "uienabled" in argDictionary
-                ? argDictionary["uienabled"] === "True"
-                : true,
-          });
-        } else {
-          pathDataList[index].data[identifier].push({
-            command: id,
-            name: "uiname" in argDictionary ? argDictionary["uiname"] : id,
-            desc: "uidesc" in argDictionary ? argDictionary["uidesc"] : id,
-            enabled:
-              "uienabled" in argDictionary
-                ? argDictionary["uienabled"] === "True"
-                : true,
-          });
-        }
-      }
+      handleInputNode(dataVal, index, pathDataList);
     } else {
       pathDataList[index].data[identifier].push(dataVal);
     }
@@ -126,6 +44,91 @@ function linkPathsToData(metadata: SerializedApparatus): PathData[] {
   // return the created object
   return pathDataList;
 }
+
+// handles the input node parsing
+function handleInputNode(
+  dataVal: string,
+  index: number,
+  pathDataList: PathData[]
+) {
+  const typeAndRest = dataVal.split("/");
+  const idAndArgs = typeAndRest[1].split("?");
+  const id = idAndArgs[0];
+
+  // in the case where args arn't provided, use default values to populate name and description
+  const hasArgs = idAndArgs.length > 1;
+
+  if (!hasArgs) {
+    if (typeAndRest[0] === "bool") {
+      pathDataList[index].data["input"].push(createBooleanInput(id, true));
+      pathDataList[index].data["input"].push(createBooleanInput(id, false));
+    } else {
+      pathDataList[index].data["input"].push(createVoidInput(id));
+    }
+  } else {
+    const args = idAndArgs[1];
+    const argSplit = args.split("&");
+
+    const argDictionary = {};
+    for (let i of argSplit) {
+      let keyvalue = i.split("=");
+      argDictionary[keyvalue[0]] = keyvalue[1];
+    }
+    if (typeAndRest[0] === "bool") {
+      pathDataList[index].data["input"].push(
+        createBooleanInput(id, true, argDictionary)
+      );
+      pathDataList[index].data["input"].push(
+        createBooleanInput(id, false, argDictionary)
+      );
+    } else {
+      pathDataList[index].data["input"].push(createVoidInput(id, argDictionary));
+    }
+  }
+}
+
+// creates a boolean input and returns it
+function createBooleanInput(
+    id: string,
+    val: boolean,
+    argDictionary = undefined
+): Input {
+  return {
+    command: `${id}?=${val.toString()}`,
+    name:
+        argDictionary !== undefined && "uiname" in argDictionary
+            ? `${argDictionary["uiname"]}?${val.toString()}`
+            : `${id}?=${val.toString()}`,
+    desc:
+        argDictionary !== undefined && "uidesc" in argDictionary
+            ? argDictionary["uidesc"]
+            : `${id}?=${val.toString()}`,
+    enabled:
+        argDictionary !== undefined && "uienabled" in argDictionary
+            ? argDictionary["uienabled"] === "True"
+            : true,
+  };
+}
+
+// creates a void input and returns it
+function createVoidInput(id: string, argDictionary = undefined): Input {
+  return {
+    command: id,
+    name:
+        argDictionary !== undefined && "uiname" in argDictionary
+            ? argDictionary["uiname"]
+            : id,
+    desc:
+        argDictionary !== undefined && "uidesc" in argDictionary
+            ? argDictionary["uidesc"]
+            : id,
+    enabled:
+        argDictionary !== undefined && "uienabled" in argDictionary
+            ? argDictionary["uienabled"] === "True"
+            : true,
+  };
+}
+
 
 // takes a string[] path and makes sure it's in the tree
 // returns the node at that path
