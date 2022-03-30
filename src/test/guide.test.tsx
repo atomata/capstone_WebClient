@@ -1,9 +1,9 @@
 import React from "react";
 import { act, renderHook } from "@testing-library/react-hooks";
+import { fireEvent } from "@testing-library/react";
 import { useGuide } from "../util/customHooks/guideFunc";
 import { SideBarContext } from "../util/customHooks/SideBarContext";
 import { useActionBar } from "../util/customHooks/ActionBarFunc";
-import {fireEvent} from "@testing-library/react";
 
 describe("Guide Funcs", () => {
   it("key down", () => {
@@ -27,15 +27,15 @@ describe("Guide Funcs", () => {
     };
 
     const wrapper = ({ children }) => (
-        <SideBarContext.Provider value={sideBarContextValuesTest}>
-          {children}
-        </SideBarContext.Provider>
+      <SideBarContext.Provider value={sideBarContextValuesTest}>
+        {children}
+      </SideBarContext.Provider>
     );
-    const { result: result2 } = renderHook(() => useGuide(), { wrapper });
-    fireEvent.keyDown(window,{ key: 'ArrowLeft', code: 'ArrowLeft' });
-    fireEvent.keyDown(window,{ key: 'ArrowRight', code: 'ArrowRight' });
-    fireEvent.keyDown(window,{ key: 'ArrowUp', code: 'ArrowUp' });
-    fireEvent.keyDown(window,{ key: 'ArrowDown', code: 'ArrowDown' });
+    renderHook(() => useGuide(), { wrapper });
+    fireEvent.keyDown(window, { key: "ArrowLeft", code: "ArrowLeft" });
+    fireEvent.keyDown(window, { key: "ArrowRight", code: "ArrowRight" });
+    fireEvent.keyDown(window, { key: "ArrowUp", code: "ArrowUp" });
+    fireEvent.keyDown(window, { key: "ArrowDown", code: "ArrowDown" });
   });
   it("Next Page", () => {
     const { result } = renderHook(() => useActionBar());
@@ -150,7 +150,7 @@ describe("Guide Funcs", () => {
     };
 
     const wrapper = ({ children, val }) => (
-        <SideBarContext.Provider value={val}>{children}</SideBarContext.Provider>
+      <SideBarContext.Provider value={val}>{children}</SideBarContext.Provider>
     );
     const { result: result2, rerender } = renderHook(() => useGuide(), {
       wrapper,
@@ -209,7 +209,7 @@ describe("Guide Funcs", () => {
     };
 
     const wrapper = ({ children, val }) => (
-        <SideBarContext.Provider value={val}>{children}</SideBarContext.Provider>
+      <SideBarContext.Provider value={val}>{children}</SideBarContext.Provider>
     );
     const { result: result2, rerender } = renderHook(() => useGuide(), {
       wrapper,
