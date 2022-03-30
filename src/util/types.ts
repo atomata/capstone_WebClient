@@ -42,6 +42,7 @@ type TreeNode = {
 };
 
 export type {
+  Input,
   ExperienceData,
   TreeNode,
   ActionData,

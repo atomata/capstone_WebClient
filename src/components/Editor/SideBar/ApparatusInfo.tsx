@@ -52,7 +52,7 @@ function ApparatusInfo(): JSX.Element {
 
   const metadata = checkIfMetaExists();
   const apparatusInfo = React.useMemo(
-    () => getAssetBundleActions(experienceData.apparatusRoot),
+    () => getAssetBundleActions(metadata),
     [metadata]
   );
   return (
