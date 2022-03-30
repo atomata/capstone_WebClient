@@ -51,12 +51,16 @@ function Experience({
   };
 
   const experienceDataTemp: ExperienceData = {
-    apparatusMetadata: { Paths: [], Data: [] },
-    experience: { experienceId, apparatusId: "", actionList: [], skyboxId: "default" },
+    apparatusRoot: { children: [], path: "", identifier: "", type: "" },
+    experience: {
+      experienceId,
+      apparatusId: "",
+      actionList: [],
+      skyboxId: "default",
+    },
   };
   React.useEffect(() => {
     // Don't load if you aren't logged in
-    // TODO test to see if this is  working properly
     if (!checkIfLoggedIn()) return;
 
     if (dataType === "apparatus") {
@@ -65,14 +69,22 @@ function Experience({
           setExperienceData(experienceDataTemp);
           setLoading(false);
         })
-        .catch(() => setError("apparatus not found"));
+        .catch((err) =>
+          setError(
+            `${err.message !== "" ? err.message : "apparatus not found"} `
+          )
+        );
     } else if (dataType === "experience") {
       setupExperienceData(userId, experienceId, experienceDataTemp)
         .then(() => {
           setExperienceData(experienceDataTemp);
           setLoading(false);
         })
-        .catch(() => setError("experience file not found"));
+        .catch((err) =>
+          setError(
+            `${err.message !== "" ? err.message : "experience not found"} `
+          )
+        );
     }
   }, [apparatusId, experienceId, dataType, userId]);
 
@@ -87,7 +99,7 @@ function Experience({
         <main>
           <Content>
             <GlobalContext.Provider value={globalContextValues}>
-              <WebglBox/>
+              <WebglBox />
             </GlobalContext.Provider>
           </Content>
         </main>

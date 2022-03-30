@@ -15,7 +15,11 @@ import {
 } from "../../util/customHooks/globalContext";
 import { saveExp } from "../../util/cloudOperations/writeToCloud";
 import SideBarItem from "./SideBar/SideBarItem";
-import {defaultCameraView, pauseApparatus} from "../../util/unityContextActions";
+import {
+  defaultCameraView,
+  pauseApparatus,
+  setDefault,
+} from "../../util/unityContextActions";
 import SavingTip from "./savingTip";
 import Guide from "./Guide";
 
@@ -55,8 +59,6 @@ const ToolDocGrid = styled.div`
   min-width: 15em;
   background-color: #3f3d56;
   z-index: 2;
-  padding-left: 1em;
-  padding-top: 1em;
 `;
 
 // css and placement for the action sequence
@@ -85,6 +87,8 @@ const SavingTipGrid = styled.div`
  * @returns
  */
 function Overlay(): JSX.Element {
+  const { experienceData, userId }: globalContextTypes =
+    useContext(GlobalContext);
   const {
     toggleTextBox,
     toggleToolDoc,
@@ -106,6 +110,7 @@ function Overlay(): JSX.Element {
 
   useKeypress("Escape", () => {
     if (!showOverlay) {
+      setDefault(experienceData.apparatusRoot);
       pauseApparatus();
       toggleOverlay();
       defaultCameraView();
@@ -113,9 +118,6 @@ function Overlay(): JSX.Element {
 
     if (showGuide) toggleGuide();
   });
-
-  const { experienceData, userId }: globalContextTypes =
-    useContext(GlobalContext);
   const {
     selectAction,
     selectedAction,
@@ -126,6 +128,17 @@ function Overlay(): JSX.Element {
     addActionToList,
   } = useActionList(experienceData);
 
+  // toggle preview on Escape clicked
+  useKeypress("Escape", () => {
+    if (!showOverlay) {
+      setDefault(experienceData.apparatusRoot);
+      toggleOverlay();
+      defaultCameraView();
+      pauseApparatus();
+    }
+
+    if (showGuide) toggleGuide();
+  });
   // useEffect for autoSave
   useEffect(() => {
     experienceData.experience.actionList = [...actionList];
@@ -195,7 +208,7 @@ function Overlay(): JSX.Element {
               <SavingTipGrid>
                 <SavingTip />
               </SavingTipGrid>
-              <Guide/>
+              <Guide />
               {renderTool()}
               {renderText()}
             </SideBarContext.Provider>
@@ -237,7 +250,7 @@ function Overlay(): JSX.Element {
             }}
           >
             <PreviewOverlay />
-            <Guide/>
+            <Guide />
           </SideBarContext.Provider>
         </ActionContext.Provider>
       )}

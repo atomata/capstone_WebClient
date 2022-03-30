@@ -8,6 +8,7 @@ import {
   unityScene,
   voidTrigger,
 } from "./constants";
+import { TreeNode } from "./types";
 
 const unityContext = new UnityContext({
   loaderUrl: "build/AtomataScene0_0_9.loader.js",
@@ -35,6 +36,15 @@ function changeSkybox(skybox: string): void {
 function defaultCameraView(): void {
   unityContext.send(unityScene, defaultCameraCommand);
 }
+function setDefault(apparatusRoot: TreeNode): void {
+  if (
+    apparatusRoot !== undefined &&
+    apparatusRoot.defaultState !== undefined &&
+    apparatusRoot.defaultState[0] !== undefined
+  ) {
+    unityContext.send(unityScene, voidTrigger, apparatusRoot.defaultState[0]);
+  }
+}
 
 function pauseApparatus(): void {
   unityContext.send(unityScene, pauseApparatusCommand);
@@ -44,6 +54,7 @@ function playApparatus(): void {
   unityContext.send(unityScene, playApparatusCommand);
 }
 export {
+  setDefault,
   playApparatus,
   pauseApparatus,
   loadApparatus,

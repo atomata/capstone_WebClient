@@ -20,6 +20,7 @@ import styles from "../../SideBarButtons.module.css";
 import {
   defaultCameraView,
   pauseApparatus,
+  setDefault,
 } from "../../../util/unityContextActions";
 import Tooltip from "../Tooltip";
 
@@ -171,6 +172,7 @@ function SideBarItem(): JSX.Element {
               sx={{ fontSize: "38px" }}
               className={styles.sidebarItem}
               onClick={() => {
+                setDefault(experienceData.apparatusRoot);
                 defaultCameraView();
                 toggleOverlay();
                 pauseApparatus();

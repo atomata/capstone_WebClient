@@ -20,7 +20,7 @@ const DescLabel = styled.label`
   right: 0.7em;
   bottom: 0.5em;
   font-family: Inter, monospace;
-  font-size: 1.6em;
+  font-size: 24px;
   word-break: break-all;
   color: white;
   border-radius: 15px;
@@ -31,6 +31,7 @@ const DescLabel = styled.label`
   &::-webkit-scrollbar-thumb {
     background: #a5a4ea;
     border-radius: 1em;
+    border: 0.05em solid rgba(0, 0, 0, 0);
     background-clip: padding-box;
   }
 `;

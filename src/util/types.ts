@@ -12,7 +12,7 @@ type Input = {
   enabled: boolean;
 };
 type ExperienceData = {
-  apparatusMetadata: SerializedApparatus;
+  apparatusRoot: TreeNode;
   experience: SerializedExperience;
 };
 
@@ -32,14 +32,19 @@ type PathData = {
   data: Record<string, any[]>;
 };
 
-type AssetBundle = { children: any[]; path: string; identifier: string };
-
-type Tree = { children: any[]; path: string };
+type TreeNode = {
+  children: TreeNode[];
+  path: string;
+  identifier: string;
+  type: string;
+  input?: any[];
+  defaultState?: string;
+};
 
 export type {
+  Input,
   ExperienceData,
-  AssetBundle,
-  Tree,
+  TreeNode,
   ActionData,
   PathData,
   SerializedApparatus,
