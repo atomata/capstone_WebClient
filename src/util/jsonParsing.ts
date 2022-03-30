@@ -196,36 +196,22 @@ function getActions(node: TreeNode): ActionData[] {
   return actionList;
 }
 
+// return assetbundles and associated action list as a tuple to the result list
 function getAssetBundleActions(apparatusRoot: TreeNode): any[] {
-  const list = [];
+  const result = [];
   const assetBundleList = getAssetBundles(apparatusRoot);
 
   for (const bundle of assetBundleList) {
     const actionList = getActions(bundle);
-    list.push([bundle.identifier[0], actionList]);
+    result.push([bundle.identifier[0], actionList]);
   }
-  return list;
+  return result;
 }
 
-// Checks if a given node is a parent node or not by recursively checking if it has any direct/indirect children of type 'AssetBundle'
-function checkIfParent(node: TreeNode): boolean {
-  if (node.children !== undefined) {
-    for (const child in node.children) {
-      if (
-        node.children[child].type[0] === "AssetBundle" ||
-        checkIfParent(node.children[child])
-      ) {
-        return true;
-      }
-    }
-  }
-  return false;
-}
 export {
   convertPathDataToTree,
   getAssetBundleActions,
   getAssetBundles,
   getActions,
-  checkIfParent,
   linkPathsToData,
 };
