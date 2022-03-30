@@ -310,7 +310,7 @@ const LoadExperience = () => {
             {expList.map((exp, index) => (
               // eslint-disable-next-line react/jsx-key
               <ExperienceRow>
-                <td>{exp[0]}</td>
+                <td style={{ textAlign: "left", width: "25%" }}>{exp[0]}</td>
                 <td style={{ textAlign: "center", width: "50%" }}>{exp[1]}</td>
                 <ExperienceButtons>
                   <Link
