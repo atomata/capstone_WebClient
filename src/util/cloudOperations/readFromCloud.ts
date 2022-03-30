@@ -45,7 +45,6 @@ function setupApparatusData(
     ) {
       throw new Error("Invalid apparatus data");
     }
-    const id = experienceDataTemp.apparatusRoot.identifier[0];
     // eslint-disable-next-line no-param-reassign
     experienceDataTemp.experience.apparatusId = id;
   });
