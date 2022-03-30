@@ -98,11 +98,11 @@ function createBooleanInput(
     name:
         argDictionary !== undefined && "uiname" in argDictionary
             ? `${argDictionary["uiname"]}?${val.toString()}`
-            : `${id}?=${val.toString()}`,
+            : `${id}:${val.toString()}`,
     desc:
         argDictionary !== undefined && "uidesc" in argDictionary
             ? argDictionary["uidesc"]
-            : `${id}?=${val.toString()}`,
+            : `${id}:${val.toString()}`,
     enabled:
         argDictionary !== undefined && "uienabled" in argDictionary
             ? argDictionary["uienabled"] === "True"

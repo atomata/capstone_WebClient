@@ -78,50 +78,50 @@ const testpathDataList = [
       input: [
         {
           command: "position",
-          desc: "",
+          desc: "position",
           name: "position",
           enabled: true,
         },
         {
           command: "rotation",
-          desc: "",
+          desc: "rotation",
           name: "rotation",
           enabled: true,
         },
         {
           command: "scale",
-          desc: "",
+          desc: "scale",
           name: "scale",
           enabled: true,
         },
         {
           command: "position_delta",
-          desc: "",
+          desc: "position_delta",
           name: "position_delta",
           enabled: true,
         },
         {
           command: "rotation_delta",
-          desc: "",
+          desc: "rotation_delta",
           name: "rotation_delta",
           enabled: true,
         },
         {
           command: "scale_delta",
-          desc: "",
+          desc: "scale_delta",
           name: "scale_delta",
           enabled: true,
         },
         {
           command: "isLocal?=true",
-          desc: "",
-          name: "isLocal: true",
+          desc: "isLocal:true",
+          name: "isLocal:true",
           enabled: true,
         },
         {
           command: "isLocal?=false",
-          desc: "",
-          name: "isLocal: false",
+          desc: "isLocal:false",
+          name: "isLocal:false",
           enabled: true,
         },
       ],
@@ -152,19 +152,19 @@ const testpathDataList = [
       input: [
         {
           command: "still",
-          desc: "",
+          desc: "still",
           name: "still",
           enabled: true,
         },
         {
           command: "wobble",
-          desc: "",
+          desc: "wobble",
           name: "wobble",
           enabled: true,
         },
         {
           command: "bounce",
-          desc: "",
+          desc: "bounce",
           name: "bounce",
           enabled: true,
         },
@@ -194,17 +194,17 @@ const testpathDataList = [
 const testActionList = [
   {
     path: "evil-cylinder/evil-cylinder/delta/wobble-sphere/wobble-sphere/animations",
-    input: { command: "still", name: "still", desc: "", enabled: true },
+    input: { command: "still", name: "still", desc: "still", enabled: true },
     assetId: ["wobble-sphere"],
   },
   {
     path: "evil-cylinder/evil-cylinder/delta/wobble-sphere/wobble-sphere/animations",
-    input: { command: "wobble", name: "wobble", desc: "", enabled: true },
+    input: { command: "wobble", name: "wobble", desc: "wobble", enabled: true },
     assetId: ["wobble-sphere"],
   },
   {
     path: "evil-cylinder/evil-cylinder/delta/wobble-sphere/wobble-sphere/animations",
-    input: { command: "bounce", name: "bounce", desc: "", enabled: true },
+    input: { command: "bounce", name: "bounce", desc: "bounce", enabled: true },
     assetId: ["wobble-sphere"],
   },
   {

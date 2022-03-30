@@ -1,5 +1,4 @@
 import {
-  checkIfParent,
   convertPathDataToTree,
   getActions,
   getAssetBundles,
@@ -26,15 +25,5 @@ describe("getActions to return actions of a node", () => {
     const testNode = getAssetBundles(testmetadata2);
     expect(testNode).toEqual(undefined);
     expect(getActions(undefined)).toEqual(undefined);
-  });
-
-  it("checkIfParent true", () => {
-    const testNode = getAssetBundles(convertPathDataToTree(testmetadata1))[0];
-    expect(checkIfParent(testNode)).toEqual(true);
-  });
-
-  it("checkIfParent false", () => {
-    const testNode = getAssetBundles(convertPathDataToTree(testmetadata1))[1];
-    expect(checkIfParent(testNode)).toEqual(false);
   });
 });
