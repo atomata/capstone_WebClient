@@ -61,7 +61,6 @@ function Experience({
   };
   React.useEffect(() => {
     // Don't load if you aren't logged in
-    // TODO test to see if this is  working properly
     if (!checkIfLoggedIn()) return;
 
     if (dataType === "apparatus") {

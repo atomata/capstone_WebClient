@@ -36,15 +36,16 @@ function setupApparatusData(
   return getApparatusFromCloud(id).then((apparatusJson) => {
     // eslint-disable-next-line no-param-reassign
     experienceDataTemp.apparatusRoot = convertPathDataToTree(apparatusJson);
-    let id = "id-not-found";
 
     if (
-      experienceDataTemp.apparatusRoot !== undefined &&
-      experienceDataTemp.apparatusRoot.identifier !== undefined &&
-      experienceDataTemp.apparatusRoot.identifier.length > 1
+      experienceDataTemp.apparatusRoot === undefined ||
+      experienceDataTemp.apparatusRoot.identifier === undefined ||
+      experienceDataTemp.apparatusRoot.identifier.length === 0 ||
+      experienceDataTemp.apparatusRoot.path === undefined
     ) {
-      id = experienceDataTemp.apparatusRoot.identifier[0];
+      throw new Error("Invalid apparatus data");
     }
+    const id = experienceDataTemp.apparatusRoot.identifier[0];
     // eslint-disable-next-line no-param-reassign
     experienceDataTemp.experience.apparatusId = id;
   });
@@ -56,13 +57,19 @@ function setupExperienceData(
   experienceDataTemp: ExperienceData
 ): Promise<void> {
   return getExperienceFromCloud(userId, experienceId).then((experienceJson) => {
-    if(experienceJson !== undefined) {
-      experienceDataTemp.experience = experienceJson;
-      if (experienceJson.skyboxId === undefined) {
-        experienceDataTemp.experience.skyboxId = "default";
-      }
-      setupApparatusData(experienceJson.apparatusId, experienceDataTemp);
+    if (
+      experienceJson === undefined ||
+      experienceJson.experienceId === undefined ||
+      experienceJson.apparatusId === undefined ||
+      experienceJson.actionList === undefined
+    ) {
+      throw new Error("Invalid experience data");
     }
+    experienceDataTemp.experience = experienceJson;
+    if (experienceJson.skyboxId === undefined) {
+      experienceDataTemp.experience.skyboxId = "default";
+    }
+    setupApparatusData(experienceJson.apparatusId, experienceDataTemp);
   });
 }
 
