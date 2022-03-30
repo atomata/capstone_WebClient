@@ -1,9 +1,24 @@
-import { ActionData, PathData, SerializedApparatus, TreeNode } from "./types";
+import {
+  ActionData,
+  PathData,
+  SerializedApparatus,
+  TreeNode,
+  Input,
+} from "./types";
 
 // Creates a list of path-data objects
 function linkPathsToData(metadata: SerializedApparatus): PathData[] {
-  const pathDataList = [] as PathData[];
+  if (
+    metadata === undefined ||
+    metadata.Paths === undefined ||
+    metadata.Data === undefined ||
+    metadata.Paths.length === 0 ||
+    metadata.Data.length === 0
+  ) {
+    return undefined;
+  }
 
+  const pathDataList = [] as PathData[];
   // make an empty object for each path
   metadata.Paths.forEach((path) => {
     const datum: PathData = { path, data: {} };
@@ -129,9 +144,17 @@ function addPathToTreeAndReturnNode(items: string[], tree: TreeNode) {
   });
   return node;
 }
-
 // converts the pathdata object created with linkPathsToData into a tree structure
 function convertPathDataToTree(metadata: SerializedApparatus): TreeNode {
+  if (
+    metadata === undefined ||
+    metadata.Paths === undefined ||
+    metadata.Data === undefined ||
+    metadata.Paths.length === 0 ||
+    metadata.Data.length === 0
+  ) {
+    return undefined;
+  }
   const tree = { children: [], path: "", identifier: "", type: "" };
   const pathDataList = linkPathsToData(metadata);
   pathDataList.forEach((pathData) => {
@@ -172,10 +195,10 @@ function getAssetBundles(apparatusRoot: TreeNode): TreeNode[] {
 // input to one event can be multi valued . currently adding them separately in the list
 // returns the list of actions of the given node
 function getActions(node: TreeNode): ActionData[] {
-  const actionList = [];
   if (node === undefined) {
     return undefined;
   }
+  const actionList = [];
   for (const child in node.children) {
     if (
       node.children[child].type[0] === "Event" ||
