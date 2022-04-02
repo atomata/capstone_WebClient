@@ -8,7 +8,7 @@ import SaveIcon from "@mui/icons-material/Save";
 import HelpIcon from "@mui/icons-material/Help";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
-import { SideBarContext } from "./SideBarContext";
+import { SideBarContext } from "./sideBarContext";
 
 const useGuide = () => {
     const { 

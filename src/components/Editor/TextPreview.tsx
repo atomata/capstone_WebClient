@@ -40,7 +40,11 @@ const DescLabel = styled.label`
   }
 `;
 
-const TextPreview = ({ desc }: any): JSX.Element => {
+type TextPreviewProps = {
+  desc: string;
+}
+
+const TextPreview = ({ desc }: TextPreviewProps): JSX.Element => {
   const [isExpanded, setExpanded] = useState(true);
   const isEmpty = desc === "" || desc === undefined;
 

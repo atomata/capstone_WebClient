@@ -92,7 +92,6 @@ function Experience({
     verifyLogIn();
   }, []);
 
-  // Todo what if the experienceData and userID are undefined? we should show an error message
   if (error === "") {
     if (!loading) {
       return (

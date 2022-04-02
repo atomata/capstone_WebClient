@@ -253,7 +253,6 @@ const slideTransition = forwardRef(
   ) => <Slide direction="up" ref={ref} {...props} />
 );
 
-// TODO show proper error message when data cannot be fetched
 const LoadExperience = () => {
   const [expList, setExpList] = useState([]);
 

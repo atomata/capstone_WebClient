@@ -2,7 +2,7 @@ import { render } from "@testing-library/react";
 import React from "react";
 import TextEditor from "../components/Editor/TextEditor";
 import { ActionContext } from "../util/customHooks/actionContext";
-import { SideBarContext } from "../util/customHooks/SideBarContext";
+import { SideBarContext } from "../util/customHooks/sideBarContext";
 
 test("Text editor renders without crashing", () => {
   render(

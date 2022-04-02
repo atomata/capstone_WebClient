@@ -4,5 +4,5 @@ import React from "react";
 import TextPreview from "../components/Editor/TextPreview";
 
 test("Text preview renders without crashing", () => {
-  render(<TextPreview />);
+  render(<TextPreview desc="test"/>);
 });

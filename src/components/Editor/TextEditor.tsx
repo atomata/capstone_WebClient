@@ -5,7 +5,7 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import { Rnd } from "react-rnd";
 import styles from "../SideBarButtons.module.css";
 import { ActionContext } from "../../util/customHooks/actionContext";
-import { SideBarContext } from "../../util/customHooks/SideBarContext";
+import { SideBarContext } from "../../util/customHooks/sideBarContext";
 
 const Header = styled.div`
   display: flex;

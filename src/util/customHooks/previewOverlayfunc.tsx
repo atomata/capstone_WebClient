@@ -50,8 +50,8 @@ const useSelected = ({
         actionList[selected - 1].path,
         actionList[selected - 1].input.command
       );
-      setSelected((prevVal) => prevVal - 1);
       updateDesc(selected - 1);
+      setSelected((prevVal) => prevVal - 1);
     } else {
       setDefault(apparatusRoot);
       defaultCameraView();

@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import useKeypress from "react-use-keypress";
 import React, { useContext, useEffect } from "react";
-import { useActionBar } from "../../util/customHooks/ActionBarFunc";
+import { useActionBar } from "../../util/customHooks/actionBarFunc";
 import ActionSequence from "./ActionSequence/ActionSequence";
-import { SideBarContext } from "../../util/customHooks/SideBarContext";
+import { SideBarContext } from "../../util/customHooks/sideBarContext";
 import { ActionContext } from "../../util/customHooks/actionContext";
 import ToolDocItem from "./SideBar/ToolDocItem";
 import TextEditor from "./TextEditor";
