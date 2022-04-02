@@ -178,14 +178,14 @@ const ErrorMsg = styled.label`
   color: red;
 `;
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles({
   textField: {
     background: "#FFFFFF",
   },
   helper: {
     color: "#FFFFFF",
   },
-}));
+});
 
 const WorkbenchTable = () => (
   <OuterBox>
@@ -253,7 +253,6 @@ const slideTransition = forwardRef(
   ) => <Slide direction="up" ref={ref} {...props} />
 );
 
-// TODO show proper error message when data cannot be fetched
 const LoadExperience = () => {
   const [expList, setExpList] = useState([]);
 

@@ -10,7 +10,7 @@ import {
   pauseApparatus,
   setDefault,
 } from "../util/unityContextActions";
-import { SideBarContext } from "../util/customHooks/SideBarContext";
+import { SideBarContext } from "../util/customHooks/sideBarContext";
 import { ActionContext } from "../util/customHooks/actionContext";
 import {
   GlobalContext,

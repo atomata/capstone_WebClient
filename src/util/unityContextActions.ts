@@ -17,12 +17,10 @@ const unityContext = new UnityContext({
   codeUrl: "build/AtomataScene0_0_9.wasm",
 });
 
-// TODO what if args string is empty?
 function loadApparatus(apparatus: string): void {
   unityContext.send(unityScene, loadTrigger, apparatus);
 }
 
-// TODO what if args string is empty?
 function requestTrigger(path: string, input: string): void {
   playApparatus();
   const arg = `${path}/${input}`;

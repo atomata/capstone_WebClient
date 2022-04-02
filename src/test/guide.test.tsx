@@ -2,8 +2,8 @@ import React from "react";
 import { act, renderHook } from "@testing-library/react-hooks";
 import { fireEvent } from "@testing-library/react";
 import { useGuide } from "../util/customHooks/guideFunc";
-import { SideBarContext } from "../util/customHooks/SideBarContext";
-import { useActionBar } from "../util/customHooks/ActionBarFunc";
+import { SideBarContext } from "../util/customHooks/sideBarContext";
+import { useActionBar } from "../util/customHooks/actionBarFunc";
 
 describe("Guide Funcs", () => {
   it("key down", () => {

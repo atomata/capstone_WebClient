@@ -13,7 +13,7 @@ import {
   GlobalContext,
   globalContextTypes,
 } from "../util/customHooks/globalContext";
-import { SideBarContext } from "../util/customHooks/SideBarContext";
+import { SideBarContext } from "../util/customHooks/sideBarContext";
 import { ActionContext } from "../util/customHooks/actionContext";
 
 const actionData1: ActionData = {
@@ -40,6 +40,7 @@ const actionData2: ActionData = {
 };
 
 const testList = [actionData1, actionData2];
+
 test("previewOverlay renders without crashing", () => {
   const globalContextValues: globalContextTypes = {
     experienceData: testExperienceData,

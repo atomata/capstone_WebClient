@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import styled from "styled-components";
-import { SideBarContext } from "../../util/customHooks/SideBarContext";
+import { SideBarContext } from "../../util/customHooks/sideBarContext";
 
 const SavingTipBox = styled.div`
   display: absolute;

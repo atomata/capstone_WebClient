@@ -8,7 +8,7 @@ import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import Typography from '@mui/material/Typography';
 import { useGuide } from "../../util/customHooks/guideFunc"
-import { SideBarContext } from "../../util/customHooks/SideBarContext";
+import { SideBarContext } from "../../util/customHooks/sideBarContext";
 
 function Guide() : JSX.Element {
     const { 

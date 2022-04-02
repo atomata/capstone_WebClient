@@ -9,7 +9,7 @@ import TextFormatIcon from "@mui/icons-material/TextFormat";
 import HelpIcon from "@mui/icons-material/Help";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
-import { SideBarContext } from "../../../util/customHooks/SideBarContext";
+import { SideBarContext } from "../../../util/customHooks/sideBarContext";
 import { saveExp } from "../../../util/cloudOperations/writeToCloud";
 import {
   GlobalContext,
