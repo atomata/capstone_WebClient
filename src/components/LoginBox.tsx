@@ -70,7 +70,7 @@ const ImgLogo = styled.img.attrs({
   margin-left: auto;
   margin-right: auto;
 `;
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   textField: {
     color: "#FFFFFF",
   },
@@ -80,9 +80,7 @@ function LoginBox(): JSX.Element {
   const { nameErr, passErr, handleSubmit } = useLoginSubmit();
 
   const classes = useStyles();
-  // https://mui.com/components/text-fields/
-  // '@Url.Content("~/images/1.jpg")'
-  // '@Url.Content("~assets/epistaLogo.png")'
+
   return (
     <LoginRoot>
       <LoginContainer>
