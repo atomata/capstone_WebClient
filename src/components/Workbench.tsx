@@ -178,14 +178,14 @@ const ErrorMsg = styled.label`
   color: red;
 `;
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles({
   textField: {
     background: "#FFFFFF",
   },
   helper: {
     color: "#FFFFFF",
   },
-}));
+});
 
 const WorkbenchTable = () => (
   <OuterBox>
