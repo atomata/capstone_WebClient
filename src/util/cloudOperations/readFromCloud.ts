@@ -26,7 +26,7 @@ function getExperienceFromCloud(
     mode: "cors",
   })
     .then((response) => response.json())
-    .catch((error) => null);
+    .catch((error) => error);
 }
 
 function setupApparatusData(
