@@ -21,7 +21,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <>
       {/* prettier-ignore */}
       <Head>
-        <title>Project Edex Prototype</title>
+        <title>Epista</title>
         <link rel="icon"       href="assets/epistaLogo.png" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=B612:wght@700&display=swap" />
