@@ -43,12 +43,12 @@ const DragContainer = styled.div`
   background-color: #3f3d56;
 `;
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles({
   SelectedAction: {
     border: "3px solid white",
     boxShadow: "0 0 10px white",
   },
-}));
+});
 
 function ActionSequence(): JSX.Element {
   const classes = useStyles();
