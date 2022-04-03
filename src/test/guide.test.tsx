@@ -6,9 +6,11 @@ import { SideBarContext } from "../util/customHooks/sideBarContext";
 import { useActionBar } from "../util/customHooks/actionBarFunc";
 
 describe("Guide Funcs", () => {
-  it("key down", () => {
-    const { result } = renderHook(() => useActionBar());
-    const sideBarContextValuesTest = {
+  let sideBarContextValuesTest;
+  let result;
+  beforeEach(() => {
+    result = renderHook(() => useActionBar()).result;
+    sideBarContextValuesTest = {
       toggleTextBox: result.current.toggleTextBox,
       toggleToolDoc: result.current.toggleToolDoc,
       toggleApparatusInfo: result.current.toggleApparatusInfo,
@@ -25,7 +27,8 @@ describe("Guide Funcs", () => {
       showGuide: true,
       guideNum: result.current.guideNum,
     };
-
+  });
+  it("key down", () => {
     const wrapper = ({ children }) => (
       <SideBarContext.Provider value={sideBarContextValuesTest}>
         {children}
@@ -38,25 +41,6 @@ describe("Guide Funcs", () => {
     fireEvent.keyDown(window, { key: "ArrowDown", code: "ArrowDown" });
   });
   it("Next Page", () => {
-    const { result } = renderHook(() => useActionBar());
-    const sideBarContextValuesTest = {
-      toggleTextBox: result.current.toggleTextBox,
-      toggleToolDoc: result.current.toggleToolDoc,
-      toggleApparatusInfo: result.current.toggleApparatusInfo,
-      toggleSkyBoxInfo: result.current.toggleSkyBoxInfo,
-      toggleOverlay: () => undefined,
-      toggleGuide: result.current.toggleGuide,
-      setGuideNum: result.current.setGuideNum,
-      toggleSavingTip: () => undefined,
-      toolDoc: false,
-      apparatusInfo: false,
-      skyBoxInfo: false,
-      showOverlay: false,
-      savingTip: false,
-      showGuide: false,
-      guideNum: result.current.guideNum,
-    };
-
     const wrapper = ({ children }) => (
       <SideBarContext.Provider value={sideBarContextValuesTest}>
         {children}
@@ -70,25 +54,6 @@ describe("Guide Funcs", () => {
   });
 
   it("Prev Page", () => {
-    const { result } = renderHook(() => useActionBar());
-    const sideBarContextValuesTest = {
-      toggleTextBox: result.current.toggleTextBox,
-      toggleToolDoc: result.current.toggleToolDoc,
-      toggleApparatusInfo: result.current.toggleApparatusInfo,
-      toggleSkyBoxInfo: result.current.toggleSkyBoxInfo,
-      toggleOverlay: () => undefined,
-      toggleGuide: result.current.toggleGuide,
-      setGuideNum: result.current.setGuideNum,
-      toggleSavingTip: () => undefined,
-      toolDoc: false,
-      apparatusInfo: false,
-      skyBoxInfo: false,
-      showOverlay: false,
-      savingTip: false,
-      showGuide: false,
-      guideNum: result.current.guideNum,
-    };
-
     const wrapper = ({ children, val }) => (
       <SideBarContext.Provider value={val}>{children}</SideBarContext.Provider>
     );
@@ -130,25 +95,6 @@ describe("Guide Funcs", () => {
   });
 
   it("Page = 4", () => {
-    const { result } = renderHook(() => useActionBar());
-    const sideBarContextValuesTest = {
-      toggleTextBox: result.current.toggleTextBox,
-      toggleToolDoc: result.current.toggleToolDoc,
-      toggleApparatusInfo: result.current.toggleApparatusInfo,
-      toggleSkyBoxInfo: result.current.toggleSkyBoxInfo,
-      toggleOverlay: () => undefined,
-      toggleGuide: result.current.toggleGuide,
-      setGuideNum: result.current.setGuideNum,
-      toggleSavingTip: () => undefined,
-      toolDoc: false,
-      apparatusInfo: false,
-      skyBoxInfo: false,
-      showOverlay: false,
-      savingTip: false,
-      showGuide: false,
-      guideNum: result.current.guideNum,
-    };
-
     const wrapper = ({ children, val }) => (
       <SideBarContext.Provider value={val}>{children}</SideBarContext.Provider>
     );
@@ -189,25 +135,6 @@ describe("Guide Funcs", () => {
     expect(result.current.guideNum).toEqual(4);
   });
   it("Page = 5", () => {
-    const { result } = renderHook(() => useActionBar());
-    const sideBarContextValuesTest = {
-      toggleTextBox: result.current.toggleTextBox,
-      toggleToolDoc: result.current.toggleToolDoc,
-      toggleApparatusInfo: result.current.toggleApparatusInfo,
-      toggleSkyBoxInfo: result.current.toggleSkyBoxInfo,
-      toggleOverlay: () => undefined,
-      toggleGuide: result.current.toggleGuide,
-      setGuideNum: result.current.setGuideNum,
-      toggleSavingTip: () => undefined,
-      toolDoc: false,
-      apparatusInfo: false,
-      skyBoxInfo: false,
-      showOverlay: false,
-      savingTip: false,
-      showGuide: false,
-      guideNum: result.current.guideNum,
-    };
-
     const wrapper = ({ children, val }) => (
       <SideBarContext.Provider value={val}>{children}</SideBarContext.Provider>
     );
